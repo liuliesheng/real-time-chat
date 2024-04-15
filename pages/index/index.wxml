@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class='success' wx:if='{{result}}'>{{result}}</view>
+<view class='error' wx:if='{{error}}'>{{error}}</view>
+<button bindtap='onScanCodeTap' class='btn'>立即扫码</button>
+
+<lala/>
