@@ -1,0 +1,12 @@
+/* pages/user/auth.wxss */
+
+.tips {
+    position: relative;
+    padding: 15% 30rpx;
+}
+
+.tips icon{
+	display: block;
+	text-align: center;
+	line-height: 2rem;
+}

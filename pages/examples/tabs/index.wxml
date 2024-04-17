@@ -1,0 +1,43 @@
+<panel title="基本用法"></panel>
+
+<tabs current="{{ current }}" bindchange="handleChange">
+    <tab key="tab1" title="选项1" data-id='0'></tab>
+    <tab key="tab2" title="选项2" data-id='1'></tab>
+    <tab key="tab3" title="选项3" data-id='2'></tab>
+</tabs>
+
+<panel title="自定义主题色"></panel>
+
+<tabs current="{{ current }}" color="#f759ab" bindchange="handleChange">
+    <tab key="tab1" title="选项1"></tab>
+    <tab key="tab2" title="选项2"></tab>
+    <tab key="tab3" title="选项3"></tab>
+</tabs>
+
+<panel title="徽标"></panel>
+
+<tabs current="{{ current }}" bindchange="handleChange">
+    <tab key="tab1" title="选项1" count="3"></tab>
+    <tab key="tab2" title="选项2"></tab>
+    <tab key="tab3" title="选项3" dot></tab>
+</tabs>
+
+<panel title="滚动"></panel>
+
+<tabs current="{{ current_scroll }}" scroll bindchange="handleChangeScroll">
+    <tab key="tab1" title="选项1"></tab>
+    <tab key="tab2" title="选项2"></tab>
+    <tab key="tab3" title="选项3"></tab>
+    <tab key="tab4" title="选项4"></tab>
+    <tab key="tab5" title="选项5"></tab>
+    <tab key="tab6" title="选项6"></tab>
+    <tab key="tab7" title="选项7"></tab>
+    <tab key="tab8" title="选项8"></tab>
+    <tab key="tab9" title="选项9"></tab>
+</tabs>
+
+<swiper current='{{ currentIndex }}'>
+    <swiper-item>11</swiper-item>
+    <swiper-item>22</swiper-item>
+    <swiper-item>33</swiper-item>
+</swiper>

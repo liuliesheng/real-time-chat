@@ -1,0 +1,25 @@
+<view class="container">
+    <view class="demo">
+        <badge dot>
+            <view class="demo-badge"></view>
+        </badge>
+    </view>
+    <view class="demo">
+        <badge count="3">
+            <view class="demo-badge"></view>
+        </badge>
+    </view>
+    <view class="demo">
+        <badge count="123" overflow-count="100">
+            <view class="demo-badge"></view>
+        </badge>
+    </view>
+    <view class="demo">
+        <badge count="66">
+        </badge>
+    </view>
+    <view class="demo">
+        <badge count="66" i-class-alone="demo-badge-alone">
+        </badge>
+    </view>
+</view>

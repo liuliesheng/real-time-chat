@@ -1,0 +1,59 @@
+<!--pages/user/index/index.wxml-->
+<view class="container">
+	<view class="userinfo">
+		<block wx:if="{{hasUserInfo}}">
+			<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+		</block>
+	</view>
+
+	<view class="row main-menu">
+		<view class="col col-span-6">
+			<image src=""/>
+			<text>特权</text>
+		</view>
+		<view class="col col-span-6">
+			<image src=""/>
+			<text>收益</text>
+		</view>
+		<view class="col col-span-6">
+			<image src=""/>
+			<text>优惠券</text>
+		</view>
+		<view class="col col-span-6">
+			<image src=""/>
+			<text>积分</text>
+		</view>
+	</view>
+</view>
+
+<view class="row main-menu" style="margin-top: 30rpx">
+	<view class="col col-span-6">
+		<image src=""/>
+		<text>待付款</text>
+	</view>
+	<view class="col col-span-6">
+		<image src=""/>
+		<text>待收货</text>
+	</view>
+	<view class="col col-span-6">
+		<image src=""/>
+		<text>待评价</text>
+	</view>
+	<view class="col col-span-6">
+		<image src=""/>
+		<text>退款/售后</text>
+	</view>
+</view>
+
+<view class="list">
+	<view class="list-header">
+		其他
+	</view>
+	<view class="list-item">
+		<navigator url="/pages/user/repassword/repassword">修改密码</navigator>
+	</view>
+	<view class="list-item">
+		<navigator url="/pages/examples/feedback/feedback">意见反馈</navigator>
+	</view>
+</view>

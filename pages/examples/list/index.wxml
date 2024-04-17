@@ -1,0 +1,49 @@
+<panel class="cell-panel-demo">
+    <cell title="单行列表"></cell>
+</panel>
+
+<panel class="cell-panel-demo">
+    <cell title="单行列表" is-link value="详细信息"></cell>
+</panel>
+
+<panel class="cell-panel-demo">
+    <cell title="单行列表" label="附加描述" value="详细信息"></cell>
+</panel>
+
+<panel class="cell-panel-demo" title="带 icon 的 Cell">
+    <cell title="单行列表" value="详细信息">
+        <icon type="like_fill" slot="icon" />
+    </cell>
+</panel>
+
+<panel class="cell-panel-demo" title="带箭头的 cell">
+    <cell title="只显示箭头" is-link></cell>
+</panel>
+
+<panel class="cell-panel-demo">
+    <cell title="跳转到首页" is-link url="/pages/index/index"></cell>
+</panel>
+
+<panel class="cell-panel-demo" title="cell 组">
+    <cell-group>
+        <cell title="只显示箭头" is-link></cell>
+        <cell title="跳转到首页" is-link url="/pages/index/index"></cell>
+        <cell title="只有 footer 点击有效" is-link url="/pages/index/index" only-tap-footer></cell>
+        <block wx:if="{{ switch1 }}">
+            <cell title="单行列表" label="附加描述" value="详细信息"></cell>
+            <cell title="表单">
+                <input slot="footer" type="digit" placeholder="带小数点的数字键盘"/>
+            </cell>
+        </block>
+        <cell title="开关">
+            <switch value="{{ switch1 }}" bind:change="onChange" slot="footer">
+                <icon type="right" slot="open"></icon>
+                <icon type="close" slot="close"></icon>
+            </switch>
+        </cell>
+    </cell-group>
+</panel>
+
+<panel class="cell-panel-demo">
+    <cell title="单行列表" label="附加描述" value="详细信息"></cell>
+</panel>

@@ -1,0 +1,44 @@
+/* pages/examples/upload/upload.wxss */
+
+.upload {
+    overflow: hidden;
+}
+
+.upload-item {
+    float: left;
+    padding: 10rpx;
+    border: 1rpx solid #ddd;
+    width: 33.333333%;
+}
+
+.upload-item:last-child{
+}
+
+.upload-image {
+    padding-top: 100%;
+    position: relative;
+}
+
+.upload-item image {
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.upload-item .status-text, .upload-item progress {
+}
+
+.upload-item .status-text {
+    line-height: 1.2;
+    color: #474747;
+}
+
+.status-text.status-success {
+    color: green;
+}
+
+.status-text.status-error {
+    color: salmon;
+}

@@ -1,0 +1,2 @@
+<!--pages/examples/timer/timer.wxml-->
+<view class='datetime'>{{datetime}}</view>

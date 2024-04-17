@@ -1,0 +1,52 @@
+<panel title="圆形"></panel>
+<view class="row-class row">
+    <col class="col col-span-8">
+        <avatar size="small">梁</avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar>梁</avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar size="large">梁</avatar>
+    </col>
+</view>
+
+<panel title="方形"></panel>
+
+<view class="row-class row">
+    <col class="col col-span-8">
+        <avatar size="small" shape="square">A</avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar shape="square">A</avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar size="large" shape="square">A</avatar>
+    </col>
+</view>
+
+<panel title="图片"></panel>
+
+<view class="row-class row">
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="small"></avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="default"></avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large"></avatar>
+    </col>
+</view>
+
+<view class="row-class row">
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="small" shape="square"></avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="default" shape="square"></avatar>
+    </col>
+    <col class="col col-span-8">
+        <avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large" shape="square"></avatar>
+    </col>
+</view>

@@ -1,0 +1,11 @@
+<view style="margin-top: 100px">
+    <button type="ghost" bind:tap="handleOpen1">一般用法</button>
+    <button type="ghost" bind:tap="handleOpen2">带有提示、异步</button>
+</view>
+<action-sheet visible="{{ visible1 }}" actions="{{ actions1 }}" show-cancel bind:cancel="handleCancel1" bind:click="handleClickItem1" />
+<action-sheet visible="{{ visible2 }}" actions="{{ actions2 }}" show-cancel bind:cancel="handleCancel2" bind:click="handleClickItem2" mask-closable="{{ false }}">
+    <view slot="header" style="padding: 16px">
+        <view style="color: #444;font-size: 16px">确定吗？</view>
+        <text>删除后无法恢复哦</text>
+    </view>
+</action-sheet>

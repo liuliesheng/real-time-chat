@@ -1,11 +1,25 @@
 {
-  "pages":[
-    "pages/index/index"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
-  }
+    "pages": [
+        "pages/index/index",
+        "pages/examples/getUserInfo/getUserInfo",
+        "pages/examples/timer/timer",
+        "pages/examples/upload/upload",
+        "pages/examples/feedback/feedback",
+        "pages/examples/tabs/index",
+		"pages/examples/listener/a",
+		"pages/examples/listener/b",
+		"pages/user/index/index",
+        "pages/user/auth/auth",
+        "pages/user/login/login",
+        "pages/user/register/register",
+        "pages/user/repassword/repassword",
+        "pages/user/edit/edit",
+        "pages/user/settings/settings"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "WeChat-mini-init",
+        "navigationBarTextStyle": "black"
+    }
 }

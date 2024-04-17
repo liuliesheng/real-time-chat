@@ -1,0 +1,19 @@
+.form-group {
+	margin-bottom: 30rpx;
+	background-color: white;
+}
+
+.form-item {
+	position: relative;
+	margin-bottom: 30rpx;
+}
+
+.form-item label{
+	line-height: 1.8;
+}
+
+.form-item .form-item-counter {
+	position: absolute;
+	bottom: 10rpx;
+	right: 0;
+}

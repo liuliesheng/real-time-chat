@@ -1,0 +1,17 @@
+<panel title="基本用法"></panel>
+
+<tab-bar current="{{ current }}" bindchange="handleChange">
+    <tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="Home"></tab-bar-item>
+    <tab-bar-item key="group" icon="group" current-icon="group_fill" title="Friends"></tab-bar-item>
+    <tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="Notice"></tab-bar-item>
+    <tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="My"></tab-bar-item>
+</tab-bar>
+
+<panel title="自定义主题色"></panel>
+
+<tab-bar current="{{ current }}" color="#f759ab" bindchange="handleChange">
+    <tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></tab-bar-item>
+    <tab-bar-item key="group" icon="group" current-icon="group_fill" title="朋友"></tab-bar-item>
+    <tab-bar-item key="remind" icon="remind" current-icon="remind_fill" title="通知"></tab-bar-item>
+    <tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></tab-bar-item>
+</tab-bar>

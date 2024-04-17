@@ -1,0 +1,114 @@
+<view class="i-steps-demo">
+	<view class="one-tag">基本用法</view>
+	<steps>
+		<step status="finish">
+			<view slot="title">
+				已完成
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step status="process">
+			<view slot="title">
+				进行中
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step status="">
+			<view slot="title">
+				错误
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+	</steps>
+
+	<view class="one-tag">使用 icon 图标</view>
+	<steps>
+		<step status="finish" icon="barrage">
+			<view slot="title">
+				已完成
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step status="process" icon="brush">
+			<view slot="title">
+				进行中
+			</view>
+			<view slot="content" icon="camera">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step icon="collection">
+			<view slot="title">
+				错误
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+	</steps>
+
+	<view class="one-tag">步骤进度</view>
+	<steps current="{{current}}">
+		<step>
+			<view slot="title">
+				已完成
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step>
+			<view slot="title">
+				进行中
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step>
+			<view slot="title">
+				错误
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+	</steps>
+	<button bindtap="handleClick">下一步</button>
+
+	<view class="one-tag">垂直方向</view>
+	<steps current="{{verticalCurrent}}" direction="vertical">
+		<step>
+			<view slot="title">
+				已完成
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step>
+			<view slot="title">
+				进行中
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+		<step>
+			<view slot="title">
+				错误
+			</view>
+			<view slot="content">
+				这里是该步骤的描述信息
+			</view>
+		</step>
+	</steps>
+</view>

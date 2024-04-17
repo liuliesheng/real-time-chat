@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Color 色彩",
+  "usingComponents": {
+    "card": "../../../components/card/index",
+    "panel": "../../../components/panel/index"
+  }
+}

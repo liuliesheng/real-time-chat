@@ -1,0 +1,6 @@
+{
+	"navigationBarTitleText":"ActionSheet 动作面板",
+	"usingComponents":{
+		"action-sheet":"../../../components/action-sheet/index"
+	}
+}
