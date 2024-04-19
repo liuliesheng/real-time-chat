@@ -8,18 +8,23 @@ const uglify = require('gulp-uglify');
 //全局配置
 const config = {
 	style: {
-		src: './styles/*.wxss',
-		out: '../'
+		src: [
+			'./styles/base.wxss',
+			'./styles/layout.wxss',
+			'./styles/list.wxss',
+			'./styles/form.wxss',
+			'./styles/animate.wxss',
+		],
+		out: './'
 	}
 };
 
 // 合并样式文件处理
-function buildStyles() {
-	return gulp.src(config.base.src)
+function buildStyles(src) {
+	return gulp.src(src)
 		.pipe(cleanCSS({
 			advanced: false,//类型：Boolean 默认：true [是否开启高级优化（合并选择器等）]
 			inline: false,
-			specialComments: '*',
 			optimizeOutline: false,
 			normalizeUrls: false,
 			tidyAtRules: false,
@@ -27,9 +32,10 @@ function buildStyles() {
 			tidySelectors: false,
 			restructureRules: true,
 		}))
-		.pipe(concat('app.wxss'))
+		.pipe(concat('app.wxss', {newLine: ''}))
 		.pipe(gulp.dest(config.style.out));
 }
+
 // 合并样式文件
 gulp.task('build-style', function() {
 	return buildStyles(config.style.src);

@@ -19,7 +19,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "WeChat-mini-init",
+        "navigationBarTitleText": "weapp-template",
         "navigationBarTextStyle": "black"
     }
 }
