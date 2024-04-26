@@ -1,8 +1,23 @@
-import listener from './listener.js';
-import request from './request.js';
-import uploader from './uploader.js';
+import {collectionUtil, functionUtil, isEmpty, numberUtil, random, stringUtil, timeUtil} from './util/index.js';
+import {emitter, EventEmitter} from "./events.js";
 import publisher from './publisher.js';
 import middleware from './middleware.js';
+
+import {http, Http} from './http.js';
+import uploader from './uploader.js';
+import Validate from './validate.js';
+
+if (!Promise.prototype.finally) {
+	Promise.prototype.finally = function(callback) {
+		let P = this.constructor;
+		return this.then(
+			value => P.resolve(callback(value)).then(() => value),
+			reason => P.resolve(callback(reason)).then(() => {
+				throw reason
+			})
+		);
+	};
+}
 
 // 注入相关快捷方法
 (function() {
@@ -22,15 +37,7 @@ import middleware from './middleware.js';
 	wx.$define(wx, 'define', function(key, value, isEnumerable = true) {
 		return wx.$define(wx, key, value, isEnumerable);
 	});
-	wx.define('listener', listener);
-	wx.define('publisher', publisher);
-	wx.define('middleware', middleware);
-	wx.define('http', request);
-	wx.define('addRequestInterceptor', request.addRequestInterceptor);
-	wx.define('removeRequestInterceptor', request.removeRequestInterceptor);
-	wx.define('addResponseInterceptor', request.addResponseInterceptor);
-	wx.define('removeResponseInterceptor', request.removeResponseInterceptor);
-	wx.define('uploader', uploader);
+
 	wx.define('require', function(file, errorTips = true) {
 		try {
 			return require(file);
@@ -39,6 +46,26 @@ import middleware from './middleware.js';
 		}
 		return null;
 	});
+
+	wx.define('random', random);
+	wx.define('isEmpty', isEmpty);
+	wx.define('collectionUtil', collectionUtil);
+	wx.define('numberUtil', numberUtil);
+	wx.define('stringUtil', stringUtil);
+	wx.define('timeUtil', timeUtil);
+	wx.define('functionUtil', functionUtil);
+
+	wx.define('emitter', emitter);
+	wx.define('EventEmitter', EventEmitter);
+	wx.define('publisher', publisher);
+	wx.define('middleware', middleware);
+
+	wx.define('http', http);
+	wx.define('Http', Http);
+	wx.define('uploader', uploader);
+
+	wx.define('Validate', Validate);
+
 	console.printHelper = function() {
 		console.groupCollapsed(`%c相关快捷操作`, "color:green;font-size:14px");
 		console.log(`%cwx.define(key,value,isEnumerable) 把一个变量绑定到wx

@@ -127,28 +127,6 @@ export class EventEmitter {
 		}
 		return this;
 	}
-
-	/**
-	 * 制作发布者
-	 * @param {string} name
-	 * @return {function(*=, *=, *=): function(*=, *=, *=)}
-	 */
-	makePublisher(name) {
-		const publisher = (param, isSyncExec) => {
-			this.trigger(name, param, isSyncExec);
-			return publisher;
-		};
-		publisher.on = (...callbacks) => {
-			return this.on(name, ...callbacks);
-		};
-		publisher.off = () => {
-			return this.off(name, ...callbacks);
-		};
-		publisher.clear = () => {
-			return this.off(null);
-		};
-		return publisher;
-	}
 }
 
 

@@ -1,5 +1,5 @@
-import {collectionUtils, random} from "./utils/index";
-import {listener} from "./listener";
+import {collectionUtil, random} from "./util/index";
+import {emitter} from "./events";
 
 /**
  * 系统方法
@@ -26,7 +26,7 @@ export default _;
 	 */
 	_.getQQMap = function() {
 		if (random(1, 3) === 2) {
-			qqMapKeys = collectionUtils.shuffle(qqMapKeys); //打乱数组
+			qqMapKeys = collectionUtil.shuffle(qqMapKeys); //打乱数组
 		}
 		const index = random(0, qqMapKeys.length - 1);
 		return new QQMapWX({key: qqMapKeys[index]});// 实例化API核心类
