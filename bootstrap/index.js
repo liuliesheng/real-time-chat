@@ -1,4 +1,4 @@
-import {collectionUtil, functionUtil, isEmpty, numberUtil, random, stringUtil, timeUtil} from './util/index.js';
+import * as util from './util/index.js';
 import {emitter, EventEmitter} from "./events.js";
 import publisher from './publisher.js';
 import middleware from './middleware.js';
@@ -6,6 +6,8 @@ import middleware from './middleware.js';
 import {http, Http} from './http.js';
 import uploader from './uploader.js';
 import Validate from './validate.js';
+
+import system from './system.js';
 
 if (!Promise.prototype.finally) {
 	Promise.prototype.finally = function(callback) {
@@ -47,13 +49,16 @@ if (!Promise.prototype.finally) {
 		return null;
 	});
 
-	wx.define('random', random);
-	wx.define('isEmpty', isEmpty);
-	wx.define('collectionUtil', collectionUtil);
-	wx.define('numberUtil', numberUtil);
-	wx.define('stringUtil', stringUtil);
-	wx.define('timeUtil', timeUtil);
-	wx.define('functionUtil', functionUtil);
+	wx.define('random', util.random);
+	wx.define('isEmpty', util.isEmpty);
+	wx.define('isEmpty', util.assign);
+	wx.define('isEmpty', util.isObject);
+	wx.define('isEmpty', util.toObject);
+	wx.define('collectionUtil', util.collectionUtil);
+	wx.define('numberUtil', util.numberUtil);
+	wx.define('stringUtil', util.stringUtil);
+	wx.define('timeUtil', util.timeUtil);
+	wx.define('functionUtil', util.functionUtil);
 
 	wx.define('emitter', emitter);
 	wx.define('EventEmitter', EventEmitter);
@@ -65,10 +70,13 @@ if (!Promise.prototype.finally) {
 	wx.define('uploader', uploader);
 
 	wx.define('Validate', Validate);
+	wx.define('system', system);
 
 	console.printHelper = function() {
 		console.groupCollapsed(`%c相关快捷操作`, "color:green;font-size:14px");
-		console.log(`%cwx.define(key,value,isEnumerable) 把一个变量绑定到wx
+		console.log(`%c
+wx.require(file, errorTips = true) 引入模块
+wx.define(key,value,isEnumerable) 把一个变量绑定到wx
 wx.$define(obj,key,value,isEnumerable) 把一个变量绑定到某个对象上
 wx.listener 监听器实例
 wx.publisher(name, handles = []) 生成一个发布/订阅实例
@@ -76,12 +84,7 @@ wx.middleware(handles = []) 生成一个中间件实例
 wx.http(options) 发起网络请求
 wx.http.get(url, data, options) 发起GET网络请求
 wx.http.post(url, data, options) 发起POST网络请求
-wx.addRequestInterceptor(fulfilled, rejected) 添加请求拦截器
-wx.removeRequestInterceptor(number) 移除拦截器
-wx.addResponseInterceptor(fulfilled, rejected) 添加返回拦截器
-wx.removeResponseInterceptor(number) 移除拦截器
 wx.uploader(files) 生成一个上传文件实例
-wx.require(file, errorTips = true) 引入模块
 wx.config 配置信息
 wx.middlewares 中间件列表`, "color:#00f;font-size:14px;");
 		console.log("%c", "padding:70px 120px;line-height:200px;background-size:50px 50px;background:url('http://hbimg.b0.upaiyun.com/d57f34add1cdc182df3aab0777d0d88a1648073610e02-35Kp1Q_fw658') no-repeat;");

@@ -5,7 +5,6 @@ import {emitter} from "./events";
  * 系统方法
  */
 const _ = {};
-export default _;
 
 // QQ地图
 (function() {
@@ -148,9 +147,10 @@ _.getUserInfo = function(options = {}) {
 						});
 					}
 				});
-				listener.trigger('wx.userinfo.to', options);
+				emitter.trigger('wx.userinfo.to', options);
 			},
 			complete: undefined
 		}));
 	});
 };
+export default _;
