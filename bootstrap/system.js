@@ -8,7 +8,7 @@ const _ = {};
 
 // QQ地图
 (function() {
-	const QQMapWX = require('./qqmap-wx-jssdk.min.js');
+	const QQMapWX = require('./libs/qqmap-wx-jssdk.min.js');
 	/**
 	 * QQ地图key列表
 	 * @type {string[]}
@@ -136,7 +136,7 @@ _.getUserInfo = function(options = {}) {
 		}, options, {
 			success: resolve,
 			fail: err => {
-				listener.once('wx.userinfo.result', (res) => {
+				emitter.once('wx.userinfo.result', (res) => {
 					getApp().globalData.isAuthing = false;
 					if (res) {
 						resolve(res);

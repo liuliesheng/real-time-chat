@@ -1,6 +1,4 @@
 // pages/examples/getUserInfo/getUserInfo.js
-import util from '../../../utils/util.js';
-
 Page({
 
 	/**
@@ -15,7 +13,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		util.getUserInfo({
+		wx.sys.getUserInfo({
 			success: (res) => {
 				this.setData({
 					userInfo: res,
@@ -27,7 +25,7 @@ Page({
 	},
 
 	getUserInfo: function() {
-		util.getUserInfo({
+		wx.sys.getUserInfo({
 			force: true, //强制获取
 			success: (res) => {
 				this.setData({

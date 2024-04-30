@@ -1,5 +1,4 @@
 // pages/examples/listener/b.js
-import listener from '../../../bootstrap/listener.js';
 Page({
 
     /**
@@ -20,8 +19,7 @@ Page({
      * 页面提交
      */
     onSubmit: function(e) {
-		console.log(e);
-		listener.fire('wait.result', e.detail.value);
+        wx.emitter.trigger('wait.result', e.detail.value);
         wx.navigateBack({})
     }
 })

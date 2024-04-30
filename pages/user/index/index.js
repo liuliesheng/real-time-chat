@@ -1,6 +1,4 @@
 // pages/user/index/index.js
-import util from "../../../utils/util";
-
 Page({
 
 	/**
@@ -50,7 +48,7 @@ Page({
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function() {
-		util.getUserInfo({
+		wx.sys.getUserInfo({
 			success: (res) => {
 				wx.stopPullDownRefresh();
 				this.setData({

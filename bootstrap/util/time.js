@@ -11,7 +11,7 @@ export default _;
  * @param {Number,Date} [date]
  * @return {string}
  */
-_.format = (formatStr, date = new Date()) => {
+_.format = (formatStr='yyyy-MM-dd hh:mm:ss', date = new Date()) => {
 	if (!(date instanceof Date)) date = new Date(date);
 
 	const o = {

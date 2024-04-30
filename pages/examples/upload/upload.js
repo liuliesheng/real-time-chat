@@ -1,6 +1,5 @@
 // pages/examples/upload/upload.js
-import {urls} from "../../../config";
-
+const {urls} = wx.config;
 Page({
 
 	/**
@@ -13,7 +12,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
+	onLoad: function(options) {
 
 	},
 
@@ -21,7 +20,7 @@ Page({
 	 * 选择图片
 	 * @param e
 	 */
-	onChooseImage: function (e) {
+	onChooseImage: function(e) {
 		wx.chooseImage({
 			success: (res) => {
 				const files = res.tempFilePaths.map(item => ({path: item, status: 0, progress: 0}));

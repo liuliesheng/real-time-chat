@@ -1,6 +1,4 @@
 // pages/user/auth.js
-import listener from '../../../bootstrap/listener.js';
-
 Page({
 
 	/**
@@ -16,7 +14,7 @@ Page({
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function () {
-		listener.fire('wx.userinfo.result', this.data.userInfo);
+		wx.emitter.trigger('wx.userinfo.result', this.data.userInfo);
 	},
 
 	/**

@@ -1,4 +1,4 @@
-import request from "./request";
+import {http} from "./http";
 
 /**
  * 默认构造器

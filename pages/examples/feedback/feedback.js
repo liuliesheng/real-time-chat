@@ -1,7 +1,4 @@
-import {
-    urls
-} from "../../../config";
-
+const {urls} = wx.config;
 Page({
     data: {
         remark: "",

@@ -18,9 +18,19 @@ export function random(min, max) {
 export function isEmpty(obj) {
 	if (obj == null) return true;
 
-	if (_.isArray(obj) || typeof obj === 'string' || obj.callee) return obj.length === 0;
+	if (isArray(obj) || typeof obj === 'string' || obj.callee) return obj.length === 0;
 
 	return Object.keys(obj).length === 0;
+}
+
+/**
+ * 是否是数组
+ * @param obj
+ * @return {boolean}
+ */
+export function isArray(obj) {
+	if (typeof obj !== 'object') return false;
+	return obj.length !== undefined;
 }
 
 

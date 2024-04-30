@@ -1,5 +1,4 @@
 // pages/examples/timer/timer.js
-import util from '../../../utils/util.js';
 Page({
 	timer: {
 		id: 0,
@@ -26,7 +25,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		datetime: util.formatTime(new Date())
+		datetime: wx.timeUtil.format()
 	},
 
 	/**
@@ -61,7 +60,7 @@ Page({
 	 * 更新时间
 	 */
 	updateDatetime: function () {
-		this.setData({ datetime: util.formatTime(new Date()) });
+		this.setData({ datetime: wx.timeUtil.format() });
 	},
 
 })
