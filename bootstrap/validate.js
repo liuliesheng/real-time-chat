@@ -3,7 +3,7 @@
  * @type {*}
  */
 const TYPE_MSG = {
-	'require': '{{attribute}}不能为空！',
+	'required': '{{attribute}}不能为空！',
 	'number': '{{attribute}}只能是数字',
 	'integer': '{{attribute}}只能是整数',
 	'float': '{{attribute}}只能是浮点数',

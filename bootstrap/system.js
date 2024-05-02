@@ -28,20 +28,11 @@ const _ = {};
 			qqMapKeys = collectionUtil.shuffle(qqMapKeys); //打乱数组
 		}
 		const index = random(0, qqMapKeys.length - 1);
-		return new QQMapWX({key: qqMapKeys[index]});// 实例化API核心类
+		return new QQMapWX({
+			key: qqMapKeys[index]
+		}); // 实例化API核心类
 	};
 })();
-
-
-/**
- * 打开网页
- * @param {String} url
- */
-_.openUrl = function(url) {
-	wx.navigateTo({
-		url: '/pages/common/webview/index?url=' + encodeURIComponent(url),
-	});
-};
 
 /**
  * 授权是否被拒绝
@@ -134,12 +125,14 @@ _.getUserInfo = function(options = {}) {
 		wx.getUserInfo(Object.assign({
 			lang: 'zh_CN'
 		}, options, {
-			success: resolve,
-			fail: err => {
+			success: (res) => {
+				resolve(options.full ? res : res.userInfo);
+			},
+			fail: (err) => {
+				console.error('getUserInfo', err);
 				emitter.once('wx.userinfo.result', (res) => {
-					getApp().globalData.isAuthing = false;
-					if (res) {
-						resolve(res);
+					if (res && res.userInfo) {
+						resolve(options.full ? res : res.userInfo);
 					} else {
 						reject({
 							errMsg: '授权失败',
