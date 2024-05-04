@@ -1,50 +1,50 @@
 {
-	"description":"项目配置文件",
-	"packOptions":{
-		"ignore":[
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": [
 			{
-				"type":"folder",
-				"value":"styles"
+				"type": "folder",
+				"value": "styles"
 			},
 			{
-				"type":"folder",
-				"value":"tests"
+				"type": "folder",
+				"value": "tests"
 			}
 		]
 	},
-	"setting":{
-		"urlCheck":true,
-		"es6":true,
-		"postcss":true,
-		"minified":true,
-		"newFeature":true,
-		"autoAudits":false,
-		"uglifyFileName":true
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"uglifyFileName": true
 	},
-	"compileType":"miniprogram",
-	"libVersion":"2.5.2",
-	"appid":"",
-	"projectname":"%E6%B5%8B%E8%AF%952",
-	"debugOptions":{
-		"hidedInDevtools":[]
+	"compileType": "miniprogram",
+	"libVersion": "2.5.2",
+	"appid": "wx1db380c4f3dad4c4",
+	"projectname": "weapp-template",
+	"debugOptions": {
+		"hidedInDevtools": []
 	},
-	"isGameTourist":false,
-	"condition":{
-		"search":{
-			"current":-1,
-			"list":[]
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
 		},
-		"conversation":{
-			"current":-1,
-			"list":[]
+		"conversation": {
+			"current": -1,
+			"list": []
 		},
-		"game":{
-			"currentL":-1,
-			"list":[]
+		"game": {
+			"currentL": -1,
+			"list": []
 		},
-		"miniprogram":{
-			"current":-1,
-			"list":[
+		"miniprogram": {
+			"current": -1,
+			"list": [
 				{
 					"id": -1,
 					"name": "上传图片",

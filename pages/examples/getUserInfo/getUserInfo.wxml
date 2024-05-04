@@ -8,6 +8,6 @@
     </view>
     <button bindtap='getUserInfo'> 获取头像昵称 </button>
     <view wx:if="{{hasUserInfo}}" class="usermotto">
-        <text class="user-motto">{{userInfoStr}}</text>
+        <view class="user-motto">{{userInfoStr}}</view>
     </view>
 </view>
