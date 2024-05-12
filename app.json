@@ -43,7 +43,7 @@
 		"pages/user/settings/settings"
 	],
 	"window":{
-		"backgroundTextStyle":"light",
+		"backgroundTextStyle":"dark",
 		"navigationBarBackgroundColor":"#fff",
 		"navigationBarTitleText":"weapp-template",
 		"navigationBarTextStyle":"black"

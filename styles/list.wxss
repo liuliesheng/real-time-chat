@@ -10,7 +10,7 @@
 
 .list-item {
     padding: 30rpx;
-    line-height: 1.2;
+    line-height: 1.4;
     transition: all 0.2s;
 }
 
