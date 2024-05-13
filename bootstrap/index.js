@@ -157,10 +157,10 @@ wx.middlewares 中间件列表
 			util.assign(wx.http.defaults, httpConfig.defaults);
 		}
 		if (httpConfig.requestInterceptors) {
-			httpConfig.requestInterceptors.forEach(interceptor => wx.addRequestInterceptor(interceptor));
+			httpConfig.requestInterceptors.forEach(interceptor => wx.http.addRequestInterceptor(interceptor));
 		}
 		if (httpConfig.responseInterceptors) {
-			httpConfig.responseInterceptors.forEach(interceptor => wx.addResponseInterceptor(interceptor));
+			httpConfig.responseInterceptors.forEach(interceptor => wx.http.addResponseInterceptor(interceptor));
 		}
 	}
 })();
