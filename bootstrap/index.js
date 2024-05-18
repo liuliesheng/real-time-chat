@@ -39,14 +39,6 @@ if (!Promise.prototype.finally) {
 	wx.$define(wx, 'define', function(key, value, isEnumerable = true) {
 		return wx.$define(wx, key, value, isEnumerable);
 	});
-	wx.define('require', function(file, errorTips = true) {
-		try {
-			return require(file);
-		} catch (e) {
-			if (errorTips) console.warn(e);
-		}
-		return null;
-	});
 
 	wx.define('random', util.random);
 	wx.define('isEmpty', util.isEmpty);
@@ -121,7 +113,13 @@ wx.middlewares 中间件列表
 
 //初始化基础配置
 (function() {
-	let config = wx.require('../config/app.js') || {};
+	let config = null;
+	try {
+		config = require('../config/app.js');
+	} catch (e) {
+		console.warn(e);
+		config = {};
+	}
 	if (typeof config === 'function') config = config() || {};
 	wx.define('runtimeConfig', __wxConfig || {});
 	wx.define('config', config);
@@ -139,17 +137,21 @@ wx.middlewares 中间件列表
 
 	const stopPullDownRefresh = wx.stopPullDownRefresh;
 	wx.define('stopPullDownRefresh', function() {
-		const that = this;
-		return function() {
-			innerAudioContext.play();
-			stopPullDownRefresh.call(that);
-		};
+		console.log('sss');
+		innerAudioContext.play();
+		stopPullDownRefresh.call(this);
 	});
 })();
 
 //初始化网络请求配置
 (function() {
-	const httpConfig = wx.require('/config/http.js', false) || {};
+	const httpConfig = (function() {
+		try {
+			return require('../config/http.js');
+		} catch (e) {
+			return {};
+		}
+	})();
 	if (typeof httpConfig === 'function') {
 		httpConfig();
 	} else {
@@ -171,10 +173,17 @@ wx.middlewares 中间件列表
 	}
 })();
 
-//初始化中间件配置
+// 初始化中间件配置
 (function() {
 	const middlewareList = {};
-	const middlewareConfig = wx.require('../config/middleware.js', false) || {};
+	const middlewareConfig = (function() {
+		try {
+			return require('../config/middleware.js');
+		} catch (e) {
+			return {};
+		}
+	})();
+
 	if (typeof middlewareConfig === 'function') {
 		middlewareConfig();
 	} else {

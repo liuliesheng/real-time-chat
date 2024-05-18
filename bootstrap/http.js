@@ -20,7 +20,7 @@ function requestAdapter(options) {
 				reject({
 					errMsg: e.message,
 					error: e,
-					options: options
+					config: options
 				});
 			}
 		}
@@ -45,7 +45,7 @@ function requestAdapter(options) {
 
 		// 请求失败之后的处理
 		options.fail = (err) => {
-			err.options = options;
+			err.config = options;
 			reject(err);
 		};
 
@@ -72,7 +72,7 @@ function uploadAdapter(options) {
 				resolve(res);
 			},
 			fail: (err) => {
-				err.options = options;
+				err.config = options;
 				reject(err);
 			},
 			complete: undefined

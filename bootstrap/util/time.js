@@ -64,5 +64,5 @@ _.format.time = (date = new Date(), isSeconds = false) => {
  * @return {string}
  */
 _.format.datetime = (date = new Date(), isSeconds = false) => {
-	return _.format('yyyy-MM-dd h:i' + (isSeconds ? ':s' : ''), date);
+	return _.format('yyyy-MM-dd hh:mm' + (isSeconds ? ':ss' : ''), date);
 };
