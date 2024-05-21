@@ -29,7 +29,7 @@
 
 .list-header {
     background-color: #efefef;
-    padding: 10rpx 30rpx;
+    padding: 20rpx 30rpx;
 }
 
 .main-menu {
