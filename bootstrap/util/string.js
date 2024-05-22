@@ -92,3 +92,21 @@ _.parseUrlQuery = function(str) {
 	}
 	return vars;
 };
+
+/**
+ * 组装url
+ * @param {*} obj
+ * @return {string}
+ */
+_.buildUrl = function(obj) {
+	const result = [];
+
+	const keys = Object.keys(obj);
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		const value = obj[key];
+		result.push(key + "=" + encodeURIComponent(value));
+	}
+
+	return result.join('&');
+};

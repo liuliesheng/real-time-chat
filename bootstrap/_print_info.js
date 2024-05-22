@@ -32,5 +32,4 @@ wx.config 配置信息
 wx.middlewares 中间件列表
 
 `, "color:#00f;font-size:12px;");
-// console.log("%c", "padding:70px 120px;line-height:200px;background-size:50px 50px;background:url('http://hbimg.b0.upaiyun.com/d57f34add1cdc182df3aab0777d0d88a1648073610e02-35Kp1Q_fw658') no-repeat;");
 console.groupEnd();
