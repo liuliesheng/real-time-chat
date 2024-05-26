@@ -59,3 +59,54 @@ _.orderedUuid = (prefix = '') => {
 	const timer = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
 	return prefix + timer + random(100000, 999999);
 };
+
+/**
+ * 解析URL
+ * @param  {string} url 被解析的URL
+ * @return {object}     解析后的数据
+ */
+_.parseUrl = function(url) {
+	const parse = url.match(/^(?:([a-z]+):\/\/)?([\w-]+(?:\.[\w-]+)+)?(?::(\d+))?([\w-\/.]+)?(?:\?((?:\w+=[^#&=\/]*)?(?:&\w+=[^#&=\/]*)*))?(?:#([\w-]+))?$/i);
+	if (!parse) throw new Error("url格式不正确！");
+	return {
+		scheme: parse[1],
+		host: parse[2],
+		port: parse[3],
+		path: parse[4],
+		query: parse[5],
+		fragment: parse[6]
+	};
+};
+
+/**
+ * 解析Url Query字符串
+ * @param {string} str
+ * @returns {{}}
+ */
+_.parseUrlQuery = function(str) {
+	if (!str) return {};
+	let value = str.split("&"), vars = {}, param;
+	for (const val in value) {
+		param = value[val].split("=");
+		vars[param[0]] = param[1];
+	}
+	return vars;
+};
+
+/**
+ * 组装url
+ * @param {*} obj
+ * @return {string}
+ */
+_.buildUrl = function(obj) {
+	const result = [];
+
+	const keys = Object.keys(obj);
+	for (let i = 0; i < keys.length; i++) {
+		const key = keys[i];
+		const value = obj[key];
+		result.push(key + "=" + encodeURIComponent(value));
+	}
+
+	return result.join('&');
+};
