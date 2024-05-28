@@ -1,21 +1,17 @@
 // 中间件配置
 // 创建一个中间件 wx.middleware();
 // 系统内置中间件列表 wx.middlewares
+
+import testAppIsStart from './middlewares/test-app-is-start'
+import printParams from './middlewares/print-params'
+
 module.exports = {
-	appLaunch: [{
-		name: 'test-app-is-start',
-		handle: function(next, options) {
-			console.log('params:', options);
-			next();
-		}
-	}],
-	appShow: [{
-		name: 'print params',
-		handle: function(next, options) {
-			console.log('params:', options);
-			next();
-		}
-	}],
+	appLaunch: [
+		testAppIsStart,
+	],
+	appShow: [
+		printParams
+	],
 	appHide: [],
 	appRoute: [],
 	appRouteDone: [],
