@@ -5,8 +5,8 @@ import basicResponseInterceptor from "./https/basic.response.interceptor";
 // http基础配置
 module.exports = {
 	defaults: {
-		// baseURL: 'http://192.168.0.109',
-		baseURL: 'https://www.xinranvip.top'
+		// baseURL: 'http://127.0.0.1',
+		baseURL: 'https://product.domin.com'
 	},
 	requestInterceptors: [
 		basicRequestInterceptor,

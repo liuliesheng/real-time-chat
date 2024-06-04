@@ -1,4 +1,4 @@
 import "./es6.ext";
-import "./global.variable";
+import "./global.ext";
 import "./app";
 import "./page";

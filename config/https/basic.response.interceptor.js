@@ -35,17 +35,20 @@ export default {
 					});
 				}
 				res.config.loginCount = 1;
-				return login(res.config);
+				return login(res.config).then(options => wx.http.request(options));
 			}
 
 			// 余额不足
 			if (res.data.code === -3) {
 				wx.showModal({
 					title: '温馨提示',
-					content: '你的当前余额不足',
-					showCancel: false,
+					content: '你的当前星币不足，是否查看获取星币的方法？',
+					showCancel: true,
+					confirmColor: '#2E8B57',
+					confirmText: '了解一下',
 					success: (res) => {
 						if (res.cancel) return;
+
 						wx.navigateTo({
 							url: '/pages/user/gold/index'
 						});

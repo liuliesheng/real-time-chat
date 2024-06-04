@@ -12,7 +12,7 @@ const callbacks = [];
 function execCallbacks(flag, err) {
 	callbacks.forEach(item => {
 		if ('resolve' === flag) {
-			item.resolve(wx.http.request(item.options));
+			item.resolve(item.options);
 		} else {
 			err.config = item.options;
 			item.reject(err);
@@ -27,7 +27,7 @@ function execCallbacks(flag, err) {
  */
 function loginServer() {
 	let code = null;
-	return wx.functionUtil.callbacksTransformPromise(wx.login).then((res) => {
+	return wx.promise.login.then((res) => {
 		code = res.code;
 		return wx.sys.getUserInfo({
 			withCredentials: true

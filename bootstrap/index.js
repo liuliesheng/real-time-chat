@@ -5,48 +5,46 @@ import middleware from './middleware.js';
 import {http, Http} from './http.js';
 import uploader from './uploader.js';
 import Validate from './validate.js';
-import system from './system.js';
 
 import "./native-init/index";
 import "./_print_info";
 
 // 注入相关快捷方法
-(function() {
-	// 常用方法
-	wx.define('random', util.random);
-	wx.define('isEmpty', util.isEmpty);
-	wx.define('isArray', util.isArray);
-	wx.define('isObject', util.isObject);
-	wx.define('toObject', util.toObject);
-	wx.define('assign', util.assign);
+const $ = wx;
 
-	// 工具类
-	wx.define('collectionUtil', util.collectionUtil);
-	wx.define('numberUtil', util.numberUtil);
-	wx.define('stringUtil', util.stringUtil);
-	wx.define('timeUtil', util.timeUtil);
-	wx.define('functionUtil', util.functionUtil);
+// 常用方法
+$.define('random', util.random);
+$.define('isEmpty', util.isEmpty);
+$.define('isArray', util.isArray);
+$.define('isObject', util.isObject);
+$.define('toObject', util.toObject);
+$.define('assign', util.assign);
 
-	// 事件类
-	wx.define('emitter', emitter);
-	wx.define('EventEmitter', EventEmitter);
-	wx.define('publisher', publisher);
-	wx.define('middleware', middleware);
+// 工具类
+$.define('collectionUtil', util.collectionUtil);
+$.define('stringUtil', util.stringUtil);
+$.define('numberUtil', util.numberUtil);
+$.define('timeUtil', util.timeUtil);
+$.define('functionUtil', util.functionUtil);
 
-	// 请求类
-	wx.define('http', http);
-	wx.define('Http', Http);
-	wx.define('uploader', uploader);
+// 事件类
+$.define('emitter', emitter);
+$.define('EventEmitter', EventEmitter);
+$.define('publisher', publisher);
+$.define('middleware', middleware);
 
-	// 其他
-	wx.define('Validate', Validate);
-	wx.define('sys', system);
-	wx.define('delayNavigateBack', function(delay, options) {
-		setTimeout(function() {
-			wx.navigateBack(options);
-		}, delay);
-	});
-})();
+// 请求类
+$.define('http', http);
+$.define('Http', Http);
+$.define('uploader', uploader);
+
+// 其他
+$.define('Validate', Validate);
+$.define('delayNavigateBack', function(delay, options) {
+	setTimeout(function() {
+		$.navigateBack(options);
+	}, delay);
+});
 
 //初始化基础配置
 (function() {
@@ -63,7 +61,7 @@ import "./_print_info";
 		config = config() || {};
 	}
 
-	wx.define('config', Object.assign(config, __wxConfig));
+	$.define('config', Object.assign(config, __wxConfig || {}));
 })();
 
 //初始化网络请求配置
@@ -125,15 +123,15 @@ import "./_print_info";
 
 	// 生成中间件
 	for (const key in config) {
-		wx.$define(middlewareList, key, middleware(config[key]));
+		$.$define(middlewareList, key, middleware(config[key]));
 	}
-	wx.define('middlewares', middlewareList);
+	$.define('middlewares', middlewareList);
 
 	// 注册中间件
 	const callbackMiddlewareHandle = function(callbackName, middlewareName) {
-		if (!wx[callbackName] || !middlewareList[middlewareName]) return;
+		if (!$[callbackName] || !middlewareList[middlewareName]) return;
 
-		wx[callbackName](function(options) {
+		$[callbackName](function(options) {
 			console.groupCollapsed(middlewareName, options);
 			middlewareList[middlewareName](function() {
 				// console.debug(middlewareName, 'options', options);
@@ -151,16 +149,16 @@ import "./_print_info";
 
 // 重写停止下拉刷新方法
 (function() {
-	let innerAudioContext = wx.config.stopPullDownRefreshAudio;
+	let innerAudioContext = $.config.stopPullDownRefreshAudio;
 	if (!innerAudioContext) return;
 
 	if (typeof innerAudioContext !== 'object') {
-		innerAudioContext = wx.createInnerAudioContext();
-		innerAudioContext.src = wx.config.stopPullDownRefreshAudio;
+		innerAudioContext = $.createInnerAudioContext();
+		innerAudioContext.src = $.config.stopPullDownRefreshAudio;
 	}
 
-	const stopPullDownRefresh = wx.stopPullDownRefresh;
-	wx.define('stopPullDownRefresh', function(isPlay) {
+	const stopPullDownRefresh = $.stopPullDownRefresh;
+	$.define('stopPullDownRefresh', function(isPlay) {
 		if (isPlay) innerAudioContext.play();
 		stopPullDownRefresh.call(this);
 	});
