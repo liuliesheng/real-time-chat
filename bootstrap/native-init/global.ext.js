@@ -174,7 +174,7 @@ $.define('sys', (function(sys = {}) {
 						resolve(options.full ? res : res.userInfo);
 					} else {
 						reject({
-							errMsg: '授权失败',
+							errMsg: '授权失败!',
 							isAuthDeny: true
 						});
 					}
