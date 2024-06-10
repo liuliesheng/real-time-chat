@@ -9,6 +9,7 @@ Page = function(options) {
 		}
 	})();
 
-	options = Object.assign({}, pageMixin, options);
+	options = Object.assign({
+	}, pageMixin, options);
 	originalPage(options);
 };

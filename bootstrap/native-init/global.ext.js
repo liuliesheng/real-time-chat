@@ -92,6 +92,16 @@ $.define('getQQMap', (function() {
 	};
 })());
 
+// 数组转对象
+$.define('arr2obj', function(prefix, data, initIndex = 0) {
+	const result = {};
+	for (let i = 0; i < data.length; i++) {
+		const newKey = prefix + '[' + (i + initIndex) + ']';
+		result[newKey] = data[i];
+	}
+	return result;
+});
+
 // 系统相关方法的扩展
 $.define('sys', (function(sys = {}) {
 
