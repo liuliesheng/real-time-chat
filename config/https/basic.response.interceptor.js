@@ -76,19 +76,19 @@ export default {
 
 		return res;
 	},
-	rejected: function(res) {
+	rejected: function(err) {
 		// 关闭loading
-		if (res.config.showLoading) {
+		if (err.config.showLoading) {
 			wx.hideLoading();
 		}
 
-		if (res.config.isShowErrorTips !== false) {
+		if (err.config.isShowErrorTips !== false) {
 			wx.showToast({
-				title: '网络错误，请稍后~',
+				title: err.errMsg || '网络错误，请稍后~',
 				icon: 'none',
 			});
 		}
 
-		return Promise.reject(res);
+		return Promise.reject(err);
 	}
 };
