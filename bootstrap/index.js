@@ -1,3 +1,6 @@
+import "./_print_info";
+import $ from "./native-init/index";
+
 import * as util from './util/index.js';
 import {emitter, EventEmitter} from "./events.js";
 import publisher from './publisher.js';
@@ -6,12 +9,7 @@ import {http, Http} from './http.js';
 import uploader from './uploader.js';
 import Validate from './validate.js';
 
-import "./native-init/index";
-import "./_print_info";
-
 // 注入相关快捷方法
-const $ = wx;
-
 // 常用方法
 $.define('random', util.random);
 $.define('isEmpty', util.isEmpty);

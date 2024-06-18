@@ -1,4 +1,6 @@
 import "./es6.ext";
-import "./global.ext";
+import $ from "./global.ext";
 import "./app";
 import "./page";
+
+export default $;
