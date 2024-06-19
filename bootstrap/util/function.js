@@ -298,6 +298,13 @@ _.gtFuture = function(func, wait, context) {
 	}
 };
 
+/**
+ * 小于未来某个时刻可是执行
+ * @param {Function} func
+ * @param {number} wait
+ * @param {*} context
+ * @return {Function}
+ */
 _.ltFuture = function(func, wait, context) {
 	let prevTime = new Date().getTime();
 	return function() {

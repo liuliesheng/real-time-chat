@@ -6,8 +6,8 @@
  */
 
 function checkType(value, type, prefixErrorMsg) {
-    if (!value || typeof value !== type)
-        throw new TypeError(prefixErrorMsg + '是一个' + type + '类型，传递的是一个' + (typeof name) + '类型');
+	if (!value || typeof value !== type)
+		throw new TypeError(prefixErrorMsg + '是一个' + type + '类型，传递的是一个' + (typeof name) + '类型');
 }
 
 /**
@@ -15,88 +15,106 @@ function checkType(value, type, prefixErrorMsg) {
  */
 export class EventEmitter {
 
-    /**
-     * 默认构造器
-     */
-    constructor() {
-        /**
-         * 监听器存储器
-         * @type {*}
-         */
-        this._listeners = {};
-    }
+	/**
+	 * 默认构造器
+	 */
+	constructor() {
+		/**
+		 * 监听器存储器
+		 * @type {*}
+		 */
+		this._listeners = {};
+	}
 
-    /**
-     * 添加监听器
-     * @param {string} name
-     * @param {...<Function,object>} callbacks
-     * @return {*[]}
-     */
-    on(name, ...callbacks) {
-        checkType(name, 'string', '参数1');
-        const callbackStorage = this._listeners.hasOwnProperty(name) ? this._listeners[name] : this._listeners[name] = [];
-        for (let i in callbacks) {
-            let callback = callbacks[i];
-            if (typeof callback === 'function') callback = {
-                callback: callback
-            };
-            checkType(callback.callback, 'function', `参数${i}`);
-            callbackStorage.push(callback);
-        }
-        return callbacks.length > 1 ? callbacks : callbacks[0];
-    }
+	/**
+	 * 添加监听器
+	 * @param {string} name
+	 * @param {...<Function,object>} callbacks
+	 * @return {*[]}
+	 */
+	on(name, ...callbacks) {
+		checkType(name, 'string', '参数1');
 
-    /**
-     * 只触发一次事件
-     * @param {string} name
-     * @param {*} callback
-     * @returns {*[]}
-     */
-    once(name, callback) {
-        if (typeof callback === 'function') callback = {
-            callback: callback
-        };
-        callback.once = true;
-        return this.on(name, callback);
-    }
+		if (!this._listeners.hasOwnProperty(name)) {
+			this._listeners[name] = [];
+		}
 
-    /**
-     * 移除监听器
-     * @param {string,null} name
-     * @param {...<Function,object>} callbacks
-     */
-    off(name, ...callbacks) {
-        if (name) {
-            if (!this._listeners.hasOwnProperty(name)) return;
-            const callbackStorage = this._listeners[name];
-            if (callbacks.length) {
-                for (let i in callbacks) {
-                    const callback = callbacks[i];
-                    for (let i = 0; i < callbackStorage.length; i++) {
-                        if (callback === callbackStorage[i].callback) {
-                            callbackStorage.splice(i, 1);
-                            i--;
-                        }
-                    }
-                }
-            } else {
-                this._listeners[name] = [];
-            }
-        } else {
-            this._listeners = {};
-        }
-    }
+		const callbackStorage = this._listeners[name];
 
-    /**
-     * 触发监听器
-     * @param {string} name
-     * @param {*} [param]
-     * @return {EventEmitter}
-     */
-    trigger(name, param) {
-        checkType(name, 'string', '参数1');
+		for (let i in callbacks) {
+			let callback = callbacks[i];
+			if (typeof callback === 'function') callback = {
+				callback: callback
+			};
+			checkType(callback.callback, 'function', `参数${i}`);
+			callbackStorage.push(callback);
+		}
+
+		return callbacks.length > 1 ? callbacks : callbacks[0];
+	}
+
+	/**
+	 * 只触发一次事件
+	 * @param {string} name
+	 * @param {*} callback
+	 * @returns {*[]}
+	 */
+	once(name, callback) {
+		if (typeof callback === 'function') callback = {
+			callback: callback
+		};
+		callback.once = true;
+		return this.on(name, callback);
+	}
+
+	/**
+	 * 移除监听器
+	 * @param {string,null} name
+	 * @param {...<Function,object>} callbacks
+	 */
+	off(name, ...callbacks) {
+		if (name) {
+			if (!this._listeners.hasOwnProperty(name)) return;
+			const callbackStorage = this._listeners[name];
+			if (callbacks.length) {
+				for (let i in callbacks) {
+					const callback = callbacks[i];
+					for (let i = 0; i < callbackStorage.length; i++) {
+						if (callback === callbackStorage[i].callback) {
+							callbackStorage.splice(i, 1);
+							i--;
+						}
+					}
+				}
+			} else {
+				this._listeners[name] = [];
+			}
+		} else {
+			this._listeners = {};
+		}
+	}
+
+	/**
+	 * 触发监听器
+	 * @param {string} name
+	 * @param {*} [param]
+	 * @return {EventEmitter}
+	 * @deprecated
+	 */
+	trigger(name, param) {
+		return this.emit(name, param);
+	}
+
+	/**
+	 * 触发监听器
+	 * @param {string} name
+	 * @param {*} [param]
+	 * @return {EventEmitter}
+	 */
+	emit(name, param) {
+		checkType(name, 'string', '参数1');
 		if (!this._listeners.hasOwnProperty(name)) return this;
-        
+
 		const callbackStorage = this._listeners[name];
 		for (let i = 0; i < callbackStorage.length; i++) {
 			const callback = callbackStorage[i];
@@ -121,7 +139,7 @@ export class EventEmitter {
 		}
 
 		return this;
-    }
+	}
 }
 
 
