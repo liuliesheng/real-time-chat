@@ -1,5 +1,5 @@
 {
-	"pages":[
+	"pages": [
 		"pages/index/index",
 		"pages/examples/getUserInfo/getUserInfo",
 		"pages/examples/timer/timer",
@@ -40,10 +40,11 @@
 		"pages/user/edit/edit",
 		"pages/user/settings/settings"
 	],
-	"window":{
-		"backgroundTextStyle":"dark",
-		"navigationBarBackgroundColor":"#fff",
-		"navigationBarTitleText":"weapp-template",
-		"navigationBarTextStyle":"black"
-	}
+	"window": {
+		"backgroundTextStyle": "dark",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "weapp-template",
+		"navigationBarTextStyle": "black"
+	},
+	"sitemapLocation": "sitemap.json"
 }
