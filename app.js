@@ -1,10 +1,10 @@
 //app.js
 import "./bootstrap/index";
 
-wx.emitter.on('wx.userinfo.to',function(){
-	wx.navigateTo({
-		url: '/pages/user/auth/auth',
-	});
+wx.emitter.on('sys.getUserInfo.to', function() {
+    wx.navigateTo({
+        url: '/pages/user/auth/auth',
+    });
 });
 
 App({

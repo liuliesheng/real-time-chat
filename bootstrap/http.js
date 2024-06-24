@@ -103,7 +103,8 @@ export class Http {
 		 */
 		this.interceptors = {
 			request: [],
-			response: []
+			response: [],
+			catchs: null
 		};
 	}
 
@@ -148,6 +149,9 @@ export class Http {
 
 		let promise = Promise.resolve(options);
 		chain.forEach(interceptor => promise = promise.then(interceptor.fulfilled, interceptor.rejected));
+		if (this.interceptors.catchs) {
+			promise.catch(this.interceptors.catchs);
+		}
 
 		return promise;
 	}
