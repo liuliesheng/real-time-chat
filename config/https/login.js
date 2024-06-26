@@ -27,7 +27,7 @@ function execCallbacks(flag, err) {
  */
 function loginServer() {
 	let code = null;
-	return wx.promise.login.then((res) => {
+	return wx.promise.login().then((res) => {
 		code = res.code;
 		return wx.sys.getUserInfo({
 			withCredentials: true
