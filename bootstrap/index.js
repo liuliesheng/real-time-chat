@@ -59,7 +59,7 @@ $.define('delayNavigateBack', function(delay, options) {
 		config = config() || {};
 	}
 
-	$.define('config', Object.assign(config, __wxConfig || {}));
+	$.define('config', Object.assign(config, (typeof __wxConfig === 'undefined') ? {} : __wxConfig));
 })();
 
 //初始化网络请求配置

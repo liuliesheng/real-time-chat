@@ -1,13 +1,15 @@
+import $ from "./global.ext";
+
 // 重置App函数
 const originalApp = App;
 App = function(appInstance) {
 	const callbackMiddlewareHandle = function(callbackName, middlewareName) {
-		if (!wx.middlewares[middlewareName]) return;
+		if (!$.middlewares[middlewareName]) return;
 		const oldFunc = appInstance[callbackName] || function() {
 		};
 		appInstance[callbackName] = function(options) {
 			console.groupCollapsed(middlewareName, options);
-			wx.middlewares[middlewareName](oldFunc, options, appInstance);
+			$.middlewares[middlewareName](oldFunc, options, appInstance);
 			console.groupEnd();
 		};
 	};

@@ -210,6 +210,4 @@ $.define('sys', (function (sys = {}) {
     return sys;
 })());
 
-console.log($)
-
 export default $;
