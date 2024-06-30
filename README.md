@@ -15,7 +15,6 @@
 
 在小程序 app.js 中引入 bootstrap/index.js 全局api,配置加载等等一切都可以运转起来了。
 
-`ssss`
     // app.js
     import "./bootstrap/index";
     
