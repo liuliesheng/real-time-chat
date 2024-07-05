@@ -31,7 +31,7 @@
         }
     });
 
-网络请求：
+**网络请求：**
 
     // 发送一个网络请求
     wx.http.get(uri,data).then(()=>console.log,err=>console.error)
@@ -43,7 +43,7 @@
         name:'file'
     }).then(()=>console.log,err=>console.error)
     
-事件：
+**事件：**
 
     // 监听一个事件
     wx.emitter.on('choose.address', function(address) {
@@ -71,7 +71,7 @@
         wx.emitter.off('choose.address', addressFn);
     });
     
-验证器：
+**验证器：**
 
     //实例化模式，一般用于表单提交前的验证
 
@@ -132,7 +132,7 @@
     console.log('是否为布尔值：', wx.Validate.is('false', 'boolean'));
     console.log('是否为数组：', wx.Validate.is([], 'array'));
     
-相关工具方法：
+**相关工具方法：**
 
     // 随机打乱数组
     wx.collectionUtil.shuffle(arr) 
@@ -226,13 +226,14 @@
 
 #### 相关配置
 一些配置信息都放在config目录下，你可以在你的代码的任何地方使用 wx.config 获取config/app.js中的配置。
-config/app.js 项目配置
+
+**config/app.js 项目配置**
 
     module.exports = {
     	stopPullDownRefreshAudio:'/audio/loadover.mp3'
     };
 
-config/http.js http基础配置
+**config/http.js http基础配置**
 
     module.exports = {
         defaults: {
@@ -249,7 +250,7 @@ config/http.js http基础配置
         ]
     };
 
-config/middleware.js 中间件
+**config/middleware.js 中间件**
 
     import testAppIsStart from './middlewares/test-app-is-start'
     import printParams from './middlewares/print-params'
@@ -267,7 +268,7 @@ config/middleware.js 中间件
     	appUnhang: [],
     };
 
-config/page.js 扩展page实例方法
+**config/page.js 扩展page实例方法**
 
     module.exports = {
     	// 设置data值
@@ -276,8 +277,8 @@ config/page.js 扩展page实例方法
     	}
     };
 
-config/upload.js 上传配置
+**config/upload.js 上传配置**
 
-config/https/* http相关拦截器
+**config/https/* http相关拦截器**
 
-config/middlewares/* 相关中间件
+**config/middlewares/* 相关中间件**
