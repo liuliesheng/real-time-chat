@@ -6,6 +6,70 @@
 #### 软件架构
 在设计方面，大量借鉴了thinkphp5的设计思想，主要是中thinkphp的毒太深，已经无法自拔。
 
+**目录说明**
+
+    miniroot                                小程序根目录
+    ├─bootstrap                             核心目录
+    │  ├─libs                               第三方模块目录
+    │  │  ├─qqmap-wx-jssdk.min.js           腾讯地图包
+    │  ├─native-init                        小程序原生语法扩展
+    │  │  ├─app.js                          扩展App函数
+    │  │  ├─component.js                    扩展Component函数
+    │  │  ├─es6.ext.js                      ES6 语法扩展
+    │  │  ├─global.ext.js                   全局对象扩展（wx,my,swan,tt）
+    │  │  └─page.js                         扩展Page函数
+    │  │
+    │  ├─util                               相关助手库
+    │  │  ├─collection.js                   集合助手库
+    │  │  ├─function.js                     函数助手库
+    │  │  ├─number.js                       数字助手库
+    │  │  ├─string.js                       字符串助手库
+    │  │  └─time.js                         时间助手库
+    │  ├─_print_info.js                     打印相关信息
+    │  ├─bignumber.js                       BigNumber.js 用来处理对小数点精度比较高的业务逻辑
+    │  ├─events.js                          事件器
+    │  ├─http.js                            请求器
+    │  ├─index.js                           入口文件
+    │  ├─middleware.js                      中间件
+    │  ├─publisher.js                       发布者
+    │  ├─uploader.js                        上传器
+    │  └─validate.js                        验证器
+    │
+    ├─config                                配置目录
+    │  ├─https                              https 拦截器存放目录
+    │  │  ├─basic.request.interceptor.js    集合助手库
+    │  │  ├─basic.response.interceptor.js   集合助手库
+    │  │  ├─formid.request.interceptor.js   集合助手库
+    │  │  └─page.js                         扩展Page函数
+    │  │
+    │  ├─middlewares                        中间件存放目录
+    │  │  ├─print-params.js                 集合助手库
+    │  │  └─...                             其他更多中间件
+    │  │
+    │  ├─app.js                             应用配置
+    │  ├─http.js                            请求器拦截器配置
+    │  ├─middleware.js                      中间件配置
+    │  ├─page.js                            Page方法混合
+    │  └─upload.js                          上传配置
+    │
+    ├─components                            自定义组件目录
+    │  └─...                                更多
+    │
+    ├─images                                图片存放目录
+    │  └─icons                              图标存放目录
+    │
+    ├─pages                                 页面存放目录
+    │  └─...                                更多
+    │
+    ├─styles                                样式目录
+    ├─tests                                 Babel转换配置文件
+    ├─.babelrc                             
+    ├─app.js                                
+    ├─app.json
+    ├─app.wxss
+    ├─gulpfile.js                           打包工具
+    ├─README.md
+    ├─package.json
 
 #### 安装教程
 
