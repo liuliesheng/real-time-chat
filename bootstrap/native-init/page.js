@@ -1,6 +1,8 @@
 // 重置Page函数
+import $ from "./global.ext";
+
 const originalPage = Page;
-Page = function(options) {
+const newPage = function(options) {
 	const pageMixin = (function() {
 		try {
 			return require('../../config/page.js');
@@ -9,7 +11,13 @@ Page = function(options) {
 		}
 	})();
 
-	options = Object.assign({
-	}, pageMixin, options);
+	options = Object.assign({}, pageMixin, options);
 	originalPage(options);
 };
+
+
+try {
+	Page = newPage;
+} catch (e) {
+	$.define('Page', newPage);
+}

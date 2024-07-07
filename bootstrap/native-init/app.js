@@ -2,7 +2,7 @@ import $ from "./global.ext";
 
 // 重置App函数
 const originalApp = App;
-App = function(appInstance) {
+const newApp = function(appInstance) {
 	const callbackMiddlewareHandle = function(callbackName, middlewareName) {
 		if (!$.middlewares[middlewareName]) return;
 		const oldFunc = appInstance[callbackName] || function() {
@@ -22,3 +22,10 @@ App = function(appInstance) {
 
 	originalApp(appInstance);
 };
+
+
+try {
+	App = newApp;
+} catch (e) {
+	$.define('App', newApp);
+}
