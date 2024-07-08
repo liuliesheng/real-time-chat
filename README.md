@@ -340,9 +340,3 @@
     		this.setData(e.target.dataset);
     	}
     };
-
-**config/upload.js 上传配置**
-
-**config/https/* http相关拦截器**
-
-**config/middlewares/* 相关中间件**
