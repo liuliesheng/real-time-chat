@@ -98,7 +98,7 @@ if (typeof my !== undefined) {
 
 		// 用户信息
 		$.define('getUserInfo', function(options) {
-			my.getAuthCode({
+			my.getOpenUserInfo({
 				success: (res) => {
 					let userInfo = null;
 					try {
