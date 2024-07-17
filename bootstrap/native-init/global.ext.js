@@ -110,13 +110,16 @@ if (typeof my !== undefined) {
 
 					if (userInfo) {
 						options.success && options.success({
-							nickName: userInfo.nickName,
-							avatarUrl: userInfo.avatar,
-							gender: userInfo.gender,
-							countryCode: userInfo.countryCode,
-							province: userInfo.province,
-							city: userInfo.city,
-							language: 'zh_CN',
+							userInfo: {
+								nickName: userInfo.nickName,
+								avatarUrl: userInfo.avatar,
+								gender: userInfo.gender,
+								countryCode: userInfo.countryCode,
+								province: userInfo.province,
+								city: userInfo.city,
+								language: 'zh_CN',
+							},
+							rawData: res.response
 						});
 					}
 				},
