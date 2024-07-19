@@ -65,6 +65,11 @@ if (typeof my !== undefined) {
 				my.confirm(options);
 			}
 		});
+		const showToast = my.showToast;
+		$.define('showToast', function(options) {
+			options.content = options.title;
+			showToast(options);
+		});
 
 		// 缓存相关
 		const getStorageSync = my.getStorageSync;
@@ -113,7 +118,7 @@ if (typeof my !== undefined) {
 							userInfo: {
 								nickName: userInfo.nickName,
 								avatarUrl: userInfo.avatar,
-								gender: userInfo.gender,
+								gender: userInfo.gender === 'm' ? 1 : 2,
 								countryCode: userInfo.countryCode,
 								province: userInfo.province,
 								city: userInfo.city,
