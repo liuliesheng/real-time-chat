@@ -34,6 +34,11 @@ $.$define($, 'define', function(key, value, isEnumerable = true) {
 	return $.$define($, key, value, isEnumerable);
 });
 
+// 兼容uni-app
+if (typeof uni !== 'undefined') {
+	$.define('$', $);
+}
+
 // 增加对微信原始API支持promise
 $.define('promise', new Proxy($, {
 	get: function(target, key, receiver) {
