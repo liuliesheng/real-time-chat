@@ -12,9 +12,9 @@
             <input id='email' type="text" placeholder="请输入邮箱地址(可选)" name='email' maxlength="48" />
         </view>
 
-    </view>
+        <view class="form-btn-group">
+            <button form-type='submit'>提交</button>
+        </view>
 
-    <view class="form-btn-group">
-        <button form-type='submit'>提交</button>
     </view>
 </form>

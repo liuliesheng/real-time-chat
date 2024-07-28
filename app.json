@@ -8,14 +8,10 @@
     "pages/examples/tabs/index",
     "pages/examples/listener/a",
     "pages/examples/listener/b",
-    "pages/examples/action-sheet/index",
     "pages/examples/avatar/index",
     "pages/examples/badge/index",
     "pages/examples/card/index",
-    "pages/examples/collapse/index",
     "pages/examples/color/index",
-    "pages/examples/divider/index",
-    "pages/examples/drawer/index",
     "pages/examples/grid/index",
     "pages/examples/icon/index",
     "pages/examples/index-list/index",
@@ -42,6 +38,7 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
+    "backgroundColor": "#f9f9f9",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "weapp-template",
     "navigationBarTextStyle": "black"

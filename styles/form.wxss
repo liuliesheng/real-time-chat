@@ -3,9 +3,17 @@
 	background-color: white;
 }
 
+.form-group::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
 .form-item {
 	position: relative;
 	margin-bottom: 30rpx;
+	padding-left: 30rpx;
+	padding-right: 30rpx;
 }
 
 .form-item label{
@@ -16,4 +24,9 @@
 	position: absolute;
 	bottom: 10rpx;
 	right: 0;
+}
+
+.form-btn-group{
+	margin: 30rpx;
+	padding-bottom: 30rpx;
 }
