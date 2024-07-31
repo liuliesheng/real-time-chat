@@ -1,5 +1,4 @@
 /* pages/examples/listener/b.wxss */
 
 page {
-    padding: 30rpx;
 }

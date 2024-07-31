@@ -12,7 +12,7 @@
 	height: 100rpx;
 }
 
-.list:not(:first-child){
+.list{
 	margin-top: 0;
 }
 

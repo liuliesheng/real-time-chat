@@ -1,148 +1,126 @@
 <!--index.wxml-->
-<view class="logo">
-	<image src="../../images/icons/logo.png" mode="aspectFit"></image>
+<view class="list">
+    <view class="list-header">
+        基础
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/timer/timer">计时器</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/listener/a">监听器</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/getUserInfo/getUserInfo">获取用户信息</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/color/index">Color 色彩</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/icon/index">Icon 图标</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/upload/upload">上传图片</navigator>
+    </view>
 </view>
 
 <view class="list">
-	<view class="list-header">
-		基础
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/timer/timer">计时器</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/listener/a">监听器</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/getUserInfo/getUserInfo">获取用户信息</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/upload/upload">上传图片</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/color/index">Color 色彩</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/icon/index">Icon 图标</navigator>
-	</view>
+    <view class="list-header">
+        布局
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/layout/index">Layout 栅格布局</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/grid/index">Grid 宫格</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/panel/index">Panel 面板</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/list/index">List 列表</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/card/index">Card 卡片</navigator>
+    </view>
 </view>
 
 <view class="list">
-	<view class="list-header">
-		布局
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/layout/index">Layout 栅格布局</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/grid/index">Grid 宫格</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/panel/index">Panel 面板</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/list/index">List 列表</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/card/index">Card 卡片</navigator>
-	</view>
+    <view class="list-header">
+        导航
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/tab-bar/index">TabBar 标签栏</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/tabs/index">Tabs 标签页</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/steps/index">Steps 步骤条</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/notice-bar/index">NoticeBar 通告栏</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/index-list/index">Index 索引选择器</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/sticky/index">Sticky 吸顶容器</navigator>
+    </view>
 </view>
 
 <view class="list">
-	<view class="list-header">
-		导航
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/tab-bar/index">TabBar 标签栏</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/tabs/index">Tabs 标签页</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/drawer/index">Drawer 抽屉</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/steps/index">Steps 步骤条</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/notice-bar/index">NoticeBar 通告栏</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/index-list/index">Index 索引选择器</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/sticky/index">Sticky 吸顶容器</navigator>
-	</view>
+    <view class="list-header">
+        组件
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/spin/index">Spin 加载中</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/swipeout/index">Swipeout 滑动菜单</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/badge/index">Badge 徽章</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/tag/index">Tag 标签</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/avatar/index">Avatar 头像</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/load-more/index">LoadMore 页底提示</navigator>
+    </view>
 </view>
 
 <view class="list">
-	<view class="list-header">
-		操作反馈
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/action-sheet/index">ActionSheet 动作面板</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/spin/index">Spin 加载中</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/swipeout/index">Swipeout 滑动菜单</navigator>
-	</view>
+    <view class="list-header">
+        表单
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/rate/index">Rate 评分</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/input-number/index">InputNumber 数字输入框</navigator>
+    </view>
 </view>
 
 <view class="list">
-	<view class="list-header">
-		视图
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/badge/index">Badge 徽章</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/tag/index">Tag 标签</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/avatar/index">Avatar 头像</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/divider/index">Divider 分隔符</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/collapse/index">Collapse 折叠面板</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/load-more/index">LoadMore 页底提示</navigator>
-	</view>
-</view>
-
-<view class="list">
-	<view class="list-header">
-		表单
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/rate/index">Rate 评分</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/input-number/index">InputNumber 数字输入框</navigator>
-	</view>
-</view>
-
-<view class="list">
-	<view class="list-header">
-		页面
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/user/login/login">登录</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/user/register/register">注册</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/user/repassword/repassword">修改密码</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/user/index/index">个人中心</navigator>
-	</view>
-	<view class="list-item">
-		<navigator url="/pages/examples/feedback/feedback">意见反馈</navigator>
-	</view>
+    <view class="list-header">
+        页面
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/user/login/login">登录</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/user/register/register">注册</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/user/repassword/repassword">修改密码</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/user/index/index">个人中心</navigator>
+    </view>
+    <view class="list-item">
+        <navigator url="/pages/examples/feedback/feedback">意见反馈</navigator>
+    </view>
 </view>
