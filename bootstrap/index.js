@@ -59,7 +59,12 @@ $.define('delayNavigateBack', function(delay, options) {
 		config = config() || {};
 	}
 
-	$.define('config', Object.assign(config, (typeof __wxConfig === 'undefined') ? {} : __wxConfig));
+	let appConfig = {};
+	if (typeof __wxConfig !== 'undefined') {
+		appConfig = __wxConfig;
+	}
+
+	$.define('config', Object.assign(config, appConfig));
 })();
 
 //初始化网络请求配置

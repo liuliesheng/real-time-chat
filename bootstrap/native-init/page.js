@@ -1,4 +1,4 @@
-if (typeof Page === "undefined") {
+if (typeof Page !== "undefined") {
 	// 重置Page函数
 	const originalPage = Page;
 	Page = function(options) {
@@ -9,7 +9,7 @@ if (typeof Page === "undefined") {
 				return {};
 			}
 		})();
-	
+
 		options = Object.assign({
 		}, pageMixin, options);
 		originalPage(options);

@@ -1,0 +1,196 @@
+page {
+    font-size: 14px;
+    color: #474747;
+    background: #f9f9f9;
+}
+
+page, view, button, label, input, textarea {
+    box-sizing: border-box;
+}
+
+form {
+    display: block;
+}
+
+button {
+    transition: all 0.2s;
+    font-size: 16px;
+    border-radius: 2px;
+}
+
+button::after {
+    border: none;
+}
+
+label {
+    line-height: 44rpx;
+    display: inline-block;
+}
+
+input, textarea {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    line-height: 44rpx;
+    height: auto;
+    padding: 10rpx 0;
+}
+
+textarea {
+    height: 200rpx;
+}
+
+radio .wx-radio-input, checkbox .wx-checkbox-input {
+    width: 18px;
+    height: 18px;
+    /*border: $default-border;*/
+    transform: translateY(-2rpx);
+    transition: all 0.1s;
+    border-radius: 50%;
+}
+
+radio[checked] .wx-radio-input.wx-radio-input-checked,
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+    background-color: #09bb07;
+    border-color: #09bb07;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before,
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+    font-size: 20px;
+    margin-top: -1px;
+    color: #fff;
+}
+
+checkbox-group > label, radio-group > label {
+    line-height: 22px;
+    vertical-align: middle;
+    margin-right: 12px;
+    padding: 0;
+}
+
+switch .wx-switch-input {
+    margin: 0;
+    width: 44px;
+    height: 24px;
+}
+
+switch .wx-switch-input ::before {
+    background-color: darken(white, 5%);
+    width: 42px;
+    height: 22px;
+}
+
+switch .wx-switch-input ::after {
+    width: 22px;
+    height: 22px;
+}
+
+navigator {
+    color: #10aeff;
+}
+
+.navigator-hover {
+    background-color: transparent;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    line-height: 1.5;
+}
+
+.h1 {
+    font-size: 42px;
+}
+
+.h2 {
+    font-size: 32px;
+}
+
+.h3 {
+    font-size: 24px;
+}
+
+.h4 {
+    font-size: 18px;
+}
+
+.h5 {
+    font-size: 14px;
+}
+
+.h6 {
+    font-size: 12px;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal !important;
+    word-wrap: break-word;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+}
+
+.container {
+    padding: 30rpx;
+    display: block;
+    /* height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+	flex: 0 1 auto;
+	margin: 15px; */
+}
+
+.p {
+    color: gray;
+}
+
+.p:not(:last-child) {
+    margin-bottom: 20rpx;
+}
+
+.back-icon {
+    width: 64rpx;
+    height: 64rpx;
+    text-align: center;
+    line-height: 64rpx;
+    border-radius: 32rpx;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    float: left;
+    margin-right: 10rpx;
+    /*box-shadow: 0 0 6rpx rgba(0, 0, 0, 0.5);*//*position: fixed;*//*left: 30rpx;*//*top: 70rpx;*//*z-index: 99999999;*/
+}
+
+.back-icon .iconfont {
+    font-size: 40rpx !important;
+    vertical-align: middle;
+}
+
+.wrap{
+    background-color: rgba(0,0,0,0.1);
+    padding: 30rpx;
+    margin-top: 30rpx;
+    font-size: 12px;
+}

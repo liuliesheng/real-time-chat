@@ -1,4 +1,4 @@
-if (typeof Component === "undefined") {
+if (typeof Component !== "undefined") {
 	// 重置Component函数
 	const originalComponent = Component;
 	Component = function(options) {
