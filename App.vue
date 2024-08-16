@@ -1,4 +1,10 @@
 <script>
+wx.emitter.on('sys.getUserInfo.to', function() {
+	wx.navigateTo({
+		url: '/pages/user/auth/auth',
+	});
+});
+
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
