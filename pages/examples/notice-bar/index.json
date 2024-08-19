@@ -1,8 +1,0 @@
-{
-    "navigationBarTitleText": "NoticeBar 通告栏",
-    "usingComponents":
-    {
-        "panel": "../../../components/panel/index",
-        "notice-bar": "../../../components/notice-bar/index"
-    }
-}

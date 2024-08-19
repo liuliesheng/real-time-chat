@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "Tabs 标签页",
-  "usingComponents": {
-    "tabs": "../../../components/tabs/index",
-    "tab": "../../../components/tab/index",
-    "panel": "../../../components/panel/index"
-  }
-}

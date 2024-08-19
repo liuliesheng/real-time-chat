@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "Card 卡片",
-  "usingComponents": {
-    "card": "../../../components/card/index"
-  }
-}

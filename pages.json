@@ -19,7 +19,7 @@
 				"navigationBarTitleText": "个人中心"
 			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"backgroundColor": "#F8F8F8",
 		"backgroundTextStyle": "dark",

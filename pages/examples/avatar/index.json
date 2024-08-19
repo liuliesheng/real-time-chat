@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "Avatar 头像",
-  "usingComponents": {
-    "avatar": "../../../components/avatar/index",
-    "panel": "../../../components/panel/index"
-  }
-}
