@@ -18,8 +18,18 @@
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "个人中心"
 			}
+		}, {
+			"path": "pages/examples/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		}, {
+			"path": "pages/examples/timer",
+			"style": {
+				"navigationBarTitleText": "计时器"
+			}
 		}
-    ],
+	],
 	"globalStyle": {
 		"backgroundColor": "#F8F8F8",
 		"backgroundTextStyle": "dark",
