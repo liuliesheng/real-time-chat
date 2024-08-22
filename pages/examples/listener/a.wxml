@@ -2,4 +2,4 @@
 <view class="container">等待触发结果:
     <text style='color:red'>{{result}}</text>
 </view>
-<button bindtap='toBPage'>子页面</button>
+<button @tap='toBPage'>子页面</button>

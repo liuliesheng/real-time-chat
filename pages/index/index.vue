@@ -6,13 +6,15 @@
 			<view class="list-item"><navigator url="/pages/examples/listener/a">监听器</navigator></view>
 			<view class="list-item"><navigator url="/pages/examples/getUserInfo">获取用户信息</navigator></view>
 			<view class="list-item"><navigator url="/pages/examples/feedback">意见反馈</navigator></view>
+			<view class="list-item"><navigator url="/pages/examples/feedback">文件上传</navigator></view>
 		</view>
 
 		<view class="list">
-			<view class="list-header">页面</view>
+			<view class="list-header">用户</view>
 			<view class="list-item"><navigator url="/pages/user/login">登录</navigator></view>
 			<view class="list-item"><navigator url="/pages/user/register">注册</navigator></view>
 			<view class="list-item"><navigator url="/pages/user/repassword">修改密码</navigator></view>
+			<view class="list-item"><navigator url="/pages/user/repassword">设置</navigator></view>
 			<view class="list-item"><navigator open-type="switchTab" url="/pages/user/index">个人中心</navigator></view>
 		</view>
 	</view>
@@ -49,15 +51,15 @@ export default {
 <style>
 	.logo{
 		text-align: center;
-		margin-bottom: 60rpx;
+		margin-bottom: 60upx;
 	}
 
 	.logo image{
 		display: block;
 		margin: 0 auto;
 		border-radius: 50%;
-		width: 100rpx;
-		height: 100rpx;
+		width: 100upx;
+		height: 100upx;
 	}
 
 	.list{
@@ -70,7 +72,7 @@ export default {
 
 	.list-header {
 	    background-color: #efefef;
-		padding: 10rpx 30rpx;
+		padding: 10upx 30upx;
 	}
 
 </style>

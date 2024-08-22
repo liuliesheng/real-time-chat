@@ -4,7 +4,7 @@
 			<view class="userinfo">
 				<block v-if="hasUserInfo">
 					<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-					<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 				</block>
 			</view>
 			<uni-grid class="main-menu" :column="4" :show-border="false">
@@ -47,15 +47,9 @@
 		</uni-grid>
 
 		<view class="list">
-			<view class="list-header">
-				其他
-			</view>
-			<view class="list-item">
-				<navigator url="/pages/user/repassword">修改密码</navigator>
-			</view>
-			<view class="list-item">
-				<navigator url="/pages/examples/feedback">意见反馈</navigator>
-			</view>
+			<view class="list-header">其他</view>
+			<view class="list-item"><navigator url="/pages/user/repassword">修改密码</navigator></view>
+			<view class="list-item"><navigator url="/pages/examples/feedback">意见反馈</navigator></view>
 		</view>
 	</view>
 </template>
@@ -76,7 +70,7 @@ export default {
 		return {
 			userInfo: {},
 			hasUserInfo: false
-		}
+		};
 	},
 
 	/**
@@ -89,30 +83,22 @@ export default {
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady: function() {
-
-	},
+	onReady: function() {},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function() {
-
-	},
+	onShow: function() {},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide: function() {
-
-	},
+	onHide: function() {},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function() {
-
-	},
+	onUnload: function() {},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
@@ -120,7 +106,7 @@ export default {
 	onPullDownRefresh: function() {
 		uni.stopPullDownRefresh();
 		uni.$.sys.getUserInfo({
-			success: (res) => {
+			success: res => {
 				uni.stopPullDownRefresh();
 				this.userInfo = res;
 				this.userInfoStr = JSON.stringify(res);
@@ -135,66 +121,62 @@ export default {
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function() {
-
-	},
+	onReachBottom: function() {},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {
-
-	}
-}
+	onShareAppMessage: function() {}
+};
 </script>
 
 <style>
-	.list navigator {
-		color: inherit;
-	}
+.list navigator {
+	color: inherit;
+}
 
-	.container {
-		box-sizing: border-box;
-		border-bottom: 1upx solid #f9f9f9;
-		box-shadow: 0 1upx 10upx #f9f9f9;
-	}
+.container {
+	box-sizing: border-box;
+	border-bottom: 1upx solid #f9f9f9;
+	box-shadow: 0 1upx 10upx #f9f9f9;
+}
 
-	.userinfo {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 30upx;
-	}
+.userinfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 30upx;
+}
 
-	.userinfo-avatar {
-		width: 128rpx;
-		height: 128upx;
-		margin: 20upx;
-		border-radius: 50%;
-	}
+.userinfo-avatar {
+	width: 128upx;
+	height: 128upx;
+	margin: 20upx;
+	border-radius: 50%;
+}
 
-	.userinfo-nickname {
-		color: #aaa;
-	}
+.userinfo-nickname {
+	color: #aaa;
+}
 
-	.list-header {
-		background-color: #efefef;
-		padding: 20upx 30upx;
-	}
+.list-header {
+	background-color: #efefef;
+	padding: 20upx 30upx;
+}
 
-	.main-menu {
-	}
+.main-menu {
+}
 
-	.main-menu image {
-		width: 64upx;
-		height: 64upx;
-		margin: 10upx auto;
-		display: block;
-		background-color: #f9f9f9;
-	}
+.main-menu image {
+	width: 64upx;
+	height: 64upx;
+	margin: 10upx auto;
+	display: block;
+	background-color: #f9f9f9;
+}
 
-	.main-menu text {
-		display: block;
-		text-align: center;
-	}
+.main-menu text {
+	display: block;
+	text-align: center;
+}
 </style>

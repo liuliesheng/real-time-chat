@@ -28,6 +28,11 @@
 			"style": {
 				"navigationBarTitleText": "计时器"
 			}
+		}, {
+			"path": "pages/examples/getUserInfo",
+			"style": {
+				"navigationBarTitleText": "获取用户信息"
+			}
 		}
 	],
 	"globalStyle": {
