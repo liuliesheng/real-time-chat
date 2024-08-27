@@ -34,8 +34,8 @@ export default {
 
 			uni.$.showLoading();
 			setTimeout(() => {
-				wx.showTips('登录成功！');
-				wx.delayNavigateBack(1200);
+				uni.$.showTips('登录成功！');
+				uni.$.delayNavigateBack(1200);
 			}, 1000);
 		}
 	}

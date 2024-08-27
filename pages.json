@@ -11,14 +11,6 @@
 			}
 		},
 		{
-			"path": "pages/user/index",
-			"style": {
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "个人中心"
-			}
-		}, {
 			"path": "pages/examples/feedback",
 			"style": {
 				"navigationBarTitleText": "意见反馈"
@@ -32,6 +24,39 @@
 			"path": "pages/examples/getUserInfo",
 			"style": {
 				"navigationBarTitleText": "获取用户信息"
+			}
+		},{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "个人中心"
+			}
+		},  {
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+			"path": "pages/user/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, {
+			"path": "pages/user/repassword",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		}, {
+			"path": "pages/user/settings",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		}, {
+			"path": "pages/user/auth",
+			"style": {
+				"navigationBarTitleText": "用户授权"
 			}
 		}
 	],

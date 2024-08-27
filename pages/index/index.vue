@@ -14,7 +14,7 @@
 			<view class="list-item"><navigator url="/pages/user/login">登录</navigator></view>
 			<view class="list-item"><navigator url="/pages/user/register">注册</navigator></view>
 			<view class="list-item"><navigator url="/pages/user/repassword">修改密码</navigator></view>
-			<view class="list-item"><navigator url="/pages/user/repassword">设置</navigator></view>
+			<view class="list-item"><navigator url="/pages/user/settings">设置</navigator></view>
 			<view class="list-item"><navigator open-type="switchTab" url="/pages/user/index">个人中心</navigator></view>
 		</view>
 	</view>
