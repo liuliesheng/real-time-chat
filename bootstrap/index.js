@@ -38,6 +38,12 @@ $.define('uploader', uploader);
 
 // 其他
 $.define('Validate', Validate);
+$.define('showTips', function(msg) {
+	$.showToast({
+		title: msg,
+		icon: 'none'
+	});
+});
 $.define('delayNavigateBack', function(delay, options) {
 	setTimeout(function() {
 		$.navigateBack(options);

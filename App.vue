@@ -1,7 +1,7 @@
 <script>
-wx.emitter.on('sys.getUserInfo.to', function() {
-	wx.navigateTo({
-		url: '/pages/user/auth/auth',
+uni.$.emitter.on('sys.getUserInfo.to', function() {
+	uni.$.navigateTo({
+		url: '/pages/user/auth/auth'
 	});
 });
 
@@ -62,7 +62,6 @@ page {
 	font-size: 38upx;
 	color: #808080;
 }
-
 
 /* #endif */
 </style>
