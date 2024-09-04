@@ -21,6 +21,16 @@
 				"navigationBarTitleText": "计时器"
 			}
 		}, {
+			"path": "pages/examples/listener/a",
+			"style": {
+				"navigationBarTitleText": "监听器-A"
+			}
+		}, {
+			"path": "pages/examples/listener/b",
+			"style": {
+				"navigationBarTitleText": "监听器-B"
+			}
+		}, {
 			"path": "pages/examples/getUserInfo",
 			"style": {
 				"navigationBarTitleText": "获取用户信息"

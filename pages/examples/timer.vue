@@ -45,7 +45,6 @@ export default {
 	onLoad: function(options) {
 		this.$options.timer = timer(() => {
 			this.datetime = uni.$.timeUtil.format();
-			console.log("saad", this.datetime)
 		})
 	},
 

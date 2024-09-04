@@ -54,24 +54,24 @@ export default {
 			this.remark_length = e.detail.value.length;
 		},
 		onSubmit: function() {
-			if (!this.data.remark) {
+			if (!this.remark) {
 				return uni.showModal({
 					content: "请输入您宝贵的意见",
 					showCancel: false
 				});
 			}
 			const data = {
-				wechat: this.data.wechat,
-				remark: this.data.remark,
+				wechat: this.wechat,
+				remark: this.remark,
 				system_info: uni.getSystemInfoSync(),
-				email: this.data.email,
+				email: this.email,
 			};
 			console.log(data);
 
 			uni.showLoading();
 			setTimeout(() => {
 				uni.$.showTips('已提交');
-				// wx.delayNavigateBack(1200);
+				uni.$.delayNavigateBack(1200);
 				// wx.showTips('提交失败，请稍后重试~');
 			}, 1000);
 		}
@@ -81,7 +81,5 @@ export default {
 
 <style>
 	.feedback {
-		background-color: white;
-		padding: 30upx;
 	}
 </style>

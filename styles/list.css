@@ -1,6 +1,6 @@
 .list {
     background-color: white;
-    margin-top: 30rpx;
+    margin-top: 30upx;
 }
 
 .list, .list-item {
@@ -9,7 +9,7 @@
 }
 
 .list-item {
-    padding: 30rpx;
+    padding: 30upx;
     line-height: 1.4;
     transition: all 0.2s;
 }

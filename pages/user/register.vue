@@ -1,7 +1,6 @@
 <template>
 	<div class="register">
-		<view class="title">注册</view>
-		<form bindsubmit="onSubmit">
+		<form @submit="onSubmit">
 			<view class="form-group">
 				<view class="form-item">
 					<input id="mobile" name="mobile" type="text" placeholder="手机号"/>
@@ -52,14 +51,4 @@ export default {
 <style scoped>
 	.register {
 	}
-	page{
-		padding: 30upx;
-	}
-
-	.title{
-		margin: 50upx auto;
-		text-align: center;
-		font-weight: bold;
-	}
-
 </style>

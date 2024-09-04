@@ -16,6 +16,7 @@ button {
     transition: all 0.2s;
     font-size: 16px;
     border-radius: 2px;
+	background-color: white;
 }
 
 button::after {
@@ -23,27 +24,27 @@ button::after {
 }
 
 label {
-    line-height: 44rpx;
+    line-height: 44upx;
     display: inline-block;
 }
 
 input, textarea {
     width: 100%;
     border-bottom: 1px solid #eee;
-    line-height: 44rpx;
+    line-height: 44upx;
     height: auto;
-    padding: 10rpx 0;
+    padding: 20upx 0;
 }
 
 textarea {
-    height: 200rpx;
+    height: 200upx;
 }
 
 radio .wx-radio-input, checkbox .wx-checkbox-input {
     width: 18px;
     height: 18px;
     /*border: $default-border;*/
-    transform: translateY(-2rpx);
+    transform: translateY(-2upx);
     transition: all 0.1s;
     border-radius: 50%;
 }
@@ -150,7 +151,7 @@ navigator {
 }
 
 .container {
-    padding: 30rpx;
+    padding: 30upx;
     display: block;
     /* height: 100%;
     display: flex;
@@ -167,30 +168,30 @@ navigator {
 }
 
 .p:not(:last-child) {
-    margin-bottom: 20rpx;
+    margin-bottom: 20upx;
 }
 
 .back-icon {
-    width: 64rpx;
-    height: 64rpx;
+    width: 64upx;
+    height: 64upx;
     text-align: center;
-    line-height: 64rpx;
-    border-radius: 32rpx;
+    line-height: 64upx;
+    border-radius: 32upx;
     padding: 0;
     background-color: rgba(255, 255, 255, 0.5);
     float: left;
-    margin-right: 10rpx;
-    /*box-shadow: 0 0 6rpx rgba(0, 0, 0, 0.5);*//*position: fixed;*//*left: 30rpx;*//*top: 70rpx;*//*z-index: 99999999;*/
+    margin-right: 10upx;
+    /*box-shadow: 0 0 6upx rgba(0, 0, 0, 0.5);*//*position: fixed;*//*left: 30upx;*//*top: 70upx;*//*z-index: 99999999;*/
 }
 
 .back-icon .iconfont {
-    font-size: 40rpx !important;
+    font-size: 40upx !important;
     vertical-align: middle;
 }
 
 .wrap{
     background-color: rgba(0,0,0,0.1);
-    padding: 30rpx;
-    margin-top: 30rpx;
+    padding: 30upx;
+    margin-top: 30upx;
     font-size: 12px;
 }

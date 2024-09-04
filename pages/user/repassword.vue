@@ -1,8 +1,8 @@
 <template>
 	<div class="repassword">
-		<view class="title">修改密码</view>
-		<form bindsubmit="onSubmit">
-			<view class="form-group">
+
+		<form @submit="onSubmit">
+			<view class="form-group form-simple">
 				<view class="form-item">
 					<input id="oldpassword" name="oldpassword" type="password" placeholder="旧密码" />
 				</view>
@@ -18,6 +18,7 @@
 				<button form-type='submit'>确认</button>
 			</view>
 		</form>
+
 	</div>
 </template>
 
@@ -49,14 +50,4 @@ export default {
 <style scoped>
 	.repassword {
 	}
-	page{
-		padding: 30upx;
-	}
-
-	.title{
-		margin: 50upx auto;
-		text-align: center;
-		font-weight: bold;
-	}
-
 </style>

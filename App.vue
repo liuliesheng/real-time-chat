@@ -26,11 +26,12 @@ export default {
 @import './styles/base.css';
 @import './styles/animate.css';
 @import './styles/iconfont.css';
+@import './styles/form.css';
 @import './styles/list.css';
 
 /* 以下样式用于 hello uni-app 演示所需 */
 page {
-	background-color: #f4f5f6;
+	background-color: #F9F9F9;
 	height: 100%;
 	font-size: 28upx;
 	line-height: 1.8;

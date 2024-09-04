@@ -1,6 +1,5 @@
 <template>
 	<div class="login">
-		<view class="title">登录</view>
 		<form @submit="onSubmit">
 			<view class="form-group">
 				<view class="form-item">
@@ -46,14 +45,4 @@ export default {
 <style scoped>
 	.login {
 	}
-	page{
-		padding: 30upx;
-	}
-
-	.title{
-		margin: 50upx auto;
-		text-align: center;
-		font-weight: bold;
-	}
-
 </style>
