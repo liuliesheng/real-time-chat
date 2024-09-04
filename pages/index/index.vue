@@ -1,12 +1,31 @@
 <template>
-	<view>
+	<view class="index">
 		<view class="list">
 			<view class="list-header">基础</view>
 			<view class="list-item"><navigator url="/pages/examples/timer">计时器</navigator></view>
 			<view class="list-item"><navigator url="/pages/examples/listener/a">监听器</navigator></view>
 			<view class="list-item"><navigator url="/pages/examples/getUserInfo">获取用户信息</navigator></view>
 			<view class="list-item"><navigator url="/pages/examples/feedback">意见反馈</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/feedback">文件上传</navigator></view>
+			<view class="list-item"><navigator url="/pages/examples/upload">文件上传</navigator></view>
+		</view>
+
+		<view class="list">
+			<view class="list-header">社区/论坛</view>
+			<view class="list-item"><navigator url="/pages/forum/timer">首页</navigator></view>
+			<view class="list-item"><navigator url="/pages/forum/category">分类</navigator></view>
+			<view class="list-item"><navigator url="/pages/forum/post-list">文章列表</navigator></view>
+			<view class="list-item"><navigator url="/pages/forum/post-detail">文章详情</navigator></view>
+		</view>
+
+		<view class="list">
+			<view class="list-header">商城</view>
+			<view class="list-item"><navigator url="/pages/mall/timer">首页</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/category">分类</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/goods-list">商品列表</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/goods-detail">商品详情</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/order-create">下单</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/order-list">订单列表</navigator></view>
+			<view class="list-item"><navigator url="/pages/mall/order-detail">订单详情</navigator></view>
 		</view>
 
 		<view class="list">
@@ -26,8 +45,6 @@ export default {
 		return {};
 	},
 	onLoad() {
-		uni.$.sys.getUserInfo().then(console.log);
-
 		const data = [];
 		// for (let i = 0; i < 1000000; i++) {
 		// 	data.push({
@@ -49,30 +66,32 @@ export default {
 </script>
 
 <style>
-	.logo{
-		text-align: center;
-		margin-bottom: 60upx;
-	}
+.index {
+}
 
-	.logo image{
-		display: block;
-		margin: 0 auto;
-		border-radius: 50%;
-		width: 100upx;
-		height: 100upx;
-	}
+.logo {
+	text-align: center;
+	margin-bottom: 60upx;
+}
 
-	.list{
-		margin-top: 0;
-	}
+.logo image {
+	display: block;
+	margin: 0 auto;
+	border-radius: 50%;
+	width: 100upx;
+	height: 100upx;
+}
 
-	.list navigator {
-		color: inherit;
-	}
+.list {
+	margin-top: 0;
+}
 
-	.list-header {
-	    background-color: #efefef;
-		padding: 10upx 30upx;
-	}
+.list navigator {
+	color: inherit;
+}
 
+.list-header {
+	background-color: #efefef;
+	padding: 10upx 30upx;
+}
 </style>

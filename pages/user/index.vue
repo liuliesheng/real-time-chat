@@ -1,13 +1,14 @@
 <template>
 	<view class="user-index">
 		<view class="container">
-			<view class="userinfo">
-				<block v-if="hasUserInfo">
-					<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
-				</block>
+			<view class="userinfo" v-if="hasUserInfo">
+				<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
+				<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 			</view>
-			<uni-grid class="main-menu" :column="4" :show-border="false">
+			<view v-else>
+				<button type="primary" @tap="onLogin">登 录</button>
+			</view>
+			<uni-grid class="main-menu" style="background-color: rgba(255,255,255,0.3);" :column="4" :show-border="false">
 				<uni-grid-item>
 					<image src=""></image>
 					<text>特权</text>
@@ -126,7 +127,24 @@ export default {
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {}
+	onShareAppMessage: function() {},
+
+	methods:{
+		onLogin(e){
+			const data = e.detail.value;
+			console.log(data);
+
+			uni.showLoading();
+			setTimeout(() => {
+				uni.$.showTips('登录成功！');
+				this.userInfo ={
+					avatarUrl:'/static/images/icons/logo.png',
+					nickName:'刘小晋啦',
+				};
+				this.hasUserInfo=true;
+			}, 1000);
+		}
+	}
 };
 </script>
 
@@ -136,6 +154,7 @@ export default {
 }
 
 .container {
+	background-color: white;
 	box-sizing: border-box;
 	border-bottom: 1upx solid #f9f9f9;
 	box-shadow: 0 1upx 10upx #f9f9f9;
@@ -160,11 +179,12 @@ export default {
 }
 
 .list-header {
-	background-color: #efefef;
+	background-color: #F9F9F9;
 	padding: 20upx 30upx;
 }
 
 .main-menu {
+	background-color: white;
 }
 
 .main-menu image {
