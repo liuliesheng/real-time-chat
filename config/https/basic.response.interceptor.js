@@ -4,13 +4,13 @@ export default {
 	fulfilled: function(res) {
 		// 关闭loading
 		if (res.config.showLoading) {
-			wx.hideLoading();
+			uni.hideLoading();
 		}
 
 		// 显示500错误
 		if (res.statusCode !== 200) {
 			if (res.config.isShowErrorTips !== false) {
-				wx.showToast({
+				uni.showToast({
 					title: '网络错误，请稍后~',
 					icon: 'none',
 				});
@@ -24,7 +24,7 @@ export default {
 			// 登录失效
 			if (res.data.code === -1) {
 				if (res.config.loginCount === 1) {
-					wx.showModal({
+					uni.showModal({
 						title: '温馨提示',
 						content: '登录超时，请稍后再试~',
 						showCancel: false
@@ -35,12 +35,12 @@ export default {
 					});
 				}
 				res.config.loginCount = 1;
-				return login(res.config).then(options => wx.http.request(options));
+				return login(res.config).then(options => uni.http.request(options));
 			}
 
 			// 余额不足
 			if (res.data.code === -3) {
-				wx.showModal({
+				uni.showModal({
 					title: '温馨提示',
 					content: '你的当前星币不足，是否查看获取星币的方法？',
 					showCancel: true,
@@ -49,7 +49,7 @@ export default {
 					success: (res) => {
 						if (res.cancel) return;
 
-						wx.navigateTo({
+						uni.navigateTo({
 							url: '/pages/user/gold/index'
 						});
 					}
@@ -59,12 +59,12 @@ export default {
 
 			if (res.config.isShowErrorTips !== false) {
 				if (res.data.show_msg_type === 1) {
-					wx.showModal({
+					uni.showModal({
 						content: res.data.msg || '网络错误，请稍后~',
 						showCancel: false
 					});
 				} else {
-					wx.showToast({
+					uni.showToast({
 						title: res.data.msg || '网络错误，请稍后~',
 						icon: 'none',
 					});
@@ -79,11 +79,11 @@ export default {
 	rejected: function(err) {
 		// 关闭loading
 		if (err.config.showLoading) {
-			wx.hideLoading();
+			uni.hideLoading();
 		}
 
 		if (err.config.isShowErrorTips !== false) {
-			wx.showToast({
+			uni.showToast({
 				title: err.errMsg || '网络错误，请稍后~',
 				icon: 'none',
 			});

@@ -3,12 +3,14 @@ import {collectionUtil, random} from "../util/index";
 
 // 获取全局对象
 const $ = (() => {
-	if (typeof wx !== 'undefined') {
-		return wx;
-	} else if (typeof my !== 'undefined') {
+	if (typeof my !== 'undefined') {
 		return my;
 	} else if (typeof swan !== 'undefined') {
 		return swan;
+	} else if (typeof tt !== 'undefined') {
+		return tt;
+	} else if (typeof wx !== 'undefined') {
+		return wx;
 	}
 	throw new Error('未适配的客户端，请手动在此处理');
 })();
@@ -60,7 +62,7 @@ $.define('systemInfo', systemInfo);
 $.define('isDev', systemInfo.platform === 'devtools');
 
 // 扁平化支付宝接口
-if (typeof my !== 'undefined') {
+if (typeof my !== 'undefined'&& typeof uni === 'undefined') {
 	(function() {
 		// ui相关
 		$.define('showModal', function(options) {

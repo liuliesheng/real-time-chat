@@ -27,9 +27,9 @@ function execCallbacks(flag, err) {
  */
 function loginServer() {
 	let code = null;
-	return wx.promise.login().then((res) => {
+	return uni.promise.login().then((res) => {
 		code = res.code;
-		return wx.sys.getUserInfo({
+		return uni.sys.getUserInfo({
 			withCredentials: true
 		});
 	}).then((res) => {
@@ -41,8 +41,8 @@ function loginServer() {
 		res.share_uid = app.globalData.shareUid;
 
 		return new Promise((resolve, reject) => {
-			wx.request({
-				url: wx.http.defaults.baseURL + '/api/app.login/login',
+			uni.request({
+				url: uni.http.defaults.baseURL + '/api/app.login/login',
 				method: 'POST',
 				data: res,
 				dataType: 'json',
@@ -90,32 +90,33 @@ export default function(options) {
 		if (isLoading) return;
 
 		isLoading = true;
-		wx.showNavigationBarLoading();
+		uni.showNavigationBarLoading();
 		loginServer().then((res) => {
-			wx.hideLoading();
-			wx.hideNavigationBarLoading();
+			uni.hideLoading();
+			uni.hideNavigationBarLoading();
 			isLoading = false;
 
 			const app = getApp();
 			app.globalData.userInfo = res.data;
 			app.globalData.sessionId = res.session_id;
-			wx.setStorageSync('session_id', res.session_id);
+			uni.setStorageSync('session_id', res.session_id);
 
 			execCallbacks('resolve');
 		}, (err) => {
-			wx.hideLoading();
-			wx.hideNavigationBarLoading();
+			uni.hideLoading();
+			uni.hideNavigationBarLoading();
 			isLoading = false;
 
 			if (err.isAuthDeny) {
-				wx.showToast({title: '请先授权！', icon: 'none'})
+				uni.showToast({title: '请先授权！', icon: 'none'})
 			} else {
-				wx.showModal({
+				uni.showModal({
 					content: '登录失败，请稍后再试~',
 					showCancel: false
 				});
 			}
-			wx.getLogManager().warn('user login fail', err);
+
+			uni.getLogManager().warn('user login fail', err);
 
 			execCallbacks('reject', err);
 		});
