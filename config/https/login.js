@@ -27,8 +27,8 @@ function execCallbacks(flag, err) {
  */
 function loginServer() {
 	let code = null;
-	return uni.promise.login().then((res) => {
-		code = res.code;
+	return uni.$.promise.login().then((res) => {
+		code = res.code || res.autoCode;
 		return uni.sys.getUserInfo({
 			withCredentials: true
 		});
@@ -108,7 +108,10 @@ export default function(options) {
 			isLoading = false;
 
 			if (err.isAuthDeny) {
-				uni.showToast({title: '请先授权！', icon: 'none'})
+				uni.showToast({
+					title: '请先授权！',
+					icon: 'none'
+				})
 			} else {
 				uni.showModal({
 					content: '登录失败，请稍后再试~',
@@ -116,7 +119,9 @@ export default function(options) {
 				});
 			}
 
-			uni.getLogManager().warn('user login fail', err);
+			// #ifdef MP-WEIXIN
+			wx.getLogManager().warn('user login fail', err);
+			// #endif
 
 			execCallbacks('reject', err);
 		});

@@ -62,7 +62,7 @@ $.define('systemInfo', systemInfo);
 $.define('isDev', systemInfo.platform === 'devtools');
 
 // 扁平化支付宝接口
-if (typeof my !== 'undefined'&& typeof uni === 'undefined') {
+if (typeof my !== 'undefined' && typeof uni === 'undefined') {
 	(function() {
 		// ui相关
 		$.define('showModal', function(options) {
