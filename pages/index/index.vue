@@ -2,39 +2,87 @@
 	<view class="index">
 		<view class="list">
 			<view class="list-header">基础</view>
-			<view class="list-item"><navigator url="/pages/examples/timer">计时器</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/listener/a">监听器</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/getUserInfo">获取用户信息</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/feedback">意见反馈</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/upload">文件上传</navigator></view>
+			<view class="list-item">
+				<navigator url="/pages/examples/timer">计时器</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/examples/listener/a">监听器</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/examples/getUserInfo">获取用户信息</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/examples/feedback">意见反馈</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/examples/upload">文件上传</navigator>
+			</view>
 		</view>
 
 		<view class="list">
 			<view class="list-header">社区/论坛</view>
-			<view class="list-item"><navigator url="/pages/forum/timer">首页</navigator></view>
-			<view class="list-item"><navigator url="/pages/forum/category">分类</navigator></view>
-			<view class="list-item"><navigator url="/pages/forum/post-list">文章列表</navigator></view>
-			<view class="list-item"><navigator url="/pages/forum/post-detail">文章详情</navigator></view>
+			<view class="list-item">
+				<navigator url="/pages/forum/index">首页</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/forum/category">分类</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/forum/posts-list">文章列表</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/forum/posts-create">发布文章</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/forum/posts-detail">文章详情</navigator>
+			</view>
 		</view>
 
 		<view class="list">
 			<view class="list-header">商城</view>
-			<view class="list-item"><navigator url="/pages/mall/timer">首页</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/category">分类</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/goods-list">商品列表</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/goods-detail">商品详情</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/order-create">下单</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/order-list">订单列表</navigator></view>
-			<view class="list-item"><navigator url="/pages/mall/order-detail">订单详情</navigator></view>
+			<view class="list-item">
+				<navigator url="/pages/mall/index">首页</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/category">分类</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/goods-list">商品列表</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/goods-detail">商品详情</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/shopping-cart">购物车</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/order-create">下单</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/order-list">订单列表</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/mall/order-detail">订单详情</navigator>
+			</view>
 		</view>
 
 		<view class="list">
 			<view class="list-header">用户</view>
-			<view class="list-item"><navigator url="/pages/user/login">登录</navigator></view>
-			<view class="list-item"><navigator url="/pages/user/register">注册</navigator></view>
-			<view class="list-item"><navigator url="/pages/user/repassword">修改密码</navigator></view>
-			<view class="list-item"><navigator url="/pages/user/settings">设置</navigator></view>
-			<view class="list-item"><navigator open-type="switchTab" url="/pages/user/index">个人中心</navigator></view>
+			<view class="list-item">
+				<navigator url="/pages/user/login">登录</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/user/register">注册</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/user/repassword">修改密码</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/user/settings">设置</navigator>
+			</view>
+			<view class="list-item">
+				<navigator open-type="switchTab" url="/pages/user/index">个人中心</navigator>
+			</view>
 		</view>
 	</view>
 </template>
@@ -66,32 +114,32 @@ export default {
 </script>
 
 <style>
-.index {
-}
+	.index {
+	}
 
-.logo {
-	text-align: center;
-	margin-bottom: 60upx;
-}
+	.logo {
+		text-align: center;
+		margin-bottom: 60 upx;
+	}
 
-.logo image {
-	display: block;
-	margin: 0 auto;
-	border-radius: 50%;
-	width: 100upx;
-	height: 100upx;
-}
+	.logo image {
+		display: block;
+		margin: 0 auto;
+		border-radius: 50%;
+		width: 100 upx;
+		height: 100 upx;
+	}
 
-.list {
-	margin-top: 0;
-}
+	.list {
+		margin-top: 0;
+	}
 
-.list navigator {
-	color: inherit;
-}
+	.list navigator {
+		color: inherit;
+	}
 
-.list-header {
-	background-color: #efefef;
-	padding: 10upx 30upx;
-}
+	.list-header {
+		background-color: #efefef;
+		padding: 10 upx 30 upx;
+	}
 </style>

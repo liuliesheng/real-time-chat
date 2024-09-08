@@ -8,7 +8,7 @@ Vue.prototype.$backgroundAudioData = {
 	playing: false,
 	playTime: 0,
 	formatedPlayTime: '00:00:00'
-}
+};
 
 Vue.prototype.$callHook = function(name) {
 	const callbacks = this.$options[name];
@@ -18,9 +18,9 @@ Vue.prototype.$callHook = function(name) {
 	callbacks.forEach(cb => cb.call(this, ...arguments))
 };
 
-Vue.component('page-head', pageHead)
-Vue.component('page-foot', pageFoot)
-Vue.component('uLink', uLink)
+Vue.component('page-head', pageHead);
+Vue.component('page-foot', pageFoot);
+Vue.component('uLink', uLink);
 
 
 // 收集formid

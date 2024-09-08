@@ -4,13 +4,13 @@
 		<form @submit="onSubmit">
 			<view class="form-group form-simple">
 				<view class="form-item">
-					<input id="oldpassword" name="oldpassword" type="password" placeholder="旧密码" />
+					<input id="oldpassword" name="oldpassword" placeholder="旧密码" type="password"/>
 				</view>
 				<view class="form-item">
-					<input id="password" name="password" type="password" placeholder="新密码" />
+					<input id="password" name="password" placeholder="新密码" type="password"/>
 				</view>
 				<view class="form-item">
-					<input id="repassword" name="repassword" type="password" placeholder="确认密码" />
+					<input id="repassword" name="repassword" placeholder="确认密码" type="password"/>
 				</view>
 			</view>
 
@@ -28,7 +28,7 @@ export default {
 	data() {
 		return {};
 	},
-	methods:{
+	methods: {
 		/**
 		 * 注册
 		 */

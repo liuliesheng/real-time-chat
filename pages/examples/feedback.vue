@@ -2,7 +2,7 @@
 	<view class="feedback">
 		<view class="form-group">
 			<view class="form-item">
-				<textarea maxlength="500" placeholder="感谢提出建议" @input="onRemarkInput"></textarea>
+				<textarea @input="onRemarkInput" maxlength="500" placeholder="感谢提出建议"></textarea>
 				<view class="form-item-counter">
 					<text>{{remark_length}}</text>
 					/500
@@ -14,12 +14,12 @@
 
 			<view class="form-item">
 				<label for='wechat'>微信号</label>
-				<input id='wechat' type="text" placeholder="请输微信号(可选)" @input="onWechatInput"/>
+				<input @input="onWechatInput" id='wechat' placeholder="请输微信号(可选)" type="text"/>
 			</view>
 
 			<view class="form-item">
 				<label for='email'>邮箱</label>
-				<input id='email' type="text" v-model="email" placeholder="请输入邮箱地址(可选)" @input="onEmailInput" maxlength="48"/>
+				<input @input="onEmailInput" id='email' maxlength="48" placeholder="请输入邮箱地址(可选)" type="text" v-model="email"/>
 			</view>
 
 		</view>

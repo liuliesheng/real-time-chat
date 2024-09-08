@@ -3,12 +3,12 @@
 		<view class="container">
 			<view class="userinfo">
 				<block v-if="hasUserInfo">
-					<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
+					<image :src="userInfo.avatarUrl" background-size="cover" class="userinfo-avatar"></image>
 					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 				</block>
 			</view>
 			<button @tap="getUserInfo">获取头像昵称</button>
-			<view v-if="hasUserInfo" class="usermotto">
+			<view class="usermotto" v-if="hasUserInfo">
 				<view class="user-motto">{{ userInfoStr }}</view>
 			</view>
 		</view>
@@ -55,35 +55,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.getUserInfo {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-	box-sizing: border-box;
-}
+	.getUserInfo {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		box-sizing: border-box;
+	}
 
-.userinfo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-bottom: 30upx;
-}
+	.userinfo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 30 upx;
+	}
 
-.userinfo-avatar {
-	width: 128upx;
-	height: 128upx;
-	margin: 20upx;
-	border-radius: 50%;
-}
+	.userinfo-avatar {
+		width: 128 upx;
+		height: 128 upx;
+		margin: 20 upx;
+		border-radius: 50%;
+	}
 
-.userinfo-nickname {
-	color: #aaa;
-}
+	.userinfo-nickname {
+		color: #aaa;
+	}
 
-.usermotto {
-	margin-top: 100px;
-	word-break: break-all;
-}
+	.usermotto {
+		margin-top: 100px;
+		word-break: break-all;
+	}
 </style>

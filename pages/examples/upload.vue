@@ -6,10 +6,10 @@
 		<view class='upload'>
 			<view class='upload-item' wx:for='{{files}}' wx:key='{{index}}'>
 				<view class='upload-image'>
-					<image src='{{item.path}}' mode='aspectFill' />
+					<image mode='aspectFill' src='{{item.path}}'/>
 				</view>
 				<view class='status-text' v-if='{{item.status===0}}'>等待上传</view>
-				<progress percent="{{item.progress}}" show-info v-if='{{item.status===1}}' />
+				<progress percent="{{item.progress}}" show-info v-if='{{item.status===1}}'/>
 				<view class='status-text status-success' v-if='{{item.status===2}}'>上传成功</view>
 				<view class='status-text status-error' v-if='{{item.status===3}}'>上传失败</view>
 			</view>
@@ -25,7 +25,7 @@ export default {
 			files: []
 		};
 	},
-	methods:{
+	methods: {
 		/**
 		 * 选择图片
 		 * @param e
@@ -99,12 +99,12 @@ export default {
 
 	.upload-item {
 		float: left;
-		padding: 10upx;
-		border: 1upx solid #ddd;
+		padding: 10 upx;
+		border: 1 upx solid #ddd;
 		width: 33.333333%;
 	}
 
-	.upload-item:last-child{
+	.upload-item:last-child {
 	}
 
 	.upload-image {
