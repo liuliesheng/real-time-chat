@@ -52,10 +52,10 @@ export default {
 		white-space: nowrap;
 		position: relative;
 		overflow: hidden;
-		width: 128 upx;
-		height: 128 upx;
-		line-height: 128 upx;
-		border-radius: 64 upx;
+		width: 128upx;
+		height: 128upx;
+		line-height: 128upx;
+		border-radius: 64upx;
 		font-size: 72px;
 		margin: 0 auto;
 	}
@@ -64,13 +64,13 @@ export default {
 		display: block;
 		text-align: center;
 		font-weight: bold;
-		margin-top: 32 upx;
-		margin-bottom: 32 upx;
+		margin-top: 32upx;
+		margin-bottom: 32upx;
 	}
 
 	.tips {
 		position: relative;
-		padding: 15% 30 upx;
+		padding: 15% 30upx;
 	}
 
 	.tips icon {

@@ -99,8 +99,8 @@ export default {
 
 	.upload-item {
 		float: left;
-		padding: 10 upx;
-		border: 1 upx solid #ddd;
+		padding: 10upx;
+		border: 1upx solid #ddd;
 		width: 33.333333%;
 	}
 

@@ -119,15 +119,15 @@ export default {
 
 	.logo {
 		text-align: center;
-		margin-bottom: 60 upx;
+		margin-bottom: 60upx;
 	}
 
 	.logo image {
 		display: block;
 		margin: 0 auto;
 		border-radius: 50%;
-		width: 100 upx;
-		height: 100 upx;
+		width: 100upx;
+		height: 100upx;
 	}
 
 	.list {
@@ -140,6 +140,6 @@ export default {
 
 	.list-header {
 		background-color: #efefef;
-		padding: 10 upx 30 upx;
+		padding: 10upx 30upx;
 	}
 </style>

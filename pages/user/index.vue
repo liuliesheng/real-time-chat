@@ -166,21 +166,21 @@ export default {
 	.container {
 		background-color: white;
 		box-sizing: border-box;
-		border-bottom: 1 upx solid #f9f9f9;
-		box-shadow: 0 1 upx 10 upx #f9f9f9;
+		border-bottom: 1upx solid #f9f9f9;
+		box-shadow: 0 1upx 10upx #f9f9f9;
 	}
 
 	.userinfo {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 30 upx;
+		margin-bottom: 30upx;
 	}
 
 	.userinfo-avatar {
-		width: 128 upx;
-		height: 128 upx;
-		margin: 20 upx;
+		width: 128upx;
+		height: 128upx;
+		margin: 20upx;
 		border-radius: 50%;
 	}
 
@@ -190,7 +190,7 @@ export default {
 
 	.list-header {
 		background-color: #F9F9F9;
-		padding: 20 upx 30 upx;
+		padding: 20upx 30upx;
 	}
 
 	.main-menu {
@@ -198,9 +198,9 @@ export default {
 	}
 
 	.main-menu image {
-		width: 64 upx;
-		height: 64 upx;
-		margin: 10 upx auto;
+		width: 64upx;
+		height: 64upx;
+		margin: 10upx auto;
 		display: block;
 		background-color: #f9f9f9;
 	}
