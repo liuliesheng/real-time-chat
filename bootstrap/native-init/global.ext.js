@@ -15,7 +15,6 @@ const $ = (() => {
 	throw new Error('未适配的客户端，请手动在此处理');
 })();
 
-
 // 对全局对象添加新属性
 Object.defineProperty($, '$define', {
 	enumerable: true,
@@ -31,15 +30,11 @@ Object.defineProperty($, '$define', {
 	}
 });
 
-// 增加wx对象添加新属性
+// 增加wx对象添加新属性/兼容uni-app
+const DEFINE_PREFIX = typeof uni !== 'undefined' ? "$" : "";
 $.$define($, 'define', function(key, value, isEnumerable = true) {
-	return $.$define($, key, value, isEnumerable);
+	return $.$define($, DEFINE_PREFIX + key, value, isEnumerable);
 });
-
-// 兼容uni-app
-if (typeof uni !== 'undefined') {
-	$.define('$', $);
-}
 
 // 增加对微信原始API支持promise
 $.define('promise', new Proxy($, {

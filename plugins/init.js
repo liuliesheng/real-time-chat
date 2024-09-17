@@ -58,3 +58,10 @@ Vue.prototype.setValue = function(e) {
 	}
 	this.setData(e.target.dataset);
 };
+
+// 监听获取用户信息事件
+uni.$.emitter.on('sys.getUserInfo.to', function() {
+	uni.$.navigateTo({
+		url: '/pages/user/auth/auth'
+	});
+});

@@ -1,11 +1,8 @@
 <script>
-uni.$.emitter.on('sys.getUserInfo.to', function() {
-	uni.$.navigateTo({
-		url: '/pages/user/auth/auth'
-	});
-});
-
 export default {
+	globalData: {
+		userInfo: null
+	},
 	onLaunch: function() {
 		console.log('App Launch');
 	},
@@ -31,7 +28,7 @@ export default {
 
 /* 以下样式用于 hello uni-app 演示所需 */
 page {
-	background-color: #F9F9F9;
+	background-color: #f9f9f9;
 	height: 100%;
 	font-size: 28upx;
 	line-height: 1.8;

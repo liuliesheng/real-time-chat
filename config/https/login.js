@@ -27,8 +27,10 @@ function execCallbacks(flag, err) {
  */
 function loginServer() {
 	let code = null;
-	return uni.$.promise.login().then((res) => {
+	return uni.login().then((res) => {
+		res = res[1];
 		code = res.code || res.autoCode;
+
 		return uni.sys.getUserInfo({
 			withCredentials: true
 		});
