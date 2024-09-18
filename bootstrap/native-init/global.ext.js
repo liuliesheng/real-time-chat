@@ -30,11 +30,15 @@ Object.defineProperty($, '$define', {
 	}
 });
 
-// 增加wx对象添加新属性/兼容uni-app
-const DEFINE_PREFIX = typeof uni !== 'undefined' ? "$" : "";
+// 增加wx对象添加新属性
 $.$define($, 'define', function(key, value, isEnumerable = true) {
-	return $.$define($, DEFINE_PREFIX + key, value, isEnumerable);
+	return $.$define($, key, value, isEnumerable);
 });
+
+// 兼容uni-app
+if (typeof uni !== 'undefined') {
+	$.define('$', $);
+}
 
 // 增加对微信原始API支持promise
 $.define('promise', new Proxy($, {

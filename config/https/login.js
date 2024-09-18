@@ -44,7 +44,7 @@ function loginServer() {
 
 		return new Promise((resolve, reject) => {
 			uni.request({
-				url: uni.http.defaults.baseURL + '/api/app.login/login',
+				url: uni.$.http.defaults.baseURL + '/api/app.login/login',
 				method: 'POST',
 				data: res,
 				dataType: 'json',

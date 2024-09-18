@@ -11,12 +11,14 @@ export default function(config) {
 		});
 	}
 
+	// 初始化请求参数
+	if (!config.data) config.data = {};
+
 	// 附加用户session_id
 	const globalData = getApp().globalData;
 	if (!globalData.sessionId) {
-		globalData.sessionId = uni.$.getStorageSync('session_id');
+		globalData.sessionId = uni.getStorageSync('session_id');
 	}
-	if (!config.data) config.data = {};
 	config.data.session_id = globalData.sessionId;
 
 	return config;

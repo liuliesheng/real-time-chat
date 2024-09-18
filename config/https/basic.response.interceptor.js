@@ -38,11 +38,11 @@ export default {
 				return login(res.config).then(options => uni.http.request(options));
 			}
 
-			// 余额不足
-			if (res.data.code === -3) {
+			// 暂无权限
+			if (res.data.code === -10) {
 				uni.showModal({
 					title: '温馨提示',
-					content: '你的当前星币不足，是否查看获取星币的方法？',
+					content: '暂无权限，详细请查看权限说明？',
 					showCancel: true,
 					confirmColor: '#2E8B57',
 					confirmText: '了解一下',
@@ -50,13 +50,15 @@ export default {
 						if (res.cancel) return;
 
 						uni.navigateTo({
-							url: '/pages/user/gold/index'
+							url: '/pages/user/auth-info'
 						});
 					}
 				});
+
 				return Promise.reject(res);
 			}
 
+			// 其他错误处理
 			if (res.config.isShowErrorTips !== false) {
 				if (res.data.show_msg_type === 1) {
 					uni.showModal({
@@ -72,6 +74,24 @@ export default {
 			}
 
 			return Promise.reject(res);
+		}
+
+		// 是否强制提示信息
+		if (res.data.is_force_tips) {
+			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
+			if (res.is_force_tips === 'toast') {
+				uni.showToast({
+					title: res.data.msg,
+					icon: 'none',
+				});
+			} else {
+				uni.showModal({
+					content: res.data.msg,
+					showCancel: false
+				});
+			}
+
+			ui[method](info || res.forceTipMsg);
 		}
 
 		return res;

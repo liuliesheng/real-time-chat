@@ -93,7 +93,7 @@ export default {
 		return {};
 	},
 	onLoad() {
-		const data = [];
+		// const data = [];
 		// for (let i = 0; i < 1000000; i++) {
 		// 	data.push({
 		// 		id: i,
@@ -108,6 +108,8 @@ export default {
 		// }
 		// const result = wx.arr2obj('data', data);
 		// this.setData(result);
+
+		// uni.$.http.get('https://www.baidu.com').then(res=>console.log);
 	},
 	methods: {}
 };
