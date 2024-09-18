@@ -33,9 +33,9 @@
 			<view class="list-item">
 				<navigator url="/pages/forum/posts-create">发布文章</navigator>
 			</view>
-			<view class="list-item">
+<!-- 			<view class="list-item">
 				<navigator url="/pages/forum/posts-detail">文章详情</navigator>
-			</view>
+			</view> -->
 		</view>
 
 		<view class="list">
@@ -49,21 +49,21 @@
 			<view class="list-item">
 				<navigator url="/pages/mall/goods-list">商品列表</navigator>
 			</view>
-			<view class="list-item">
+<!-- 			<view class="list-item">
 				<navigator url="/pages/mall/goods-detail">商品详情</navigator>
-			</view>
+			</view> -->
 			<view class="list-item">
 				<navigator url="/pages/mall/shopping-cart">购物车</navigator>
 			</view>
-			<view class="list-item">
+<!-- 			<view class="list-item">
 				<navigator url="/pages/mall/order-create">下单</navigator>
-			</view>
+			</view> -->
 			<view class="list-item">
 				<navigator url="/pages/mall/order-list">订单列表</navigator>
 			</view>
-			<view class="list-item">
+<!-- 			<view class="list-item">
 				<navigator url="/pages/mall/order-detail">订单详情</navigator>
-			</view>
+			</view> -->
 		</view>
 
 		<view class="list">

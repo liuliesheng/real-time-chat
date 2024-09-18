@@ -1,5 +1,5 @@
 <template>
-
+	
 </template>
 
 <script>
@@ -7,12 +7,9 @@ export default {
 	data() {
 		return {};
 	},
-	onLoad() {
-	},
+	onLoad() {},
 	methods: {}
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
