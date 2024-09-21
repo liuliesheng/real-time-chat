@@ -1,16 +1,20 @@
 import './bootstrap/index.js';
 
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import App from './App';
 
-import "./plugins/init"
+import "./plugins/init";
 
-Vue.config.productionTip = false
+// #ifdef H5
+import "./plugins/h5.adapter";
+// #endif
 
-App.mpType = 'app'
+Vue.config.productionTip = false;
+
+App.mpType = 'app';
 
 const app = new Vue({
 	...App
-})
+});
 
-app.$mount()
+app.$mount();

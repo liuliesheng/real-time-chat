@@ -1,13 +1,12 @@
 <template>
 	<div class="login">
-		<view class="title">登录</view>
 		<form @submit="onSubmit">
 			<view class="form-group">
 				<view class="form-item">
-					<input id="mobile" name="mobile" type="text" placeholder="手机号"/>
+					<input id="mobile" name="mobile" placeholder="手机号" type="text"/>
 				</view>
 				<view class="form-item">
-					<input id="password" name="password" type="password" placeholder="密码"/>
+					<input id="password" name="password" placeholder="密码" type="password"/>
 				</view>
 			</view>
 
@@ -24,7 +23,7 @@ export default {
 	data() {
 		return {};
 	},
-	methods:{
+	methods: {
 		/**
 		 * 登录
 		 */
@@ -46,14 +45,4 @@ export default {
 <style scoped>
 	.login {
 	}
-	page{
-		padding: 30upx;
-	}
-
-	.title{
-		margin: 50upx auto;
-		text-align: center;
-		font-weight: bold;
-	}
-
 </style>

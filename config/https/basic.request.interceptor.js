@@ -5,18 +5,20 @@ export default function(config) {
 	// config.showLoading = true;
 	if (config.showLoading) {
 		const showLoadingText = typeof config.showLoading === 'string' ? config.showLoading : '请稍后...';
-		wx.showLoading({
+		uni.showLoading({
 			title: showLoadingText,
 			mask: true,
 		});
 	}
 
+	// 初始化请求参数
+	if (!config.data) config.data = {};
+
 	// 附加用户session_id
 	const globalData = getApp().globalData;
 	if (!globalData.sessionId) {
-		globalData.sessionId = wx.getStorageSync('session_id');
+		globalData.sessionId = uni.getStorageSync('session_id');
 	}
-	if (!config.data) config.data = {};
 	config.data.session_id = globalData.sessionId;
 
 	return config;

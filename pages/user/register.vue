@@ -1,19 +1,18 @@
 <template>
 	<div class="register">
-		<view class="title">注册</view>
-		<form bindsubmit="onSubmit">
+		<form @submit="onSubmit">
 			<view class="form-group">
 				<view class="form-item">
-					<input id="mobile" name="mobile" type="text" placeholder="手机号"/>
+					<input id="mobile" name="mobile" placeholder="手机号" type="text"/>
 				</view>
 				<view class="form-item">
-					<input id="password" name="password" type="password" placeholder="密码"/>
+					<input id="password" name="password" placeholder="密码" type="password"/>
 				</view>
 				<view class="form-item">
-					<input id="repassword" name="repassword" type="password" placeholder="确认密码"/>
+					<input id="repassword" name="repassword" placeholder="确认密码" type="password"/>
 				</view>
 				<view class="form-item">
-					<input id="verify" name="verify" type="text" placeholder="验证码"/>
+					<input id="verify" name="verify" placeholder="验证码" type="text"/>
 				</view>
 			</view>
 
@@ -30,7 +29,7 @@ export default {
 	data() {
 		return {};
 	},
-	methods:{
+	methods: {
 		/**
 		 * 注册
 		 */
@@ -52,14 +51,4 @@ export default {
 <style scoped>
 	.register {
 	}
-	page{
-		padding: 30upx;
-	}
-
-	.title{
-		margin: 50upx auto;
-		text-align: center;
-		font-weight: bold;
-	}
-
 </style>

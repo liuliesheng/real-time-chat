@@ -3,13 +3,13 @@
 		<view class="container">
 			<view class="userinfo">
 				<block v-if="hasUserInfo">
-					<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-					<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+					<image :src="userInfo.avatarUrl" background-size="cover" class="userinfo-avatar"></image>
+					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 				</block>
 			</view>
-			<button @tap='getUserInfo'> 获取头像昵称</button>
-			<view v-if="hasUserInfo" class="usermotto">
-				<view class="user-motto">{{userInfoStr}}</view>
+			<button @tap="getUserInfo">获取头像昵称</button>
+			<view class="usermotto" v-if="hasUserInfo">
+				<view class="user-motto">{{ userInfoStr }}</view>
 			</view>
 		</view>
 	</div>
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-	name: "getUserInfo",
+	name: 'getUserInfo',
 	data() {
 		return {
 			userInfo: {},
@@ -29,12 +29,10 @@ export default {
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		uni.$.sys.getUserInfo().then((res) => {
-			this.setData({
-				userInfo: res,
-				userInfoStr: JSON.stringify(res),
-				hasUserInfo: true
-			})
+		uni.$.sys.getUserInfo().then(res => {
+			this.userInfo = res;
+			this.userInfoStr = JSON.stringify(res);
+			this.hasUserInfo = true;
 		});
 	},
 
@@ -42,17 +40,17 @@ export default {
 		getUserInfo: function() {
 			uni.$.sys.getUserInfo({
 				force: true, //强制获取
-				success: (res) => {
+				success: res => {
 					this.setData({
 						userInfo: res,
 						userInfoStr: JSON.stringify(res),
 						hasUserInfo: true
-					})
+					});
 				}
 			});
 		}
 	}
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -70,13 +68,13 @@ export default {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 15px;
+		margin-bottom: 30upx;
 	}
 
 	.userinfo-avatar {
-		width: 128 upx;
-		height: 128 upx;
-		margin: 20 upx;
+		width: 128upx;
+		height: 128upx;
+		margin: 20upx;
 		border-radius: 50%;
 	}
 

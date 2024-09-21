@@ -1,4 +1,4 @@
-# weapp-template
+# weapp-template & uni-app
 
 #### 介绍
 微信小程序模板：里面封装了一些常用的类库和方法（日期时间的转换、用户授权、请求封装，多文件上传，表单验证器、监听器、中间件、发布/订阅者、原生JS函数扩展等），方便开发人员二次开发时能够快速搭建一个微信小程序。
@@ -8,7 +8,6 @@
 
 **目录说明**
 
-    miniroot                                小程序根目录
     ├─bootstrap                             核心目录
     │  ├─libs                               第三方模块目录
     │  │  ├─qqmap-wx-jssdk.min.js           腾讯地图包
@@ -55,21 +54,20 @@
     ├─components                            自定义组件目录
     │  └─...                                更多
     │
-    ├─images                                图片存放目录
-    │  └─icons                              图标存放目录
+    ├─static                                静态资源存放目录
+    │  ├─audio                              音频资源
+    │  ├─images                             图片资源
+	│  └─icons                              图标存放目录
     │
     ├─pages                                 页面存放目录
     │  └─...                                更多
     │
     ├─styles                                样式目录
-    ├─tests                                 Babel转换配置文件
-    ├─.babelrc                             
-    ├─app.js                                
-    ├─app.json
-    ├─app.wxss
-    ├─gulpfile.js                           打包工具
+    ├─tests                                 测试文件
+    ├─app.vue                                
+    ├─pages.json
+    ├─main.js
     ├─README.md
-    ├─package.json
 
 #### 安装教程
 
@@ -79,21 +77,23 @@
 
 在小程序 app.js 中引入 bootstrap/index.js 全局api,配置加载等等一切都可以运转起来了。
 
-    // app.js
+    // main.js
     import "./bootstrap/index";
+	// 会自动注入到 `uni.$` 变量下
     
-    wx.emitter.on('sys.getUserInfo.to', function() {
-        wx.navigateTo({
+	// plugins/init.js
+    uni.$.emitter.on('sys.getUserInfo.to', function() {
+        uni.navigateTo({
             url: '/pages/user/auth/auth',
         });
     });
     
-    App({
-        onLaunch: function() {},
-        globalData: {
-            userInfo: null
-        }
-    });
+	// App.vue
+    export default {
+    	globalData: {
+    		userInfo: null
+    	},
+	};
 
 **网络请求：**
 

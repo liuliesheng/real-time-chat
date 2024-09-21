@@ -4,13 +4,13 @@ export default {
 	fulfilled: function(res) {
 		// 关闭loading
 		if (res.config.showLoading) {
-			wx.hideLoading();
+			uni.hideLoading();
 		}
 
 		// 显示500错误
 		if (res.statusCode !== 200) {
 			if (res.config.isShowErrorTips !== false) {
-				wx.showToast({
+				uni.showToast({
 					title: '网络错误，请稍后~',
 					icon: 'none',
 				});
@@ -24,7 +24,7 @@ export default {
 			// 登录失效
 			if (res.data.code === -1) {
 				if (res.config.loginCount === 1) {
-					wx.showModal({
+					uni.showModal({
 						title: '温馨提示',
 						content: '登录超时，请稍后再试~',
 						showCancel: false
@@ -35,36 +35,38 @@ export default {
 					});
 				}
 				res.config.loginCount = 1;
-				return login(res.config).then(options => wx.http.request(options));
+				return login(res.config).then(options => uni.http.request(options));
 			}
 
-			// 余额不足
-			if (res.data.code === -3) {
-				wx.showModal({
+			// 暂无权限
+			if (res.data.code === -10) {
+				uni.showModal({
 					title: '温馨提示',
-					content: '你的当前星币不足，是否查看获取星币的方法？',
+					content: '暂无权限，详细请查看权限说明？',
 					showCancel: true,
 					confirmColor: '#2E8B57',
 					confirmText: '了解一下',
 					success: (res) => {
 						if (res.cancel) return;
 
-						wx.navigateTo({
-							url: '/pages/user/gold/index'
+						uni.navigateTo({
+							url: '/pages/user/auth-info'
 						});
 					}
 				});
+
 				return Promise.reject(res);
 			}
 
+			// 其他错误处理
 			if (res.config.isShowErrorTips !== false) {
 				if (res.data.show_msg_type === 1) {
-					wx.showModal({
+					uni.showModal({
 						content: res.data.msg || '网络错误，请稍后~',
 						showCancel: false
 					});
 				} else {
-					wx.showToast({
+					uni.showToast({
 						title: res.data.msg || '网络错误，请稍后~',
 						icon: 'none',
 					});
@@ -74,16 +76,34 @@ export default {
 			return Promise.reject(res);
 		}
 
+		// 是否强制提示信息
+		if (res.data.is_force_tips) {
+			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
+			if (res.is_force_tips === 'toast') {
+				uni.showToast({
+					title: res.data.msg,
+					icon: 'none',
+				});
+			} else {
+				uni.showModal({
+					content: res.data.msg,
+					showCancel: false
+				});
+			}
+
+			ui[method](info || res.forceTipMsg);
+		}
+
 		return res;
 	},
 	rejected: function(err) {
 		// 关闭loading
 		if (err.config.showLoading) {
-			wx.hideLoading();
+			uni.hideLoading();
 		}
 
 		if (err.config.isShowErrorTips !== false) {
-			wx.showToast({
+			uni.showToast({
 				title: err.errMsg || '网络错误，请稍后~',
 				icon: 'none',
 			});

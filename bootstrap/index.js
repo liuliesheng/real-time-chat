@@ -8,6 +8,7 @@ import middleware from './middleware.js';
 import {http, Http} from './http.js';
 import uploader from './uploader.js';
 import Validate from './validate.js';
+import htmlParser from './html-parser.js';
 
 // 注入相关快捷方法
 // 常用方法
@@ -38,6 +39,7 @@ $.define('uploader', uploader);
 
 // 其他
 $.define('Validate', Validate);
+$.define('htmlParser', htmlParser);
 $.define('showTips', function(msg) {
 	$.showToast({
 		title: msg,

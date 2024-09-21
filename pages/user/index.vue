@@ -1,13 +1,14 @@
 <template>
 	<view class="user-index">
 		<view class="container">
-			<view class="userinfo">
-				<block v-if="hasUserInfo">
-					<image class="userinfo-avatar" :src="userInfo.avatarUrl" background-size="cover"></image>
-					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
-				</block>
+			<view class="userinfo" v-if="hasUserInfo">
+				<image :src="userInfo.avatarUrl" background-size="cover" class="userinfo-avatar"></image>
+				<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 			</view>
-			<uni-grid class="main-menu" :column="4" :show-border="false">
+			<view v-else>
+				<button @tap="onLogin" type="primary">登 录</button>
+			</view>
+			<uni-grid :column="4" :show-border="false" class="main-menu" style="background-color: rgba(255,255,255,0.3);">
 				<uni-grid-item>
 					<image src=""></image>
 					<text>特权</text>
@@ -27,7 +28,7 @@
 			</uni-grid>
 		</view>
 
-		<uni-grid class="main-menu" style="margin-top: 30upx" :column="4" :show-border="false">
+		<uni-grid :column="4" :show-border="false" class="main-menu" style="margin-top: 30upx">
 			<uni-grid-item>
 				<image src=""></image>
 				<text>待付款</text>
@@ -48,8 +49,12 @@
 
 		<view class="list">
 			<view class="list-header">其他</view>
-			<view class="list-item"><navigator url="/pages/user/repassword">修改密码</navigator></view>
-			<view class="list-item"><navigator url="/pages/examples/feedback">意见反馈</navigator></view>
+			<view class="list-item">
+				<navigator url="/pages/user/repassword">修改密码</navigator>
+			</view>
+			<view class="list-item">
+				<navigator url="/pages/examples/feedback">意见反馈</navigator>
+			</view>
 		</view>
 	</view>
 </template>
@@ -81,24 +86,22 @@ export default {
 	},
 
 	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function() {},
-
-	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function() {},
+	onShow: function() {
+	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide: function() {},
+	onHide: function() {
+	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function() {},
+	onUnload: function() {
+	},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
@@ -118,65 +121,74 @@ export default {
 		});
 	},
 
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function() {},
+	methods: {
+		onLogin(e) {
+			const data = e.detail.value;
+			console.log(data);
 
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function() {}
+			uni.showLoading();
+			setTimeout(() => {
+				uni.$.showTips('登录成功！');
+				this.userInfo = {
+					avatarUrl: '/static/images/icons/logo.png',
+					nickName: '刘小晋啦',
+				};
+				this.hasUserInfo = true;
+			}, 1000);
+		}
+	}
 };
 </script>
 
 <style>
-.list navigator {
-	color: inherit;
-}
+	.list navigator {
+		color: inherit;
+	}
 
-.container {
-	box-sizing: border-box;
-	border-bottom: 1upx solid #f9f9f9;
-	box-shadow: 0 1upx 10upx #f9f9f9;
-}
+	.container {
+		background-color: white;
+		box-sizing: border-box;
+		border-bottom: 1upx solid #f9f9f9;
+		box-shadow: 0 1upx 10upx #f9f9f9;
+	}
 
-.userinfo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-bottom: 30upx;
-}
+	.userinfo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 30upx;
+	}
 
-.userinfo-avatar {
-	width: 128upx;
-	height: 128upx;
-	margin: 20upx;
-	border-radius: 50%;
-}
+	.userinfo-avatar {
+		width: 128upx;
+		height: 128upx;
+		margin: 20upx;
+		border-radius: 50%;
+	}
 
-.userinfo-nickname {
-	color: #aaa;
-}
+	.userinfo-nickname {
+		color: #aaa;
+	}
 
-.list-header {
-	background-color: #efefef;
-	padding: 20upx 30upx;
-}
+	.list-header {
+		background-color: #F9F9F9;
+		padding: 20upx 30upx;
+	}
 
-.main-menu {
-}
+	.main-menu {
+		background-color: white;
+	}
 
-.main-menu image {
-	width: 64upx;
-	height: 64upx;
-	margin: 10upx auto;
-	display: block;
-	background-color: #f9f9f9;
-}
+	.main-menu image {
+		width: 64upx;
+		height: 64upx;
+		margin: 10upx auto;
+		display: block;
+		background-color: #f9f9f9;
+	}
 
-.main-menu text {
-	display: block;
-	text-align: center;
-}
+	.main-menu text {
+		display: block;
+		text-align: center;
+	}
 </style>

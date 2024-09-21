@@ -1,22 +1,20 @@
 <template>
 	<div class="b">
-		<form bindsubmit='onSubmit'>
+		<form @submit="onSubmit">
 			<view class="form-group">
+				<view class="form-item">
+					<label for="wechat">你的名字</label>
+					<input id="wechat" name="name" placeholder="你的名字" type="text"/>
+				</view>
 
 				<view class="form-item">
-					<label for='wechat'>你的名字</label>
-					<input id='wechat' type="text" placeholder="你的名字" name='name' />
+					<label for="email">你的邮箱</label>
+					<input id="email" maxlength="48" name="email" placeholder="请输入邮箱地址(可选)" type="text"/>
 				</view>
+			</view>
 
-				<view class="form-item">
-					<label for='email'>你的邮箱</label>
-					<input id='email' type="text" placeholder="请输入邮箱地址(可选)" name='email' maxlength="48" />
-				</view>
-
-				<view class="form-btn-group">
-					<button form-type='submit'>提交</button>
-				</view>
-
+			<view class="form-btn-group">
+				<button form-type="submit">提交</button>
 			</view>
 		</form>
 	</div>
@@ -24,20 +22,20 @@
 
 <script>
 export default {
-	name: "b",
+	name: 'b',
 	data() {
 		return {};
 	},
-	methods:{
+	methods: {
 		/**
 		 * 页面提交
 		 */
 		onSubmit: function(e) {
 			uni.$.emitter.trigger('wait.result', e.detail.value);
-			uni.navigateBack({})
+			uni.navigateBack({});
 		}
 	}
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
