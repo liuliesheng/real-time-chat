@@ -6,12 +6,13 @@ if (typeof Page !== "undefined") {
 			try {
 				return require('../../config/page.js');
 			} catch (e) {
+				console.warn("/config/page.js not found!");
 				return {};
 			}
 		})();
 
-		options = Object.assign({
-		}, pageMixin, options);
+		options = Object.assign({}, pageMixin, options);
+		console.log(pageMixin, options)
 		originalPage(options);
 	};
 }
