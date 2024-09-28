@@ -65,11 +65,22 @@ function requestAdapter(options) {
  * @return {Promise}
  */
 function uploadAdapter(options) {
+	if (options.data) {
+		options.formData = options.data;
+	}
 	return new Promise((resolve, reject) => {
 		const uploadTask = wx.uploadFile(Object.assign({}, options, {
 			success: (res) => {
 				res.config = options;
-				resolve(res);
+				if (!options.dataType || options.dataType === 'json') {
+					try {
+						res.data = JSON.parse(res.data);
+						resolve(res);
+					}catch (e) {
+						e.config = options;
+						reject(e);
+					}
+				}
 			},
 			fail: (err) => {
 				err.config = options;
@@ -116,17 +127,6 @@ export class Http {
 	request(options) {
 		//合并默认配置
 		options = Object.assign({}, this.defaults, options);
-		if (options.name) {
-			if (UNIQUE_REQUEST_LIST[options.name]) {
-				return Promise.reject({
-					errMsg: '请求被拒绝',
-					options: options,
-					isCancel: true,
-					isRepeat: true
-				});
-			}
-			UNIQUE_REQUEST_LIST[options.name] = true;
-		}
 
 		// Support baseURL config
 		if (options.baseURL && !isAbsoluteURL(options.url)) {
@@ -138,6 +138,18 @@ export class Http {
 		if (options.filePath || options.isUpload) {
 			adapter = uploadAdapter;
 		} else {
+			if (options.name) {
+				if (UNIQUE_REQUEST_LIST[options.name]) {
+					return Promise.reject({
+						errMsg: '请求被拒绝',
+						options: options,
+						isCancel: true,
+						isRepeat: true
+					});
+				}
+				UNIQUE_REQUEST_LIST[options.name] = true;
+			}
+
 			adapter = requestAdapter;
 		}
 

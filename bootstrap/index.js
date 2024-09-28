@@ -9,6 +9,7 @@ import {http, Http} from './http.js';
 import uploader from './uploader.js';
 import Validate from './validate.js';
 import htmlParser from './html-parser.js';
+import BigNumber from './bignumber.js';
 
 // 注入相关快捷方法
 // 常用方法
@@ -25,6 +26,7 @@ $.define('stringUtil', util.stringUtil);
 $.define('numberUtil', util.numberUtil);
 $.define('timeUtil', util.timeUtil);
 $.define('functionUtil', util.functionUtil);
+$.define('BigNumber', BigNumber);
 
 // 事件类
 $.define('emitter', emitter);
