@@ -1,5 +1,4 @@
-import "./_print_info";
-import $ from "./native-init/index";
+import $ from "./native/index";
 
 import * as util from './util/index.js';
 import {emitter, EventEmitter} from "./events.js";
@@ -13,45 +12,40 @@ import BigNumber from './bignumber.js';
 
 // 注入相关快捷方法
 // 常用方法
-$.define('random', util.random);
-$.define('isEmpty', util.isEmpty);
-$.define('isArray', util.isArray);
-$.define('isObject', util.isObject);
-$.define('toObject', util.toObject);
-$.define('assign', util.assign);
+$.$define('random', util.random);
+$.$define('isEmpty', util.isEmpty);
+$.$define('isArray', util.isArray);
+$.$define('isObject', util.isObject);
+$.$define('toObject', util.toObject);
+$.$define('assign', util.assign);
 
 // 工具类
-$.define('collectionUtil', util.collectionUtil);
-$.define('stringUtil', util.stringUtil);
-$.define('numberUtil', util.numberUtil);
-$.define('timeUtil', util.timeUtil);
-$.define('functionUtil', util.functionUtil);
-$.define('BigNumber', BigNumber);
+$.$define('collectionUtil', util.collectionUtil);
+$.$define('stringUtil', util.stringUtil);
+$.$define('numberUtil', util.numberUtil);
+$.$define('timeUtil', util.timeUtil);
+$.$define('functionUtil', util.functionUtil);
+$.$define('BigNumber', BigNumber);
 
 // 事件类
-$.define('emitter', emitter);
-$.define('EventEmitter', EventEmitter);
-$.define('publisher', publisher);
-$.define('middleware', middleware);
+$.$define('emitter', emitter);
+$.$define('EventEmitter', EventEmitter);
+$.$define('publisher', publisher);
+$.$define('middleware', middleware);
 
 // 请求类
-$.define('http', http);
-$.define('Http', Http);
-$.define('uploader', uploader);
+$.$define('http', http);
+$.$define('Http', Http);
+$.$define('uploader', uploader);
 
 // 其他
-$.define('Validate', Validate);
-$.define('htmlParser', htmlParser);
-$.define('showTips', function(msg) {
+$.$define('Validate', Validate);
+$.$define('htmlParser', htmlParser);
+$.$define('showTips', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'none'
 	});
-});
-$.define('delayNavigateBack', function(delay, options) {
-	setTimeout(function() {
-		$.navigateBack(options);
-	}, delay);
 });
 
 //初始化基础配置
@@ -74,7 +68,7 @@ $.define('delayNavigateBack', function(delay, options) {
 		appConfig = __wxConfig;
 	}
 
-	$.define('config', Object.assign(config, appConfig));
+	$.$define('config', Object.assign(config, appConfig));
 })();
 
 //初始化网络请求配置
@@ -136,9 +130,9 @@ $.define('delayNavigateBack', function(delay, options) {
 
 	// 生成中间件
 	for (const key in config) {
-		$.$define(middlewareList, key, middleware(config[key]));
+		$.$$define(middlewareList, key, middleware(config[key]));
 	}
-	$.define('middlewares', middlewareList);
+	$.$define('middlewares', middlewareList);
 
 	// 注册中间件
 	const callbackMiddlewareHandle = function(callbackName, middlewareName) {
@@ -162,16 +156,16 @@ $.define('delayNavigateBack', function(delay, options) {
 
 // 重写停止下拉刷新方法
 (function() {
-	let innerAudioContext = $.config.stopPullDownRefreshAudio;
+	let innerAudioContext = $.$config.stopPullDownRefreshAudio;
 	if (!innerAudioContext) return;
 
 	if (typeof innerAudioContext !== 'object') {
 		innerAudioContext = $.createInnerAudioContext();
-		innerAudioContext.src = $.config.stopPullDownRefreshAudio;
+		innerAudioContext.src = $.$config.stopPullDownRefreshAudio;
 	}
 
 	const stopPullDownRefresh = $.stopPullDownRefresh;
-	$.define('stopPullDownRefresh', function(isPlay) {
+	$.$define('stopPullDownRefresh', function(isPlay) {
 		if (isPlay) innerAudioContext.play();
 		stopPullDownRefresh.call(this);
 	});

@@ -4,6 +4,7 @@ import Vue from 'vue';
 import App from './App';
 
 import "./plugins/init";
+import "./plugins/vue.ext";
 
 // #ifdef H5
 import "./plugins/h5.adapter";

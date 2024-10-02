@@ -1,5 +1,3 @@
-console.groupCollapsed(`%c相关快捷操作`, "color:green;font-size:14px");
-console.log(`%c
 wx.define(key,value,isEnumerable) 把一个变量绑定到wx
 wx.$define(obj,key,value,isEnumerable) 把一个变量绑定到某个对象上
 wx.require(file, errorTips = true) 引入模块
@@ -30,6 +28,3 @@ wx.uploader(files) 生成一个上传文件实例
 wx.runtimeConfig 运行时配置信息
 wx.config 配置信息
 wx.middlewares 中间件列表
-
-`, "color:#00f;font-size:12px;");
-console.groupEnd();

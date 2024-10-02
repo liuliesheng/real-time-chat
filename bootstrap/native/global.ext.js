@@ -16,7 +16,7 @@ const $ = (() => {
 })();
 
 // 对全局对象添加新属性
-Object.defineProperty($, '$define', {
+Object.defineProperty($, '$$define', {
 	enumerable: true,
 	get: function() {
 		return function(obj, key, value, isEnumerable = true) {
@@ -31,17 +31,14 @@ Object.defineProperty($, '$define', {
 });
 
 // 增加wx对象添加新属性
-$.$define($, 'define', function(key, value, isEnumerable = true) {
-	return $.$define($, key, value, isEnumerable);
+// const $uni = typeof uni !== 'undefined' ? uni : {};
+$.$$define($, '$define', function(key, value, isEnumerable = true) {
+	$.$$define($, '$' + key, value, isEnumerable);
+	// $.$$define($uni, '$' + key, value, isEnumerable);
 });
 
-// 兼容uni-app
-if (typeof uni !== 'undefined') {
-	$.define('$', $);
-}
-
 // 增加对微信原始API支持promise
-$.define('promise', new Proxy($, {
+$.$define('promise', new Proxy($, {
 	get: function(target, key, receiver) {
 		const wxFunc = Reflect.get(target, key, receiver);
 		return function(options) {
@@ -57,14 +54,14 @@ $.define('promise', new Proxy($, {
 
 // 系统信息
 const systemInfo = $.getSystemInfoSync();
-$.define('systemInfo', systemInfo);
-$.define('isDev', systemInfo.platform === 'devtools');
+$.$define('systemInfo', systemInfo);
+$.$define('isDev', systemInfo.platform === 'devtools');
 
 // 扁平化支付宝接口
 if (typeof my !== 'undefined' && typeof uni === 'undefined') {
 	(function() {
 		// ui相关
-		$.define('showModal', function(options) {
+		$.$define('showModal', function(options) {
 			if (options.showCancel === false) {
 				my.alert(options);
 			} else {
@@ -72,29 +69,29 @@ if (typeof my !== 'undefined' && typeof uni === 'undefined') {
 			}
 		});
 		const showToast = my.showToast;
-		$.define('showToast', function(options) {
+		$.$define('showToast', function(options) {
 			options.content = options.title;
 			showToast(options);
 		});
 
 		// 缓存相关
 		const getStorageSync = my.getStorageSync;
-		$.define('getStorageSync', function(key) {
+		$.$define('getStorageSync', function(key) {
 			return getStorageSync({key: key}).data;
 		});
 
 		const setStorageSync = my.setStorageSync;
-		$.define('setStorageSync', function(key, data) {
+		$.$define('setStorageSync', function(key, data) {
 			return setStorageSync({key: key, data: data});
 		});
 
 		const removeStorageSync = my.removeStorageSync;
-		$.define('removeStorageSync', function(key) {
+		$.$define('removeStorageSync', function(key) {
 			return removeStorageSync({key: key});
 		});
 
 		// 用户相关
-		$.define('login', function(options) {
+		$.$define('login', function(options) {
 			my.getAuthCode({
 				scopes: 'auth_base',
 				success: (res) => {
@@ -108,7 +105,7 @@ if (typeof my !== 'undefined' && typeof uni === 'undefined') {
 		});
 
 		// 用户信息
-		$.define('getUserInfo', function(options) {
+		$.$define('getUserInfo', function(options) {
 			my.getOpenUserInfo({
 				success: (res) => {
 					let userInfo = null;
@@ -142,12 +139,19 @@ if (typeof my !== 'undefined' && typeof uni === 'undefined') {
 	})();
 }
 
+// 延迟返回上一页
+$.$define('delayNavigateBack', function(delay, options) {
+	setTimeout(function() {
+		$.navigateBack(options);
+	}, delay);
+});
+
 /**
  * 授权是否被拒绝
  * @param {*} res
  * @return {boolean}
  */
-$.define('isAuthDeny', function(err) {
+$.$define('isAuthDeny', function(err) {
 	if (!err || !err.errMsg) return false;
 	return err.errMsg.indexOf('fail auth deny') !== -1;
 });
@@ -157,12 +161,12 @@ $.define('isAuthDeny', function(err) {
  * @param {*} pageObj
  * @return {boolean}
  */
-$.define('isShowPage', function(pageObj) {
+$.$define('isShowPage', function(pageObj) {
 	return getCurrentPages()[0].route === pageObj.route;
 });
 
 // QQ地图
-$.define('getQQMap', (function() {
+$.$define('getQQMap', (function() {
 	const QQMapWX = require('../libs/qqmap-wx-jssdk.min.js');
 
 	/**
@@ -193,7 +197,7 @@ $.define('getQQMap', (function() {
 })());
 
 // 数组转对象
-$.define('arr2obj', function(prefix, data, initIndex = 0) {
+$.$define('arr2obj', function(prefix, data, initIndex = 0) {
 	const result = {};
 	for (let i = 0; i < data.length; i++) {
 		const newKey = prefix + '[' + (i + initIndex) + ']';
@@ -203,7 +207,7 @@ $.define('arr2obj', function(prefix, data, initIndex = 0) {
 });
 
 // 系统相关方法的扩展
-$.define('sys', (function(sys = {}) {
+$.$define('sys', (function(sys = {}) {
 
 	/**
 	 * 调用并授权地理位置权限
@@ -211,16 +215,16 @@ $.define('sys', (function(sys = {}) {
 	 * @param {*} options
 	 */
 	function invokeLocationAndAuth(invokeFunc, options) {
-		return $.promise[invokeFunc](options).catch(function(err) {
+		return $.$promise[invokeFunc](options).catch(function(err) {
 			err.isAuthDeny = $.isAuthDeny(err);
 			if (!err.isAuthDeny) return Promise.reject(err);
 
-			return $.promise.openSetting({}).then(function(res) {
+			return $.$promise.openSetting({}).then(function(res) {
 				if (!res.authSetting['scope.userLocation']) {
 					return Promise.reject(err);
 				}
 
-				return $.promise.showModal({
+				return $.$promise.showModal({
 					title: '温馨提示',
 					content: '此操作需要你的授权，我们不会泄露你的隐私！',
 					showCancel: false,
@@ -271,7 +275,7 @@ $.define('sys', (function(sys = {}) {
 	 * @param {*} options
 	 */
 	sys.getUserInfo = function(options = {}) {
-		return $.promise.getUserInfo(Object.assign({
+		return $.$promise.getUserInfo(Object.assign({
 			lang: 'zh_CN'
 		})).then(function(res) {
 			return options.full ? res : res.userInfo;
@@ -289,7 +293,7 @@ $.define('sys', (function(sys = {}) {
 						});
 					}
 				});
-				emitter.trigger('sys.getUserInfo.to', options);
+				emitter.emit('sys.getUserInfo.to', options);
 			});
 		});
 	};

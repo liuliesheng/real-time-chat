@@ -4,7 +4,7 @@ export default {
 		userInfo: null
 	},
 	onLaunch: function() {
-		console.log('App Launch');
+		console.log('App Launch',wx);
 	},
 	onShow: function() {
 		console.log('App Show');

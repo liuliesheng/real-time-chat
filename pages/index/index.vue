@@ -93,6 +93,7 @@ export default {
 		return {};
 	},
 	onLoad() {
+		console.log(uni)
 		// const data = [];
 		// for (let i = 0; i < 1000000; i++) {
 		// 	data.push({
