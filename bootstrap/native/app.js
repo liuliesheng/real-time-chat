@@ -5,6 +5,7 @@ if (typeof App !== "undefined") {
 		const callbackMiddlewareHandle = function(callbackName, middlewareName) {
 			if (!uni.$middlewares[middlewareName]) return;
 			const oldFunc = appInstance[callbackName] || function() {};
+			// console.log(oldFunc);
 			appInstance[callbackName] = function(options) {
 				console.groupCollapsed(middlewareName, options);
 				uni.$middlewares[middlewareName](oldFunc, options, appInstance);

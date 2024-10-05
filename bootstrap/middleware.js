@@ -1,7 +1,7 @@
 export default function middleware(handles = []) {
 	const dispatch = function(func, params, context = null) {
 		let index = 0;
-		const next = () => {
+		const next = function() {
 			if (index >= handles.length) {
 				return func.call(context, params);
 			}

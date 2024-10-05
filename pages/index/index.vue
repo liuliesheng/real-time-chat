@@ -93,7 +93,7 @@ export default {
 		return {};
 	},
 	onLoad() {
-		console.log(uni)
+		console.log(uni,uni.$http)
 		// const data = [];
 		// for (let i = 0; i < 1000000; i++) {
 		// 	data.push({
