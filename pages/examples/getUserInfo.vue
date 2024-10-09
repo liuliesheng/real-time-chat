@@ -29,7 +29,7 @@ export default {
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		uni.$.sys.getUserInfo().then(res => {
+		uni.$sys.getUserInfo().then(res => {
 			this.userInfo = res;
 			this.userInfoStr = JSON.stringify(res);
 			this.hasUserInfo = true;
@@ -38,7 +38,7 @@ export default {
 
 	methods: {
 		getUserInfo: function() {
-			uni.$.sys.getUserInfo({
+			uni.$sys.getUserInfo({
 				force: true, //强制获取
 				success: res => {
 					this.setData({

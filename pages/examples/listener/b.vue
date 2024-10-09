@@ -31,7 +31,7 @@ export default {
 		 * 页面提交
 		 */
 		onSubmit: function(e) {
-			uni.$.emitter.trigger('wait.result', e.detail.value);
+			uni.$emitter.trigger('wait.result', e.detail.value);
 			uni.navigateBack({});
 		}
 	}

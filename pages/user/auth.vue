@@ -23,7 +23,7 @@ export default {
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function() {
-		uni.$.emitter.trigger('sys.userinfo.result', this.userInfo);
+		uni.$emitter.emit('sys.userinfo.result', this.userInfo);
 	},
 	methods: {
 		/**
@@ -32,7 +32,7 @@ export default {
 		getUserInfo: function(e) {
 			this.data.userInfo = e.detail;
 			if (e.detail.userInfo) {
-				wx.navigateBack();
+				uni.navigateBack();
 			}
 		}
 	}

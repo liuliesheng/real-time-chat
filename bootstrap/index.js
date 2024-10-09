@@ -165,7 +165,7 @@ $.$define('showTips', function(msg) {
 	}
 
 	const stopPullDownRefresh = $.stopPullDownRefresh;
-	$.$define('stopPullDownRefresh', function(isPlay) {
+	$.$$define($, 'stopPullDownRefresh', function(isPlay) {
 		if (isPlay) innerAudioContext.play();
 		stopPullDownRefresh.call(this);
 	});

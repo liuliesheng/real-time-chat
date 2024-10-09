@@ -34,7 +34,7 @@ export default {
 	name: "timer",
 	data() {
 		return {
-			datetime: uni.$.timeUtil.format()
+			datetime: uni.$timeUtil.format()
 		};
 	},
 	timer: null,
@@ -44,7 +44,7 @@ export default {
 	 */
 	onLoad: function(options) {
 		this.$options.timer = timer(() => {
-			this.datetime = uni.$.timeUtil.format();
+			this.datetime = uni.$timeUtil.format();
 		})
 	},
 

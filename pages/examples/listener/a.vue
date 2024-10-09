@@ -22,7 +22,7 @@ export default {
 	 */
 	onLoad: function(options) {
 		console.log(this);
-		uni.$.emitter.on('wait.result', res => {
+		uni.$emitter.on('wait.result', res => {
 			this.result = JSON.stringify(res);
 		});
 	},

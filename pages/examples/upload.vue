@@ -4,7 +4,7 @@
 			<button @tap='onChooseImage'>选择图片</button>
 		</view>
 		<view class='upload'>
-			<view class='upload-item' wx:for='{{files}}' wx:key='{{index}}'>
+			<view class='upload-item' v-for='(item,index) in files' :key='index'>
 				<view class='upload-image'>
 					<image mode='aspectFill' src='{{item.path}}'/>
 				</view>

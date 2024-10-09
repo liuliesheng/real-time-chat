@@ -5,7 +5,7 @@
 				<textarea @input="onRemarkInput" maxlength="500" placeholder="感谢提出建议"></textarea>
 				<view class="form-item-counter">
 					<text>{{remark_length}}</text>
-					/500
+					<text>/500</text>
 				</view>
 			</view>
 		</view>
@@ -70,8 +70,8 @@ export default {
 
 			uni.showLoading();
 			setTimeout(() => {
-				uni.$.showTips('已提交');
-				uni.$.delayNavigateBack(1200);
+				uni.$showTips('已提交');
+				uni.$delayNavigateBack(1200);
 				// wx.showTips('提交失败，请稍后重试~');
 			}, 1000);
 		}
