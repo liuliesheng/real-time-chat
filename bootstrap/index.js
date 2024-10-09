@@ -41,12 +41,6 @@ $.$define('uploader', uploader);
 // 其他
 $.$define('Validate', Validate);
 $.$define('htmlParser', htmlParser);
-$.$define('showTips', function(msg) {
-	$.showToast({
-		title: msg,
-		icon: 'none'
-	});
-});
 
 //初始化基础配置
 (function() {

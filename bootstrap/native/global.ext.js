@@ -146,6 +146,14 @@ $.$define('delayNavigateBack', function(delay, options) {
 	}, delay);
 });
 
+// 轻提示
+$.$define('showTips', function(msg) {
+	$.showToast({
+		title: msg,
+		icon: 'none'
+	});
+});
+
 /**
  * 授权是否被拒绝
  * @param {*} res

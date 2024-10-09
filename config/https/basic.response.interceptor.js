@@ -97,16 +97,18 @@ export default {
 		return res;
 	},
 	rejected: function(err) {
-		// 关闭loading
-		if (err.config.showLoading) {
-			uni.hideLoading();
-		}
+		if (err.config) {
+			// 关闭loading
+			if (err.config.showLoading) {
+				uni.hideLoading();
+			}
 
-		if (err.config.isShowErrorTips !== false) {
-			uni.showToast({
-				title: err.errMsg || '网络错误，请稍后~',
-				icon: 'none',
-			});
+			if (err.config.isShowErrorTips !== false) {
+				uni.showToast({
+					title: err.errMsg || '网络错误，请稍后~',
+					icon: 'none',
+				});
+			}
 		}
 
 		return Promise.reject(err);

@@ -21,6 +21,7 @@ export default {
 	data() {
 		return {
 			userInfo: {},
+			userInfoStr: '',
 			hasUserInfo: false
 		};
 	},
@@ -41,11 +42,10 @@ export default {
 			uni.$sys.getUserInfo({
 				force: true, //强制获取
 				success: res => {
-					this.setData({
-						userInfo: res,
-						userInfoStr: JSON.stringify(res),
-						hasUserInfo: true
-					});
+					console.log('getUserInfo', res);
+					this.userInfo = res;
+					this.userInfoStr = JSON.stringify(res);
+					this.hasUserInfo = true;
 				}
 			});
 		}

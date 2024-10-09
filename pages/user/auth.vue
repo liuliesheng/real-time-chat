@@ -15,7 +15,9 @@
 export default {
 	name: 'auth',
 	data() {
-		return {};
+		return {
+			userInfo: null
+		};
 	},
 	onLoad: function(options) {
 	},
@@ -23,15 +25,15 @@ export default {
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function() {
-		uni.$emitter.emit('sys.userinfo.result', this.userInfo);
+		uni.$emitter.emit('sys.getUserInfo.result', this.userInfo);
 	},
 	methods: {
 		/**
 		 * 获取用户信息
 		 */
 		getUserInfo: function(e) {
-			this.data.userInfo = e.detail;
 			if (e.detail.userInfo) {
+				this.userInfo = e.detail;
 				uni.navigateBack();
 			}
 		}

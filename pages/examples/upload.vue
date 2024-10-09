@@ -6,12 +6,12 @@
 		<view class='upload'>
 			<view class='upload-item' v-for='(item,index) in files' :key='index'>
 				<view class='upload-image'>
-					<image mode='aspectFill' src='{{item.path}}'/>
+					<image mode='aspectFill' :src='item.path'/>
 				</view>
-				<view class='status-text' v-if='{{item.status===0}}'>等待上传</view>
-				<progress percent="{{item.progress}}" show-info v-if='{{item.status===1}}'/>
-				<view class='status-text status-success' v-if='{{item.status===2}}'>上传成功</view>
-				<view class='status-text status-error' v-if='{{item.status===3}}'>上传失败</view>
+				<view class='status-text' v-if='item.status===0'>等待上传</view>
+				<progress :percent="item.progress" show-info v-if='item.status===1'/>
+				<view class='status-text status-success' v-if='item.status===2'>上传成功</view>
+				<view class='status-text status-error' v-if='item.status===3'>上传失败</view>
 			</view>
 		</view>
 	</div>
@@ -31,7 +31,7 @@ export default {
 		 * @param e
 		 */
 		onChooseImage: function(e) {
-			wx.chooseImage({
+			uni.chooseImage({
 				success: (res) => {
 					const files = res.tempFilePaths.map(item => ({path: item, status: 0, progress: 0}));
 
@@ -42,14 +42,14 @@ export default {
 						//延迟更新，避免小程序抛出异常
 						setTimeout(() => {
 							isUpdated = true;
-							this.setData({files: files});
+							this.files=files;
 						}, 200);
 					};
 
-					wx.http.upload({
-						url: urls.upload,
+					uni.$http.request({
+						url: 'upload',
 						files: res.tempFilePaths,
-						name: 'download',
+						name: 'file',
 						// multiple: true,
 						success: (res) => {
 							const {index, result} = res;
