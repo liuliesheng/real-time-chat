@@ -12,7 +12,6 @@ if (typeof Page !== "undefined") {
 		})();
 
 		options = Object.assign({}, pageMixin, options);
-		console.log(pageMixin, options)
 		originalPage(options);
 	};
 }
