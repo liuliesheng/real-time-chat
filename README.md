@@ -14,7 +14,7 @@
     │  ├─native-init                        小程序原生语法扩展
     │  │  ├─app.js                          扩展App函数
     │  │  ├─component.js                    扩展Component函数
-    │  │  ├─es6.ext.js                      ES6 语法扩展
+    │  │  ├─index.js                      ES6 语法扩展
     │  │  ├─global.ext.js                   全局对象扩展（wx,my,swan,tt）
     │  │  └─page.js                         扩展Page函数
     │  │

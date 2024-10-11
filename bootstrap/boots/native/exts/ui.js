@@ -1,0 +1,16 @@
+import $ from "../api";
+
+// 延迟返回上一页
+$.$define('delayNavigateBack', function(delay, options) {
+	setTimeout(function() {
+		$.navigateBack(options);
+	}, delay);
+});
+
+// 轻提示
+$.$define('showTips', function(msg) {
+	$.showToast({
+		title: msg,
+		icon: 'none'
+	});
+});

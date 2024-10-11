@@ -1,3 +1,4 @@
+import $ from './native';
 /**
  * 防重复请求
  * @type {*}
@@ -55,7 +56,7 @@ function requestAdapter(options) {
 			if (options.name) delete UNIQUE_REQUEST_LIST[options.name];
 		};
 
-		wx.request(options);
+		$.request(options);
 	});
 }
 
@@ -69,14 +70,14 @@ function uploadAdapter(options) {
 		options.formData = options.data;
 	}
 	return new Promise((resolve, reject) => {
-		const uploadTask = wx.uploadFile(Object.assign({}, options, {
+		const uploadTask = $.uploadFile(Object.assign({}, options, {
 			success: (res) => {
 				res.config = options;
 				if (!options.dataType || options.dataType === 'json') {
 					try {
 						res.data = JSON.parse(res.data);
 						resolve(res);
-					}catch (e) {
+					} catch (e) {
 						e.config = options;
 						reject(e);
 					}
@@ -101,7 +102,7 @@ export class Http {
 	 * 默认构造器
 	 * @param {*} options
 	 */
-	constructor(options) {
+	constructor(options = {}) {
 		/**
 		 * 默认配置
 		 * @type {*}

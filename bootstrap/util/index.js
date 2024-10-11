@@ -1,5 +1,5 @@
 export * from "./core";
-export {default as collectionUtil} from "./collection";
+export * as collectionUtil from "./collection";
 export {default as numberUtil} from "./number";
 export {default as stringUtil} from "./string";
 export {default as timeUtil} from "./time";

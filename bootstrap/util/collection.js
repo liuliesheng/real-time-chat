@@ -1,22 +1,16 @@
 /**
- * 集合工具类
- */
-const _ = {};
-export default _;
-
-/**
  * 随机打乱数组
  * @param {*[]} arr
  * @returns {*}
  */
-_.shuffle = function(arr) {
+export function shuffle(arr) {
 	let m = arr.length, i;
 	while (m) {
 		i = (Math.random() * m--) >>> 0;
 		[arr[m], arr[i]] = [arr[i], arr[m]]
 	}
 	return arr;
-};
+}
 
 /**
  * 从 list中产生一个随机样本。传递一个数字表示从list中返回n个随机元素。否则将返回一个单一的随机项。
@@ -25,23 +19,23 @@ _.shuffle = function(arr) {
  * @param guard
  * @return {*}
  */
-_.sample = function(arr, n, guard) {
+export function sample(arr, n, guard) {
 	if (n == null || guard) {
-		if (!Array.isArray(arr)) arr = Array.from(obj);
+		if (!Array.isArray(arr)) arr = Array.from(arr);
 		return arr[Math.random() * (arr.length - 1)];
 	}
-	return _.shuffle(obj).slice(0, Math.max(0, n));
-};
+	return shuffle(arr).slice(0, Math.max(0, n));
+}
 
 // Internal implementation of a recursive `flatten` function.
-const flatten = function(input, shallow, strict, startIndex) {
+const _flatten = function(input, shallow, strict, startIndex) {
 	let output = [], idx = 0;
 	let i = startIndex || 0, length = input && input.length;
 	for (; i < length; i++) {
 		let value = input[i];
 		if (Array.isArray(value)) {
 			//flatten current level of array or arguments object
-			if (!shallow) value = flatten(value, shallow, strict);
+			if (!shallow) value = _flatten(value, shallow, strict);
 			let j = 0, len = value.length;
 			output.length += len;
 			while (j < len) {
@@ -61,16 +55,16 @@ const flatten = function(input, shallow, strict, startIndex) {
  * @param shallow
  * @return {Array}
  */
-_.flatten = function(array, shallow) {
-	return flatten(array, shallow, false);
-};
+export function flatten(array, shallow) {
+	return _flatten(array, shallow, false);
+}
 
 /**
  * 返回传入 arrays（数组）交集。结果中的每个值是存在于传入的每个arrays（数组）里。
  * @param {array} array...
  * @return {Array}
  */
-_.intersection = function(array) {
+export function intersection(array) {
 	if (array == null) return [];
 
 	const result = [];
@@ -89,7 +83,7 @@ _.intersection = function(array) {
 	}
 
 	return result;
-};
+}
 
 /**
  * 取两个数组的差集
@@ -97,19 +91,19 @@ _.intersection = function(array) {
  * Only the elements present in just the first array will remain.
  * @return {*}
  */
-_.difference = function() {
+export function difference() {
 	let rest = Array.from(arguments);
 	const array = rest.shift();
-	rest = flatten(rest, true, true);
+	rest = _flatten(rest, true, true);
 	return array.filter((value) => rest.indexOf(value) === -1);
-};
+}
 
 /**
  * 它类似于map，但是这用于对象。转换每个属性的值。
  * @param {*} obj
  * @param {function(*,string,*)} iteratee
  */
-_.mapObject = function(obj, iteratee) {
+export function mapObject(obj, iteratee) {
 	const keys = Object.keys(obj),
 		length = keys.length,
 		results = {};
@@ -119,6 +113,4 @@ _.mapObject = function(obj, iteratee) {
 		results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
 	}
 	return results;
-};
-
-
+}
