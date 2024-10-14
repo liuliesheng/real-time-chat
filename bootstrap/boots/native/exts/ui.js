@@ -1,4 +1,4 @@
-import $ from "../api";
+import $ from "../../../$";
 
 // 延迟返回上一页
 $.$define('delayNavigateBack', function(delay, options) {

@@ -1,14 +1,17 @@
+import $ from "../../$";
+
+// 重置App函数
 if (typeof App !== "undefined") {
-	// 重置App函数
 	const originalApp = App;
 	App = function(appInstance) {
 		const callbackMiddlewareHandle = function(callbackName, middlewareName) {
-			if (!uni.$middlewares[middlewareName]) return;
-			const oldFunc = appInstance[callbackName] || function() {};
+			if (!$.$middlewares[middlewareName]) return;
+			const oldFunc = appInstance[callbackName] || function() {
+			};
 			// console.log(oldFunc);
 			appInstance[callbackName] = function(options) {
 				console.groupCollapsed(middlewareName, options);
-				uni.$middlewares[middlewareName](oldFunc, options, appInstance);
+				$.$middlewares[middlewareName](oldFunc, options, appInstance);
 				console.groupEnd();
 			};
 		};

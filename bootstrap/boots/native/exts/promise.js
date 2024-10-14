@@ -1,4 +1,4 @@
-import $ from "../api";
+import $ from "../../../$";
 
 // 增加对微信原始API支持promise
 $.$define('promise', new Proxy($, {

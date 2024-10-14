@@ -1,5 +1,5 @@
-import $ from "../api";
-import {emitter} from "../../events";
+import $ from "../../../$";
+import {emitter} from "../../../events";
 
 // 系统信息
 const systemInfo = $.getSystemInfoSync();

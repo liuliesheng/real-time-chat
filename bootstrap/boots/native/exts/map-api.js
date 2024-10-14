@@ -1,9 +1,9 @@
-import {collectionUtil, random} from "../../util";
+import {collectionUtil, random} from "../../../util";
+
+const QQMapWX = require('../libs/qqmap-wx-jssdk.min.js');
 
 // QQ地图
 $.$define('getQQMap', (function() {
-	const QQMapWX = require('../libs/qqmap-wx-jssdk.min.js');
-
 	/**
 	 * QQ地图key列表
 	 * @type {string[]}
