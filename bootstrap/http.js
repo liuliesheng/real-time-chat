@@ -1,4 +1,5 @@
-import $ from './native';
+import $ from './$';
+
 /**
  * 防重复请求
  * @type {*}
@@ -53,7 +54,9 @@ function requestAdapter(options) {
 		// 请求完成之后的处理
 		options.complete = () => {
 			//删除唯一请求标识
-			if (options.name) delete UNIQUE_REQUEST_LIST[options.name];
+			if (options.name) {
+				delete UNIQUE_REQUEST_LIST[options.name];
+			}
 		};
 
 		$.request(options);

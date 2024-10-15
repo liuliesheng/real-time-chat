@@ -35,11 +35,5 @@ export default function middleware(handles = []) {
 		handles.remove(handle);
 		return dispatch;
 	};
-	dispatch.bindObjectFunction = function(funcName, obj) {
-		const oldFunc = context[funcName];
-		return context[funcName] = function() {
-			return m(oldFunc, arguments[0], context);
-		};
-	};
 	return dispatch;
 }

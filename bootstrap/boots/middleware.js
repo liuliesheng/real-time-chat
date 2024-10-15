@@ -1,7 +1,8 @@
-// 初始化中间件配置
+/** @var {*} $ */
 import $ from "../$";
 import middleware from "../middleware";
 
+// 初始化中间件配置
 const middlewareList = {};
 let config = null;
 

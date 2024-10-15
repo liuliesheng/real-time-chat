@@ -53,7 +53,7 @@ const TYPE = {};
  * @return {*}
  */
 function getDataValue(data, key) {
-	let value = null;
+	let value;
 	if (!Number.isNaN(parseInt(key))) {
 		value = key;
 	} else if (key.indexOf('.') !== -1) { // 支持二维数组验证
@@ -196,7 +196,7 @@ export default class Validate {
  * @param {string} type 验证规则类型
  * @param {function} [callback] callback方法(或闭包)
  */
-Validate.extend = function (type, callback) {
+Validate.extend = function(type, callback) {
 	if (typeof type === 'object') {
 		Object.assign(TYPE, type);
 	} else {
@@ -209,7 +209,7 @@ Validate.extend = function (type, callback) {
  * @param {*} type 验证规则类型名称或者数组
  * @param {string} [msg] 验证提示信息
  */
-Validate.setTypeMsg = function (type, msg) {
+Validate.setTypeMsg = function(type, msg) {
 	if (typeof type === 'object') {
 		Object.assign(TYPE_MSG, type);
 	} else {
@@ -225,10 +225,10 @@ Validate.setTypeMsg = function (type, msg) {
  * @param {string} [field] 字段名
  * @return {boolean}
  */
-Validate.confirm = function (value, rule, data, field) {
+Validate.confirm = function(value, rule, data, field) {
 	field = field || '';
 	if ('' === rule) rule = field + '_confirm';
-	return getDataValue(data, rule) == value;
+	return getDataValue(data, rule) === value;
 };
 
 /**
@@ -238,8 +238,8 @@ Validate.confirm = function (value, rule, data, field) {
  * @param {*} data  数据
  * @return {boolean}
  */
-Validate.different = function (value, rule, data) {
-	return getDataValue(data, rule) != value;
+Validate.different = function(value, rule, data) {
+	return getDataValue(data, rule) !== value;
 };
 
 /**
@@ -249,7 +249,7 @@ Validate.different = function (value, rule, data) {
  * @param {*} data  数据
  * @return {boolean}
  */
-Validate.egt = function (value, rule, data) {
+Validate.egt = function(value, rule, data) {
 	let val = getDataValue(data, rule);
 	return val !== null && value >= val;
 };
@@ -261,7 +261,7 @@ Validate.egt = function (value, rule, data) {
  * @param {*} data  数据
  * @return {boolean}
  */
-Validate.gt = function (value, rule, data) {
+Validate.gt = function(value, rule, data) {
 	let val = getDataValue(data, rule);
 	return val !== null && value > val;
 };
@@ -273,7 +273,7 @@ Validate.gt = function (value, rule, data) {
  * @param {*} data  数据
  * @return {boolean}
  */
-Validate.elt = function (value, rule, data) {
+Validate.elt = function(value, rule, data) {
 	let val = getDataValue(data, rule);
 	return val !== null && value <= val;
 };
@@ -285,7 +285,7 @@ Validate.elt = function (value, rule, data) {
  * @param {*} data  数据
  * @return {boolean}
  */
-Validate.lt = function (value, rule, data) {
+Validate.lt = function(value, rule, data) {
 	let val = getDataValue(data, rule);
 	return val !== null && value < val;
 };
@@ -296,8 +296,12 @@ Validate.lt = function (value, rule, data) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.eq = function (value, rule) {
-	return value == rule;
+Validate.eq = function(value, rule) {
+	if (typeof value === "object") {
+		return value === rule;
+	} else {
+		return (value ? value.toString() : null) === (rule ? rule.toString() : null);
+	}
 };
 
 /**
@@ -306,10 +310,10 @@ Validate.eq = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.is = function (value, rule) {
-	let result = true;
+Validate.is = function(value, rule) {
+	let result;
 	if (rule === 'require') {// 必须
-		result = undefined !== value || null !== value || '' !== value;
+		result = undefined !== value || '' !== value;
 	} else if (rule === 'date') {// 是否是一个有效日期
 		result = !isNaN(strtotime(value));
 	} else if (rule === 'alpha') {// 只允许字母
@@ -363,7 +367,7 @@ Validate.is = function (value, rule) {
  * @param {*} value 字段值
  * @return {boolean}
  */
-Validate.ip = function (value) {
+Validate.ip = function(value) {
 	return Validate.is(value, 'ip');
 };
 
@@ -373,7 +377,7 @@ Validate.ip = function (value) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.in = function (value, rule) {
+Validate.in = function(value, rule) {
 	if (typeof rule === 'string') rule = rule.split(',');
 	return rule.indexOf(value) !== -1;
 };
@@ -384,7 +388,7 @@ Validate.in = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.notIn = function (value, rule) {
+Validate.notIn = function(value, rule) {
 	if (typeof rule === 'string') rule = rule.split(',');
 	return rule.indexOf(value) === -1;
 };
@@ -395,7 +399,7 @@ Validate.notIn = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.between = function (value, rule) {
+Validate.between = function(value, rule) {
 	if (typeof rule === 'string') rule = rule.split(',', 2);
 	let [min, max] = rule;
 	return value >= min && value <= max;
@@ -407,7 +411,7 @@ Validate.between = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.notBetween = function (value, rule) {
+Validate.notBetween = function(value, rule) {
 	if (typeof rule === 'string') rule = rule.split(',', 2);
 	let [min, max] = rule;
 	return value < min || value > max;
@@ -419,8 +423,8 @@ Validate.notBetween = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.len = function (value, rule) {
-	let length = 0;
+Validate.len = function(value, rule) {
+	let length;
 	if (value instanceof Array) {
 		length = value.length;
 	} else {
@@ -433,7 +437,7 @@ Validate.len = function (value, rule) {
 		return length >= min && length <= max;
 	} else {
 		// 指定长度
-		return length == rule;
+		return length === rule;
 	}
 };
 
@@ -443,8 +447,8 @@ Validate.len = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.max = function (value, rule) {
-	let length = 0;
+Validate.max = function(value, rule) {
+	let length;
 	if (value instanceof Array) {
 		length = value.length;
 	} else {
@@ -460,8 +464,8 @@ Validate.max = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.min = function (value, rule) {
-	let length = 0;
+Validate.min = function(value, rule) {
+	let length;
 	if (value instanceof Array) {
 		length = value.length;
 	} else {
@@ -477,7 +481,7 @@ Validate.min = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.after = function (value, rule) {
+Validate.after = function(value, rule) {
 	return strtotime(value) >= strtotime(rule);
 };
 
@@ -487,7 +491,7 @@ Validate.after = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.before = function (value, rule) {
+Validate.before = function(value, rule) {
 	return strtotime(value) <= strtotime(rule);
 };
 
@@ -497,7 +501,7 @@ Validate.before = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.expire = function (value, rule) {
+Validate.expire = function(value, rule) {
 	if (typeof rule === 'string') rule = rule.split(',', 2);
 
 	let [start, end] = rule;
@@ -514,7 +518,7 @@ Validate.expire = function (value, rule) {
  * @param {*} rule  验证规则
  * @return {boolean}
  */
-Validate.regex = function (value, rule) {
+Validate.regex = function(value, rule) {
 	if (!(rule instanceof RegExp)) rule = new RegExp(rule);
 	return rule.test(value);
 };

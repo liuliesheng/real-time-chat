@@ -1,3 +1,4 @@
+/** @var {*} $ */
 import $ from "../../../$";
 import {emitter} from "../../../events";
 
