@@ -1,6 +1,6 @@
 import {collectionUtil, random} from "../../../util";
 
-const QQMapWX = require('../libs/qqmap-wx-jssdk.min.js');
+const QQMapWX = require('../../../libs/qqmap-wx-jssdk.min.js');
 
 // QQ地图
 $.$define('getQQMap', (function() {

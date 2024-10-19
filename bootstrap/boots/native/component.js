@@ -4,7 +4,7 @@ if (typeof Component !== "undefined") {
 	Component = function(options) {
 		const componentMixin = (function() {
 			try {
-				return require('../../config/component.js');
+				return require('../../../config/component.js');
 			} catch (e) {
 				console.warn("/config/component.js not found!");
 				return {};
