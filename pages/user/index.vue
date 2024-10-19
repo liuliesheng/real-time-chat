@@ -108,7 +108,7 @@ export default {
 	 */
 	onPullDownRefresh: function() {
 		uni.stopPullDownRefresh();
-		uni.$.sys.getUserInfo({
+		uni.$sys.getUserInfo({
 			success: res => {
 				uni.stopPullDownRefresh();
 				this.userInfo = res;
@@ -128,7 +128,7 @@ export default {
 
 			uni.showLoading();
 			setTimeout(() => {
-				uni.$.showTips('登录成功！');
+				uni.$showTips('登录成功！');
 				this.userInfo = {
 					avatarUrl: '/static/images/icons/logo.png',
 					nickName: '刘小晋啦',

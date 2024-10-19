@@ -110,7 +110,7 @@ export default {
 		// const result = wx.arr2obj('data', data);
 		// this.setData(result);
 
-		// uni.$.http.get('https://www.baidu.com').then(res=>console.log);
+		// uni.$http.get('https://www.baidu.com').then(res=>console.log);
 	},
 	methods: {}
 };

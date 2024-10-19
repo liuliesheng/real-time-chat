@@ -1,3 +1,4 @@
+import $ from "../../../$";
 import {collectionUtil, random} from "../../../util";
 
 const QQMapWX = require('../../../libs/qqmap-wx-jssdk.min.js');

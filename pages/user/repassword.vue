@@ -36,10 +36,10 @@ export default {
 			const data = e.detail.value;
 			console.log(data);
 
-			uni.$.showLoading();
+			uni.showLoading();
 			setTimeout(() => {
-				uni.$.showTips('更新成功！');
-				uni.$.delayNavigateBack(1200);
+				uni.$showTips('更新成功！');
+				uni.$delayNavigateBack(1200);
 			});
 		}
 	}

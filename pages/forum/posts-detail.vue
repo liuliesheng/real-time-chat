@@ -51,9 +51,9 @@ export default {
 					if (result.statusCode == 200) {
 						content = result.data.content;
 					}
-					const nodes = uni.$.htmlParser(content);
+					const nodes = uni.$htmlParser(content);
 					// #ifdef APP-PLUS-NVUE
-					uni.$.parseHtmlImgs(nodes);
+					uni.$parseHtmlImgs(nodes);
 					// #endif
 					this.content = nodes;
 				}
@@ -69,7 +69,7 @@ export default {
 		min-height: 100%;
 	}
 	/* #endif */
-	
+
 	.banner {
 	    height: 360upx;
 	    position: relative;
@@ -77,11 +77,11 @@ export default {
 	    flex-direction: row;
 	    overflow: hidden;
 	}
-	
+
 	.banner-img {
 	    flex: 1;
 	}
-	
+
 	.banner-title {
 	    position: absolute;
 	    left: 30upx;
@@ -93,28 +93,28 @@ export default {
 	    overflow: hidden;
 	    z-index: 11;
 	}
-	
+
 	.article-meta {
 	    padding: 20upx 40upx;
 	    flex-direction: row;
 	    justify-content: flex-start;
 	    color: gray;
 	}
-	
+
 	.article-text {
 	    font-size: 26upx;
 	    line-height: 50upx;
 	    margin: 0 20upx;
 	}
-	
+
 	.article-author {
 	    font-size: 30upx;
 	}
-	
+
 	.article-time {
 	    font-size: 30upx;
 	}
-	
+
 	.article-content {
 	    font-size: 30upx;
 	    padding: 0 30upx;
