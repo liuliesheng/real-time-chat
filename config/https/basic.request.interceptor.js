@@ -1,12 +1,18 @@
+import loading from "./loading";
+
 export default function(config) {
 	console.debug('request:', config);
 
 	// 是否显示加载条
-	// config.showLoading = true;
-	if (config.showLoading) {
-		const showLoadingText = typeof config.showLoading === 'string' ? config.showLoading : '请稍后...';
-		uni.showLoading({
-			title: showLoadingText,
+	// config.loading = true;
+	if (config.loading) {
+		const loadingText = typeof config.loading === 'string' ? config.loading : (config.loadingText || '请稍后...');
+		if (typeof config.loading !== 'object') {
+			config.loading = loading;
+		}
+
+		config.loading.showLoading({
+			title: loadingText,
 			mask: true,
 		});
 	}

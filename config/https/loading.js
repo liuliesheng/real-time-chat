@@ -1,5 +1,10 @@
+import $ from '../../bootstrap/$';
+
 export default {
-	showLoading() {
-		uni.showLoading();
+	showLoading(options) {
+		$.showLoading(options);
+	},
+	hideLoading() {
+		$.hideLoading();
 	}
 }

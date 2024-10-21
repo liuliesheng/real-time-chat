@@ -2,16 +2,18 @@ import login from "./login";
 
 export default {
 	fulfilled: function(res) {
+		const {config, data} = res;
+
 		// 关闭loading
-		if (res.config.showLoading) {
-			uni.hideLoading();
+		if (config.loading) {
+			config.loading.hideLoading();
 		}
 
 		// 显示500错误
 		if (res.statusCode !== 200) {
-			if (res.config.isShowErrorTips !== false) {
+			if (config.isShowErrorTips !== false) {
 				uni.showToast({
-					title: '网络错误，请稍后~',
+					title: '网络繁忙，请稍后~',
 					icon: 'none',
 				});
 			}
@@ -19,11 +21,11 @@ export default {
 		}
 
 		// 业务错误提示
-		if (res.data.code !== 1) {
+		if (data.code !== 1) {
 
 			// 登录失效
-			if (res.data.code === -1) {
-				if (res.config.loginCount === 1) {
+			if (data.code === -1) {
+				if (config.loginCount === 1) {
 					uni.showModal({
 						title: '温馨提示',
 						content: '登录超时，请稍后再试~',
@@ -34,12 +36,12 @@ export default {
 						login_timeout: true
 					});
 				}
-				res.config.loginCount = 1;
+				config.loginCount = 1;
 				return login(res.config).then(options => uni.http.request(options));
 			}
 
 			// 暂无权限
-			if (res.data.code === -10) {
+			if (data.code === -10) {
 				uni.showModal({
 					title: '温馨提示',
 					content: '暂无权限，详细请查看权限说明？',
@@ -59,15 +61,15 @@ export default {
 			}
 
 			// 其他错误处理
-			if (res.config.isShowErrorTips !== false) {
-				if (res.data.show_msg_type === 1) {
+			if (config.isShowErrorTips !== false) {
+				if (data.show_msg_type === 1) {
 					uni.showModal({
-						content: res.data.msg || '网络错误，请稍后~',
+						content: data.msg || '网络错误，请稍后~',
 						showCancel: false
 					});
 				} else {
 					uni.showToast({
-						title: res.data.msg || '网络错误，请稍后~',
+						title: data.msg || '网络错误，请稍后~',
 						icon: 'none',
 					});
 				}
@@ -77,21 +79,19 @@ export default {
 		}
 
 		// 是否强制提示信息
-		if (res.data.is_force_tips) {
+		if (data.is_force_tips) {
 			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
-			if (res.is_force_tips === 'toast') {
+			if (method === 'toast') {
 				uni.showToast({
-					title: res.data.msg,
+					title: data.forceTipMsg || data.msg,
 					icon: 'none',
 				});
 			} else {
 				uni.showModal({
-					content: res.data.msg,
+					content: data.forceTipMsg || data.msg,
 					showCancel: false
 				});
 			}
-
-			ui[method](info || res.forceTipMsg);
 		}
 
 		return res;
@@ -99,8 +99,8 @@ export default {
 	rejected: function(err) {
 		if (err.config) {
 			// 关闭loading
-			if (err.config.showLoading) {
-				uni.hideLoading();
+			if (err.config.loading) {
+				err.config.loading.hideLoading();
 			}
 
 			if (err.config.isShowErrorTips !== false) {
