@@ -1,16 +1,16 @@
 // 中间件配置
-// 创建一个中间件 uni.middleware();
-// 系统内置中间件列表 uni.middlewares
+// 创建一个中间件 $.$middleware();
+// 系统内置中间件列表 $.$middlewares
 
-import testAppIsStart from './middlewares/test-app-is-start'
-import printParams from './middlewares/print-params'
+import appLoadParams from './middlewares/app-load-params'
+import appShowParams from './middlewares/app-show-params'
 
 module.exports = {
 	appLaunch: [
-		testAppIsStart,
+		appLoadParams,
 	],
 	appShow: [
-		printParams
+		appShowParams
 	],
 	appHide: [],
 	appRoute: [],

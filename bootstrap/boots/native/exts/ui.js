@@ -7,10 +7,17 @@ $.$define('delayNavigateBack', function(delay, options) {
 	}, delay);
 });
 
-// 轻提示
-$.$define('showTips', function(msg) {
+// 错误提示
+$.$define('hintError', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'none'
+	});
+});
+
+// 成功提示
+$.$define('hintSuccess', function(msg) {
+	$.showToast({
+		title: msg,
 	});
 });

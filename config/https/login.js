@@ -1,3 +1,5 @@
+import $ from '../../bootstrap/$';
+
 /**
  * 调用登录的回调函数
  * @type {Array}
@@ -26,12 +28,12 @@ function execCallbacks(flag, err) {
  * @return {Promise}
  */
 function loginServer() {
+	const app = getApp();
 	let code = null;
-	return uni.login().then((res) => {
-		res = res[1];
-		code = res.code || res.autoCode;
 
-		return uni.sys.getUserInfo({
+	return $.login({}).then((res) => {
+		code = res[1].code;
+		return $.$getUserInfo({
 			withCredentials: true
 		});
 	}).then((res) => {
@@ -39,25 +41,30 @@ function loginServer() {
 
 		// 组装数据
 		res.code = code;
-		const app = getApp();
 		res.share_uid = app.globalData.shareUid;
 
+		if (!$.$http.defaults.loginUrl) {
+			return Promise.reject({
+				errMsg: 'config/http.js not configure `defaults.loginUrl` !'
+			});
+		}
+
 		return new Promise((resolve, reject) => {
-			uni.request({
-				url: uni.$.http.defaults.baseURL + '/api/app.login/login',
+			$.request({
+				url: $.$http.defaults.loginUrl,
 				method: 'POST',
 				data: res,
 				dataType: 'json',
-				success: (res) => {
-					if (res.statusCode !== 200) {
+				success: (response) => {
+					if (response.statusCode !== 200) {
 						reject({
-							code: res.statusCode,
+							code: response.statusCode,
 							errMsg: '登录失败，请稍后再试~',
-							response: res.data
+							response: response
 						});
 					}
 
-					res = res.data;
+					res = response.data;
 					if (res.code === 1) {
 						resolve(res);
 					} else {
@@ -92,30 +99,27 @@ export default function(options) {
 		if (isLoading) return;
 
 		isLoading = true;
-		uni.showNavigationBarLoading();
+		$.showNavigationBarLoading();
 		loginServer().then((res) => {
-			uni.hideLoading();
-			uni.hideNavigationBarLoading();
+			$.hideLoading();
+			$.hideNavigationBarLoading();
 			isLoading = false;
 
 			const app = getApp();
 			app.globalData.userInfo = res.data;
 			app.globalData.sessionId = res.session_id;
-			uni.setStorageSync('session_id', res.session_id);
+			$.setStorageSync('session_id', res.session_id);
 
 			execCallbacks('resolve');
 		}, (err) => {
-			uni.hideLoading();
-			uni.hideNavigationBarLoading();
+			$.hideLoading();
+			$.hideNavigationBarLoading();
 			isLoading = false;
 
 			if (err.isAuthDeny) {
-				uni.showToast({
-					title: '请先授权！',
-					icon: 'none'
-				})
+				$.hintError('请先授权！')
 			} else {
-				uni.showModal({
+				$.showModal({
 					content: '登录失败，请稍后再试~',
 					showCancel: false
 				});

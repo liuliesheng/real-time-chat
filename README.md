@@ -42,7 +42,7 @@
     │  │  └─page.js                         扩展Page函数
     │  │
     │  ├─middlewares                        中间件存放目录
-    │  │  ├─print-params.js                 集合助手库
+    │  │  ├─app-show-params.js                 集合助手库
     │  │  └─...                             其他更多中间件
     │  │
     │  ├─app.js                             应用配置

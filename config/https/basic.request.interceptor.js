@@ -23,7 +23,7 @@ export default function(config) {
 	// 附加用户session_id
 	const globalData = getApp().globalData;
 	if (!globalData.sessionId) {
-		globalData.sessionId = uni.getStorageSync('session_id');
+		globalData.sessionId = $.getStorageSync('session_id');
 	}
 	config.data.session_id = globalData.sessionId;
 

@@ -16,10 +16,8 @@ Object.defineProperty($, '$$define', {
 });
 
 // 增加wx对象添加新属性
-// const $uni = typeof uni !== 'undefined' ? uni : {};
 $.$$define($, '$define', function(key, value, isEnumerable = true) {
 	$.$$define($, '$' + key, value, isEnumerable);
-	// $.$$define($uni, '$' + key, value, isEnumerable);
 });
 
 /**

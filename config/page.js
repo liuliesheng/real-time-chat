@@ -1,4 +1,5 @@
-const $ = uni.$;
+import $ from '../bootstrap/$';
+
 module.exports = {
 	// 推送formid
 	__pushFormid__: function(e) {
@@ -12,8 +13,11 @@ module.exports = {
 			$.pushFormid(e.detail.formId);
 		}
 
-		for (const key in e.target.dataset) {
-			this[key] = e.target.dataset[key];
+		const data = e.target.dataset;
+		for (const key in data) {
+			if (data.hasOwnProperty(key)) {
+				this[key] = e.target.dataset[key];
+			}
 		}
 	}
 };

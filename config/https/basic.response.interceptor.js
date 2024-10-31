@@ -1,8 +1,96 @@
 import login from "./login";
+import $ from '../../bootstrap/$';
+
+// 生成登录超时的错误
+function resolveLoginTimeoutError(response) {
+	$.showModal({
+		content: '登录超时，请稍后再试~',
+		showCancel: false
+	});
+
+	return Promise.reject({
+		errMsg: '登录超时!',
+		loginTimeout: true,
+		response: response
+	});
+}
+
+// 登录
+function resolveLogin(response) {
+	const config = response.config;
+
+	if (config.loginCount === 1) {
+		return resolveLoginTimeoutError();
+	}
+
+	config.loginCount = 1;
+
+	return login(config).then(options => $.$http.request(options));
+}
+
+// 生成Http状态的错误
+function resolveHttpStatusError(response) {
+	const config = response.config;
+	const data = response.data;
+
+	if (config.isShowErrorTips !== false) {
+		if (response.statusCode === 404) {
+			$.hintError(data.msg || '网络繁忙，请稍后~');
+			$.navigateBack();
+		} else {
+			$.hintError('网络繁忙，请稍后~');
+		}
+	}
+
+	return Promise.reject(response);
+}
+
+// 无权限
+function resolveNotAuthError(response) {
+	$.showModal({
+		title: '温馨提示',
+		content: '暂无权限，详细请查看权限说明？',
+		showCancel: true,
+		confirmColor: '#2E8B57',
+		confirmText: '了解一下',
+		success: (res) => {
+			if (res.cancel) {
+				return;
+			}
+
+			if ($.$config.notAuthPage) {
+				$.navigateTo({
+					url: $.$config.notAuthPage
+				});
+			}
+		}
+	});
+
+	return Promise.reject(response);
+}
+
+// 其他错误处理
+function resolveBasicError(response) {
+	const config = response.config;
+	const data = response.data;
+
+	if (config.isShowErrorTips !== false) {
+		if (data.show_msg_type === 1) {
+			$.showModal({
+				content: data.msg || '网络繁忙，请稍后~',
+				showCancel: false
+			});
+		} else {
+			$.hintError(data.msg || '网络繁忙，请稍后~');
+		}
+	}
+
+	return Promise.reject(response);
+}
 
 export default {
-	fulfilled: function(res) {
-		const {config, data} = res;
+	fulfilled: function(response) {
+		const {config, data} = response;
 
 		// 关闭loading
 		if (config.loading) {
@@ -10,14 +98,8 @@ export default {
 		}
 
 		// 显示500错误
-		if (res.statusCode !== 200) {
-			if (config.isShowErrorTips !== false) {
-				uni.showToast({
-					title: '网络繁忙，请稍后~',
-					icon: 'none',
-				});
-			}
-			return Promise.reject(res);
+		if (response.statusCode !== 200) {
+			return resolveHttpStatusError(response);
 		}
 
 		// 业务错误提示
@@ -25,89 +107,38 @@ export default {
 
 			// 登录失效
 			if (data.code === -1) {
-				if (config.loginCount === 1) {
-					uni.showModal({
-						title: '温馨提示',
-						content: '登录超时，请稍后再试~',
-						showCancel: false
-					});
-					return Promise.reject({
-						message: '登录超时,请稍后再试~',
-						login_timeout: true
-					});
-				}
-				config.loginCount = 1;
-				return login(res.config).then(options => uni.http.request(options));
+				return resolveLogin(response);
+			} else if (data.code === -10) { // 暂无权限
+				return resolveNotAuthError(response);
 			}
 
-			// 暂无权限
-			if (data.code === -10) {
-				uni.showModal({
-					title: '温馨提示',
-					content: '暂无权限，详细请查看权限说明？',
-					showCancel: true,
-					confirmColor: '#2E8B57',
-					confirmText: '了解一下',
-					success: (res) => {
-						if (res.cancel) return;
-
-						uni.navigateTo({
-							url: '/pages/user/auth-info'
-						});
-					}
-				});
-
-				return Promise.reject(res);
-			}
-
-			// 其他错误处理
-			if (config.isShowErrorTips !== false) {
-				if (data.show_msg_type === 1) {
-					uni.showModal({
-						content: data.msg || '网络错误，请稍后~',
-						showCancel: false
-					});
-				} else {
-					uni.showToast({
-						title: data.msg || '网络错误，请稍后~',
-						icon: 'none',
-					});
-				}
-			}
-
-			return Promise.reject(res);
+			return resolveBasicError(response);
 		}
 
 		// 是否强制提示信息
 		if (data.is_force_tips) {
 			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
 			if (method === 'toast') {
-				uni.showToast({
-					title: data.forceTipMsg || data.msg,
-					icon: 'none',
-				});
+				$.hintSuccess(data.forceTipMsg || data.msg);
 			} else {
-				uni.showModal({
+				$.showModal({
 					content: data.forceTipMsg || data.msg,
 					showCancel: false
 				});
 			}
 		}
 
-		return res;
+		return config.returnRaw ? response : data;
 	},
 	rejected: function(err) {
-		if (err.config) {
+		if (err.config && !err.isCancel) {
 			// 关闭loading
 			if (err.config.loading) {
 				err.config.loading.hideLoading();
 			}
 
 			if (err.config.isShowErrorTips !== false) {
-				uni.showToast({
-					title: err.errMsg || '网络错误，请稍后~',
-					icon: 'none',
-				});
+				$.hintError(err.errMsg || '网络错误，请稍后~');
 			}
 		}
 
