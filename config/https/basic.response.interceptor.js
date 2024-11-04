@@ -1,5 +1,5 @@
-import login from "./login";
 import $ from '../../bootstrap/$';
+import login from "./login";
 
 // 生成登录超时的错误
 function resolveLoginTimeoutError(response) {

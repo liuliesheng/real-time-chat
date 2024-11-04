@@ -31,8 +31,8 @@ function loginServer() {
 	const app = getApp();
 	let code = null;
 
-	return $.login({}).then((res) => {
-		code = res[1].code;
+	return $.$promise.login({}).then((res) => {
+		code = res.code;
 		return $.$getUserInfo({
 			withCredentials: true
 		});

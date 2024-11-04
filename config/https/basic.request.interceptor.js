@@ -1,3 +1,4 @@
+import $ from '../../bootstrap/$';
 import loading from "./loading";
 
 export default function(config) {
