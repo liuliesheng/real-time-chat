@@ -1,4 +1,4 @@
-import "./boots";
+import "./boots/index";
 
 import $ from "./$";
 import Validate from './validate.js';

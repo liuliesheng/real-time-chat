@@ -1,4 +1,4 @@
-import "./exts";
+import "./exts/index";
 import "./floatings/alipay";
 // #ifdef MP
 import "./app";

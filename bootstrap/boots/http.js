@@ -1,7 +1,7 @@
 import $ from "../$";
 import {Http, http} from "../http";
 import uploader from "../uploader";
-import * as util from "../util";
+import * as util from "../util/index";
 
 // 请求类
 $.$define('http', http);

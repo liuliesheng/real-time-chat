@@ -1,4 +1,4 @@
-import './bootstrap/index.js';
+import './bootstrap';
 
 import Vue from 'vue';
 import App from './App';

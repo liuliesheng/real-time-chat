@@ -1,6 +1,5 @@
 import $ from "../$";
-import * as util from "../util";
-import BigNumber from "../bignumber";
+import * as util from "../util/index";
 
 // 常用方法
 $.$define('random', util.random);
