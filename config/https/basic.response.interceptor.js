@@ -3,6 +3,8 @@ import login from "./login";
 
 // 生成登录超时的错误
 function resolveLoginTimeoutError(response) {
+	console.error('apply for login:', response);
+
 	$.showModal({
 		content: '登录超时，请稍后再试~',
 		showCancel: false
@@ -42,6 +44,7 @@ function resolveHttpStatusError(response) {
 		}
 	}
 
+	console.error('http error:', response);
 	return Promise.reject(response);
 }
 
@@ -66,6 +69,7 @@ function resolveNotAuthError(response) {
 		}
 	});
 
+	console.warn('not auth:', response);
 	return Promise.reject(response);
 }
 
@@ -85,6 +89,7 @@ function resolveBasicError(response) {
 		}
 	}
 
+	console.debug('request logic tips:', response);
 	return Promise.reject(response);
 }
 
@@ -131,6 +136,8 @@ export default {
 		return config.returnRaw ? response : data;
 	},
 	rejected: function(err) {
+		console.error('request system error:', err);
+
 		if (err.config && !err.isCancel) {
 			// 关闭loading
 			if (err.config.loading) {

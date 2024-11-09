@@ -2,8 +2,6 @@ import $ from '../../bootstrap/$';
 import loading from "./loading";
 
 export default function(config) {
-	console.debug('request:', config);
-
 	// 是否显示加载条
 	// config.loading = true;
 	if (config.loading) {
