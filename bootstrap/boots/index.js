@@ -1,5 +1,6 @@
 import "./es6/index";
 import "./native/index";
+import "./promise-cache";
 import "./util";
 import "./event";
 import "./config";
