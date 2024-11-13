@@ -33,9 +33,12 @@ function loginServer() {
 
 	return $.$promise.login({}).then((res) => {
 		code = res.code;
-		return $.$getUserInfo({
-			withCredentials: true
-		});
+		if ($.$http.defaults.loginUserInfo) {
+			return $.$getUserInfo({
+				withCredentials: true
+			});
+		}
+		return {};
 	}).then((res) => {
 		delete res.errMsg;
 
