@@ -1,17 +1,10 @@
 /**
- * 时间工具类
- */
-const _ = {};
-
-export default _;
-
-/**
  * 格式化日期
  * @param {string} formatStr
  * @param {Number,Date} [date]
  * @return {string}
  */
-_.format = (formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date()) => {
+export function format(formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date()) {
 	if (!(date instanceof Date)) date = new Date(date);
 
 	const o = {
@@ -35,7 +28,7 @@ _.format = (formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date()) => {
 	}
 
 	return formatStr;
-};
+}
 
 
 /**
@@ -43,9 +36,9 @@ _.format = (formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date()) => {
  * @param {Number,Date} date
  * @return {string}
  */
-_.format.date = (date = new Date()) => {
-	return _.format('yyyy-MM-dd', date);
-};
+format.date = function(date = new Date()) {
+	return format('yyyy-MM-dd', date);
+}
 
 /**
  * 格式化成时间
@@ -53,9 +46,9 @@ _.format.date = (date = new Date()) => {
  * @param {Boolean} isSeconds
  * @return {string}
  */
-_.format.time = (date = new Date(), isSeconds = false) => {
-	return _.format('h:i' + (isSeconds ? ':s' : ''), date);
-};
+format.time = function(date = new Date(), isSeconds = false) {
+	return format('h:i' + (isSeconds ? ':s' : ''), date);
+}
 
 /**
  * 格式化成日期时间
@@ -63,35 +56,35 @@ _.format.time = (date = new Date(), isSeconds = false) => {
  * @param {Boolean} isSeconds
  * @return {string}
  */
-_.format.datetime = (date = new Date(), isSeconds = false) => {
-	return _.format('yyyy-MM-dd hh:mm' + (isSeconds ? ':ss' : ''), date);
-};
+format.datetime = function(date = new Date(), isSeconds = false) {
+	return format('yyyy-MM-dd hh:mm' + (isSeconds ? ':ss' : ''), date);
+}
 
 /**
  * 获取今天的开始时间
  * @param {Date} date
  * @return {number}
  */
-_.todayStart = (date = new Date()) => {
+export function todayStart(date = new Date()) {
 	date.setHours(0);
 	date.setMinutes(0);
 	date.setSeconds(0);
 	date.setMilliseconds(0);
 	return date.getTime();
-};
+}
 
 /**
  * 获取今天的结束时间
  * @param {Date} date
  * @return {number}
  */
-_.todayEnd = (date = new Date()) => {
+export function todayEnd(date = new Date()) {
 	date.setHours(23);
 	date.setMinutes(59);
 	date.setSeconds(59);
 	date.setMilliseconds(0);
 	return date.getTime();
-};
+}
 
 /**
  * 获取今天开始和结束的时间
@@ -99,9 +92,9 @@ _.todayEnd = (date = new Date()) => {
  * @param {Date} end
  * @return {{start: number, end: number}}
  */
-_.today = (start = new Date(), end = new Date()) => {
+export function today(start = new Date(), end = new Date()) {
 	return {
-		start: _.todayStart(start),
-		end: _.todayEnd(end)
+		start: todayStart(start),
+		end: todayEnd(end)
 	};
-};
+}

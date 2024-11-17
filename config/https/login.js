@@ -92,7 +92,7 @@ let isLoading = false;
  * login
  * @type {function}
  */
-export default function(options) {
+export default function (options) {
 	return new Promise((resolve, reject) => {
 		callbacks.push({
 			options: options,

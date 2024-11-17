@@ -1,31 +1,24 @@
 /**
- * 数字工具类
- */
-const _ = {};
-
-export default _;
-
-/**
  * 保留小数点
  * @param {*} number
  * @param {number} dotNum
  * @return {string}
  */
-_.toDecimal = (number, dotNum = 2) => {
+export function toDecimal(number, dotNum = 2) {
 	if (typeof number !== 'string') number = number.toString();
 	const dotIndex = number.indexOf('.');
 	if (dotIndex !== -1) {
 		number = number.substring(0, dotIndex + dotNum + 1);
 	}
 	return number;
-};
+}
 
 /**
  * 转换为人性化数字
  * @param {number} num
  * @param {boolean} isLetter
  */
-_.toSimplify = (num, isLetter = false) => {
+export function toSimplify(num, isLetter = false) {
 	if (isNaN(num)) return num;
 	const numHandler = function(num, unit = '') {
 		if (String(num).indexOf('.') !== -1) {
@@ -43,4 +36,4 @@ _.toSimplify = (num, isLetter = false) => {
 		if (num < 10000) return numHandler(num, units[i]);
 	}
 	return numHandler(num, units[units.length - 1]);
-};
+}

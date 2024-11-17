@@ -14,7 +14,7 @@ $.$define('isDev', systemInfo.platform === 'devtools');
  */
 function invokeLocationAndAuth(invokeFunc, options) {
 	return $.$promise[invokeFunc](options).catch(function(err) {
-		err.isAuthDeny = $.isAuthDeny(err);
+		err.isAuthDeny = $.$isAuthDeny(err);
 		if (!err.isAuthDeny) return Promise.reject(err);
 
 		return $.$promise.openSetting({}).then(function(res) {
@@ -47,7 +47,7 @@ function invokeLocationAndAuth(invokeFunc, options) {
  * @return Promise<*>
  */
 $.$define('getLocation', function(options) {
-	return invokeLocationAndAuth(options, 'getLocation');
+	return invokeLocationAndAuth('getLocation', options);
 });
 
 /**
@@ -56,7 +56,7 @@ $.$define('getLocation', function(options) {
  * @return Promise<*>
  */
 $.$define('openLocation', function(options) {
-	return invokeLocationAndAuth(options, 'openLocation');
+	return invokeLocationAndAuth('openLocation', options);
 });
 
 /**
@@ -65,7 +65,7 @@ $.$define('openLocation', function(options) {
  * @return Promise<*>
  */
 $.$define('chooseLocation', function(options) {
-	return invokeLocationAndAuth(options, 'chooseLocation');
+	return invokeLocationAndAuth('chooseLocation', options);
 });
 
 /**

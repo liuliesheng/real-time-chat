@@ -1,22 +1,16 @@
 /**
- * 函数工具类
- */
-const _ = {};
-export default _;
-
-/**
  * 尝试执行方法
  * @param {function} func
  * @param {*} [param]
  * @param {*} [thisArg]
  */
-_.safeCallback = function(func, param, thisArg) {
+export function safeCallback(func, param, thisArg) {
 	try {
 		func && func.call(thisArg, param);
 	} catch (e) {
 		console.error(e);
 	}
-};
+}
 
 /**
  * callbacksTransformPromise
@@ -24,7 +18,7 @@ _.safeCallback = function(func, param, thisArg) {
  * @param {*} [options]
  * @return {Promise}
  */
-_.callbacksTransformPromise = function(func, options) {
+export function callbacksTransformPromise(func, options) {
 	return new Promise((resolve, reject) => {
 		func(Object.assign(options || {}, {
 			success: resolve,
@@ -32,7 +26,7 @@ _.callbacksTransformPromise = function(func, options) {
 			complete: undefined
 		}));
 	});
-};
+}
 
 /**
  * 在原有的回调函数贴上新的回调函数
@@ -40,7 +34,7 @@ _.callbacksTransformPromise = function(func, options) {
  * @param {string} name
  * @param {function} callback
  */
-_.attachCallback = function(obj, name, callback) {
+export function attachCallback(obj, name, callback) {
 	if (obj[name]) {
 		const func = obj[name];
 		obj[name] = function(options) {
@@ -53,7 +47,8 @@ _.attachCallback = function(obj, name, callback) {
 		};
 	}
 	return obj;
-};
+}
+
 /**
  * 创建并返回一个像节流阀一样的函数，当重复调用函数的时候，至少每隔 wait毫秒调用一次该函数。对于想控制一些触发频率较高的事件有帮助。
  * 默认情况下，throttle将在你调用的第一时间尽快执行这个function，并且，如果你在wait周期内调用任意次数的函数，都将尽快的被覆盖。
@@ -63,19 +58,19 @@ _.attachCallback = function(obj, name, callback) {
  * @param {*} [options]
  * @return {function(): *}
  */
-_.throttle = function(func, wait, options) {
+export function throttle(func, wait, options) {
 	let context, args, result;
 	let timeout = null;
 	let previous = 0;
 	if (!options) options = {};
 	const later = function() {
-		previous = options.leading === false ? 0 : _.now();
+		previous = options.leading === false ? 0 : now();
 		timeout = null;
 		result = func.apply(context, args);
 		if (!timeout) context = args = null;
 	};
 	return function() {
-		const now = _.now();
+		const now = now();
 		if (!previous && options.leading === false) previous = now;
 		const remaining = wait - (now - previous);
 		context = this;
@@ -93,7 +88,7 @@ _.throttle = function(func, wait, options) {
 		}
 		return result;
 	};
-};
+}
 
 /**
  * 返回 function 函数的防反跳版本, 将延迟函数的执行(真正的执行)在函数最后一次调用时刻的 wait 毫秒之后.
@@ -106,11 +101,11 @@ _.throttle = function(func, wait, options) {
  * @param {boolean} [immediate]
  * @return {function(): *}
  */
-_.debounce = function(func, wait, immediate) {
+export function debounce(func, wait, immediate) {
 	let timeout, args, context, timestamp, result;
 
 	const later = function() {
-		const last = _.now() - timestamp;
+		const last = now() - timestamp;
 
 		if (last < wait && last >= 0) {
 			timeout = setTimeout(later, wait - last);
@@ -126,7 +121,7 @@ _.debounce = function(func, wait, immediate) {
 	return function() {
 		context = this;
 		args = arguments;
-		timestamp = _.now();
+		timestamp = now();
 		const callNow = immediate && !timeout;
 		if (!timeout) timeout = setTimeout(later, wait);
 		if (callNow) {
@@ -136,7 +131,7 @@ _.debounce = function(func, wait, immediate) {
 
 		return result;
 	};
-};
+}
 
 /**
  * 创建一个函数,调用不超过count 次。 当count已经达到时，最后一个函数调用的结果将被记住并返回。
@@ -144,7 +139,7 @@ _.debounce = function(func, wait, immediate) {
  * @param {number} count
  * @return {function(): *}
  */
-_.before = function(func, count) {
+export function before(func, count) {
 	let memo;
 	return function() {
 		if (--count > 0) {
@@ -153,7 +148,7 @@ _.before = function(func, count) {
 		if (count <= 1) func = null;
 		return memo;
 	};
-};
+}
 
 /**
  * 创建一个只能调用一次的函数。重复调用改进的方法也没有效果，只会返回第一次执行时的结果。
@@ -161,9 +156,9 @@ _.before = function(func, count) {
  * @param {function} func
  * @return {function(): *}
  */
-_.once = function(func) {
-	return _.before(func, 2);
-};
+export function once(func) {
+	return before(func, 2);
+}
 
 /**
  * 创建一个函数, 只有在运行了 count 次之后才有效果. 在处理同组异步请求返回结果时,
@@ -172,21 +167,21 @@ _.once = function(func) {
  * @param {number} count
  * @return {Function}
  */
-_.after = function(func, count) {
+export function after(func, count) {
 	return function() {
 		if (--count < 1) {
 			return func.apply(this, arguments);
 		}
 	};
-};
+}
 
 /**
  * 获取当前时间戳
  * @type {function()}
  */
-_.now = Date.now || function() {
+export const now = Date.now || function() {
 	return new Date().getTime();
-};
+}
 
 /**
  * 生成一个中间件函数
@@ -196,7 +191,7 @@ _.now = Date.now || function() {
  * @param context
  * @return {function(): *}
  */
-_.middleware = function(bindFunc, context) {
+export function middleware(bindFunc, context) {
 	// 中间件函数
 	const queue = [];
 
@@ -258,13 +253,13 @@ _.middleware = function(bindFunc, context) {
 	middleware.getLength = () => queue.length;
 
 	return middleware;
-};
+}
 
 /**
  * 回调器
  * @return {Array}
  */
-_.callbacks = function() {
+export function callbacks() {
 	const callbacks = [];
 	callbacks.exec = (options) => {
 		callbacks.forEach((item) => {
@@ -274,7 +269,7 @@ _.callbacks = function() {
 		if (options.clear) callbacks.splice(0, callbacks.length);
 	};
 	return callbacks;
-};
+}
 
 /**
  * 大于未来某个时刻可是执行
@@ -283,7 +278,7 @@ _.callbacks = function() {
  * @param {*} context
  * @return {Function}
  */
-_.gtFuture = function(func, wait, context) {
+export function gtFuture(func, wait, context) {
 	let prevTime = 0;
 	return function() {
 		const currentTime = new Date().getTime();
@@ -296,7 +291,7 @@ _.gtFuture = function(func, wait, context) {
 		prevTime = currentTime;
 		func.call(context, diffTime, ...arguments);
 	}
-};
+}
 
 /**
  * 小于未来某个时刻可是执行
@@ -305,7 +300,7 @@ _.gtFuture = function(func, wait, context) {
  * @param {*} context
  * @return {Function}
  */
-_.ltFuture = function(func, wait, context) {
+export function ltFuture(func, wait, context) {
 	let prevTime = new Date().getTime();
 	return function() {
 		const currentTime = new Date().getTime();
@@ -316,4 +311,4 @@ _.ltFuture = function(func, wait, context) {
 		prevTime = currentTime;
 		func.call(context, diffTime, ...arguments);
 	}
-};
+}

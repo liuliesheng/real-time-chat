@@ -1,33 +1,31 @@
 import $ from "../$";
 
 function factory(promiseFactory, options = {}) {
-	let promise = null;
-
-	return function(refresh = false) {
+	return function make(refresh = false) {
 		if (!refresh) {
 			if (options.refresh) {
 				refresh = options.refresh && options.refresh();
 			} else {
-				refresh = refresh();
+				refresh = isRefresh();
 			}
 		}
 
-		if (!promise || refresh) {
+		if (!make.promise || refresh) {
 			const args = Array.from(arguments);
 			args.shift();
-			promise = promiseFactory(...args).then(function(result) {
+			make.promise = promiseFactory(...args).then(function(result) {
 				return result;
 			}, function(err) {
-				promise = null;
+				make.promise = null;
 				return Promise.reject(err);
 			});
 		}
 
-		return promise;
+		return make.promise;
 	}
 }
 
-function refresh() {
+function isRefresh() {
 	return Math.floor(Math.random() * 3) === 1;
 }
 
