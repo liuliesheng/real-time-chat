@@ -98,3 +98,45 @@ export function today(start = new Date(), end = new Date()) {
 		end: todayEnd(end)
 	};
 }
+
+/**
+ * 获取相对时间
+ * @param {Date} init
+ * @param {Date} now
+ */
+export function fromNow(init, now = new Date()) {
+	now = typeof now !== 'object' ? now : (now.getTime() / 1000);
+
+	// 判断传入时间戳是否早于当前时间戳
+	const IS_EARLY = init <= now;
+
+	// 获取两个时间戳差值
+	let diff = now - init;
+
+	// 如果IS_EARLY为false则差值取反
+	if (!IS_EARLY) {
+		diff = -diff;
+	}
+
+	const dirStr = IS_EARLY ? '前' : '后';
+
+	let resStr;
+
+	if (diff < 1000) {
+		resStr = '刚刚';
+	} else if (diff < 60000) { // 少于等于59秒
+		resStr = Math.floor(diff / 1000) + '秒' + dirStr;
+	} else if (diff >= 60000 && diff < 3600000) { // 多于59秒，少于等于59分钟59秒
+		resStr = Math.floor(diff / 60000) + '分钟' + dirStr;
+	} else if (diff >= 3600000 && diff < 86400000) { // 多于59分钟59秒，少于等于23小时59分钟59秒
+		resStr = Math.floor(diff / 3600000) + '小时' + dirStr;
+	} else if (diff >= 86400000 && diff < 2623860000) { // 多于23小时59分钟59秒，少于等于29天59分钟59秒
+		resStr = Math.floor(diff / 86400000) + '天' + dirStr;
+	} else if (diff >= 2623860000 && diff <= 31567860000 && IS_EARLY) { // 多于29天59分钟59秒，少于364天23小时59分钟59秒，且传入的时间戳早于当前
+		resStr = format('MM-dd hh:mm', init);
+	} else {
+		resStr = format.date(init);
+	}
+
+	return resStr;
+}

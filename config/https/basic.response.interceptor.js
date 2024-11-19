@@ -89,6 +89,11 @@ function resolveBasicError(response) {
 		}
 	}
 
+	const logicCodeHandles = config.logicCodeHandles;
+	if (logicCodeHandles && logicCodeHandles[data.code]) {
+		logicCodeHandles[data.code](data, response);
+	}
+
 	console.debug('request logic tips:', response);
 	return Promise.reject(response);
 }
