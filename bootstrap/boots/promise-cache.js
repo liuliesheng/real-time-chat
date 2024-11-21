@@ -4,7 +4,8 @@ function factory(promiseFactory, options = {}) {
 	return function make(refresh = false) {
 		if (!refresh) {
 			if (options.refresh) {
-				refresh = options.refresh && options.refresh();
+				refresh = typeof options.refresh === 'function'
+					? options.refresh() : isRefresh(options.refresh);
 			} else {
 				refresh = isRefresh();
 			}
@@ -25,8 +26,12 @@ function factory(promiseFactory, options = {}) {
 	}
 }
 
-function isRefresh() {
-	return Math.floor(Math.random() * 3) === 1;
+function isRefresh(max = 3) {
+	if (!max) {
+		max = 3;
+	}
+
+	return Math.floor(Math.random() * max) === 1;
 }
 
 $.$define('promiseCache', factory);

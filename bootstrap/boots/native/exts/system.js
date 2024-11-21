@@ -15,29 +15,31 @@ $.$define('isDev', systemInfo.platform === 'devtools');
 function invokeLocationAndAuth(invokeFunc, options) {
 	return $.$promise[invokeFunc](options).catch(function(err) {
 		err.isAuthDeny = $.$isAuthDeny(err);
-		if (!err.isAuthDeny) return Promise.reject(err);
-
-		return $.$promise.openSetting({}).then(function(res) {
-			if (!res.authSetting['scope.userLocation']) {
-				return Promise.reject(err);
-			}
-
-			return $.$promise.showModal({
+		if (err.isAuthDeny) {
+			$.$promise.showModal({
 				title: '温馨提示',
-				content: '此操作需要你的授权，我们不会泄露你的隐私！',
+				content: '此操作需要你的授权，我们不会泄露你的隐私，操作方法：【右上角···->设置->允许位置信息】',
 				showCancel: false,
-			}).then(function() {
-				return new Promise(function(resolve, reject) {
-					$[invokeFunc](Object.assign(options, {
-						success: resolve,
-						fail: function(err) {
-							err.isAuthDeny = $.isAuthDeny(err);
-							reject(err);
-						}
-					}));
-				});
 			});
+			return Promise.reject(err);
+		}
+
+		if (err.errMsg.indexOf("require permission") !== -1) {
+			$.$promise.showModal({
+				title: '温馨提示',
+				content: '此操作需要你的开启手机定位，我们不会泄露你的隐私',
+				showCancel: false,
+			});
+			return;
+		}
+
+		$.$promise.showModal({
+			title: '温馨提示',
+			content: '授权地理位置失败：' + JSON.stringify(err),
+			showCancel: false,
 		});
+
+		return Promise.reject(err);
 	});
 }
 
