@@ -41,6 +41,21 @@ module.exports = {
 		}
 	},
 
+	// 图片预览
+	previewImage: function(e) {
+		let current = e.currentTarget.dataset.current;
+		let urls = e.currentTarget.dataset.urls;
+		if (typeof urls == 'string') {
+			const ceil = [];
+			ceil.push(urls);
+			urls = ceil;
+		}
+		wx.previewImage({
+			current: current, // 当前显示图片的http链接
+			urls: urls // 需要预览的图片http链接列表
+		})
+	},
+
 	// 跳转
 	linkTo: function(e) {
 		const dataset = e.currentTarget.dataset;
