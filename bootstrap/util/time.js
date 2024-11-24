@@ -101,11 +101,12 @@ export function today(start = new Date(), end = new Date()) {
 
 /**
  * 获取相对时间
- * @param {Date} init
- * @param {Date} now
+ * @param {Date|Number} init
+ * @param {Date|Number} now
  */
 export function fromNow(init, now = new Date()) {
-	now = typeof now !== 'object' ? now : (now.getTime() / 1000);
+	init = init.toString().length === 10 ? init * 1000 : init;
+	now = typeof now !== 'object' ? now : now.getTime();
 
 	// 判断传入时间戳是否早于当前时间戳
 	const IS_EARLY = init <= now;
