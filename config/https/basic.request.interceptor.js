@@ -1,5 +1,6 @@
 import $ from '../../bootstrap/$';
 import loading from "./loading";
+import {attachGetParams, makeBasicGetParams} from "./util";
 
 export default function(config) {
 	// 是否显示加载条
@@ -24,7 +25,10 @@ export default function(config) {
 	if (!globalData.sessionId) {
 		globalData.sessionId = $.getStorageSync('session_id');
 	}
-	config.data.session_id = globalData.sessionId;
+
+	const basicParams = makeBasicGetParams();
+	basicParams.session_id = globalData.sessionId;
+	attachGetParams(config, basicParams);
 
 	return config;
 }

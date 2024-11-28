@@ -312,3 +312,18 @@ export function ltFuture(func, wait, context) {
 		func.call(context, diffTime, ...arguments);
 	}
 }
+
+/**
+ * Tap
+ * @param {*} value
+ * @param {function} callback
+ * @return {*}
+ */
+export function tap(value, callback) {
+	if (typeof callback !== 'function') {
+		return value;
+	}
+
+	callback(value);
+	return value;
+}
