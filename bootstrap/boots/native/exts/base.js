@@ -20,6 +20,11 @@ $.$$define($, '$define', function(key, value, isEnumerable = true) {
 	$.$$define($, '$' + key, value, isEnumerable);
 });
 
+// 系统信息
+const systemInfo = $.getSystemInfoSync();
+$.$define('systemInfo', systemInfo);
+$.$define('isDev', systemInfo.platform === 'devtools');
+
 /**
  * 授权是否被拒绝
  * @param {*} res

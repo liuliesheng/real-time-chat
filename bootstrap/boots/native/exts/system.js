@@ -2,11 +2,6 @@
 import $ from "../../../$";
 import {emitter} from "../../../events";
 
-// 系统信息
-const systemInfo = $.getSystemInfoSync();
-$.$define('systemInfo', systemInfo);
-$.$define('isDev', systemInfo.platform === 'devtools');
-
 /**
  * 调用并授权地理位置权限
  * @param {string} invokeFunc

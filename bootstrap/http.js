@@ -130,7 +130,9 @@ export class Http {
 	 */
 	request(options) {
 		//合并默认配置
-		options = Object.assign({}, this.defaults, options);
+		options = Object.assign({
+			requestTime: Math.floor(new Date().getTime() / 1000)
+		}, this.defaults, options);
 
 		// Support baseURL config
 		if (options.baseURL && !isAbsoluteURL(options.url)) {

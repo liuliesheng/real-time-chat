@@ -1,14 +1,20 @@
-const $ = uni.$;
+const $ = uni;
 
-$.define('getUserInfo', function(options) {
+$.$$define(uni, 'getUserInfo', function(options) {
 	options.success({
-		userInfo:{
+		userInfo: {
 			avatarUrl: '/static/images/icons/logo.png',
-			nickName: '刘小晋啦',
+			nickName: '小白',
 			gender: 1,
 			province: '河南',
 			city: '郑州',
 			language: 'zh_CN',
 		}
+	});
+});
+
+$.$$define(uni, 'login', function(options) {
+	options.success({
+		code: new Date().getTime()
 	});
 });

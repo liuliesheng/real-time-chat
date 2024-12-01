@@ -1,6 +1,67 @@
 import $ from '../../bootstrap/$';
 import login from "./login";
 
+export default {
+	fulfilled: function(response) {
+		const {config, data} = response;
+
+		// 关闭loading
+		if (config.loading) {
+			config.loading.hideLoading();
+		}
+
+		// 显示500错误
+		if (response.statusCode !== 200) {
+			return resolveHttpStatusError(response);
+		}
+
+		// 业务错误提示
+		if (data.code !== 1) {
+
+			// 登录失效
+			if (data.code === -1) {
+				return resolveLogin(response);
+			} else if (data.code === -10) { // 暂无权限
+				return resolveNotAuthError(response);
+			}
+
+			return resolveBasicError(response);
+		}
+
+		// 是否强制提示信息
+		if (data.is_force_tips) {
+			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
+			if (method === 'toast') {
+				$.hintSuccess(data.forceTipMsg || data.msg);
+			} else {
+				$.showModal({
+					content: data.forceTipMsg || data.msg,
+					showCancel: false
+				});
+			}
+		}
+
+		return config.returnRaw ? response : data;
+	},
+	rejected: function(err) {
+		console.error('request system error:', err);
+
+		if (err.config && !err.isCancel) {
+			// 关闭loading
+			if (err.config.loading) {
+				err.config.loading.hideLoading();
+			}
+
+			if (err.config.isShowErrorTips !== false) {
+				$.hintError(err.errMsg || '网络错误，请稍后~');
+			}
+		}
+
+		return Promise.reject(err);
+	}
+};
+
+
 // 生成登录超时的错误
 function resolveLoginTimeoutError(response) {
 	console.error('apply for login:', response);
@@ -97,63 +158,3 @@ function resolveBasicError(response) {
 	console.debug('request logic tips:', response);
 	return Promise.reject(response);
 }
-
-export default {
-	fulfilled: function(response) {
-		const {config, data} = response;
-
-		// 关闭loading
-		if (config.loading) {
-			config.loading.hideLoading();
-		}
-
-		// 显示500错误
-		if (response.statusCode !== 200) {
-			return resolveHttpStatusError(response);
-		}
-
-		// 业务错误提示
-		if (data.code !== 1) {
-
-			// 登录失效
-			if (data.code === -1) {
-				return resolveLogin(response);
-			} else if (data.code === -10) { // 暂无权限
-				return resolveNotAuthError(response);
-			}
-
-			return resolveBasicError(response);
-		}
-
-		// 是否强制提示信息
-		if (data.is_force_tips) {
-			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
-			if (method === 'toast') {
-				$.hintSuccess(data.forceTipMsg || data.msg);
-			} else {
-				$.showModal({
-					content: data.forceTipMsg || data.msg,
-					showCancel: false
-				});
-			}
-		}
-
-		return config.returnRaw ? response : data;
-	},
-	rejected: function(err) {
-		console.error('request system error:', err);
-
-		if (err.config && !err.isCancel) {
-			// 关闭loading
-			if (err.config.loading) {
-				err.config.loading.hideLoading();
-			}
-
-			if (err.config.isShowErrorTips !== false) {
-				$.hintError(err.errMsg || '网络错误，请稍后~');
-			}
-		}
-
-		return Promise.reject(err);
-	}
-};

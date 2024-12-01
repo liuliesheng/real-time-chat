@@ -10,15 +10,15 @@ const QQMapWX = require('../../../libs/qqmap-wx-jssdk.min.js');
 let qqMapKeys = [];
 
 // QQ地图
-$.$define('setQQMapKeys', (function(keys) {
+$.$define('setQQMapKeys', function(keys) {
 	qqMapKeys = keys;
-}));
+});
 
 /**
  * 获取腾讯地图实例
  * @return {QQMapWX}
  */
-$.$define('getQQMap', (function() {
+$.$define('getQQMap', function() {
 	if (random(1, 3) === 2) {
 		qqMapKeys = collectionUtil.shuffle(qqMapKeys); //打乱数组
 	}
@@ -29,4 +29,4 @@ $.$define('getQQMap', (function() {
 	return new QQMapWX({
 		key: qqMapKeys[index]
 	});
-})());
+});
