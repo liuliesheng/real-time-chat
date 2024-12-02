@@ -12,9 +12,7 @@ export default function(options) {
 	if (!options) {
 		options = $.getStorageSync(LOGIN_INFO_KEY);
 		if (!options) {
-			return fallback().then(function(options) {
-				return connect(options);
-			});
+			return fallback();
 		}
 	}
 

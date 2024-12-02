@@ -1,9 +1,12 @@
 import $ from '../../bootstrap/$';
+import {resolveHint, resolveModal} from './util';
 import login from "./login";
 
 export default {
 	fulfilled: function(response) {
 		const {config, data} = response;
+		const hint = resolveHint(config);
+		const showModal = resolveModal(config);
 
 		// 关闭loading
 		if (config.loading) {
@@ -32,9 +35,9 @@ export default {
 		if (data.is_force_tips) {
 			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
 			if (method === 'toast') {
-				$.hintSuccess(data.forceTipMsg || data.msg);
+				hint.hintSuccess(data.forceTipMsg || data.msg);
 			} else {
-				$.showModal({
+				showModal({
 					content: data.forceTipMsg || data.msg,
 					showCancel: false
 				});
@@ -47,13 +50,15 @@ export default {
 		console.error('request system error:', err);
 
 		if (err.config && !err.isCancel) {
+			const hint = resolveHint(err.config);
+
 			// 关闭loading
 			if (err.config.loading) {
 				err.config.loading.hideLoading();
 			}
 
 			if (err.config.isShowErrorTips !== false) {
-				$.hintError(err.errMsg || '网络错误，请稍后~');
+				hint.hintError(err.errMsg || '网络错误，请稍后~');
 			}
 		}
 
@@ -95,13 +100,14 @@ function resolveLogin(response) {
 function resolveHttpStatusError(response) {
 	const config = response.config;
 	const data = response.data;
+	const hint = resolveHint(config);
 
 	if (config.isShowErrorTips !== false) {
 		if (response.statusCode === 404) {
-			$.hintError(data.msg || '网络繁忙，请稍后~');
+			hint.hintError(data.msg || '网络繁忙，请稍后~');
 			$.navigateBack();
 		} else {
-			$.hintError('网络繁忙，请稍后~');
+			hint.hintError('网络繁忙，请稍后~');
 		}
 	}
 
@@ -111,7 +117,8 @@ function resolveHttpStatusError(response) {
 
 // 无权限
 function resolveNotAuthError(response) {
-	$.showModal({
+	const config = response.config;
+	resolveModal(config)({
 		title: '温馨提示',
 		content: '暂无权限，详细请查看权限说明？',
 		showCancel: true,
@@ -138,15 +145,16 @@ function resolveNotAuthError(response) {
 function resolveBasicError(response) {
 	const config = response.config;
 	const data = response.data;
+	const hint = resolveHint(config);
 
 	if (config.isShowErrorTips !== false) {
 		if (data.show_msg_type === 1) {
-			$.showModal({
+			resolveModal(config)({
 				content: data.msg || '网络繁忙，请稍后~',
 				showCancel: false
 			});
 		} else {
-			$.hintError(data.msg || '网络繁忙，请稍后~');
+			hint.hintError(data.msg || '网络繁忙，请稍后~');
 		}
 	}
 

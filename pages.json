@@ -131,13 +131,13 @@
 			}
 		},
 		{
-			"path":"pages/user/login",
+			"path":"pages/auth/login",
 			"style":{
 				"navigationBarTitleText":"登录"
 			}
 		},
 		{
-			"path":"pages/user/register",
+			"path":"pages/auth/register",
 			"style":{
 				"navigationBarTitleText":"注册"
 			}

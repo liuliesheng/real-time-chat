@@ -42,3 +42,38 @@ function makeQueryString(queryObject) {
 		return result
 	}, []).join('&');
 }
+
+const hint = {
+	hintError: $.hintError,
+	hintSuccess: $.hintSuccess,
+};
+
+/**
+ * 显示提示信息
+ * @param config
+ * @return {{hintError, hintSuccess}}
+ */
+export function resolveHint(config) {
+	if (!config) {
+		return hint;
+	}
+
+	return config.hint || hint;
+}
+
+const showModal = function(options) {
+
+};
+
+/**
+ * 显示模态框
+ * @param config
+ * @return {function}
+ */
+export function resolveModal(config) {
+	if (!config) {
+		return showModal;
+	}
+
+	return config.modal || showModal;
+}

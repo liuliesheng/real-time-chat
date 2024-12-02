@@ -1,5 +1,6 @@
 <template>
 	<view class="index">
+		<view class="tips animated" :class="{bounceIn:showErrMsgCount,bounceOut:!showErrMsgCount}">{{showErrMsg}}</view>
 		<view class="list">
 			<view class="list-header">基础</view>
 			<view class="list-item">
@@ -69,10 +70,10 @@
 		<view class="list">
 			<view class="list-header">用户</view>
 			<view class="list-item">
-				<navigator url="/pages/user/login">登录</navigator>
+				<navigator url="/pages/auth/login">登录</navigator>
 			</view>
 			<view class="list-item">
-				<navigator url="/pages/user/register">注册</navigator>
+				<navigator url="/pages/auth/register">注册</navigator>
 			</view>
 			<view class="list-item">
 				<navigator url="/pages/user/repassword">修改密码</navigator>
@@ -90,7 +91,10 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			showErrMsg:'',
+			showErrMsgCount:0
+		};
 	},
 	onLoad() {
 		// const data = [];
@@ -108,14 +112,44 @@ export default {
 		// }
 		// const result = wx.arr2obj('data', data);
 		// this.setData(result);
-		uni.$http.get('post/lists').then(res=>console.log(res));
+		uni.$http.get('post/lists',{},{
+			hint:this
+		}).then(res=>console.log(res));
 	},
-	methods: {}
+	methods: {
+		hintError: function(msg) {
+			this.showErrMsg = msg;
+			this.showErrMsgCount++;
+			setTimeout(() => {
+				let showErrMsgCount = this.showErrMsgCount - 1;
+				if (showErrMsgCount < 0) {
+					showErrMsgCount = 0;
+				}
+
+				this.showErrMsgCount = showErrMsgCount;
+			}, 1500);
+		}
+	}
 };
 </script>
 
 <style>
 	.index {
+	}
+
+	.tips{
+		position: fixed;
+		z-index: 1200;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 20upx;
+		background-color: red;
+		transition: all 0.1s;
+		color: white;
+	}
+
+	.tips.bounceIn{
 	}
 
 	.logo {

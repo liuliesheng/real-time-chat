@@ -1,5 +1,6 @@
 <template>
 	<div class="login">
+		<view v-show="showErrMsg" class="tips animated" :class="{slideInDown:showErrMsgCount,slideOutUp:!showErrMsgCount}">{{showErrMsg}}</view>
 		<form @submit="onSubmit">
 			<view class="form-group">
 				<view class="form-item">
@@ -28,7 +29,10 @@ export default {
 	data() {
 		return {
 			isShowLoading: false,
-			showLoadingCount: 0
+			showLoadingCount: 0,
+
+			showErrMsg:'',
+			showErrMsgCount:0
 		};
 	},
 	methods: {
@@ -47,6 +51,19 @@ export default {
 			}
 		},
 
+		hintError: function(msg) {
+			this.showErrMsg = msg;
+			this.showErrMsgCount++;
+			setTimeout(() => {
+				let showErrMsgCount = this.showErrMsgCount - 1;
+				if (showErrMsgCount < 0) {
+					showErrMsgCount = 0;
+				}
+
+				this.showErrMsgCount = showErrMsgCount;
+			}, 1500);
+		},
+
 		/**
 		 * 登录
 		 */
@@ -58,7 +75,8 @@ export default {
 				username: 'admin',
 				password: '123456'
 			}, {
-				loading: this
+				loading: this,
+				hint:this
 			}).then(function() {
 				console.log(this)
 			});
@@ -77,6 +95,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.login {
+	}
+
+	.tips{
+		position: fixed;
+		z-index: 1200;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 20upx;
+		background-color: red;
+		transition: all 0.1s;
+		color: white;
+	}
+
+	.tips.bounceIn{
 	}
 
 	.loading {

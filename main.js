@@ -3,12 +3,7 @@ import './bootstrap';
 import Vue from 'vue';
 import App from './App';
 
-import "./plugins/init";
-import "./plugins/vue.ext";
-
-// #ifdef H5
-import "./plugins/h5.adapter";
-// #endif
+import "./plugins";
 
 Vue.config.productionTip = false;
 

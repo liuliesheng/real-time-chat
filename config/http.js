@@ -18,7 +18,7 @@ module.exports = {
 		loginUserInfo: false,
 
 		// account login uses
-		loginPage: '/pages/login/login'
+		loginPage: '/pages/auth/login'
 	},
 	requestInterceptors: [
 		basicRequestInterceptor,
