@@ -1,5 +1,6 @@
 import "./base";
 import "./promise";
-import "./system";
+import "./user";
+import "./location";
 import "./ui";
 import "./map-api";

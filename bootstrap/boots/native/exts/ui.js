@@ -8,7 +8,7 @@ $.$$define($, 'delayNavigateBack', function(delay, options) {
 });
 
 // 错误提示
-$.$$define($, 'hintError', function(msg) {
+$.$$define($, '$hintError', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'none'
@@ -16,7 +16,7 @@ $.$$define($, 'hintError', function(msg) {
 });
 
 // 成功提示
-$.$$define($, 'hintSuccess', function(msg) {
+$.$$define($, '$hintSuccess', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'success',

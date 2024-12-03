@@ -1,6 +1,15 @@
 <template>
 	<view class="index">
 		<view class="tips animated" :class="{bounceIn:showErrMsgCount,bounceOut:!showErrMsgCount}">{{showErrMsg}}</view>
+		<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="action">
+				<text class="cuIcon-title text-orange"></text> 基础
+			</view>
+			<view class="action">
+				<button class="cu-btn bg-green shadow" >设置</button>
+			</view>
+		</view>
+
 		<view class="list">
 			<view class="list-header">基础</view>
 			<view class="list-item">

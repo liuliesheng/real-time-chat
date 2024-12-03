@@ -44,8 +44,8 @@ function makeQueryString(queryObject) {
 }
 
 const hint = {
-	hintError: $.hintError,
-	hintSuccess: $.hintSuccess,
+	hintError: $.$hintError,
+	hintSuccess: $.$hintSuccess,
 };
 
 /**
