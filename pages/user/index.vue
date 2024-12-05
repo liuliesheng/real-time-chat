@@ -1,58 +1,59 @@
 <template>
-	<view class="user-index">
-		<view class="container">
-			<view class="userinfo" v-if="hasUserInfo">
+	<view class="user">
+		<view class="container userinfo">
+			<image class="bg" src="/static/images/loading.gif"/>
+			<view class="userinfo-inner" v-if="hasUserInfo">
 				<image :src="userInfo.avatarUrl" background-size="cover" class="userinfo-avatar"></image>
 				<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 			</view>
 			<view v-else>
 				<button @tap="onLogin" type="primary">登 录</button>
 			</view>
-			<uni-grid :column="4" :show-border="false" class="main-menu" style="background-color: rgba(255,255,255,0.3);">
-				<uni-grid-item>
+
+			<view class="grid text-center col-4" style="background-color: rgba(255,255,255,0.3);">
+				<view class="padding-sm">
 					<image src=""></image>
 					<text>特权</text>
-				</uni-grid-item>
-				<uni-grid-item>
+				</view>
+				<view class="padding-sm">
 					<image src=""></image>
 					<text>收益</text>
-				</uni-grid-item>
-				<uni-grid-item>
+				</view>
+				<view class="padding-sm">
 					<image src=""></image>
 					<text>优惠券</text>
-				</uni-grid-item>
-				<uni-grid-item>
+				</view>
+				<view class="padding-sm">
 					<image src=""></image>
 					<text>积分</text>
-				</uni-grid-item>
-			</uni-grid>
+				</view>
+			</view>
 		</view>
 
-		<uni-grid :column="4" :show-border="false" class="main-menu" style="margin-top: 30upx">
-			<uni-grid-item>
+		<view class="grid text-center col-4 bg-white">
+			<view class="padding-sm">
 				<image src=""></image>
 				<text>待付款</text>
-			</uni-grid-item>
-			<uni-grid-item>
+			</view>
+			<view class="padding-sm">
 				<image src=""></image>
 				<text>待收货</text>
-			</uni-grid-item>
-			<uni-grid-item>
+			</view>
+			<view class="padding-sm">
 				<image src=""></image>
 				<text>待评价</text>
-			</uni-grid-item>
-			<uni-grid-item>
+			</view>
+			<view class="padding-sm">
 				<image src=""></image>
 				<text>退款/售后</text>
-			</uni-grid-item>
-		</uni-grid>
+			</view>
+		</view>
 
-		<view class="list">
-			<view class="list-header">其他</view>
-			<view class="list-item">
+		<view class="cu-list menu margin-top">
+			<view class="cu-item">
 				<navigator url="/pages/user/repassword">修改密码</navigator>
 			</view>
-			<view class="list-item">
+			<view class="cu-item">
 				<navigator url="/pages/examples/feedback">意见反馈</navigator>
 			</view>
 		</view>
@@ -137,18 +138,25 @@ export default {
 </script>
 
 <style>
-	.list navigator {
-		color: inherit;
-	}
 
-	.container {
+	.userinfo {
 		background-color: white;
 		box-sizing: border-box;
 		border-bottom: 1upx solid #f9f9f9;
 		box-shadow: 0 1upx 10upx #f9f9f9;
+		height: 400upx;
+		overflow: hidden;
+		position: relative;
 	}
 
-	.userinfo {
+	.userinfo image.bg{
+		position: absolute;
+		width: 100%;
+		left: 0;
+		top: 0;
+	}
+
+	.userinfo .userinfo-inner{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -166,16 +174,12 @@ export default {
 		color: #aaa;
 	}
 
-	.list-header {
-		background-color: #F9F9F9;
-		padding: 20upx 30upx;
+	.userinfo .grid {
+		position: absolute;
+		bottom: 30upx;
+		width: calc(100% - 60upx);
 	}
-
-	.main-menu {
-		background-color: white;
-	}
-
-	.main-menu image {
+	.grid image {
 		width: 64upx;
 		height: 64upx;
 		margin: 10upx auto;
@@ -183,7 +187,7 @@ export default {
 		background-color: #f9f9f9;
 	}
 
-	.main-menu text {
+	.grid text {
 		display: block;
 		text-align: center;
 	}

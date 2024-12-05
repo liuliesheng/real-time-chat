@@ -1,12 +1,11 @@
 <template>
 	<view class="index">
 		<view class="logo">
-			<image src="/static/logo.png" @tap="loadModal=true" />
+			<image src="/static/logo.png" @tap="loadModal=true"/>
 		</view>
 
-		<button type="default" @tap="loadData">Hello world</button>
-
-		<loading/>
+		<navigator class="cu-btn bg-blue round lg shadow margin-top" style="display: block;line-height: 40px;"
+				url="/pages/index/examples">查看示例</navigator>
 	</view>
 </template>
 
@@ -18,12 +17,7 @@ export default {
 	onLoad() {
 	},
 	methods: {
-		loadData: function() {
-			this.showLoading();
-			setTimeout(() => {
-				this.hideLoading();
-			}, 3000);
-		}
+
 	}
 };
 </script>
@@ -33,20 +27,21 @@ export default {
 		background-color: white;
 	}
 
-	.index {}
-
+	.index {
+		padding: 30upx;
+		overflow-x: hidden;
+	}
 
 	.logo {
 		text-align: center;
-		margin-bottom: 60upx;
-		margin-top: 60upx;
+		margin:0 auto;
+		padding: 15% 0;
 	}
 
 	.logo image {
 		display: block;
 		margin: 0 auto;
-		border-radius: 50%;
-		width: 300upx;
-		height: 300upx;
+		width: 200upx;
+		height: 200upx;
 	}
 </style>

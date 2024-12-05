@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import loading from '@/components/loading';
+import hint from '@/components/hint';
 
+Vue.component('hint', hint);
 Vue.component('loading', loading);
 
 Vue.prototype.$callHook = function(name) {

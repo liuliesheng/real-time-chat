@@ -1,5 +1,23 @@
 <template>
 	<view class="index">
+		<loading/>
+		<hint/>
+
+		<view class="cu-bar bg-white solid-bottom margin-top">
+			<view class="action">组件</view>
+		</view>
+		<view class="cu-list menu sm-border">
+			<view class="cu-item">
+				<view class="content" @tap="loadData">Loading</view>
+			</view>
+			<view class="cu-item">
+				<view class="content" @tap="hintError('这是一个警告消息')">警告提示</view>
+			</view>
+			<view class="cu-item">
+				<view class="content" @tap="hintSuccess('这是一个成功消息')">成功提示</view>
+			</view>
+		</view>
+
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">基础</view>
 		</view>
@@ -116,11 +134,15 @@ export default {
 		// }
 		// const result = wx.arr2obj('data', data);
 		// this.setData(result);
-		uni.$http.get('post/lists', {}, {
-			hint: this
-		}).then(res => console.log(res));
 	},
-	methods: {}
+	methods: {
+		loadData: function() {
+			this.showLoading();
+			setTimeout(() => {
+				this.hideLoading();
+			}, 3000);
+		}
+	}
 };
 </script>
 
