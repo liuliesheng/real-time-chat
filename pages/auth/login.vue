@@ -25,45 +25,11 @@
 
 <script>
 export default {
-	name: "login",
 	data() {
 		return {
-			isShowLoading: false,
-			showLoadingCount: 0,
-
-			showErrMsg:'',
-			showErrMsgCount:0
 		};
 	},
 	methods: {
-		showLoading() {
-			this.showLoadingCount++;
-			this.isShowLoading = true;
-		},
-
-		hideLoading() {
-			this.showLoadingCount--;
-			if (this.showLoadingCount <= 0) {
-				this.showLoadingCount = 0;
-				setTimeout(()=> {
-					this.isShowLoading = false;
-				},500);
-			}
-		},
-
-		hintError: function(msg) {
-			this.showErrMsg = msg;
-			this.showErrMsgCount++;
-			setTimeout(() => {
-				let showErrMsgCount = this.showErrMsgCount - 1;
-				if (showErrMsgCount < 0) {
-					showErrMsgCount = 0;
-				}
-
-				this.showErrMsgCount = showErrMsgCount;
-			}, 1500);
-		},
-
 		/**
 		 * 登录
 		 */
@@ -95,21 +61,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.login {
-	}
-
-	.tips{
-		position: fixed;
-		z-index: 1200;
-		top: 0;
-		left: 0;
-		width: 100%;
-		padding: 20upx;
-		background-color: red;
-		transition: all 0.1s;
-		color: white;
-	}
-
-	.tips.bounceIn{
 	}
 
 	.loading {

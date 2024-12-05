@@ -1,8 +1,8 @@
-page {
+/* page {
     font-size: 14px;
     color: #474747;
     background: #f9f9f9;
-}
+} */
 
 page, view, button, label, input, textarea {
     box-sizing: border-box;

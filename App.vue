@@ -16,15 +16,16 @@ export default {
 </script>
 
 <style>
-/*每个页面公共css */
-/* #ifndef APP-PLUS-NVUE */
-/* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */
-@import './styles/base.css';
-@import './styles/animate.css';
-@import './styles/form.css';
+	/*每个页面公共css */
+	/* #ifndef APP-PLUS-NVUE */
+	/* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */
+	/* colorui */
+	@import "styles/colorui/main.css";
+	@import "styles/colorui/icon.css";
 
-/* colorui */
-@import "colorui/main.css";
-@import "colorui/icon.css";
-/* #endif */
+	@import './styles/base.css';
+	@import './styles/animate.css';
+	@import './styles/form.css';
+	@import './styles/colorui.adapter.css';
+	/* #endif */
 </style>

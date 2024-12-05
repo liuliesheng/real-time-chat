@@ -1,4 +1,7 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import loading from '@/components/loading';
+
+Vue.component('loading', loading);
 
 Vue.prototype.$callHook = function(name) {
 	const callbacks = this.$options[name];

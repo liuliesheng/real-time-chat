@@ -60,13 +60,9 @@
 </template>
 
 <script>
-import uniGrid from '@/components/uni-grid/uni-grid.vue';
-import uniGridItem from '@/components/uni-grid-item/uni-grid-item.vue';
 
 export default {
 	components: {
-		uniGrid,
-		uniGridItem
 	},
 	/**
 	 * 页面的初始数据
