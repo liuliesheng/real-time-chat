@@ -2,7 +2,7 @@
 	<div class="repassword">
 
 		<form @submit="onSubmit">
-			<view class="form-group form-simple">
+			<view class="form-group">
 				<view class="form-item">
 					<input id="oldpassword" name="oldpassword" placeholder="旧密码" type="password"/>
 				</view>

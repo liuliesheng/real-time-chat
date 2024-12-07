@@ -11,23 +11,19 @@
 
 .form-item {
 	position: relative;
-	margin-bottom: 30upx;
 	padding-left: 30upx;
 	padding-right: 30upx;
 }
 
 .form-item label{
+	margin-top: 30upx;
 	line-height: 1.8;
 }
 
 .form-item .form-item-counter {
 	position: absolute;
 	bottom: 10upx;
-	right: 0;
-}
-
-.form-group.form-simple .form-item:not(:last-child){
-	margin-bottom: 0;
+	right: 30upx;
 }
 
 .form-btn-group{

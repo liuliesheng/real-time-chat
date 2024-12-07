@@ -7,7 +7,7 @@
 				<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
 			</view>
 			<view v-else>
-				<button @tap="onLogin" type="primary">登 录</button>
+				<button @tap="onLogin" @getUserInfo="getUserInfo" class="cu-btn bg-blue lg block shadow" open-type="getUserInfo">登 录</button>
 			</view>
 
 			<view class="grid text-center col-4" style="background-color: rgba(255,255,255,0.3);">
@@ -51,10 +51,10 @@
 
 		<view class="cu-list menu margin-top">
 			<view class="cu-item">
-				<navigator url="/pages/user/repassword">修改密码</navigator>
+				<navigator class="content" url="/pages/auth/rest.password">修改密码</navigator>
 			</view>
 			<view class="cu-item">
-				<navigator url="/pages/examples/feedback">意见反馈</navigator>
+				<navigator class="content" url="/pages/examples/feedback">意见反馈</navigator>
 			</view>
 		</view>
 	</view>
@@ -105,7 +105,7 @@ export default {
 	 */
 	onPullDownRefresh: function() {
 		uni.stopPullDownRefresh();
-		uni.$sys.getUserInfo({
+		uni.$getUserInfo({
 			success: res => {
 				uni.stopPullDownRefresh();
 				this.userInfo = res;
@@ -120,18 +120,20 @@ export default {
 
 	methods: {
 		onLogin(e) {
-			const data = e.detail.value;
-			console.log(data);
-
 			uni.showLoading();
 			setTimeout(() => {
-				uni.$showTips('登录成功！');
+				uni.$hintSuccess('登录成功！');
 				this.userInfo = {
 					avatarUrl: '/static/images/icons/logo.png',
 					nickName: '刘小晋啦',
 				};
 				this.hasUserInfo = true;
 			}, 1000);
+		},
+
+		getUserInfo(e) {
+			const data = e.detail.value;
+			console.log(data)
 		}
 	}
 };
@@ -144,7 +146,7 @@ export default {
 		box-sizing: border-box;
 		border-bottom: 1upx solid #f9f9f9;
 		box-shadow: 0 1upx 10upx #f9f9f9;
-		height: 400upx;
+		height: 480upx;
 		overflow: hidden;
 		position: relative;
 	}
@@ -161,6 +163,7 @@ export default {
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 30upx;
+		position: relative;
 	}
 
 	.userinfo-avatar {
@@ -171,7 +174,7 @@ export default {
 	}
 
 	.userinfo-nickname {
-		color: #aaa;
+		color: #343434;
 	}
 
 	.userinfo .grid {

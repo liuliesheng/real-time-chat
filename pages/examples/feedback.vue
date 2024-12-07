@@ -1,5 +1,8 @@
 <template>
 	<view class="feedback">
+		<loading/>
+		<hint/>
+
 		<view class="form-group">
 			<view class="form-item">
 				<textarea @input="onRemarkInput" maxlength="500" placeholder="感谢提出建议"></textarea>
@@ -68,11 +71,11 @@ export default {
 			};
 			console.log(data);
 
-			uni.showLoading();
+			this.showLoading();
 			setTimeout(() => {
-				uni.$showTips('已提交');
+				this.hideLoading();
+				this.hintError('已提交');
 				uni.$delayNavigateBack(1200);
-				// wx.showTips('提交失败，请稍后重试~');
 			}, 1000);
 		}
 	}
