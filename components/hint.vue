@@ -1,6 +1,11 @@
 <template>
 	<view v-show="showMsg" class="hint padding text-center shadow-blur animated"
-			:class="classs">
+			:class="{
+				'bg-gradual-red': showType !== 'success',
+				'bg-gradual-green': showType === 'success',
+				slideInDown: isShow,
+				slideOutUp: !isShow
+			}">
 		{{showMsg}}
 	</view>
 </template>
@@ -13,16 +18,6 @@ export default {
 			isShow: 0,
 			showType: 'error',
 			timeId: 0
-		}
-	},
-	computed: {
-		classs: function() {
-			return {
-				'bg-gradual-red': this.showType !== 'success',
-				'bg-gradual-green': this.showType === 'success',
-				slideInDown: this.isShow,
-				slideOutUp: !this.isShow
-			};
 		}
 	},
 	created: function() {

@@ -1,195 +1,196 @@
 {
-	"pages": [
+	"pages":[
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationStyle": "custom"
+			"path":"pages/index/index",
+			"style":{
+				"navigationBarTitleText":"首页",
+				"navigationStyle":"custom"
 			}
 		},
 		{
-			"path": "pages/index/examples",
-			"style": {
-				"navigationBarTitleText": "案例页面"
+			"path":"pages/index/examples",
+			"style":{
+				"navigationBarTitleText":"案例页面"
 			}
 		},
 		{
-			"path": "pages/examples/feedback",
-			"style": {
-				"navigationBarTitleText": "意见反馈"
+			"path":"pages/examples/feedback",
+			"style":{
+				"navigationBarTitleText":"意见反馈"
 			}
 		},
 		{
-			"path": "pages/examples/upload",
-			"style": {
-				"navigationBarTitleText": "文件上传"
+			"path":"pages/examples/upload",
+			"style":{
+				"navigationBarTitleText":"文件上传"
 			}
 		},
 		{
-			"path": "pages/examples/timer",
-			"style": {
-				"navigationBarTitleText": "计时器"
+			"path":"pages/examples/timer",
+			"style":{
+				"navigationBarTitleText":"计时器"
 			}
 		},
 		{
-			"path": "pages/examples/listener/a",
-			"style": {
-				"navigationBarTitleText": "监听器-A"
+			"path":"pages/examples/listener/a",
+			"style":{
+				"navigationBarTitleText":"监听器-A"
 			}
 		},
 		{
-			"path": "pages/examples/listener/b",
-			"style": {
-				"navigationBarTitleText": "监听器-B"
+			"path":"pages/examples/listener/b",
+			"style":{
+				"navigationBarTitleText":"监听器-B"
 			}
 		},
 		{
-			"path": "pages/examples/getUserInfo",
-			"style": {
-				"navigationBarTitleText": "获取用户信息"
+			"path":"pages/examples/getUserInfo",
+			"style":{
+				"navigationBarTitleText":"获取用户信息"
 			}
 		},
 		{
-			"path": "pages/forum/index",
-			"style": {
-				"navigationBarTitleText": "首页"
+			"path":"pages/forum/index",
+			"style":{
+				"navigationBarTitleText":"首页"
 			}
 		},
 		{
-			"path": "pages/forum/category",
-			"style": {
-				"navigationBarTitleText": "分类"
+			"path":"pages/forum/category",
+			"style":{
+				"navigationBarTitleText":"分类"
 			}
 		},
 		{
-			"path": "pages/forum/posts-list",
-			"style": {
-				"navigationBarTitleText": "文章列表"
+			"path":"pages/forum/posts-list",
+			"style":{
+				"navigationBarTitleText":"文章列表"
 			}
 		},
 		{
-			"path": "pages/forum/posts-create",
-			"style": {
-				"navigationBarTitleText": "发布文章"
+			"path":"pages/forum/posts-create",
+			"style":{
+				"navigationBarTitleText":"发布文章"
 			}
 		},
 		{
-			"path": "pages/forum/posts-detail",
-			"style": {
-				"navigationBarTitleText": "文章详情"
+			"path":"pages/forum/posts-detail",
+			"style":{
+				"navigationBarTitleText":"文章详情"
 			}
 		},
 		{
-			"path": "pages/mall/index",
-			"style": {
-				"navigationBarTitleText": "首页"
+			"path":"pages/mall/index",
+			"style":{
+				"navigationBarTitleText":"首页"
 			}
 		},
 		{
-			"path": "pages/mall/category",
-			"style": {
-				"navigationBarTitleText": "分类"
+			"path":"pages/mall/category",
+			"style":{
+				"navigationBarTitleText":"分类"
 			}
 		},
 		{
-			"path": "pages/mall/goods-list",
-			"style": {
-				"navigationBarTitleText": "商品列表"
+			"path":"pages/mall/goods-list",
+			"style":{
+				"navigationBarTitleText":"商品列表"
 			}
 		},
 		{
-			"path": "pages/mall/goods-detail",
-			"style": {
-				"navigationBarTitleText": "商品详情"
+			"path":"pages/mall/goods-detail",
+			"style":{
+				"navigationBarTitleText":"商品详情"
 			}
 		},
 		{
-			"path": "pages/mall/shopping-cart",
-			"style": {
-				"navigationBarTitleText": "购物车"
+			"path":"pages/mall/shopping-cart",
+			"style":{
+				"navigationBarTitleText":"购物车"
 			}
 		},
 		{
-			"path": "pages/mall/order-create",
-			"style": {
-				"navigationBarTitleText": "下单"
+			"path":"pages/mall/order-create",
+			"style":{
+				"navigationBarTitleText":"下单"
 			}
 		},
 		{
-			"path": "pages/mall/order-list",
-			"style": {
-				"navigationBarTitleText": "订单列表"
+			"path":"pages/mall/order-list",
+			"style":{
+				"navigationBarTitleText":"订单列表"
 			}
 		},
 		{
-			"path": "pages/mall/order-detail",
-			"style": {
-				"navigationBarTitleText": "订单详情"
+			"path":"pages/mall/order-detail",
+			"style":{
+				"navigationBarTitleText":"订单详情"
 			}
 		},
 		{
-			"path": "pages/user/index",
-			"style": {
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "个人中心"
+			"path":"pages/user/index",
+			"style":{
+				"navigationBarTextStyle":"white",
+				"navigationStyle":"custom",
+				"enablePullDownRefresh":true,
+				"navigationBarTitleText":"个人中心"
 			}
 		},
 		{
-			"path": "pages/auth/login",
-			"style": {
-				"navigationBarTitleText": "登录"
+			"path":"pages/auth/login",
+			"style":{
+				"navigationBarTitleText":"登录"
 			}
 		},
 		{
-			"path": "pages/auth/register",
-			"style": {
-				"navigationBarTitleText": "注册"
+			"path":"pages/auth/register",
+			"style":{
+				"navigationBarTitleText":"注册"
 			}
 		},
 		{
-			"path": "pages/auth/rest.password",
-			"style": {
-				"navigationBarTitleText": "修改密码"
+			"path":"pages/auth/rest.password",
+			"style":{
+				"navigationBarTitleText":"修改密码"
 			}
 		},
 		{
-			"path": "pages/auth/auth",
-			"style": {
-				"navigationBarTitleText": "用户授权"
+			"path":"pages/auth/auth",
+			"style":{
+				"navigationBarTitleText":"用户授权"
 			}
 		},
 		{
-			"path": "pages/user/settings",
-			"style": {
-				"navigationBarTitleText": "设置"
+			"path":"pages/user/settings",
+			"style":{
+				"navigationBarTitleText":"设置"
 			}
 		}
 	],
-	"globalStyle": {
-		"backgroundColor": "#F8F8F8",
-		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTitleText": "周易星卜",
-		"navigationBarTextStyle": "black"
+	"globalStyle":{
+		"backgroundColor":"#F8F8F8",
+		"backgroundTextStyle":"dark",
+		"navigationBarBackgroundColor":"#fff",
+		"navigationBarTitleText":"Weapp",
+		"navigationBarTextStyle":"black"
 	},
-	"tabBar": {
-		"color": "#555555",
-		"selectedColor": "#1296db",
-		"backgroundColor": "white",
-		"list": [{
-				"pagePath": "pages/index/index",
-				"text": "首页",
-				"iconPath": "/static/images/tabbars/home.png",
-				"selectedIconPath": "/static/images/tabbars/home_in.png"
+	"tabBar":{
+		"color":"#555555",
+		"selectedColor":"#1296db",
+		"backgroundColor":"white",
+		"list":[
+			{
+				"pagePath":"pages/index/index",
+				"text":"首页",
+				"iconPath":"/static/images/tabbars/home.png",
+				"selectedIconPath":"/static/images/tabbars/home_in.png"
 			},
 			{
-				"pagePath": "pages/user/index",
-				"text": "我的",
-				"iconPath": "/static/images/tabbars/user.png",
-				"selectedIconPath": "/static/images/tabbars/user_in.png"
+				"pagePath":"pages/user/index",
+				"text":"我的",
+				"iconPath":"/static/images/tabbars/user.png",
+				"selectedIconPath":"/static/images/tabbars/user_in.png"
 			}
 		]
 	}

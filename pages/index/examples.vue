@@ -1,7 +1,7 @@
 <template>
 	<view class="index">
-		<loading/>
-		<hint/>
+		<loading1/>
+		<hint1/>
 
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">组件</view>
@@ -114,7 +114,14 @@
 </template>
 
 <script>
+import hint1 from '@/components/hint';
+import loading1 from '@/components/loading';
+
 export default {
+	components: {
+		hint1,
+		loading1
+	},
 	data() {
 		return {};
 	},
@@ -147,5 +154,6 @@ export default {
 </script>
 
 <style>
-	.index {}
+	.index {
+	}
 </style>

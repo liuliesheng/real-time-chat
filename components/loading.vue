@@ -18,6 +18,7 @@
 		created:function(){
 			this.$root.showLoading = this.showLoading;
 			this.$root.hideLoading = this.hideLoading;
+			console.log(this)
 		},
 		methods: {
 			showLoading() {
