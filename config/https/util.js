@@ -43,7 +43,27 @@ function makeQueryString(queryObject) {
 	}, []).join('&');
 }
 
-const hint = {
+// Loading
+export const loading = {
+	showLoading: $.showLoading,
+	hideLoading: $.hideLoading
+}
+
+/**
+ * 显示Loading
+ * @param config
+ * @return {{hintError, hintSuccess}}
+ */
+export function resolveLoading(config) {
+	if (!config) {
+		return loading;
+	}
+
+	return config.loading || loading;
+}
+
+// Hint
+export const hint = {
 	hintError: $.$hintError,
 	hintSuccess: $.$hintSuccess,
 };
@@ -61,9 +81,8 @@ export function resolveHint(config) {
 	return config.hint || hint;
 }
 
-const showModal = function(options) {
-
-};
+// Modal
+export const showModal = $.showModal;
 
 /**
  * 显示模态框

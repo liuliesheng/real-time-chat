@@ -1,6 +1,5 @@
 import $ from '../../bootstrap/$';
-import loading from "./loading";
-import {attachGetParams, makeBasicGetParams} from "./util";
+import {attachGetParams, loading, makeBasicGetParams} from "./util";
 
 export default function(config) {
 	// 是否显示加载条
