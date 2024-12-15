@@ -2,12 +2,6 @@ import $ from '../bootstrap/$';
 
 module.exports = {
 
-	// 推送formid
-	__pushFormid__: function(e) {
-		if (!e.detail.formId) return;
-		$.pushFormid(e.detail.formId);
-	},
-
 	// 绑定数据被改变
 	setValueChange: function(e) {
 		const dataset = e.currentTarget.dataset;
@@ -63,5 +57,22 @@ module.exports = {
 		$[method]({
 			url: dataset.url
 		});
+	},
+
+	// 页面完成
+	finish: function(result) {
+		const pages = getCurrentPages();
+		if (pages.length < 2) {
+			return;
+		}
+
+		const page = pages[pages.length - 1];
+		if (page.onFinishResult) {
+			uni.navigateBack({
+				success: function() {
+					page.onFinishResult(result);
+				}
+			});
+		}
 	}
 };

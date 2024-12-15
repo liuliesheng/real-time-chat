@@ -33,7 +33,8 @@ input, textarea {
     border-bottom: 1px solid #eee;
     line-height: 44upx;
     height: auto;
-    padding: 20upx 0;
+    padding: 30upx 0;
+	font-size: 14px;
 }
 
 textarea {

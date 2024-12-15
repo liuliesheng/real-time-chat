@@ -14,6 +14,7 @@ function factory(promiseFactory, options = {}) {
 		if (!make.promise || refresh) {
 			const args = Array.from(arguments);
 			args.shift();
+			
 			make.promise = promiseFactory(...args).then(function(result) {
 				return result;
 			}, function(err) {

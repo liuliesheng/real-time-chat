@@ -1,7 +1,7 @@
 <template>
 	<view class="index">
-		<loading1/>
-		<hint1/>
+		<loading/>
+		<hint/>
 
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">组件</view>
@@ -114,13 +114,13 @@
 </template>
 
 <script>
-import hint1 from '@/components/hint';
-import loading1 from '@/components/loading';
+import hint from '@/components/hint';
+import loading from '@/components/loading';
 
 export default {
 	components: {
-		hint1,
-		loading1
+		// hint,
+		// loading
 	},
 	data() {
 		return {};

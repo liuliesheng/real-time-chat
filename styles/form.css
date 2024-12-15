@@ -3,7 +3,7 @@
 	background-color: white;
 }
 
-.form-group::after{
+.form-group::after {
 	content: '';
 	display: block;
 	clear: both;
@@ -15,7 +15,7 @@
 	padding-right: 30upx;
 }
 
-.form-item label{
+.form-item label {
 	margin-top: 30upx;
 	line-height: 1.8;
 }
@@ -26,7 +26,7 @@
 	right: 30upx;
 }
 
-.form-btn-group{
+.form-btn-group {
 	margin: 30upx;
 	padding-bottom: 30upx;
 }
