@@ -11,6 +11,11 @@
 </template>
 
 <script>
+// const successAudioContext = uni.createInnerAudioContext();
+// successAudioContext.src = uni.$config.successTipsAudio;
+
+// const failAudioContext = uni.createInnerAudioContext();
+// failAudioContext.src = uni.$config.failTipsAudio;
 export default {
 	data() {
 		return {
@@ -44,10 +49,12 @@ export default {
 
 		hintError: function(msg) {
 			this.hint('error', msg);
+			// failAudioContext.play();
 		},
 
 		hintSuccess: function(msg) {
 			this.hint('success', msg);
+			// successAudioContext.play();
 		},
 
 		autoClose: function() {

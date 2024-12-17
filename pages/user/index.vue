@@ -104,16 +104,16 @@ export default {
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
 	onPullDownRefresh: function() {
-		uni.stopPullDownRefresh();
+		uni.stopPullDownRefresh({sound: true});
 		uni.$getUserInfo({
 			success: res => {
-				uni.stopPullDownRefresh();
+				uni.stopPullDownRefresh({sound: true});
 				this.userInfo = res;
 				this.userInfoStr = JSON.stringify(res);
 				this.hasUserInfo = true;
 			},
 			fail: () => {
-				uni.stopPullDownRefresh();
+				uni.stopPullDownRefresh({sound: true});
 			}
 		});
 	},
