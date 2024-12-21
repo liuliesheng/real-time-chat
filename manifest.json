@@ -118,5 +118,19 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : false
+            }
+        },
+        "devServer" : {
+            "https" : false
+        },
+        "title" : "演示应用",
+        "router" : {
+            "base" : "/h5/"
+        }
     }
 }

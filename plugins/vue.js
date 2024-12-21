@@ -1,10 +1,19 @@
 import Vue from 'vue';
-import loading from '@/components/loading';
-import hint from '@/components/hint';
+import Loading from '@/components/loading';
+import Hint from '@/components/hint';
+import Empty from '@/components/empty.vue';
+import LoadMore from '@/components/load-more.vue';
+// #ifdef H5
+import pageMixin from "@/config/page.js";
+import componentMixin from "@/config/component.js";
+// #endif
 
-Vue.component('hint', hint);
-Vue.component('loading', loading);
+Vue.component('Hint', Hint);
+Vue.component('Loading', Loading);
+Vue.component('Empty', Empty);
+Vue.component('LoadMore', LoadMore);
 
+// 调用生命周期钩子函数
 Vue.prototype.$callHook = function(name) {
 	const callbacks = this.$options[name];
 	if (!callbacks) return;
@@ -13,17 +22,20 @@ Vue.prototype.$callHook = function(name) {
 	callbacks.forEach(cb => cb.call(this, ...args))
 };
 
-Vue.prototype.$backgroundAudioData = {
-	playing: false,
-	playTime: 0,
-	formatedPlayTime: '00:00:00'
-};
+// #ifdef H5
+for (const k in pageMixin) {
+	if (!Vue.prototype[k] && pageMixin.hasOwnProperty(k)) {
+		Vue.prototype[k] = pageMixin[k];
+	}
+}
 
-// 页面跳转
-Vue.prototype.__linkTo__ = function(e) {
-	const target = e.detail.target || e.currentTarget || e.target;
-	const url = target.dataset.url;
-	uni.navigateTo({
-		url
-	});
-};
+if (componentMixin.methods) {
+	const methods = componentMixin.methods;
+	for (const k in methods) {
+		if (!Vue.prototype[k] && methods.hasOwnProperty(k)) {
+			Vue.prototype[k] = methods[k];
+		}
+	}
+}
+// #endif
+

@@ -18,6 +18,7 @@
 .form-item label {
 	margin-top: 30upx;
 	line-height: 1.8;
+	display: inline-block;
 }
 
 .form-item .form-item-counter {
@@ -29,4 +30,9 @@
 .form-btn-group {
 	margin: 30upx;
 	padding-bottom: 30upx;
+}
+
+.form-item input,
+.form-item textarea {
+	border-bottom: 1px solid #eee;
 }

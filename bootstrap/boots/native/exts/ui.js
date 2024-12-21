@@ -11,7 +11,8 @@ $.$$define($, '$delayNavigateBack', function(delay, options) {
 $.$$define($, '$hintError', function(msg) {
 	$.showToast({
 		title: msg,
-		icon: 'none'
+		icon: 'none',
+		// duration: 1500000
 	});
 });
 

@@ -1,6 +1,7 @@
 <template>
 	<view class="loading" v-show="isShowLoading">
-		<view class="cu-load load-modal animated" :class="{bounceIn:showLoadingCount,bounceOut:!showLoadingCount}">
+		<!-- bounceIn:showLoadingCount, -->
+		<view class="cu-load load-modal animated" :class="{bounceOut:!showLoadingCount}">
 			<image src="/static/logo.png" class="" mode="aspectFit"></image>
 			<view class="gray-text">加载中...</view>
 		</view>

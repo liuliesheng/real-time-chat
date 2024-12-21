@@ -28,4 +28,41 @@ export default {
 	@import './styles/form.css';
 	@import './styles/colorui.adapter.css';
 	/* #endif */
+
+	.page {
+		overflow-x: hidden;
+		min-height: 100vh;
+	}
+
+	uni-toast {
+		z-index: 10000;
+	}
+
+	@keyframes show {
+		0% {
+			transform: translateY(-50px);
+		}
+
+		60% {
+			transform: translateY(40upx);
+		}
+
+		100% {
+			transform: translateY(0px);
+		}
+	}
+
+	@-webkit-keyframes show {
+		0% {
+			transform: translateY(-50px);
+		}
+
+		60% {
+			transform: translateY(40upx);
+		}
+
+		100% {
+			transform: translateY(0px);
+		}
+	}
 </style>
