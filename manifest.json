@@ -131,6 +131,9 @@
         "title" : "演示应用",
         "router" : {
             "base" : "/h5/"
+        },
+        "uniStatistics" : {
+            "enable" : false
         }
     }
 }

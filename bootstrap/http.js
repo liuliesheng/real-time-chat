@@ -72,6 +72,7 @@ function uploadAdapter(options) {
 	if (options.data) {
 		options.formData = options.data;
 	}
+	
 	return new Promise((resolve, reject) => {
 		const uploadTask = $.uploadFile(Object.assign({}, options, {
 			success: (res) => {

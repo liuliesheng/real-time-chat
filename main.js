@@ -1,9 +1,19 @@
-import './bootstrap';
-
 import Vue from 'vue';
 import App from './App';
 
+import './bootstrap';
 import "./plugins";
+
+// 组件区
+import Loading from '@/components/loading';
+import Hint from '@/components/hint';
+import Empty from '@/components/empty.vue';
+import LoadMore from '@/components/load-more.vue';
+
+Vue.component('Hint', Hint);
+Vue.component('XLoading', Loading);
+Vue.component('Empty', Empty);
+Vue.component('LoadMore', LoadMore);
 
 Vue.config.productionTip = false;
 

@@ -1,15 +1,13 @@
 import $ from '../../bootstrap/$';
-import {attachGetParams, loading, makeBasicGetParams} from "./util";
+import { attachGetParams, resolveLoading, makeBasicGetParams } from "./util";
 
 export default function(config) {
 	// 是否显示加载条
 	// config.loading = true;
 	if (config.loading) {
 		const loadingText = typeof config.loading === 'string' ? config.loading : (config.loadingText || '请稍后...');
-		if (typeof config.loading !== 'object') {
-			config.loading = loading;
-		}
 
+		config.loading = resolveLoading(config);
 		config.loading.showLoading({
 			title: loadingText,
 			mask: true,

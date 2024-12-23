@@ -1,7 +1,7 @@
 <template>
 	<view class="index">
-		<loading/>
-		<hint/>
+		<XLoading/>
+		<Hint/>
 
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">组件</view>

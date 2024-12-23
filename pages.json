@@ -183,14 +183,14 @@
 			{
 				"pagePath":"pages/index/index",
 				"text":"首页",
-				"iconPath":"/static/images/tabbars/home.png",
-				"selectedIconPath":"/static/images/tabbars/home_in.png"
+				"iconPath":"/static/tabbars/home.png",
+				"selectedIconPath":"/static/tabbars/home_in.png"
 			},
 			{
 				"pagePath":"pages/user/index",
 				"text":"我的",
-				"iconPath":"/static/images/tabbars/user.png",
-				"selectedIconPath":"/static/images/tabbars/user_in.png"
+				"iconPath":"/static/tabbars/user.png",
+				"selectedIconPath":"/static/tabbars/user_in.png"
 			}
 		]
 	}

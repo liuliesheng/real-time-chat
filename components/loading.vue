@@ -10,13 +10,14 @@
 
 <script>
 	export default {
+		props: {},
 		data() {
 			return {
 				isShowLoading: false,
 				showLoadingCount: 0,
 			};
 		},
-		created:function(){
+		created: function() {
 			this.$root.showLoading = this.showLoading;
 			this.$root.hideLoading = this.hideLoading;
 		},
@@ -32,7 +33,7 @@
 					this.showLoadingCount = 0;
 					setTimeout(() => {
 						this.isShowLoading = false;
-					}, 500);
+					}, 200);
 				}
 			},
 
@@ -50,11 +51,12 @@
 		background-color: transparent;
 		z-index: 9999;
 	}
-	.cu-load{
-		box-shadow: 0 0 30upx rgba(0,0,0,0.1);
+
+	.cu-load {
+		box-shadow: 0 0 30upx rgba(0, 0, 0, 0.1);
 	}
 
-	.cu-load image{
+	.cu-load image {
 		animation: turn 1s linear infinite;
 	}
 

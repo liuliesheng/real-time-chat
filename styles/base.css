@@ -220,3 +220,8 @@ navigator {
 	margin-top: 30upx;
 	font-size: 12px;
 }
+
+.shadow-wrap {
+	position: relative;
+	box-shadow: 0 0 10upx rgba(0, 0, 0, 0.1);
+}

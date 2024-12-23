@@ -1,6 +1,6 @@
 <template>
 	<view class="component">
-		<image src="../static/images/empty.png" mode="widthFix" class="img"></image>
+		<image src="/static/empty.png" mode="widthFix" class="img"></image>
 	</view>
 </template>
 

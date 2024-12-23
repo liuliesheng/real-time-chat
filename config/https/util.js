@@ -59,7 +59,14 @@ export function resolveLoading(config) {
 		return loading;
 	}
 
-	return config.loading || loading;
+	if (config.loading && typeof config.loading === 'object') {
+		return config.loading = {
+			showLoading: config.loading.showLoading,
+			hideLoading: config.loading.hideLoading
+		};
+	}
+
+	return loading;
 }
 
 // Hint
@@ -78,7 +85,14 @@ export function resolveHint(config) {
 		return hint;
 	}
 
-	return config.hint || hint;
+	if (config.hint && typeof config.loading === 'object') {
+		return config.hint = {
+			hintError: config.hint.hintError,
+			hintSuccess: config.hint.hintSuccess
+		};
+	}
+
+	return hint;
 }
 
 // Modal
