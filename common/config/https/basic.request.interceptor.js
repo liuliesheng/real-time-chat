@@ -1,4 +1,4 @@
-import $ from '../../bootstrap/$';
+import $ from '../../../bootstrap/$';
 import { attachGetParams, resolveLoading, makeBasicGetParams } from "./util";
 
 export default function(config) {

@@ -8,13 +8,13 @@ import {http} from "./http";
 // 基础配置
 const config = (function() {
 	try {
-		let config = require('../config/upload.js');
+		let config = require('../common/config/upload.js');
 		if (typeof config === 'function') {
 			config = config();
 		}
 		return config || {};
 	} catch (e) {
-		console.warn(e);
+		console.warn("/common/config/upload.js not found!");
 		return {};
 	}
 })();

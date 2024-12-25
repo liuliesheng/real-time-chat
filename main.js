@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App';
 
 import './bootstrap';
-import "./plugins";
+import "./common/services";
 
 // 组件区
 import Loading from '@/components/loading';

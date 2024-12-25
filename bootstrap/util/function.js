@@ -62,30 +62,46 @@ export function throttle(func, wait, options) {
 	let context, args, result;
 	let timeout = null;
 	let previous = 0;
-	if (!options) options = {};
+	if (!options) {
+		options = {};
+	}
+
 	const later = function() {
 		previous = options.leading === false ? 0 : now();
 		timeout = null;
 		result = func.apply(context, args);
-		if (!timeout) context = args = null;
+
+		if (!timeout) {
+			context = args = null;
+		}
 	};
+
 	return function() {
-		const now = now();
-		if (!previous && options.leading === false) previous = now;
-		const remaining = wait - (now - previous);
-		context = this;
 		args = arguments;
+		context = options.context || this;
+
+		const timestamp = now();
+		if (!previous && options.leading === false) {
+			previous = timestamp;
+		}
+
+		const remaining = wait - (timestamp - previous);
 		if (remaining <= 0 || remaining > wait) {
 			if (timeout) {
 				clearTimeout(timeout);
 				timeout = null;
 			}
-			previous = now;
+
+			previous = timestamp;
 			result = func.apply(context, args);
-			if (!timeout) context = args = null;
+
+			if (!timeout) {
+				context = args = null;
+			}
 		} else if (!timeout && options.trailing !== false) {
 			timeout = setTimeout(later, remaining);
 		}
+
 		return result;
 	};
 }
@@ -95,7 +111,7 @@ export function throttle(func, wait, options) {
  * 对于必须在一些输入（多是一些用户操作）停止到达之后执行的行为有帮助。
  * 例如: 渲染一个Markdown格式的评论预览, 当窗口停止改变大小之后重新计算布局, 等等.
  * 传参 immediate 为 true， debounce会在 wait 时间间隔的开始调用这个函数 。
- * (并且在 waite 的时间之内，不会再次调用）在类似不小心点了提交按钮两下而提交了两次的情况下很有用。
+ * (并且在 wait 的时间之内，不会再次调用）在类似不小心点了提交按钮两下而提交了两次的情况下很有用。
  * @param {function} func
  * @param {number} wait
  * @param {boolean} [immediate]
@@ -106,7 +122,6 @@ export function debounce(func, wait, immediate) {
 
 	const later = function() {
 		const last = now() - timestamp;
-
 		if (last < wait && last >= 0) {
 			timeout = setTimeout(later, wait - last);
 		} else {
@@ -123,7 +138,11 @@ export function debounce(func, wait, immediate) {
 		args = arguments;
 		timestamp = now();
 		const callNow = immediate && !timeout;
-		if (!timeout) timeout = setTimeout(later, wait);
+
+		if (!timeout) {
+			timeout = setTimeout(later, wait);
+		}
+
 		if (callNow) {
 			result = func.apply(context, args);
 			context = args = null;
@@ -137,21 +156,31 @@ export function debounce(func, wait, immediate) {
  * 创建一个函数,调用不超过count 次。 当count已经达到时，最后一个函数调用的结果将被记住并返回。
  * @param {function} func
  * @param {number} count
+ * @param {*} context
  * @return {function(): *}
  */
-export function before(func, count) {
+export function before(func, count, context) {
 	let memo;
+	let callCount = 0;
 	return function() {
+		context = context || this;
+		context.callCount = ++callCount;
+
 		if (--count > 0) {
-			memo = func.apply(this, arguments);
+			memo = func.apply(context, arguments);
 		}
-		if (count <= 1) func = null;
+
+		if (count <= 1) {
+			func = null;
+			context.isCallStop = true;
+		}
+
 		return memo;
 	};
 }
 
 /**
- * 创建一个只能调用一次的函数。重复调用改进的方法也没有效果，只会返回第一次执行时的结果。
+ * 创建一个只能调用一次的函数。重复调用该方法也没有效果，只会返回第一次执行时的结果。
  * 作为初始化函数使用时非常有用, 不用再设一个boolean值来检查是否已经初始化完成.
  * @param {function} func
  * @return {function(): *}
@@ -165,13 +194,22 @@ export function once(func) {
  * 如果你要确保同组里所有异步请求完成之后才 执行这个函数, 这将非常有用。
  * @param {function} func
  * @param {number} count
+ * @param {*} context
  * @return {Function}
  */
-export function after(func, count) {
+export function after(func, count, context) {
+	let callCount = 0;
+
 	return function() {
-		if (--count < 1) {
-			return func.apply(this, arguments);
+		if (--count > 0) {
+			return;
 		}
+
+		context = context || this;
+		context.callCount = ++callCount;
+		context.isCallStart = true;
+
+		return func.apply(context, arguments);
 	};
 }
 
@@ -272,7 +310,7 @@ export function callbacks() {
 }
 
 /**
- * 大于未来某个时刻可是执行
+ * 大于未来某个时刻即可执行
  * @param {Function} func
  * @param {number} wait
  * @param {*} context
@@ -280,16 +318,29 @@ export function callbacks() {
  */
 export function gtFuture(func, wait, context) {
 	let prevTime = 0;
+	let callCount = 0;
+
 	return function() {
 		const currentTime = new Date().getTime();
 
-		if (!prevTime) prevTime = currentTime;
+		if (!prevTime) {
+			prevTime = currentTime;
+		}
+
+		callCount++;
 
 		const diffTime = currentTime - prevTime;
-		if (diffTime < wait) return;
+		if (diffTime < wait) {
+			return;
+		}
 
 		prevTime = currentTime;
+		context = context || this;
+		context.callCount = callCount;
+
 		func.call(context, diffTime, ...arguments);
+
+		callCount = 0
 	}
 }
 
@@ -302,13 +353,23 @@ export function gtFuture(func, wait, context) {
  */
 export function ltFuture(func, wait, context) {
 	let prevTime = new Date().getTime();
+	let callCount = 0;
+
 	return function() {
 		const currentTime = new Date().getTime();
 
+		callCount++;
+
 		const diffTime = currentTime - prevTime;
-		if (diffTime > wait) return;
+		if (diffTime > wait) {
+			callCount = 0
+			return;
+		}
 
 		prevTime = currentTime;
+		context = context || this;
+		context.callCount = callCount;
+
 		func.call(context, diffTime, ...arguments);
 	}
 }

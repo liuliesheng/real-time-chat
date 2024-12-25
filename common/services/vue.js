@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import pageMixin from "@/config/page.js";
-import componentMixin from "@/config/component.js";
+import pageMixin from "@/common/config/page.js";
+import componentMixin from "@/common/config/component.js";
 
 // 调用生命周期钩子函数
 Vue.prototype.$callHook = function(name) {

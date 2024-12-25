@@ -19,14 +19,14 @@
 	/*每个页面公共css */
 	/* #ifndef APP-PLUS-NVUE */
 	/* colorui */
-	@import "styles/colorui/main.css";
-	@import "styles/colorui/icon.css";
+	@import "common/styles/colorui/main.css";
+	@import "common/styles/colorui/icon.css";
 
 	/* base */
-	@import './styles/base.css';
-	@import './styles/animate.css';
-	@import './styles/form.css';
-	@import './styles/colorui.adapter.css';
+	@import 'common/styles/base.css';
+	@import 'common/styles/animate.css';
+	@import 'common/styles/form.css';
+	@import 'common/styles/colorui.adapter.css';
 	/* #endif */
 
 	uni-app {

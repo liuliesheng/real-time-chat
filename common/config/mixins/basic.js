@@ -1,4 +1,4 @@
-import $ from "../../bootstrap/$";
+import $ from "../../../bootstrap/$";
 
 export default {
 	// 跳转

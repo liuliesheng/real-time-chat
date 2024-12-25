@@ -1,4 +1,4 @@
-import $ from "../../bootstrap/$";
+import $ from "../../../bootstrap/$";
 
 /**
  * 是否登录中...

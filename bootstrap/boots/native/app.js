@@ -3,6 +3,7 @@ import $ from "../../$";
 // 重置App函数
 if (typeof App !== "undefined") {
 	const originalApp = App;
+
 	App = function(appInstance) {
 		const callbackMiddlewareHandle = function(callbackName, middlewareName) {
 			if (!$.$middlewares[middlewareName]) return;

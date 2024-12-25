@@ -1,4 +1,4 @@
-import $ from '../../bootstrap/$';
+import $ from '../../../bootstrap/$';
 import {resolveHint, resolveModal} from './util';
 import login from "./login";
 
@@ -105,7 +105,9 @@ function resolveHttpStatusError(response) {
 	if (config.isShowErrorTips !== false) {
 		if (response.statusCode === 404) {
 			hint.hintError(data.msg || '网络繁忙，请稍后~');
-			$.navigateBack();
+			if (config.method.toUpperCase() === 'GET') {
+				$.navigateBack();
+			}
 		} else {
 			hint.hintError('网络繁忙，请稍后~');
 		}

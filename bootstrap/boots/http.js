@@ -13,13 +13,13 @@ $.$define('uploader', uploader);
 let config = null;
 
 try {
-	config = require('../../config/http.js');
+	config = require('../../common/config/http.js');
 
 	if (typeof config === 'function') {
 		config = config();
 	}
 } catch (e) {
-	console.warn(e);
+	console.warn("/common/config/http.js not found!");
 	config = {};
 }
 

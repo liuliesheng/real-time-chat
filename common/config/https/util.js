@@ -1,4 +1,4 @@
-import $ from '../../bootstrap/$';
+import $ from '../../../bootstrap/$';
 
 /**
  * 附加Get请求参数

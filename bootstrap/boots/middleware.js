@@ -7,13 +7,13 @@ const middlewareList = {};
 let config = null;
 
 try {
-	config = require('../../config/middleware.js');
+	config = require('../../common/config/middleware.js');
 
 	if (typeof config === 'function') {
 		config = config();
 	}
 } catch (e) {
-	console.warn(e);
+	console.warn("/common/config/middleware.js not found!");
 	config = {};
 }
 

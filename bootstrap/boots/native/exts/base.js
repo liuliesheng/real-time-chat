@@ -1,25 +1,5 @@
 import $ from "../../../$";
 
-// 对全局对象添加新属性
-Object.defineProperty($, '$$define', {
-	enumerable: true,
-	get: function() {
-		return function(obj, key, value, isEnumerable = true) {
-			Object.defineProperty(obj, key, {
-				enumerable: isEnumerable,
-				get: function() {
-					return value;
-				}
-			});
-		};
-	}
-});
-
-// 增加wx对象添加新属性
-$.$$define($, '$define', function(key, value, isEnumerable = true) {
-	$.$$define($, '$' + key, value, isEnumerable);
-});
-
 // 系统信息
 const systemInfo = $.getSystemInfoSync();
 $.$define('systemInfo', systemInfo);
@@ -44,6 +24,21 @@ $.$define('isShowPage', function(pageObj) {
 	return getCurrentPages()[0].route === pageObj.route;
 });
 
+/**
+ * 返回上一页面实例
+ * @param {*} pageObj
+ * @return {boolean}
+ */
+$.$define('prePage', function(pageObj) {
+	const pages = getCurrentPages();
+	const prePage = pages[pages.length - 2];
+
+	// #ifdef H5
+	return prePage;
+	// #endif
+
+	return prePage.$vm;
+});
 
 // 数组转对象
 $.$define('arr2obj', function(prefix, data, initIndex = 0) {

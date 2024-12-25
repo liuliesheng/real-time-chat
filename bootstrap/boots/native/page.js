@@ -4,9 +4,9 @@ if (typeof Page !== "undefined") {
 	Page = function(options) {
 		const pageMixin = (function() {
 			try {
-				return require('../../../config/page.js');
+				return require('../../../common/config/page.js');
 			} catch (e) {
-				console.warn("/config/page.js not found!");
+				console.warn("/common/config/page.js not found!");
 				return {};
 			}
 		})();

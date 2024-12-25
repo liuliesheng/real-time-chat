@@ -4,13 +4,13 @@ import $ from "../$";
 let config = null;
 
 try {
-	config = require('../../config/app.js');
+	config = require('../../common/config/app.js');
 
 	if (typeof config === 'function') {
 		config = config() || {};
 	}
 } catch (e) {
-	console.warn(e);
+	console.warn("/common/config/app.js not found!");
 	config = {};
 }
 

@@ -1,6 +1,5 @@
 /** @var {*} $ */
 import $ from "../../../$";
-import {emitter} from "../../../events";
 
 /**
  * 调用并授权地理位置权限
