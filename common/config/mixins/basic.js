@@ -47,16 +47,36 @@ export default {
 
 	// 图片预览
 	previewImage: function(e) {
-		let current = e.currentTarget.dataset.current;
+		let current = e.target.dataset.current;
 		let urls = e.currentTarget.dataset.urls;
-		if (typeof urls == 'string') {
-			const ceil = [];
-			ceil.push(urls);
-			urls = ceil;
+		if (current === undefined) {
+			return;
 		}
+
+		if (typeof urls == 'string') {
+			urls = urls.split(',');
+		}
+
+		let index = parseInt(current);
+		if (!isNaN(index)) {
+			current = urls[index];
+		}
+
 		wx.previewImage({
 			current: current, // 当前显示图片的http链接
-			urls: urls // 需要预览的图片http链接列表
+			urls: urls, // 需要预览的图片http链接列表
+			showmenu: true,
 		})
+	},
+
+	// 图片懒加载函数处理
+	imageOnLoad: function(data, key) {
+		setTimeout(() => {
+			this.$set(data, 'loaded', true);
+		}, 100)
+	},
+
+	// 事件停止向上传递
+	stopPrevent: function() {
 	},
 };

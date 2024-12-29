@@ -330,10 +330,24 @@ Validate.is = function(value, rule) {
 		result = Validate.regex(value, /^[a-zA-Z0-9\u4e00-\u9fa5]+$/u);
 	} else if (rule === 'chsDash') {// 只允许汉字、字母、数字和下划线_及破折号-
 		result = Validate.regex(value, /^[a-zA-Z0-9_\-\u4e00-\u9fa5]+$/u);
-	} else if (rule === 'mobile') {//是否为有效手机号
+	} else if (rule === 'mobile') {// 是否为有效手机号
 		result = Validate.regex(value, /^[1][0-9]{10}$/);
-	} else if (rule === 'tel') {//是否为有效的电话号码
+	} else if (rule === 'tel') {// 是否为有效的电话号码
 		result = Validate.regex(value, /^(([0+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/);
+	} else if (rule === 'card') {// 是否为有效的身份证
+		result = Validate.regex(value, /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/);
+	} else if (rule === 'mobileCode') {// 是否为有效的6位数字验证码
+		result = Validate.regex(value, /^[0-9]{6}$/);
+	} else if (rule === 'pwd') {// 是否为有效的密码：以字母开头，长度在6~18之间，只能包含字母、数字和下划线
+		result = Validate.regex(value, /^([a-zA-Z0-9_]){6,18}$/);
+	} else if (rule === 'payPwd') {// 是否为有效的支付密码 6位纯数字
+		result = Validate.regex(value, /^[0-9]{6}$/);
+	} else if (rule === 'postal') {// 是否为有效的邮政编码
+		result = Validate.regex(value, /[1-9]\d{5}(?!\d)/);
+	} else if (rule === 'QQ') {// 是否为有效的QQ号
+		result = Validate.regex(value, /^[1-9][0-9]{4,9}$/);
+	} else if (rule === 'money') {// 是否为有效的金额(小数点2位)
+		result = Validate.regex(value, /^\d*(?:\.\d{0,2})?$/);
 	} else if (rule === 'email') {// 是否为邮箱地址
 		result = Validate.regex(value, /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/);
 	} else if (rule === 'ip') {// 是否为IP地址

@@ -26,3 +26,11 @@ if (componentMixin.methods) {
 	}
 }
 
+// 价格过滤器
+Vue.filter('price', function(price, fixed = 0) {
+	if (!price || isNaN(price)) {
+		return 0
+	}
+	return fixed > 0 ? parseFloat(price).toFixed(fixed) : +parseFloat(price).toFixed(2);
+})
+

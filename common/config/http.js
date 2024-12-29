@@ -4,11 +4,13 @@ import login from './logins/basic.js';
 // import login from './logins/account.js';
 
 // http基础配置
-const baseURL = 'http://localhost/api';
+const baseURL = 'http://mall.test.com/api';
 module.exports = {
 	defaults: {
 		baseURL: baseURL,
+		returnRaw: false,
 
+		// Login
 		login: login,
 		loginDenyAuthMsg: '此操作需要您先授权！',
 		loginFailedMsg: '登录失败，请稍后再试~',

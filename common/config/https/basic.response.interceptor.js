@@ -44,7 +44,7 @@ export default {
 			}
 		}
 
-		return config.returnRaw ? response : data;
+		return config.returnRaw ? response : data.data;
 	},
 	rejected: function(err) {
 		console.error('request system error:', err);
