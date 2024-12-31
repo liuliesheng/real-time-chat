@@ -3,7 +3,7 @@ const $ = uni;
 $.$$define(uni, 'getUserInfo', function(options) {
 	options.success({
 		userInfo: {
-			avatarUrl: '/static/images/icons/logo.png',
+			avatarUrl: '/static/logo.png',
 			nickName: '小白',
 			gender: 1,
 			province: '河南',

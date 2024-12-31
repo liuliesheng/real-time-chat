@@ -26,18 +26,22 @@ $.$define('isShowPage', function(pageObj) {
 
 /**
  * 返回上一页面实例
- * @param {*} pageObj
+ * @param {function} [cb]
  * @return {boolean}
  */
-$.$define('prePage', function(pageObj) {
+$.$define('prePage', function(cb) {
 	const pages = getCurrentPages();
 	const prePage = pages[pages.length - 2];
 
-	// #ifdef H5
-	return prePage;
-	// #endif
+	if (cb && prePage) {
+		cb(prePage.$vm ? prePage.$vm : prePage);
+	}
 
-	return prePage.$vm;
+	if(!prePage){
+		return null;
+	}
+
+	return prePage.$vm ? prePage.$vm : prePage;
 });
 
 // 数组转对象

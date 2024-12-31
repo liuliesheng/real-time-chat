@@ -130,6 +130,24 @@
 			}
 		},
 		{
+			"path": "pages/mall/refund/apply",
+			"style": {
+				"navigationBarTitleText": "申请退款/退货"
+			}
+		},
+		{
+			"path": "pages/mall/refund/list",
+			"style": {
+				"navigationBarTitleText": "退款/售后"
+			}
+		},
+		{
+			"path": "pages/mall/refund/detail",
+			"style": {
+				"navigationBarTitleText": "退款详情"
+			}
+		},
+		{
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTextStyle": "white",
@@ -168,7 +186,25 @@
 				"navigationBarTitleText": "设置"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/user/address/list",
+            "style" :
+            {
+                "navigationBarTitleText": "收货地址",
+                "enablePullDownRefresh": true
+            }
+
+        }
+        ,{
+            "path" : "pages/user/address/edit",
+            "style" :
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+
+        }
+    ],
 	"globalStyle": {
 		// #ifdef H5
 		"navigationStyle": "custom",
