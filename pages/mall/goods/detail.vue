@@ -1,14 +1,14 @@
 <template>
 	<view class="page" v-if="loaded">
-		<XLoading/>
-		<Hint/>
+		<XLoading />
+		<Hint />
 
 		<!-- 商品轮播图 -->
 		<view class="" style="overflow: hidden;">
 			<swiper class="screen-swiper round-dot" style="min-height: 356upx;"
-				:indicator-dots="true" :circular="true"
-				:autoplay="true" interval="5000" duration="500"
-				@tap="previewImage" :data-urls="swiperList" :data-current="index">
+			        :indicator-dots="true" :circular="true"
+			        :autoplay="true" interval="5000" duration="500"
+			        @tap="previewImage" :data-urls="swiperList" :data-current="index">
 				<swiper-item v-for="(item,index) in swiperList" :key="index" :data-current="index">
 					<image :src="item" mode="aspectFill"></image>
 				</swiper-item>
@@ -22,7 +22,7 @@
 			<view class="margin-top">
 				<text class="text-price text-red text-xl">{{ info.price }}</text>
 				<text class="text-price text-gray margin-left-sm"
-					style="text-decoration: line-through;">{{ info.market_price }}
+				      style="text-decoration: line-through;">{{ info.market_price }}
 				</text>
 			</view>
 
@@ -116,7 +116,7 @@
 		<view class="padding bg-white margin-top">
 			<view class="text-black text-center padding">图文详情</view>
 			<view class="rich-text margin-top">
-				<MPHtml :content="info.content"/>
+				<MPHtml :content="info.content" />
 			</view>
 		</view>
 		<!-- /商品详情 -->
@@ -132,32 +132,30 @@
 				<view class="cuIcon-favorfill"></view>
 				已收藏
 			</view>
-			<!--			<view class="action">-->
-			<!--				<view class="cuIcon-cart">-->
-			<!--					<view class="cu-tag badge">99</view>-->
-			<!--				</view>-->
-			<!--				购物车-->
-			<!--			</view>-->
-			<view class="bg-orange submit">加入购物车
-				<view class="cu-tag badge">99</view>
+			<view class="action">
+				<view class="cuIcon-cart">
+					<view class="cu-tag badge">99</view>
+				</view>
+				购物车
 			</view>
+			<view class="bg-orange submit">加入购物车</view>
 			<view class="bg-red submit">立即订购</view>
 		</view>
 	</view>
-	<PageLoad v-else/>
+	<PageLoad v-else />
 </template>
 
 <script>
-import MPHtml from '@/components/mp-html/mp-html'
+	import MPHtml from '@/components/mp-html/mp-html'
 
-export default {
+	export default {
 		components: {
 			MPHtml
 		},
 		data() {
 			return {
 				info: null,
-				loaded:false,
+				loaded: false,
 				chooseSpec: false,
 			};
 		},

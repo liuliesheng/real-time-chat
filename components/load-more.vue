@@ -1,5 +1,5 @@
 <template>
-	<view class="cu-load" :class="isLoading?'loading':'over'"></view>
+	<view class="cu-load text-gray" :class="isLoading?'loading':'over'"></view>
 </template>
 
 <script>

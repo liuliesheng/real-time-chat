@@ -4,7 +4,7 @@
 		      v-if="listType === 'row'"
 		      v-for="item in list"
 		      :key="item.id"
-			  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
+		      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
 			<view class="image-wrapper radius" :class="{loaded: item.loaded}">
 				<image :src="item.cover"
 				       mode="aspectFill"
@@ -94,6 +94,7 @@
 
 	.text-price {
 		font-size: 36rpx;
+		font-weight: bold;
 	}
 
 	.m-price {

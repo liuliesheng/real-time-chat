@@ -5,49 +5,9 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/index/examples",
-			"style": {
-				"navigationBarTitleText": "案例页面"
-			}
-		},
-		{
-			"path": "pages/examples/feedback",
-			"style": {
-				"navigationBarTitleText": "意见反馈"
-			}
-		},
-		{
-			"path": "pages/examples/upload",
-			"style": {
-				"navigationBarTitleText": "文件上传"
-			}
-		},
-		{
-			"path": "pages/examples/timer",
-			"style": {
-				"navigationBarTitleText": "计时器"
-			}
-		},
-		{
-			"path": "pages/examples/listener/a",
-			"style": {
-				"navigationBarTitleText": "监听器-A"
-			}
-		},
-		{
-			"path": "pages/examples/listener/b",
-			"style": {
-				"navigationBarTitleText": "监听器-B"
-			}
-		},
-		{
-			"path": "pages/examples/getUserInfo",
-			"style": {
-				"navigationBarTitleText": "获取用户信息"
+				"navigationStyle": "custom",
+				"disableScroll": false, //删除此项: mescroll-body必须允许原生页面滚动, 默认false
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -181,30 +141,70 @@
 			}
 		},
 		{
+			"path": "pages/auth/agreement",
+			"style": {
+				"navigationBarTitleText": "协议",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/user/settings",
 			"style": {
 				"navigationBarTitleText": "设置"
 			}
+		},
+		{
+			"path": "pages/user/address/list",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
+			"path": "pages/user/address/edit",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/examples/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path": "pages/examples/upload",
+			"style": {
+				"navigationBarTitleText": "文件上传"
+			}
+		},
+		{
+			"path": "pages/examples/timer",
+			"style": {
+				"navigationBarTitleText": "计时器"
+			}
+		},
+		{
+			"path": "pages/examples/listener/a",
+			"style": {
+				"navigationBarTitleText": "监听器-A"
+			}
+		},
+		{
+			"path": "pages/examples/listener/b",
+			"style": {
+				"navigationBarTitleText": "监听器-B"
+			}
+		},
+		{
+			"path": "pages/examples/getUserInfo",
+			"style": {
+				"navigationBarTitleText": "获取用户信息"
+			}
 		}
-	    ,{
-            "path" : "pages/user/address/list",
-            "style" :
-            {
-                "navigationBarTitleText": "收货地址",
-                "enablePullDownRefresh": true
-            }
-
-        }
-        ,{
-            "path" : "pages/user/address/edit",
-            "style" :
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-
-        }
-    ],
+	],
 	"globalStyle": {
 		// #ifdef H5
 		"navigationStyle": "custom",
