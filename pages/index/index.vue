@@ -88,7 +88,7 @@
 					<navigator class="content" url="/pages/mall/shopping-cart">购物车</navigator>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/mall/order-list">订单列表</navigator>
+					<navigator class="content" url="/pages/mall/order/list">订单列表</navigator>
 				</view>
 			</view>
 

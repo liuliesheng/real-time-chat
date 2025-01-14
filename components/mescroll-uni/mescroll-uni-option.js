@@ -15,7 +15,7 @@ const GlobalOption = {
 	up: {
 		// 其他up的配置参数也可以写,这里只展示了常用的配置:
 		textLoading: '加载中 ...', // 加载中的提示文本
-		textNoMore: '-- END --', // 没有更多数据的提示文本
+		textNoMore: '☺没有更多了', // 没有更多数据的提示文本
 		offset: 150, // 距底部多远时,触发upCallback,仅mescroll-uni生效 ( mescroll-body配置的是pages.json的 onReachBottomDistance )
 		toTop: {
 			// 回到顶部按钮,需配置src才显示

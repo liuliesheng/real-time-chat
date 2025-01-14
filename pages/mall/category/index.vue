@@ -21,20 +21,17 @@
 					{{item.title}}
 				</view>
 			</scroll-view>
-			<scroll-view class="VerticalMain" scroll-y scroll-with-animation
-			             style="height:100vh" :scroll-into-view="'main-'+mainCur"
-			             @scroll="VerticalMain">
-				<view class="" v-if="choiceCate">
-					<view class="cu-bar solid-bottom bg-white">
-						<view class="action">
-							<text class="cuIcon-title text-green"></text> {{choiceCate.title}}
-						</view>
-					</view>
+			<view class="VerticalMain" style="height:100vh">
+				<mescroll-uni class="VerticalMain" ref="mescrollRef"
+				              :fixed="false"
+				              @init="mescrollInit"
+				              @down="downCallback"
+				              @up="upCallback">
 					<view class="cu-list goods-list">
 						<view class="cu-item flex padding-sm" v-for="(item,index) in data"
 						      :key="item.id" :id="'main-'+item.id"
-							  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
-							<view class="image-wrapper cu-avatar radius lg" :class="{loaded: item.loaded}">
+						      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
+							<view class="image-wrapper radius lg" :class="{loaded: item.loaded}">
 								<image :src="item.cover" mode="aspectFit" lazy-load="true"
 								       @load="imageOnLoad(item)"></image>
 							</view>
@@ -50,17 +47,17 @@
 							</view>
 						</view>
 					</view>
-					
-					<LoadMore v-if="data.length" :isLoading="more" />
-				</view>
-			</scroll-view>
+				</mescroll-uni>
+			</view>
 		</view>
 	</view>
 	<PageLoad v-else />
 </template>
 
 <script>
+	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 	export default {
+		mixins: [MescrollMixin],
 		data() {
 			return {
 				categories: [],
@@ -82,11 +79,6 @@
 		onLoad() {
 			this.loadData();
 		},
-		onPullDownRefresh() {
-			this.loadData().finally(() => {
-				uni.stopPullDownRefresh();
-			});
-		},
 		methods: {
 			loadData() {
 				return uni.$model.mall.getCategoryList().then((res) => {
@@ -100,7 +92,13 @@
 					} else {
 						this.data = [];
 					}
-
+				});
+			},
+			upCallback(mescroll) {
+				this.loadGoodsData(mescroll.num).then((res) => {
+					mescroll.endSuccess(res.data.length, this.more);
+				}, () => {
+					mescroll.endErr();
 				});
 			},
 			loadGoodsData(page = 1) {
@@ -113,13 +111,15 @@
 					this.more = res.data.length >= res.per_page;
 					this.page = page;
 					this.loaded = true;
+
+					return res;
 				});
 			},
 			TabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
 				// this.mainCur = e.currentTarget.dataset.id;
 				// this.verticalNavTop = (e.currentTarget.dataset.id - 1) * 50;
-				this.loadGoodsData();
+				this.mescroll.resetUpScroll(true);
 			},
 			VerticalMain(e) {
 				return false;
