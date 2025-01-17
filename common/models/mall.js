@@ -68,14 +68,32 @@ export default {
 
 	// 获取订单列表
 	getOrderList(query, options) {
-		return uni.$http.get('/plugin/mall/order', query, options);
+		return uni.$http.get('/plugin/mall/order', query, options).then((res) => {
+			res.data.forEach((item) => {
+				const { stateTip, stateTipColor } = this.parseOrderState(item.order_status);
+				item.stateTip = stateTip;
+				item.stateTipColor = stateTipColor;
+
+				item.goods_num = item.goods.reduce(function(result, it) {
+					return result + it.goods_num;
+				}, 0);
+			});
+
+			return res;
+		})
 	},
 
 	// 获取订单详情
 	getOrderDetail(id, options) {
 		return uni.$http.get('/plugin/mall/order/detail', {
 			id: id
-		}, options);
+		}, options).then((res) => {
+			const { stateTip, stateTipColor } = this.parseOrderState(res.order_status);
+			res.stateTip = stateTip;
+			res.stateTipColor = stateTipColor;
+
+			return res;
+		});
 	},
 
 	// 获取订单支付信息
@@ -109,6 +127,13 @@ export default {
 		return uni.$http.post('/plugin/mall/order/evaluate', data, options);
 	},
 
+	// 获取订单物流信息
+	getExpressTracks(orderId, options) {
+		return uni.$http.post('/plugin/mall/express', {
+			order_id: orderId
+		}, options);
+	},
+
 	// 获取预退款信息
 	getRefundApplyInfo(query, options) {
 		return uni.$http.get('/plugin/mall/refund_apply', query, options);
@@ -130,4 +155,29 @@ export default {
 			id: id
 		}, options);
 	},
+
+	// 获取订单状态
+	parseOrderState(state) {
+		state = parseInt(state);
+		let stateTip = '',
+			stateTipColor = '#909399';
+		if (0 === state) {
+			stateTip = '已取消';
+			stateTipColor = '#909399';
+		} else if (10 === state) {
+			stateTip = '待付款';
+		} else if (20 === state) {
+			stateTip = '待发货';
+		} else if (30 === state) {
+			stateTip = '待收货';
+		} else if (40 === state) {
+			stateTip = '待评价';
+		} else if (50 === state) {
+			stateTip = '已完成';
+		} else if (50 === state) {
+			stateTip = '已关闭';
+			stateTipColor = '#909399';
+		}
+		return { stateTip, stateTipColor };
+	}
 }

@@ -32,5 +32,10 @@ Vue.filter('price', function(price, fixed = 0) {
 		return 0
 	}
 	return fixed > 0 ? parseFloat(price).toFixed(fixed) : +parseFloat(price).toFixed(2);
-})
+});
 
+// 日期
+Vue.filter('date', (timeStamp, isSeconds = false) => {
+	if (!timeStamp) return '';
+	return uni.$timeUtil.format.datetime(timeStamp, isSeconds);
+})

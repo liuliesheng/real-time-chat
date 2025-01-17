@@ -83,18 +83,22 @@
 					<text>我的收藏</text>
 				</navigator>
 			</view>
+			<!-- #ifndef MP -->
 			<view class="cu-item arrow">
 				<navigator class="content" url="/pages/auth/rest.password">
 					<text class="cuIcon-circlefill text-grey"></text>
 					<text>修改密码</text>
 				</navigator>
 			</view>
+			<!-- #endif -->
+			<!-- #ifdef MP -->
 			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/examples/feedback">
+				<button open-type="feedback" class="content text-left">
 					<text class="cuIcon-commentfill text-grey"></text>
 					<text>意见反馈</text>
-				</navigator>
+				</button>
 			</view>
+			<!-- #endif -->
 		</view>
 	</view>
 </template>
@@ -251,6 +255,7 @@
 
 	.order-status .cu-list [class*=cuIcon] {
 		color: #fa436a;
+		font-size: 28px;
 	}
 
 	.cu-list.card-menu {

@@ -86,8 +86,17 @@
 		{
 			"path": "pages/mall/order/detail",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "订单详情"
 			}
+		},
+		{
+			"path": "pages/mall/order/express",
+			"style": {
+				"navigationBarTitleText": "物流信息",
+				"enablePullDownRefresh": true
+			}
+
 		},
 		{
 			"path": "pages/mall/refund/apply",
