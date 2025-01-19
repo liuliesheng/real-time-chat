@@ -3,11 +3,8 @@
 		<XLoading />
 		<Hint />
 
-		<view class="logo">
-			<image src="/static/logo.png" @tap="loadModal=true" />
-		</view>
-
-		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
+		<mescroll-body ref="mescrollRef" :up="mescrollOptions.up" @init="mescrollInit"
+		               @down="downCallback" @up="upCallback">
 			<view class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
 					<text class="cuIcon-titles text-green"></text>
@@ -129,6 +126,12 @@
 		data() {
 			return {
 				loaded: true,
+
+				mescrollOptions: {
+					up: {
+						use: false
+					}
+				}
 			};
 		},
 		onLoad() {
@@ -157,8 +160,9 @@
 			},
 			downCallback() {
 				// this.mescroll.resetUpScroll();
-				// this.mescroll.endSuccess();
-				console.log('ssss')
+				setTimeout(() => {
+					this.mescroll.endSuccess();
+				}, 1500);
 			}
 		}
 	};

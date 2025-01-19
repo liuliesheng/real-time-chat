@@ -160,7 +160,7 @@
 			this.loadData(this.page + 1);
 		},
 		methods: {
-			// 加载地址
+			// 加载信息
 			loadData: function(page = 1) {
 				return uni.$model.mall.getShoppingCartList({
 					page: page,

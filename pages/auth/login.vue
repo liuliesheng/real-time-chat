@@ -25,7 +25,7 @@
 			<view class="block text-sm margin-lr" @tap="checkAgreement">
 				<text :class="agreement?'cuIcon-roundcheckfill text-blue':'cuIcon-roundcheck'"></text>
 				<text class="title">请认真阅读并同意</text>
-				<text class="text-blue" @click="navToAgreementDetail('login')">《用户服务协议》</text>
+				<text class="text-blue" @click="navToAgreementDetail('member')">《用户服务协议》</text>
 				<text class="text-blue" @click="navToAgreementDetail('privacy')">《隐私权政策》</text>
 			</view>
 
