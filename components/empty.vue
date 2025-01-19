@@ -1,6 +1,13 @@
 <template>
 	<view class="component">
-		<image src="/static/empty.png" mode="widthFix" class="img"></image>
+		<image src="/static/empty/default.png" mode="widthFix" class="img"></image>
+		<view class="padding-lr padding-tb-sm text-center text-black text-lg">
+			购物车是空的
+		</view>
+		<view class="padding text-center" v-if="btns.length">
+			<button class="cu-btn round margin-right" v-for="(item,index) in btns" :key="index"
+			        :class="item.class" @tap="item.click">{{item.text}}</button>
+		</view>
 	</view>
 </template>
 
@@ -10,6 +17,12 @@
 			return {
 
 			};
+		},
+		props: {
+			btns: {
+				type: Array,
+				default: () => []
+			}
 		}
 	}
 </script>

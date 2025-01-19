@@ -27,7 +27,7 @@ export default {
 	},
 
 	// 获取购物车列表
-	createShoppingCart(data, options) {
+	addShoppingCart(data, options) {
 		return uni.$http.post('/plugin/mall/shopping_cart/create', data, options);
 	},
 

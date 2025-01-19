@@ -2,6 +2,11 @@ import $ from '../../../bootstrap/$';
 import { attachGetParams, resolveLoading, makeBasicGetParams } from "./util";
 
 export default function(config) {
+	// 自动判断成功时是否需要提示
+	if (config.successTips === undefined) {
+		config.successTips = ['post', 'put'].indexOf(config.method) !== -1;
+	}
+
 	// 是否显示加载条
 	// config.loading = true;
 	if (config.loading) {

@@ -210,9 +210,10 @@
 	}
 
 	.goods-list .cu-item .title {
-		display: block;
 		color: #333333;
-		height: 70upx;
+		font-size: 14px;
+		line-height: 1.2;
+		height: 33.6px;
 	}
 
 	.goods-list .cu-item .image-wrapper {

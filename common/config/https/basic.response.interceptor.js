@@ -1,10 +1,10 @@
 import $ from '../../../bootstrap/$';
-import {resolveHint, resolveModal} from './util';
+import { resolveHint, resolveModal } from './util';
 import login from "./login";
 
 export default {
 	fulfilled: function(response) {
-		const {config, data} = response;
+		const { config, data } = response;
 		const hint = resolveHint(config);
 		const showModal = resolveModal(config);
 
@@ -32,15 +32,15 @@ export default {
 		}
 
 		// 是否强制提示信息
-		if (data.is_force_tips) {
-			const method = res.is_force_tips === true ? 'modal' : res.is_force_tips;
-			if (method === 'toast') {
-				hint.hintSuccess(data.forceTipMsg || data.msg);
-			} else {
+		if (data.is_force_tips || config.successTips) {
+			const tipType = data.is_force_tips === true ? 'modal' : data.is_force_tips;
+			if (tipType === 'modal') {
 				showModal({
 					content: data.forceTipMsg || data.msg,
 					showCancel: false
 				});
+			} else {
+				hint.hintSuccess(data.forceTipMsg || data.msg);
 			}
 		}
 

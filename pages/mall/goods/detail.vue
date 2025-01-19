@@ -8,7 +8,7 @@
 			<swiper class="screen-swiper round-dot" style="min-height: 356upx;"
 			        :indicator-dots="true" :circular="true"
 			        :autoplay="true" interval="5000" duration="500"
-			        @tap="previewImage" :data-urls="swiperList" :data-current="index">
+			        @tap="previewImage" :data-urls="swiperList">
 				<swiper-item v-for="(item,index) in swiperList" :key="index" :data-current="index">
 					<image :src="item" mode="aspectFill"></image>
 				</swiper-item>
@@ -121,25 +121,34 @@
 		</view>
 		<!-- /商品详情 -->
 
-		<view class="cu-bar bg-white tabbar border shop foot">
+		<view class="cu-bar bg-white tabbar shop foot">
+			<!-- #ifdef MP -->
 			<button class="action" open-type="contact">
-				<view class="cuIcon-service text-green">
-					<view class="cu-tag badge"></view>
-				</view>
-				客服
+				<view class="cuIcon-service text-green"></view>
+				<text>客服</text>
 			</button>
-			<view class="action text-orange">
-				<view class="cuIcon-favorfill"></view>
-				已收藏
+			<!-- #endif -->
+			<view class="action" @tap="toggleFavorite">
+				<template v-if="info.is_favorite">
+					<view class="cuIcon-favorfill text-orange"></view>
+					<text>已收藏</text>
+				</template>
+				<template v-else>
+					<view class="cuIcon-favor"></view>
+					<text>收藏</text>
+				</template>
 			</view>
-			<view class="action">
+			<view class="action" @tap="linkTo" data-url="../shopping-cart">
 				<view class="cuIcon-cart">
-					<view class="cu-tag badge">99</view>
+					<view class="cu-tag badge">{{info.cart_count}}</view>
 				</view>
 				购物车
 			</view>
-			<view class="bg-orange submit">加入购物车</view>
-			<view class="bg-red submit">立即订购</view>
+			<view class="btn-group flex">
+				<view class="cu-btn bg-gradual-orange round flex-sub" @tap="toShoppingCart">加入购物车</view>
+				<view class="cu-btn bg-gradual-red round flex-sub margin-left-sm"
+				      @tap="toShoppingCart">立即订购</view>
+			</view>
 		</view>
 	</view>
 	<PageLoad v-else />
@@ -191,7 +200,63 @@
 					this.info = res;
 					this.loaded = true;
 				});
-			}
+			},
+			// 商品收藏
+			toggleFavorite() {
+				const options = {
+					loading: this,
+					hint: this
+				};
+				if (!this.info.is_favorite) {
+					return uni.$model.favorite.favorite('goods', this.id, options).then(res => {
+						this.info.is_favorite = 1;
+					});
+				} else {
+					return uni.$model.favorite.unfavorite('goods', this.id, options).then(res => {
+						this.info.is_favorite = 0;
+					});
+				}
+			},
+			// 开始加入购物车
+			toShoppingCart() {
+				if (this.info.is_multi) { //是否多规格
+
+				} else {
+					this.addShoppingCart();
+				}
+			},
+			// 加入购物车
+			addShoppingCart() {
+				return uni.$model.mall.addShoppingCart({
+					goods_id: this.id,
+					count: 1
+				}, {
+					loading: this,
+					hint: this
+				}).then(count => {
+					info.cart_count = count;
+				});
+			},
+			// 开始立即购买
+			toBuy() {
+				if (this.info.is_multi) { //是否多规格
+
+				} else {
+					this.goBuy();
+				}
+			},
+			// 立即购买
+			goBuy() {
+				return uni.$model.mall.addShoppingCart({
+					goods_id: this.id,
+					count: 1
+				}, {
+					loading: this,
+					hint: this
+				}).then(res => {
+					this.info.is_favorite = 1;
+				});
+			},
 		}
 	}
 </script>
@@ -199,6 +264,19 @@
 <style scoped>
 	.cu-item-title {
 		width: 140rpx;
+	}
+
+	.cu-bar.tabbar.shop .action {
+		width: 108upx;
+		font-size: 20upx;
+	}
+
+	.cu-bar.tabbar.shop .action [class*="cuIcon-"] {
+		width: 54upx;
+	}
+
+	.cu-bar.tabbar .btn-group {
+		justify-content: space-between;
 	}
 
 	.cu-dialog.spec-dialog {

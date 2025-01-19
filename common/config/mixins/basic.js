@@ -12,6 +12,18 @@ export default {
 		});
 	},
 
+	// 跳转
+	navTo: function(url) {
+		uni.navigateTo({
+			url: url,
+			fail() {
+				uni.switchTab({
+					url: url
+				});
+			}
+		});
+	},
+
 	// 绑定数据被改变
 	setValueChange: function(e) {
 		const dataset = e.currentTarget.dataset;
@@ -77,6 +89,5 @@ export default {
 	},
 
 	// 事件停止向上传递
-	stopPrevent: function() {
-	},
+	stopPrevent: function() {},
 };

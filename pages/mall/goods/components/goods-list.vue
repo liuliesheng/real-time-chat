@@ -89,16 +89,16 @@
 		color: black;
 		font-size: 16px;
 		line-height: 1.2;
-		height: 76rpx;
+		height: 38.4px;
 	}
 
 	.text-price {
-		font-size: 36rpx;
+		font-size: 18px;
 		font-weight: bold;
 	}
 
 	.m-price {
-		font-size: 26rpx;
+		font-size: 13px;
 		text-decoration: line-through;
 		margin-left: 10rpx;
 		color: #999;

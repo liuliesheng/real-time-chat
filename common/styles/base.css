@@ -38,7 +38,7 @@ textarea {
 	width: 100%;
 	line-height: 44upx;
 	height: auto;
-	padding: 30upx 0;
+	/* padding: 30upx 0; */
 	font-size: 14px;
 }
 

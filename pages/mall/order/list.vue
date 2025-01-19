@@ -162,9 +162,10 @@
 
 	.goods-list .cu-item .title {
 		font-size: 16px;
+		line-height: 1.2;
 		font-weight: bold;
 		color: #333333;
-		height: 80upx;
+		height: 38.4px;
 	}
 
 	.goods-list .cu-item .image-wrapper {

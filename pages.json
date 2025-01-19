@@ -68,6 +68,7 @@
 		{
 			"path": "pages/mall/shopping-cart",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "购物车"
 			}
 		},

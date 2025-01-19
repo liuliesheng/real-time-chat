@@ -6,14 +6,18 @@ export default {
 	},
 
 	// 收藏
-	favorite(type, id, options = {}) {
-		return uni.$http.get('favorite/create', {
-			id: id
+	favorite(type, topicId, options = {}) {
+		return uni.$http.post('favorite/favorite', {
+			type: type,
+			topic_id: topicId,
 		}, options);
 	},
 
 	// 取消收藏
-	unfavorite(type, data, options = {}) {
-		return uni.$http.post('favorite/delete', data, options);
+	unfavorite(type, topicId, options = {}) {
+		return uni.$http.post('favorite/unfavorite', {
+			type: type,
+			topic_id: topicId
+		}, options);
 	},
 }
