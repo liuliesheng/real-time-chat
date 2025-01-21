@@ -16,20 +16,20 @@
 		<!--购物车列表-->
 		<view class="cu-list goods-list" v-if="data.length">
 			<view class="cu-item flex padding-sm"
-			      v-for="(item,index) in data" :key="item.id">
-				<view class="text-xxl" @tap="itemToggleChecked(item)">
+			      v-for="(item,index) in data" :key="item.id"
+			      @tap="linkTo" :data-url="'./goods/detail?id='+item.goods_id">
+				<view class="text-xxl" @tap.stop.prevent="itemToggleChecked(item)">
 					<text class="margin-right-xs" :class="item.checked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
 				</view>
-				<view class="image-wrapper radius lg" :class="{loaded: item.loaded}">
-					<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"
-					       @load="imageOnLoad(item)"></image>
+				<view class="image-wrapper radius lg">
+					<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
 				</view>
 				<view class="content flex-sub padding-lr-sm">
 					<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
 					<view class="text-gray text-sm margin-top-xs">
 						<text>{{ item.goods_spec || '' }}</text>
 					</view>
-					<view class="flex margin-top-xs">
+					<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
 						<view class="flex-sub text-lg text-bold">
 							<text class="text-price text-red">{{ item.goods_price }}</text>
 						</view>
@@ -65,7 +65,7 @@
 			</view>
 		</view>
 
-		<Empty :btns="emptyBtnList" v-if="!data.length"></Empty>
+		<Empty :btns="emptyBtnList" tips="购物车是空的" v-if="!data.length"></Empty>
 	</view>
 	<PageLoad v-else />
 </template>
@@ -79,7 +79,6 @@
 				data: [],
 				page: 1,
 				more: true,
-				keywords: '',
 				loaded: false,
 
 				isEdited: false,

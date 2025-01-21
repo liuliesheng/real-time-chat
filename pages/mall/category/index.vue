@@ -22,18 +22,16 @@
 				</view>
 			</scroll-view>
 			<view class="VerticalMain" style="height:100vh">
-				<mescroll-uni class="VerticalMain" ref="mescrollRef"
-				              :fixed="false"
-				              @init="mescrollInit"
-				              @down="downCallback"
-				              @up="upCallback">
+				<mescroll-uni class="VerticalMain" ref="mescrollRef" :fixed="false"
+				              @init="mescrollInit" @down="downCallback" @up="upCallback">
+
+					<!--商品列表-->
 					<view class="cu-list goods-list">
 						<view class="cu-item flex padding-sm" v-for="(item,index) in data"
 						      :key="item.id" :id="'main-'+item.id"
 						      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
-							<view class="image-wrapper radius lg" :class="{loaded: item.loaded}">
-								<image :src="item.cover" mode="aspectFit" lazy-load="true"
-								       @load="imageOnLoad(item)"></image>
+							<view class="image-wrapper radius lg">
+								<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
 							</view>
 							<view class="content flex-sub">
 								<view class="title ellipsis-2 text-black">{{ item.title }}</view>

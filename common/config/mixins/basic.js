@@ -82,8 +82,19 @@ export default {
 	},
 
 	// 图片懒加载函数处理
-	imageOnLoad: function(data, key) {
+	imageOnLoad: function(data) {
+		// if (!this.images) {
+		// 	this.$set(this, 'images', {
+		// 		defalut: {}
+		// 	});
+		// }
+
+		// if (!this.images[target]) {
+		// 	this.$set(this.images, target, {});
+		// }
+
 		setTimeout(() => {
+			// this.$set(this.images[target], id, true);
 			this.$set(data, 'loaded', true);
 		}, 100)
 	},

@@ -23,7 +23,7 @@
 					</view>
 				</view>
 
-				<view class="action">
+				<view class="action" @tap.stop.prevent="stopPrevent">
 					<view class="cuIcon-write text-bold" @tap="linkTo"
 					      :data-url="'/pages/user/address/edit?id='+item.id"></view>
 				</view>
@@ -76,6 +76,8 @@
 					this.more = res.data.length >= res.per_page;
 					this.page = page;
 					this.loaded = true;
+				}, () => {
+					uni.navigateBack();
 				});
 			},
 
@@ -113,13 +115,13 @@
 			checkAddress(item) {
 				if (this.source === 1) {
 					uni.$emitter.emit('address.choice', item);
-					if (uni.$prePage.onChoiceAddress) {
-						uni.$prePage.onChoiceAddress(item);
-					}
+					uni.$prePage(function(prePage) {
+						if (prePage.onChoiceAddress) {
+							prePage.onChoiceAddress(item);
+						}
+					});
 
 					uni.navigateBack();
-				} else {
-
 				}
 			},
 

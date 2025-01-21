@@ -82,9 +82,9 @@
 						颜色
 					</view>
 					<view class="flex-wrap spec-val-list margin-top-sm">
-						<view class="cu-tag round light bg-red">红色</view>
-						<view class="cu-tag round">蓝色</view>
-						<view class="cu-tag round">绿色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round light bg-red" style="height: auto;">红色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">蓝色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">绿色</view>
 					</view>
 				</view>
 
@@ -93,9 +93,9 @@
 						颜色
 					</view>
 					<view class="flex-wrap spec-val-list margin-top-sm">
-						<view class="cu-tag round light bg-red">红色</view>
-						<view class="cu-tag round">蓝色</view>
-						<view class="cu-tag round">绿色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round light bg-red" style="height: auto;">红色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">蓝色</view>
+						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">绿色</view>
 					</view>
 				</view>
 
@@ -147,7 +147,7 @@
 			<view class="btn-group flex">
 				<view class="cu-btn bg-gradual-orange round flex-sub" @tap="toShoppingCart">加入购物车</view>
 				<view class="cu-btn bg-gradual-red round flex-sub margin-left-sm"
-				      @tap="toShoppingCart">立即订购</view>
+				      @tap="toBuy">立即订购</view>
 			</view>
 		</view>
 	</view>
@@ -247,15 +247,9 @@
 			},
 			// 立即购买
 			goBuy() {
-				return uni.$model.mall.addShoppingCart({
-					goods_id: this.id,
-					count: 1
-				}, {
-					loading: this,
-					hint: this
-				}).then(res => {
-					this.info.is_favorite = 1;
-				});
+				uni.navigateTo({
+					url: '../order/create?goods_id=' + this.info.id
+				})
 			},
 		}
 	}
@@ -289,7 +283,7 @@
 	.spec-image {
 		width: 170rpx;
 		height: 170rpx;
-		margin-top: -40rpx;
+		margin-top: -60rpx;
 		flex-shrink: 0;
 	}
 </style>

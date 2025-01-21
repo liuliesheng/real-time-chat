@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import GoodsList from './goods/components/goods-list';
+import GoodsList from './components/goods-list';
 
 export default {
 	components: {

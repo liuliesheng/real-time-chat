@@ -27,7 +27,10 @@
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">基础</view>
+				<view class="action">
+					<text class="cuIcon-titles text-green"></text>
+					<text class="text-xl">基础</text>
+				</view>
 			</view>
 			<view class="cu-list menu sm-border">
 				<view class="cu-item arrow">
@@ -48,7 +51,10 @@
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">社区/论坛</view>
+				<view class="action">
+					<text class="cuIcon-titles text-green"></text>
+					<text class="text-xl">社区/论坛</text>
+				</view>
 			</view>
 			<view class="cu-list menu sm-border">
 				<view class="cu-item arrow">
@@ -69,7 +75,10 @@
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">商城</view>
+				<view class="action">
+					<text class="cuIcon-titles text-green"></text>
+					<text class="text-xl">商城</text>
+				</view>
 			</view>
 			<view class="cu-list menu sm-border">
 				<view class="cu-item arrow">
@@ -90,7 +99,10 @@
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
-				<view class="action">用户</view>
+				<view class="action">
+					<text class="cuIcon-titles text-green"></text>
+					<text class="text-xl">用户</text>
+				</view>
 			</view>
 			<view class="cu-list menu sm-border">
 				<view class="cu-item arrow">

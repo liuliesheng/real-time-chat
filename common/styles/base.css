@@ -192,36 +192,71 @@ navigator {
 	margin-bottom: 20upx;
 }
 
-.back-icon {
-	width: 64upx;
-	height: 64upx;
-	text-align: center;
-	line-height: 64upx;
-	border-radius: 32upx;
-	padding: 0;
-	background-color: rgba(255, 255, 255, 0.5);
-	float: left;
-	margin-right: 10upx;
-	/*box-shadow: 0 0 6upx rgba(0, 0, 0, 0.5);*/
-	/*position: fixed;*/
-	/*left: 30upx;*/
-	/*top: 70upx;*/
-	/*z-index: 99999999;*/
+/**
+ * ui样式
+ */
+.radius-xs {
+	border-radius: 2upx !important;
 }
 
-.back-icon .iconfont {
-	font-size: 40upx !important;
-	vertical-align: middle;
+.radius-sm {
+	border-radius: 6upx !important;
 }
 
-.wrap {
-	background-color: rgba(0, 0, 0, 0.1);
-	padding: 30upx;
-	margin-top: 30upx;
-	font-size: 12px;
+.radius {
+	border-radius: 10upx !important;
 }
 
-.shadow-wrap {
+.radius-lg {
+	border-radius: 14upx !important;
+}
+
+.radius-xl {
+	border-radius: 16upx !important;
+}
+
+.radius-xxl {
+	border-radius: 20upx !important;
+}
+
+.radius-sl {
+	border-radius: 30upx !important;
+}
+
+.radius-sl {
+	border-radius: 40upx !important;
+}
+
+/**
+ * 图片懒样式
+ */
+.image-wrapper {
 	position: relative;
-	box-shadow: 0 0 10upx rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.image-wrapper::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #F1F1F1;
+	background-size: 100% 100%;
+	opacity: 1;
+}
+
+.image-wrapper image {
+	position: relative;
+	z-index: 1;
+	background: transparent;
+	/* opacity: 0; */
+	width: 100%;
+	height: 100%;
+}
+
+.image-wrapper.loaded image {
+	transition: .7s;
+	opacity: 1 !important;
 }

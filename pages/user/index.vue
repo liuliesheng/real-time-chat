@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class="userinfo">
 			<image class="bg" src="/static/bg/user.jpg"></image>
-			<view class="userinfo-inner flex" v-if="hasUserInfo">
+			<view class="userinfo-inner flex" v-if="hasUserInfo1">
 				<image :src="userInfo.avatarUrl" background-size="cover"
 				       class="cu-avatar xl round userinfo-avatar"></image>
 				<view class="flex-sub padding-lr">
@@ -18,7 +18,7 @@
 		</view>
 
 		<!-- style="background-color: rgba(255,255,255,0.3);" -->
-		<view class="grid col-3 margin padding-tb-sm text-center bg-white radius">
+		<view class="grid col-3 margin padding-tb-sm text-center bg-white radius-lg">
 			<view class="padding-sm">
 				<text class="num">{{userInfo.balance||'0.00'}}</text>
 				<text class="text-sm">余额</text>
@@ -33,39 +33,9 @@
 			</view>
 		</view>
 
-		<view class="order-status margin radius">
-			<view class="flex padding-lr padding-top" @tap="linkTo" data-url="/pages/mall/order/list">
-				<text class="flex-sub text-bold">我的订单</text>
-				<view class="text-sm text-gray">
-					<text>全部订单</text>
-					<text class="cuIcon-right"></text>
-				</view>
-			</view>
-			<view class="cu-list grid col-5 no-border">
-				<view class="cu-item" @tap="linkTo" data-url="/pages/mall/order/list?state=10">
-					<view class="cuIcon-pay"></view>
-					<text class="text-sm">待付款</text>
-				</view>
-				<view class="cu-item" @tap="linkTo" data-url="/pages/mall/order/list?state=20">
-					<view class="cuIcon-deliver text-red lg"></view>
-					<text class="text-sm">待发货</text>
-				</view>
-				<view class="cu-item" @tap="linkTo" data-url="/pages/mall/order/list?state=30">
-					<view class="cuIcon-send text-red"></view>
-					<text class="text-sm">待收货</text>
-				</view>
-				<view class="cu-item" @tap="linkTo" data-url="/pages/mall/order/list?state=40">
-					<view class="cuIcon-evaluate text-red"></view>
-					<text class="text-sm">待评价</text>
-				</view>
-				<view class="cu-item" @tap="linkTo" data-url="/pages/mall/refund/list">
-					<view class="cuIcon-refund text-red"></view>
-					<text class="text-sm">退款/售后</text>
-				</view>
-			</view>
-		</view>
+		<OrderStatus />
 
-		<view class="cu-list menu sm-border card-menu radius margin-top">
+		<view class="cu-list menu sm-border card-menu radius-lg margin-top">
 			<view class="cu-item arrow">
 				<navigator class="content" url="/pages/user/address/list">
 					<text class="cuIcon-circlefill text-grey"></text>
@@ -78,7 +48,7 @@
 					<text>收货地址</text></navigator>
 			</view>
 			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/user/address/list">
+				<navigator class="content" url="/pages/mall/favorite/index">
 					<text class="cuIcon-favorfill text-grey"></text>
 					<text>我的收藏</text>
 				</navigator>
@@ -104,8 +74,12 @@
 </template>
 
 <script>
+	import OrderStatusNav from '@/pages/mall/components/order-status-nav.vue';
 	export default {
-		components: {},
+		components: {
+			OrderStatusNav
+		},
+		
 		/**
 		 * 页面的初始数据
 		 */
@@ -120,7 +94,7 @@
 		 * 生命周期函数--监听页面加载
 		 */
 		onLoad: function(options) {
-			wx.startPullDownRefresh();
+			this.$callHook('onPullDownRefresh');
 		},
 
 		/**

@@ -16,6 +16,11 @@ export default {
 		return uni.$http.get('/plugin/mall/goods/browseList', query, options);
 	},
 
+	// 获取商品收藏记录
+	getFavoriteList(query, options) {
+		return uni.$http.get('/plugin/mall/goods/favoriteList', query, options);
+	},
+
 	// 获取分类列表
 	getCategoryList(query, options) {
 		return uni.$http.get('/plugin/mall/category', query, options);

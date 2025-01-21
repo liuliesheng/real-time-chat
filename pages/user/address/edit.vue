@@ -68,7 +68,10 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$model.address.getDetail(this.id).then(res => {
+				return uni.$model.address.getDetail(this.id, {
+					loading: this,
+					hint: this
+				}).then(res => {
 					this.info = res;
 				});
 			},

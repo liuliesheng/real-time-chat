@@ -19,7 +19,7 @@
 				              @init="mescrollInit(tabIndex,$event)"
 				              @down="downCallback" @up="upCallback">
 
-					<PageLoad v-if="!tabItem.loaded" />
+					<PageLoad :content="true" v-if="!tabItem.loaded" />
 
 					<!-- 订单列表 -->
 					<view class="cu-card dynamic no-card margin-top"
@@ -100,7 +100,7 @@
 			return {};
 		},
 		onLoad(options) {
-			this.tabCur = parseInt(options.state || 0);
+			this.tabCur = parseInt(options.state) || 0;
 		},
 		methods: {
 			// 初始化滚动条
