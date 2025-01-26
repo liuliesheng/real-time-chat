@@ -22,7 +22,25 @@
 			</view>
 		</view>
 
-		<view class="cu-timeline">
+		<view class="bg-white order-info solid-bottom">
+			<view class="padding-lr padding-tb-sm text-sm">
+				<view class="flex">
+					<view class="title">物流单号：</view>
+					<view class="flex-sub">{{info.order.express_no}}</view>
+					<view class="text-blue" @tap="copy(info.express_no)">复制</view>
+				</view>
+				<view class="flex margin-top-sm">
+					<view class="title">物流名称：</view>
+					<view class="flex-sub">{{info.order.express_company}}</view>
+				</view>
+				<view class="flex margin-top-sm">
+					<view class="title">发货时间：</view>
+					<view class="flex-sub">{{info.order.delivery_time | date(true)}}</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="cu-timeline margin-top">
 			<view class="cu-time">至今</view>
 			<view class="cu-item" v-for="(item,index) in info.data" :key="index"
 			      :class="index===0?'cur text-blue':''">
@@ -74,6 +92,10 @@
 
 <style>
 	.page {
-		background-color: white;
+		/* background-color: white; */
+	}
+
+	.order-info .title {
+		width: 160upx;
 	}
 </style>

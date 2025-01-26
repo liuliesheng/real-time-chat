@@ -71,7 +71,7 @@
 </template>
 
 <script>
-	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue"
+	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue";
 	export default {
 		components: { uniNumberBox },
 		data() {
@@ -86,15 +86,11 @@
 				emptyBtnList: [{
 					text: '逛逛商城',
 					class: 'bg-red',
-					click: () => {
-						this.navTo('/pages/mall/index');
-					}
+					to: '/pages/mall/index',
 				}, {
 					text: '看看收藏',
 					class: 'line-red',
-					click: () => {
-						this.navTo('/pages/mall/favorite');
-					}
+					to: '/pages/mall/favorite/index'
 				}]
 			};
 		},

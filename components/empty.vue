@@ -6,7 +6,7 @@
 		</view>
 		<view class="padding text-center" v-if="btns.length">
 			<button class="cu-btn round margin-right" v-for="(item,index) in btns" :key="index"
-			        :class="item.class" @tap="item.click">{{item.text}}</button>
+			        :class="item.class" @tap="onBtnClick(item)">{{item.text}}</button>
 		</view>
 	</view>
 </template>
@@ -26,6 +26,23 @@
 			btns: {
 				type: Array,
 				default: () => []
+			}
+		},
+		methods: {
+			onBtnClick(item) {
+				console.log(item)
+				if (item.click) {
+					item.click();
+				} else if (item.to) {
+					uni.navigateTo({
+						url: item.to,
+						fail() {
+							uni.switchTab({
+								url: item.to
+							})
+						}
+					})
+				}
 			}
 		}
 	}

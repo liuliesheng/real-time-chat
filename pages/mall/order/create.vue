@@ -23,25 +23,24 @@
 		</view>
 
 		<!--商品列表-->
-		<view class="cu-list goods-list" v-if="info.goods.length">
+		<view class="cu-list goods-list" v-if="info.goods_list.length">
 			<view class="cu-item flex padding-sm"
-			      v-for="(item,index) in info.goods" :key="item.id"
+			      v-for="(item,index) in info.goods_list" :key="item.id"
 			      @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
 				<view class="image-wrapper radius lg">
 					<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
 				</view>
 				<view class="content flex-sub padding-lr-sm">
-					<view class="title ellipsis-2 text-black">{{ item.title }}</view>
+					<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
 					<view class="text-gray text-sm margin-top-xs">
-						<text>{{ item.spec || '' }}</text>
+						<text>{{ item.goods_spec || '' }}</text>
 					</view>
 					<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
 						<view class="flex-sub text-lg text-bold">
-							<text class="text-price text-red">{{ item.price }}</text>
+							<text class="text-price text-red">{{ item.goods_price }}</text>
 						</view>
 						<view style="display: inline-block;">
-							<uni-number-box :min="1" :max="100" size="sm"
-							                :value="item.num"
+							<uni-number-box :min="1" :max="100" size="sm" :value="item.goods_num"
 							                @change="changeItemNum(item,$event)">
 							</uni-number-box>
 						</view>
@@ -54,7 +53,7 @@
 		<view class="cu-list menu price-info">
 			<view class="cu-item">
 				<view class="content">商品金额</view>
-				<view class="action text-black text-price text-bold">0.00</view>
+				<view class="action text-black text-price text-bold">{{goodsTotalAmount}}</view>
 			</view>
 			<view class="cu-item">
 				<view class="content">运费</view>
@@ -71,18 +70,45 @@
 				<view class="content"></view>
 				<view class="action">
 					<text class="text-black">合计：</text>
-					<text class="text-red text-price text-bold">0.00</text>
+					<text class="text-red text-price text-bold">{{orderAmount}}</text>
 				</view>
 			</view>
 		</view>
 
+		<!--支付方式-->
+		<view class="cu-bar">
+			<view class="action">支付方式</view>
+		</view>
+		<radio-group class="block">
+			<!-- #ifndef MP-ALIPAY -->
+			<view class="cu-form-group" @tap.stop="payType='20'">
+				<view class="title">
+					<text class="text-xxl margin-right-xs">
+						<text class="cuIcon-weixin text-green"></text>
+					</text>
+					<text>微信支付</text>
+				</view>
+				<radio class='radio' :checked="payType=='20'"></radio>
+			</view>
+			<view class="cu-form-group" @tap.stop="payType='10'">
+				<view class="title">
+					<text class="text-xxl margin-right-xs" style="vertical-align: sub;">
+						<text class="cuIcon-card text-pink"></text>
+					</text>
+					<text>余额支付</text>
+				</view>
+				<radio class='radio' :checked="payType=='10'"></radio>
+			</view>
+			<!-- #endif -->
+		</radio-group>
+
 		<!--底部栏-->
 		<view class="cu-bar foot padding-lr bg-white">
 			<view class="flex-sub">
-				<text class="text-xxl text-price text-bold text-red">0.00</text>
+				<text class="text-xxl text-price text-bold text-red">{{orderAmount}}</text>
 			</view>
 			<view class="">
-				<button class="cu-btn bg-red round">提交订单</button>
+				<button class="cu-btn bg-red round" @tap="goOrder">提交订单</button>
 			</view>
 		</view>
 
@@ -95,17 +121,49 @@
 	export default {
 		data() {
 			return {
+				// 根据商品信息购买
 				goodsId: null,
+				goodsSkuId: null,
+				goodsNum: 1,
+
+				// 根据购物车信息购买
 				cartIds: null,
 
 				info: null,
-				loaded: false
+				loaded: false,
+
+				// 支付方式
+				payType: '10',
+
+				// 是否下单中
+				isGoOrder: false
 			};
 		},
+		computed: {
+			// 商品总金额
+			goodsTotalAmount() {
+				const result = this.info.goods_list.reduce((result, item) => {
+					return result.plus(item.goods_total_price);
+				}, uni.$BigNumber(0));
+				return result.toFixed(2);
+			},
+			// 订单支付金额
+			orderAmount() {
+				return this.goodsTotalAmount;
+			}
+		},
 		onLoad(options) {
-			if (options.goods_id) {
+			if (options.goods_id && options.goods_sku_id) {
 				this.goodsId = +options.goods_id;
+				this.goodsSkuId = +options.goods_sku_id;
+				this.goodsNum = +options.count;
+				this.goodsNum = this.goodsNum || 1;
 				if (!this.goodsId) {
+					uni.$hintError('参数错误！');
+					return uni.$delayNavigateBack(1500);
+				}
+
+				if (!this.goodsSkuId) {
 					uni.$hintError('参数错误！');
 					return uni.$delayNavigateBack(1500);
 				}
@@ -130,14 +188,20 @@
 				};
 				if (this.goodsId) {
 					return uni.$model.mall.getAdvanceOrderFormGoods({
-						goods_id: this.goodsId
+						goods_id: this.goodsId,
+						goods_sku_id: this.goodsSkuId,
+						goods_num: this.goodsNum,
 					}).then((res) => {
+						res.goods_list.forEach((item) => {
+							this.calcItemTotalPrice(item);
+						});
+
 						this.info = res;
 						this.loaded = true;
 					});
 				} else {
-					return uni.$model.mall.getAdvanceOrderFormShoppingCart({
-						goods_id: this.goodsId
+					return uni.$model.mall.getAdvanceOrderFormCart({
+						cart_ids: this.cartIds
 					}).then((res) => {
 						this.info = res;
 						this.loaded = true;
@@ -147,14 +211,65 @@
 
 			// 用户重新选择了地址
 			onChoiceAddress(info) {
-				console.log(info)
 				this.$set(this.info, 'user_address', info);
+			},
+
+			// 改变商品数量
+			changeItemNum(item, num) {
+				item.goods_num = num;
+				this.calcItemTotalPrice(item);
+				item.goods_total_price = uni.$BigNumber(item.goods_price).multipliedBy(num).toFixed(2);
+			},
+
+			// 计算商品总价格
+			calcItemTotalPrice(item) {
+				const totalPrice = uni.$BigNumber(item.goods_price)
+					.multipliedBy(item.goods_num).toFixed(2);
+				this.$set(item, 'goods_total_price', totalPrice);
+			},
+
+			// 立即下单
+			goOrder() {
+				this.isGoOrder = true;
+				const order = {
+					platform: 'wx_mini',
+					receiver_name: this.info.user_address.name,
+					receiver_phone: this.info.user_address.phone,
+					receiver_gender: this.info.user_address.gender,
+					receiver_province: this.info.user_address.province,
+					receiver_city: this.info.user_address.city,
+					receiver_district: this.info.user_address.district,
+					receiver_address: this.info.user_address.address,
+				};
+				if (this.goodsId) {
+					return uni.$model.mall.createOrderFormGoods(Object.assign({
+						goods_id: this.goodsId,
+						goods_sku_id: this.goodsSkuId,
+						goods_num: this.goodsNum,
+					}, order)).then((info) => {
+						uni.redirectTo({
+							url: './list'
+						});
+					}).finally(() => {
+						this.isGoOrder = false;
+					});
+				} else {
+					return uni.$model.mall.createOrderFormCart(Object.assign({
+
+					}, receiver)).finally(() => {
+						this.isGoOrder = false;
+					});
+				}
 			}
 		}
 	}
 </script>
 
 <style scoped>
+	.page {
+		padding-bottom: 130upx;
+	}
+
 	.user-address-default {
 		line-height: 1.2;
 		height: auto;

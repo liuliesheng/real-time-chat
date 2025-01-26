@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import mediaItem from './posts-list-item.vue';
+import mediaItem from './list-item.vue';
 // 缓存每页最多
 const MAX_CACHE_DATA = 100;
 // 缓存页签数量

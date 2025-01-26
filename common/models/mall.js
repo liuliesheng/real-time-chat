@@ -57,17 +57,17 @@ export default {
 	},
 
 	// 创建预下单 - 来自商品
-	createAdvanceOrderFormGoods(data, options) {
+	createOrderFormGoods(data, options) {
 		return uni.$http.post('/plugin/mall/advance_order/fromgoods', data, options);
 	},
 
 	// 获取预下单信息 - 来自购物车
-	getAdvanceOrderFormShoppingCart(query, options) {
+	getAdvanceOrderFormCart(query, options) {
 		return uni.$http.get('/plugin/mall/advance_order/fromshoppingcart', query, options);
 	},
 
 	// 创建预下单 - 来自购物车
-	createAdvanceOrderFormShoppingCart(data, options) {
+	createOrderFormCart(data, options) {
 		return uni.$http.post('/plugin/mall/advance_order/fromshoppingcart', data, options);
 	},
 
@@ -79,7 +79,8 @@ export default {
 				item.stateTip = stateTip;
 				item.stateTipColor = stateTipColor;
 
-				item.goods_num = item.goods.reduce(function(result, it) {
+
+				item.goods_num = item.goods_list.reduce(function(result, it) {
 					return result + it.goods_num;
 				}, 0);
 			});
@@ -134,7 +135,7 @@ export default {
 
 	// 获取订单物流信息
 	getExpressTracks(orderId, options) {
-		return uni.$http.post('/plugin/mall/express', {
+		return uni.$http.get('/plugin/mall/express', {
 			order_id: orderId
 		}, options);
 	},

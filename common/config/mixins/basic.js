@@ -101,4 +101,12 @@ export default {
 
 	// 事件停止向上传递
 	stopPrevent: function() {},
+
+	// 复制订单号
+	copy: function(text) {
+		uni.setClipboardData({
+			data: text
+		});
+		this.hintSuccess && this.hintSuccess('已复制');
+	}
 };

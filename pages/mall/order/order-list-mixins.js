@@ -156,7 +156,8 @@ export default {
 				item = list[index];
 
 			uni.showModal({
-				content: '是否确认收货？',
+				title:'确认收到货了吗？',
+				content: '为了保障您的售后权益，请收到商品检查无误后再确认收货？',
 				success: (res) => {
 					if (res.cancel) {
 						return;

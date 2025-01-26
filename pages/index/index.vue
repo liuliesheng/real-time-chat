@@ -69,9 +69,6 @@
 				<view class="cu-item arrow">
 					<navigator class="content" url="/pages/forum/posts-create">发布文章</navigator>
 				</view>
-				<!-- 			<view class="cu-item arrow">
-							<navigator class="content" url="/pages/forum/posts-detail">文章详情</navigator>
-						</view> -->
 			</view>
 
 			<view class="cu-bar bg-white solid-bottom margin-top">
@@ -113,9 +110,6 @@
 				</view>
 				<view class="cu-item arrow">
 					<navigator class="content" url="/pages/auth/rest.password">修改密码</navigator>
-				</view>
-				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/user/settings">设置</navigator>
 				</view>
 				<view class="cu-item arrow">
 					<navigator class="content" open-type="switchTab" url="/pages/user/index">个人中心</navigator>

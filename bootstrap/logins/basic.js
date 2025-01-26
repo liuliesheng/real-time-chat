@@ -1,4 +1,4 @@
-import $ from "../../../bootstrap/$";
+import $ from "../$";
 
 export default function() {
 	const app = getApp();

@@ -1,7 +1,5 @@
 import basicRequestInterceptor from "./https/basic.request.interceptor";
 import basicResponseInterceptor from "./https/basic.response.interceptor";
-import login from './logins/basic.js';
-// import login from './logins/account.js';
 
 // http基础配置
 const baseURL = 'http://mall.test.com/api';
@@ -11,7 +9,7 @@ module.exports = {
 		returnRaw: false,
 
 		// Login
-		login: login,
+		login: uni.$logins.basic,
 		loginDenyAuthMsg: '此操作需要您先授权！',
 		loginFailedMsg: '登录失败，请稍后再试~',
 

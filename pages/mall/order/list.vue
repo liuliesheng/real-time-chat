@@ -33,7 +33,7 @@
 							<!-- 商品列表 -->
 							<view class="cu-list goods-list">
 								<view class="cu-item flex padding-sm"
-								      v-for="(goodsItem,goodsIndex) in item.goods" :key="goodsItem.id">
+								      v-for="(goodsItem,goodsIndex) in item.goods_list" :key="goodsItem.id">
 									<view class="image-wrapper radius lg" :class="{loaded: goodsItem.loaded}">
 										<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"
 										       @load="imageOnLoad(goodsItem)"></image>

@@ -23,19 +23,19 @@
 			}
 		},
 		{
-			"path": "pages/forum/posts-list",
+			"path": "pages/forum/article/list",
 			"style": {
 				"navigationBarTitleText": "文章列表"
 			}
 		},
 		{
-			"path": "pages/forum/posts-create",
+			"path": "pages/forum/article/create",
 			"style": {
 				"navigationBarTitleText": "发布文章"
 			}
 		},
 		{
-			"path": "pages/forum/posts-detail",
+			"path": "pages/forum/article/detail",
 			"style": {
 				"navigationBarTitleText": "文章详情"
 			}
@@ -163,12 +163,6 @@
 			"style": {
 				"navigationBarTitleText": "协议",
 				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/user/settings",
-			"style": {
-				"navigationBarTitleText": "设置"
 			}
 		},
 		{

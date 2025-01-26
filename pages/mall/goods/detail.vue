@@ -36,9 +36,12 @@
 
 		<!-- 商品优惠信息 -->
 		<view class="bg-white cu-list menu">
-			<view class="cu-item arrow" @tap="chooseSpec=true">
+			<view class="cu-item arrow" @tap="toChooseSpec">
 				<view class="cu-item-title">购买类型</view>
-				<view class="flex-sub ">选择规格</view>
+				<view class="flex-sub">
+					<text v-if="chooseSpec.length">{{chooseSpecText}}</text>
+					<text v-else>选择规格</text>
+				</view>
 			</view>
 			<view class="cu-item arrow">
 				<view class="cu-item-title">优惠券</view>
@@ -61,49 +64,7 @@
 		<!-- /商品优惠信息 -->
 
 		<!-- 商品规格 -->
-		<view class="cu-modal bottom-modal" :class="chooseSpec?'show':''" @tap="chooseSpec=false">
-			<view class="cu-dialog spec-dialog" @tap.stop.prevent="stopPrevent">
-
-				<view class="flex padding-lr padding-tb-sm">
-					<image class="spec-image margin-right radius" :src="info.cover"></image>
-					<view class="flex-sub">
-						<view class="text-price text-red text-lg">320.00</view>
-						<view>库存：
-							<text>22</text>
-						</view>
-						<view>已选：
-							<text>XL</text>
-						</view>
-					</view>
-				</view>
-
-				<view class="padding-tb-sm padding-lr">
-					<view class="text-lg text-gray">
-						颜色
-					</view>
-					<view class="flex-wrap spec-val-list margin-top-sm">
-						<view class="cu-tag padding-tb-xs padding-lr round light bg-red" style="height: auto;">红色</view>
-						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">蓝色</view>
-						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">绿色</view>
-					</view>
-				</view>
-
-				<view class="padding-tb-sm padding-lr">
-					<view class="text-lg text-gray">
-						颜色
-					</view>
-					<view class="flex-wrap spec-val-list margin-top-sm">
-						<view class="cu-tag padding-tb-xs padding-lr round light bg-red" style="height: auto;">红色</view>
-						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">蓝色</view>
-						<view class="cu-tag padding-tb-xs padding-lr round" style="height: auto;">绿色</view>
-					</view>
-				</view>
-
-				<view class="padding flex flex-direction">
-					<button class="cu-btn bg-red lg" @tap="chooseSpec=false">完成</button>
-				</view>
-			</view>
-		</view>
+		<GoodsSku ref="sku" :info="info" />
 		<!-- /商品规格 -->
 
 		<!-- 商品评价 -->
@@ -121,6 +82,7 @@
 		</view>
 		<!-- /商品详情 -->
 
+		<!-- 底部操作栏 -->
 		<view class="cu-bar bg-white tabbar shop foot">
 			<!-- #ifdef MP -->
 			<button class="action" open-type="contact">
@@ -140,7 +102,7 @@
 			</view>
 			<view class="action" @tap="linkTo" data-url="../shopping-cart">
 				<view class="cuIcon-cart">
-					<view class="cu-tag badge">{{info.cart_count}}</view>
+					<view class="cu-tag badge" v-if="info.cart_count">{{info.cart_count}}</view>
 				</view>
 				购物车
 			</view>
@@ -150,22 +112,28 @@
 				      @tap="toBuy">立即订购</view>
 			</view>
 		</view>
+		<!-- /底部操作栏 -->
 	</view>
 	<PageLoad v-else />
 </template>
 
 <script>
-	import MPHtml from '@/components/mp-html/mp-html'
+	import MPHtml from '@/components/mp-html/mp-html';
+	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue";
+	import GoodsSku from '../components/goods-sku.vue';
 
 	export default {
 		components: {
-			MPHtml
+			MPHtml,
+			uniNumberBox,
+			GoodsSku
 		},
 		data() {
 			return {
 				info: null,
 				loaded: false,
-				chooseSpec: false,
+
+				chooseSpec: [],
 			};
 		},
 		computed: {
@@ -173,9 +141,11 @@
 				if (!this.info) {
 					return [];
 				}
-
 				return this.info.picture;
-			}
+			},
+			chooseSpecText() {
+				return this.chooseSpec.map(it => it.title).join(';');
+			},
 		},
 		onLoad(options) {
 			this.id = parseInt(options.id);
@@ -201,6 +171,7 @@
 					this.loaded = true;
 				});
 			},
+
 			// 商品收藏
 			toggleFavorite() {
 				const options = {
@@ -217,45 +188,59 @@
 					});
 				}
 			},
-			// 开始加入购物车
-			toShoppingCart() {
-				if (this.info.is_multi) { //是否多规格
 
-				} else {
-					this.addShoppingCart();
-				}
-			},
-			// 加入购物车
-			addShoppingCart() {
-				return uni.$model.mall.addShoppingCart({
-					goods_id: this.id,
-					count: 1
-				}, {
-					loading: this,
-					hint: this
-				}).then(count => {
-					info.cart_count = count;
+			// 开始选择规格
+			toChooseSpec(type) {
+				return this.$refs.sku.open(type).then((res) => {
+					if (res.confirm) {
+						this.chooseSpec = res.spec;
+					}
+
+					return res;
 				});
 			},
+
+			// 开始加入购物车
+			toShoppingCart() {
+				this.toChooseSpec('cart').then((res) => {
+					if (res.cancel) {
+						return;
+					}
+
+					return uni.$model.mall.addShoppingCart({
+						goods_id: this.id,
+						goods_sku_id: res.sku.id,
+						count: res.count
+					}, {
+						loading: this,
+						hint: this
+					}).then((count) => {
+						this.info.cart_count = count;
+					});
+				});
+			},
+
 			// 开始立即购买
 			toBuy() {
-				if (this.info.is_multi) { //是否多规格
+				this.toChooseSpec('buy').then((res) => {
+					if (res.cancel) {
+						return;
+					}
 
-				} else {
-					this.goBuy();
-				}
-			},
-			// 立即购买
-			goBuy() {
-				uni.navigateTo({
-					url: '../order/create?goods_id=' + this.info.id
-				})
+					uni.navigateTo({
+						url: `../order/create?goods_id=${this.info.id}&goods_sku_id=${res.sku.id}&count=${res.count}`
+					})
+				});
 			},
 		}
 	}
 </script>
 
 <style scoped>
+	.page {
+		padding-bottom: 130upx;
+	}
+
 	.cu-item-title {
 		width: 140rpx;
 	}
@@ -271,19 +256,5 @@
 
 	.cu-bar.tabbar .btn-group {
 		justify-content: space-between;
-	}
-
-	.cu-dialog.spec-dialog {
-		text-align: left;
-		overflow: visible;
-		background-color: white;
-		border-radius: 12rpx 12rpx 0 0;
-	}
-
-	.spec-image {
-		width: 170rpx;
-		height: 170rpx;
-		margin-top: -60rpx;
-		flex-shrink: 0;
 	}
 </style>

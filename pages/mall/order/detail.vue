@@ -36,7 +36,7 @@
 			</view>
 
 			<view class="cu-list goods-list">
-				<view class="cu-item flex padding-sm" v-for="(goodsItem,goodsIndex) in info.goods" :key="goodsItem.id">
+				<view class="cu-item flex padding-sm" v-for="(goodsItem,goodsIndex) in info.goods_list" :key="goodsItem.id">
 					<view class="image-wrapper radius lg" :class="{loaded: goodsItem.loaded}">
 						<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"
 						       @load="imageOnLoad(goodsItem)"></image>
@@ -88,7 +88,7 @@
 					<view class="title">下单时间：</view>
 					<view class="flex-sub">{{info.create_time | date(true)}}</view>
 				</view>
-				<view class="flex margin-top-sm">
+				<view class="flex margin-top-sm" v-if="info.pay_status==20 && info.pay_amount>0">
 					<view class="title">支付方式：</view>
 					<view class="flex-sub">
 						<text v-if="info.pay_type===10">余额支付</text>
@@ -104,7 +104,7 @@
 		</view>
 
 		<!-- 物流信息 -->
-		<view class="bg-white margin-top order-info">
+		<view class="bg-white margin-top order-info" v-if="info.delivery_type==10 && info.delivery_status==20">
 			<view class="cu-bar bottom-border">
 				<view class="action">
 					<text class="cuIcon-titles text-red"></text>
@@ -264,7 +264,8 @@
 			// 确认订单
 			confirmOrder(index) {
 				uni.showModal({
-					content: '是否确认收货？',
+					title:'确认收到货了吗？',
+					content: '为了保障您的售后权益，请收到商品检查无误后再确认收货？',
 					success: (res) => {
 						if (res.cancel) {
 							return;
@@ -290,14 +291,6 @@
 				this.info.stateTip = stateTip;
 				this.info.stateTipColor = stateTipColor;
 			},
-
-			// 复制订单号
-			copy(text) {
-				uni.setClipboardData({
-					data: text
-				});
-				this.hintSuccess('已复制');
-			}
 		}
 	}
 </script>

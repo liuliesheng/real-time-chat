@@ -1,12 +1,15 @@
 import $ from "../$";
-import {Http, http} from "../http";
+import { Http, http } from "../http";
 import uploader from "../uploader";
 import * as util from "../util/index";
+
+import * as logins from '../logins';
 
 // 请求类
 $.$define('http', http);
 $.$define('Http', Http);
 $.$define('uploader', uploader);
+$.$define('logins', logins);
 
 
 //初始化网络请求配置
