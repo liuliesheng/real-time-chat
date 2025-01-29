@@ -75,6 +75,9 @@
 								        @tap.stop.prevent="cancelOrder(index)" v-if="item.order_status===10">取消订单</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"
 								        @tap.stop.prevent="payOrder(index)" v-if="item.order_status===10">立即支付</button>
+								<button class="cu-btn round text-sm margin-left-sm"
+								        @tap.stop.prevent="linkTo" :data-url="'./express?id='+item.id"
+								        v-if="item.delivery_type==10 && item.delivery_status==20">查看物流</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"
 								        @tap.stop.prevent="confirmOrder(index)" v-if="item.order_status===20 || item.order_status===30">确认收货</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"

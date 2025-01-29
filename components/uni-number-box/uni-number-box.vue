@@ -47,11 +47,11 @@
 			value(val) {
 				this.inputValue = +val;
 			},
-			inputValue(newVal, oldVal) {
-				if (+newVal !== +oldVal) {
-					this.$emit("change", newVal);
-				}
-			}
+			// inputValue(newVal, oldVal) {
+			// 	if (+newVal !== +oldVal) {
+			// 		this.$emit("change", newVal);
+			// 	}
+			// }
 		},
 		created() {
 			this.inputValue = +this.value;
@@ -83,6 +83,7 @@
 				}
 
 				this.inputValue = String(value / scale);
+				this.$emit("change", this.inputValue);
 			},
 			_getDecimalScale() {
 				let scale = 1;
@@ -105,6 +106,7 @@
 					value = this.min;
 				}
 				this.inputValue = value;
+				this.$emit("change", this.inputValue);
 			}
 		}
 	};
@@ -116,6 +118,8 @@
 	/* #endif */
 	$box-line-height: 26px;
 	$box-width: 35px;
+
+	$uni-bg-color-grey: #f9f9f9;
 
 	.uni-numbox {
 		/* #ifndef APP-NVUE */
@@ -133,11 +137,11 @@
 		height: $box-height;
 		text-align: center;
 		font-size: $uni-font-size-lg;
-		border-width: 1rpx;
-		border-style: solid;
-		border-color: $uni-border-color;
-		border-left-width: 0;
-		border-right-width: 0;
+		// border-width: 1rpx;
+		// border-style: solid;
+		// border-color: $uni-border-color;
+		// border-left-width: 0;
+		// border-right-width: 0;
 	}
 
 	.uni-numbox__minus {
@@ -154,12 +158,12 @@
 		font-size: 20px;
 		color: $uni-text-color;
 		background-color: $uni-bg-color-grey;
-		border-width: 1rpx;
-		border-style: solid;
-		border-color: $uni-border-color;
-		border-top-left-radius: $uni-border-radius-base;
-		border-bottom-left-radius: $uni-border-radius-base;
-		border-right-width: 0;
+		// border-width: 1rpx;
+		// border-style: solid;
+		// border-color: $uni-border-color;
+		// border-top-left-radius: $uni-border-radius-base;
+		// border-bottom-left-radius: $uni-border-radius-base;
+		// border-right-width: 0;
 	}
 
 	.uni-numbox__plus {
@@ -171,13 +175,13 @@
 		justify-content: center;
 		width: $box-width;
 		height: $box-height;
-		border-width: 1rpx;
-		border-style: solid;
-		border-color: $uni-border-color;
-		border-top-right-radius: $uni-border-radius-base;
-		border-bottom-right-radius: $uni-border-radius-base;
 		background-color: $uni-bg-color-grey;
-		border-left-width: 0;
+		// border-width: 1rpx;
+		// border-style: solid;
+		// border-color: $uni-border-color;
+		// border-top-right-radius: $uni-border-radius-base;
+		// border-bottom-right-radius: $uni-border-radius-base;
+		// border-left-width: 0;
 	}
 
 	.uni-numbox--text {

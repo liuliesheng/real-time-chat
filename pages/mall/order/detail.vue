@@ -137,7 +137,8 @@
 			<button class="cu-btn bg-red round text-sm margin-left-sm"
 			        @tap.stop.prevent="payOrder" v-if="info.order_status===10">立即支付</button>
 			<button class="cu-btn round text-sm margin-left-sm"
-			        @tap.stop.prevent="linkTo" :data-url="'./express?id='+info.id" v-if="info.order_status===30">查看物流</button>
+			        @tap.stop.prevent="linkTo" :data-url="'./express?id='+info.id"
+			        v-if="info.delivery_type==10 && info.delivery_status==20">查看物流</button>
 			<button class="cu-btn bg-red round text-sm margin-left-sm"
 			        @tap.stop.prevent="confirmOrder" v-if="info.order_status===20 || info.order_status===30">确认收货</button>
 			<button class="cu-btn bg-red round text-sm margin-left-sm"
@@ -264,7 +265,7 @@
 			// 确认订单
 			confirmOrder(index) {
 				uni.showModal({
-					title:'确认收到货了吗？',
+					title: '确认收到货了吗？',
 					content: '为了保障您的售后权益，请收到商品检查无误后再确认收货？',
 					success: (res) => {
 						if (res.cancel) {

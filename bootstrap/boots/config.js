@@ -14,9 +14,9 @@ try {
 	config = {};
 }
 
-let appConfig = {};
-if (typeof __wxConfig !== 'undefined') {
-	appConfig = __wxConfig;
-}
+let appConfig = wx.getLaunchOptionsSync();
+// if (typeof __wxConfig !== 'undefined') {
+// 	appConfig = __wxConfig;
+// }
 
 $.$define('config', Object.assign(config, appConfig));

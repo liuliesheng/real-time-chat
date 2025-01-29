@@ -30,7 +30,6 @@
 		},
 		methods: {
 			onBtnClick(item) {
-				console.log(item)
 				if (item.click) {
 					item.click();
 				} else if (item.to) {

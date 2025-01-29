@@ -67,7 +67,11 @@
 		},
 		computed: {
 			chooseSku() {
-				const skuId = this.chooseSpec.map(it => it.id).join('_');
+				let skuId = this.chooseSpec.map(it => it.id).join('_');
+				if (!this.chooseSpec.length) {
+					skuId = '0';
+				}
+				
 				return this.skuList[skuId];
 			}
 		},

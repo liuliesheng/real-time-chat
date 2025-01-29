@@ -2,7 +2,7 @@
 	<view class="loading" v-show="isShowLoading">
 		<!-- bounceIn:showLoadingCount, -->
 		<view class="cu-load load-modal animated" :class="{bounceOut:!showLoadingCount}">
-			<image src="/static/logo.png" class="margin-top" mode="aspectFit"></image>
+			<image src="/static/logo.png" class="margin-top loading-img" mode="aspectFit"></image>
 			<view class="gray-text text-xs">加载中...</view>
 		</view>
 	</view>
@@ -56,7 +56,7 @@
 		box-shadow: 0 0 30upx rgba(0, 0, 0, 0.1);
 	}
 
-	.cu-load image {
+	.cu-load .loading-img {
 		animation: turn 1s linear infinite;
 	}
 

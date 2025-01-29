@@ -19,7 +19,7 @@
 				</view>
 				<view class="tags margin-top-xs">
 					<view class="cu-tag line-red text-xs"
-					      v-if="!item.freight_template">免邮费</view>
+					      v-if="item.is_free_freight">免邮费</view>
 				</view>
 			</view>
 		</view>
