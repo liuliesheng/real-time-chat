@@ -71,7 +71,7 @@
 				if (!this.chooseSpec.length) {
 					skuId = '0';
 				}
-				
+
 				return this.skuList[skuId];
 			}
 		},
@@ -128,6 +128,8 @@
 						spec: this.chooseSpec,
 						count: this.buyNumber
 					});
+
+					this.buyNumber = 1;
 				}
 
 				this.$options.resolve = null;
@@ -158,6 +160,7 @@
 		overflow: visible;
 		background-color: white;
 		border-radius: 12rpx 12rpx 0 0;
+		max-width: 1120upx;
 	}
 
 	.spec-image {

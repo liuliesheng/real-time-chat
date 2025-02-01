@@ -2,7 +2,7 @@
 	<view class="page">
 		<view class="userinfo">
 			<image class="bg" src="/static/bg/user.jpg"></image>
-			<view class="userinfo-inner flex" v-if="hasUserInfo1">
+			<view class="userinfo-inner flex" v-if="hasUserInfo">
 				<image :src="userInfo.avatarUrl" background-size="cover"
 				       class="cu-avatar xl round userinfo-avatar"></image>
 				<view class="flex-sub padding-lr">
@@ -33,7 +33,7 @@
 			</view>
 		</view>
 
-		<OrderStatus />
+		<OrderStatusNav />
 
 		<view class="cu-list menu sm-border card-menu radius-lg margin-top">
 			<view class="cu-item arrow">

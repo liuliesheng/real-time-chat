@@ -7,7 +7,7 @@ export default {
 
 	// 收藏
 	favorite(type, topicId, options = {}) {
-		return uni.$http.post('favorite/favorite', {
+		return uni.$http.get('favorite/favorite', {
 			type: type,
 			topic_id: topicId,
 		}, options);
@@ -15,7 +15,7 @@ export default {
 
 	// 取消收藏
 	unfavorite(type, topicId, options = {}) {
-		return uni.$http.post('favorite/unfavorite', {
+		return uni.$http.get('favorite/unfavorite', {
 			type: type,
 			topic_id: topicId
 		}, options);

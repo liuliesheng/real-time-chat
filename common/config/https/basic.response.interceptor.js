@@ -69,7 +69,7 @@ export default {
 
 // 生成登录超时的错误
 function resolveLoginTimeoutError(response) {
-	console.error('apply for login:', response);
+	console.error('login timeout!!!');
 
 	$.showModal({
 		content: '登录超时，请稍后再试~',

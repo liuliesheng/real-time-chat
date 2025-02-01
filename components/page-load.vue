@@ -20,7 +20,7 @@
 
 <style scoped>
 	.page-load {
-		background-color: white;
+		/* background-color: white; */
 		position: absolute;
 		left: 0;
 		top: 0;

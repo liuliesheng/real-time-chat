@@ -33,8 +33,6 @@ export default function(options) {
 	if (!loginPromise) {
 		$.showNavigationBarLoading();
 		loginPromise = $.$http.defaults.login().then((res) => {
-			complete();
-
 			$.hideLoading();
 			$.hideNavigationBarLoading();
 
@@ -42,18 +40,20 @@ export default function(options) {
 			app.globalData.userInfo = res.data;
 			app.globalData.sessionId = res.session_id;
 			$.setStorageSync('session_id', res.session_id);
-		}, (err) => {
-			complete(err);
 
+			complete();
+
+			return options;
+		}, (err) => {
 			$.hideLoading();
 			$.hideNavigationBarLoading();
 
 			if (err.isAuthDeny) {
-				$.hintError(
+				$.$hintError(
 					$.$http.defaults.loginFailedMsg
 				)
 			} else {
-				$.hintError(
+				$.$hintError(
 					$.$http.defaults.loginFailedMsg
 				);
 			}
@@ -62,6 +62,7 @@ export default function(options) {
 			wx.getLogManager().warn('user login fail', err);
 			// #endif
 
+			complete(err);
 			return Promise.reject(err);
 		});
 	}

@@ -3,7 +3,7 @@
 		<XLoading />
 		<Hint />
 
-		<view class="cu-list menu sm-border">
+		<view class="cu-list menu sm-border" v-if="data.length">
 			<view class="cu-item"
 			      v-for="(item, index) in data"
 			      :key="index"
@@ -29,8 +29,10 @@
 				</view>
 			</view>
 		</view>
+		<Empty v-else />
+
 		<view class="foot padding">
-			<button class="cu-btn block bg-gradual-red lg" @tap="linkTo"
+			<button class="cu-btn round block bg-gradual-red lg" @tap="linkTo"
 			        data-url="/pages/user/address/edit">新建收货地址</button>
 		</view>
 	</view>

@@ -14,7 +14,7 @@ try {
 	config = {};
 }
 
-let appConfig = wx.getLaunchOptionsSync();
+let appConfig = $.getLaunchOptionsSync ? $.getLaunchOptionsSync() : {};
 // if (typeof __wxConfig !== 'undefined') {
 // 	appConfig = __wxConfig;
 // }

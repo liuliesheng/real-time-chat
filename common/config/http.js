@@ -14,7 +14,7 @@ module.exports = {
 		loginFailedMsg: '登录失败，请稍后再试~',
 
 		// basic login uses
-		loginUrl: baseURL + '/login/login',
+		loginUrl: baseURL + '/weapp_login',
 		loginUserInfo: false,
 
 		// account login uses

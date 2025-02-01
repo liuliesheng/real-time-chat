@@ -59,8 +59,8 @@
 					<button class="cu-btn line-red round" @tap="deleteShoppingCart">删除({{choiceGoodsNum}})</button>
 				</template>
 				<template v-else>
-					<button class="cu-btn bg-red round" @tap="linkTo"
-					        :data-url="'./order/create?card_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
+					<button class="cu-btn bg-gradual-red round" @tap="linkTo"
+					        :data-url="'./order/create?cart_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
 				</template>
 			</view>
 		</view>

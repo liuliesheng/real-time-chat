@@ -7,7 +7,7 @@
 			<view class="text-xxl margin-right-sm">
 				<text class="cuIcon-locationfill text-pink"></text>
 			</view>
-			<view class="flex-sub">
+			<view class="flex-sub" v-if="info.user_address">
 				<view class="text-black">
 					<text class="cu-tag bg-red radius text-xs user-address-default"
 					      v-if="info.user_address.is_default">默认</text>
@@ -19,6 +19,7 @@
 					<text class="margin-left-sm">{{info.user_address.phone}}</text>
 				</view>
 			</view>
+			<view class="flex-sub" v-else>添加收货地址</view>
 			<view class="cuIcon-right text-gray"></view>
 		</view>
 
@@ -143,7 +144,7 @@
 			// 商品总金额
 			goodsTotalAmount() {
 				const result = this.info.goods_list.reduce((result, item) => {
-					return result.plus(item.goods_total_price);
+					return result.plus(item.total_price);
 				}, uni.$BigNumber(0));
 				return result.toFixed(2);
 			},
@@ -169,7 +170,7 @@
 				}
 			} else if (options.cart_ids) {
 				this.cartIds = options.cart_ids;
-				if (!this.cart_ids) {
+				if (!this.cartIds) {
 					uni.$hintError('参数错误！');
 					return uni.$delayNavigateBack(1500);
 				}
@@ -192,16 +193,12 @@
 						goods_sku_id: this.goodsSkuId,
 						goods_num: this.goodsNum,
 					}).then((res) => {
-						res.goods_list.forEach((item) => {
-							this.calcItemTotalPrice(item);
-						});
-
 						this.info = res;
 						this.loaded = true;
 					});
 				} else {
 					return uni.$model.mall.getAdvanceOrderFormCart({
-						cart_ids: this.cartIds
+						ids: this.cartIds
 					}).then((res) => {
 						this.info = res;
 						this.loaded = true;
@@ -218,19 +215,23 @@
 			changeItemNum(item, num) {
 				item.goods_num = num;
 				this.calcItemTotalPrice(item);
-				item.goods_total_price = uni.$BigNumber(item.goods_price).multipliedBy(num).toFixed(2);
+				item.total_price = uni.$BigNumber(item.goods_price).multipliedBy(num).toFixed(2);
 			},
 
 			// 计算商品总价格
 			calcItemTotalPrice(item) {
 				const totalPrice = uni.$BigNumber(item.goods_price)
 					.multipliedBy(item.goods_num).toFixed(2);
-				this.$set(item, 'goods_total_price', totalPrice);
+				this.$set(item, 'total_price', totalPrice);
 			},
 
 			// 立即下单
 			goOrder() {
 				this.isGoOrder = true;
+				if (!this.info.user_address) {
+					return uni.$hintError("请选择收货地址！");
+				}
+
 				const order = {
 					platform: 'wx_mini',
 					receiver_name: this.info.user_address.name,
@@ -246,7 +247,9 @@
 						goods_id: this.goodsId,
 						goods_sku_id: this.goodsSkuId,
 						goods_num: this.goodsNum,
-					}, order)).then((info) => {
+					}, order), {
+						successTips: false
+					}).then((info) => {
 						uni.redirectTo({
 							url: './list'
 						});
@@ -255,8 +258,14 @@
 					});
 				} else {
 					return uni.$model.mall.createOrderFormCart(Object.assign({
-
-					}, receiver)).finally(() => {
+						ids: this.cartIds
+					}, order), {
+						successTips: false
+					}).then((info) => {
+						uni.redirectTo({
+							url: './list'
+						});
+					}).finally(() => {
 						this.isGoOrder = false;
 					});
 				}

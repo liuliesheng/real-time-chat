@@ -59,6 +59,29 @@
 		margin: 0 auto;
 	}
 
+	uni-tabbar.uni-tabbar-bottom,
+	uni-tabbar.uni-tabbar-bottom .uni-tabbar,
+	uni-tabbar.uni-tabbar-top,
+	uni-tabbar.uni-tabbar-top .uni-tabbar {
+		max-width: 1120upx;
+		left: auto;
+		right: auto;
+	}
+
+	uni-tabbar.uni-tabbar-bottom .uni-tabbar,
+	uni-tabbar.uni-tabbar-top .uni-tabbar {
+		width: 100%;
+	}
+
+	.fixed,
+	.foot {
+		max-width: 1120upx;
+	}
+
+	.max-width {
+		max-width: 1120upx;
+	}
+
 	.page {
 		overflow-x: hidden;
 		min-height: 100vh;

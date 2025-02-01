@@ -13,12 +13,12 @@
 			<view class="welcome">
 				欢迎回来！
 			</view>
-			<view class="form-group">
-				<view class="form-item">
-					<input id="mobile" name="mobile" placeholder="手机号" type="text" />
+			<view class="form-group margin-lr">
+				<view class="cu-form-group">
+					<input id="mobile" v-model="form.username" placeholder="手机号" type="text" />
 				</view>
-				<view class="form-item">
-					<input id="password" name="password" placeholder="密码" type="password" />
+				<view class="cu-form-group" style="border-bottom: 1upx solid #eee;">
+					<input id="password" v-model="form.password" placeholder="密码" type="password" />
 				</view>
 			</view>
 
@@ -40,7 +40,11 @@
 	export default {
 		data() {
 			return {
-				agreement: false
+				agreement: false,
+				form: {
+					username: '',
+					password: ''
+				}
 			};
 		},
 		methods: {
@@ -64,24 +68,17 @@
 			 */
 			onSubmit: function(e) {
 				const data = e.detail.value;
-				console.log(data);
+				if (!this.agreement) {
+					return uni.$hintError('请先确认用户服务协议与隐私权政策！');
+				}
 
-				uni.$http.post('member/login', {
-					username: 'admin',
-					password: '123456'
-				}, {
+				uni.$http.post('login', this.form, {
 					loading: this,
 					hint: this
 				}).then(function() {
-					console.log(this)
+					uni.$hintSuccess('登录成功！');
+					uni.$delayNavigateBack(1200);
 				});
-
-				// uni.showLoading();
-				// setTimeout(() => {
-				// 	uni.navigateBack();
-				// 	uni.$showTips('登录成功！');
-				// 	// uni.$delayNavigateBack(1200);
-				// }, 1000);
 			}
 		}
 	}
@@ -93,6 +90,7 @@
 		position: relative;
 		width: 100vw;
 		height: 100vh;
+		max-width: 1120upx;
 		overflow: hidden;
 		background: #fff;
 	}

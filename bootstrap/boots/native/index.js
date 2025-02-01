@@ -1,7 +1,11 @@
-import "./exts/index";
-import "./floatings/alipay";
+import "./base";
+import "./promise";
+import "./user";
+import "./location";
+import "./ui";
+import "./map-api";
+
 // #ifdef MP
-import "./app";
-import "./page";
-import "./component";
+import "./floatings/alipay";
+import "./mixin";
 // #endif

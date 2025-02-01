@@ -47,7 +47,7 @@
 				<view class="cu-item-title">优惠券</view>
 				<view class="flex-sub text-red">选择优惠券</view>
 			</view>
-			<view class="cu-item">
+			<!--<view class="cu-item">
 				<view class="cu-item-title">促销活动</view>
 				<view class="flex-sub">
 					<view>新人首单送20元无门槛代金券</view>
@@ -55,10 +55,10 @@
 					<view>订单满100减30</view>
 					<view>单笔购买满两件免邮费</view>
 				</view>
-			</view>
-			<view class="cu-item">
+			</view> -->
+			<view class="cu-item" v-if="info.services">
 				<view class="cu-item-title">服务</view>
-				<view class="flex-sub">7天无理由退换货 · 假一赔十 ·</view>
+				<view class="flex-sub">{{servicesText}}</view>
 			</view>
 		</view>
 		<!-- /商品优惠信息 -->
@@ -75,7 +75,7 @@
 
 		<!-- 商品详情 -->
 		<view class="padding bg-white margin-top">
-			<view class="text-black text-center padding">图文详情</view>
+			<view class="text-black text-center">图文详情</view>
 			<view class="rich-text margin-top">
 				<MPHtml :content="info.content" />
 			</view>
@@ -146,6 +146,9 @@
 			chooseSpecText() {
 				return this.chooseSpec.map(it => it.title).join(';');
 			},
+			servicesText() {
+				return this.info.services.map(it => it.title).join(' · ');
+			}
 		},
 		onLoad(options) {
 			this.id = parseInt(options.id);
