@@ -1,3 +1,39 @@
 .cu-item navigator {
 	color: inherit;
 }
+
+/* ==================
+          文本
+ ==================== */
+
+.text-xs {
+	font-size: 20upx !important;
+}
+
+.text-sm {
+	font-size: 24upx !important;
+}
+
+.text-df {
+	font-size: 28upx !important;
+}
+
+.text-lg {
+	font-size: 32upx !important;
+}
+
+.text-xl {
+	font-size: 36upx !important;
+}
+
+.text-xxl {
+	font-size: 44upx !important;
+}
+
+.text-sl {
+	font-size: 80upx !important;
+}
+
+.text-xsl {
+	font-size: 120upx !important;
+}

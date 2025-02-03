@@ -117,7 +117,7 @@
 				this.tabCur = e.currentTarget.dataset.id;
 				// this.mainCur = e.currentTarget.dataset.id;
 				// this.verticalNavTop = (e.currentTarget.dataset.id - 1) * 50;
-				this.mescroll.resetUpScroll(true);
+				this.mescroll.resetUpScroll();
 			},
 			VerticalMain(e) {
 				return false;

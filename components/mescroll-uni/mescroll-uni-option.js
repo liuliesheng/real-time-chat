@@ -2,6 +2,7 @@
 // mescroll-body 和 mescroll-uni 通用
 const GlobalOption = {
 	down: {
+		auto: false,
 		// 其他down的配置参数也可以写,这里只展示了常用的配置:
 		textInOffset: '下拉刷新', // 下拉的距离在offset范围内的提示文本
 		textOutOffset: '释放更新', // 下拉的距离大于offset范围的提示文本
@@ -13,6 +14,7 @@ const GlobalOption = {
 		native: false // 是否使用系统自带的下拉刷新; 默认false; 仅在mescroll-body生效 (值为true时,还需在pages配置enablePullDownRefresh:true;详请参考mescroll-native的案例)
 	},
 	up: {
+		auto: false,
 		// 其他up的配置参数也可以写,这里只展示了常用的配置:
 		textLoading: '加载中 ...', // 加载中的提示文本
 		textNoMore: '☺没有更多了', // 没有更多数据的提示文本

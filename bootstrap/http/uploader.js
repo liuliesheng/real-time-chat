@@ -1,14 +1,9 @@
-/**
- * 上传器
- * @param files
- * @param options
- */
-import {http} from "./http";
+import {http} from "./request";
 
 // 基础配置
 const config = (function() {
 	try {
-		let config = require('../common/config/upload.js');
+		let config = require('../../common/config/upload.js');
 		if (typeof config === 'function') {
 			config = config();
 		}

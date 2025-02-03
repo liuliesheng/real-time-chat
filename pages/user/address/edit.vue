@@ -3,6 +3,12 @@
 		<XLoading />
 		<Hint />
 
+		<!-- #ifdef MP-WEIXIN -->
+		<view class="text-blue margin-lr margin-top" @tap="importWechatAddress">
+			导入微信地址
+		</view>
+		<!-- #endif -->
+
 		<view class="cu-form-group margin-top">
 			<view class="title required">联系人</view>
 			<input type="text" v-model="info.name" placeholder="请输入收货人姓名" />
@@ -13,12 +19,14 @@
 		</view>
 		<view class="cu-form-group">
 			<view class="title">收货地址</view>
-			<view class="flex-sub">{{info.province}}{{info.city}}{{info.district}}</view>
-			<text class='cuIcon-locationfill text-orange' @click="chooseLocation"></text>
+			<view class="flex-sub">
+				<picker mode="region" @change="onRegionChange">{{info.province}}{{info.city}}{{info.district}}</picker>
+			</view>
+			<!-- <text class='cuIcon-locationfill text-orange' @click="chooseLocation"></text> -->
 		</view>
 		<view class="cu-form-group align-start">
 			<view class="title">详细地址</view>
-			<textarea maxlength="255" v-model="info.address" placeholder="请输入多行文本输入框"></textarea>
+			<textarea maxlength="255" v-model="info.address" placeholder="请输入详细地址"></textarea>
 		</view>
 		<view class="cu-form-group margin-top">
 			<view class="title">设为默认</view>
@@ -47,7 +55,6 @@
 					address: "",
 					latitude: 0,
 					longitude: 0,
-					area: '',
 					is_default: 0,
 				},
 			};
@@ -81,6 +88,14 @@
 				this.info.is_default = e.detail ? 1 : 0;
 			},
 
+			// 选择地区
+			onRegionChange(e) {
+				const values = e.detail.value;
+				this.info.province = values[0];
+				this.info.city = values[1];
+				this.info.district = values[2];
+			},
+
 			//地图选择地址
 			chooseLocation() {
 				uni.chooseLocation({
@@ -90,6 +105,21 @@
 						this.info.address = data.name;
 					}
 				})
+			},
+
+			// 导入微信地址库
+			importWechatAddress() {
+				uni.chooseAddress({
+					success: (res) => {
+						console.log(res)
+						this.info.name = res.userName;
+						this.info.phone = res.telNumber;
+						this.info.province = res.provinceName;
+						this.info.city = res.cityName;
+						this.info.district = res.countyName;
+						this.info.address = res.detailInfo;
+					}
+				});
 			},
 
 			//提交

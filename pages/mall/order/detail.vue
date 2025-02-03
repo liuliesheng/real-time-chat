@@ -46,6 +46,10 @@
 						<view class="text-gray text-sm margin-top-xs">
 							<text>{{ goodsItem.goods_spec || '' }}</text>
 						</view>
+						<view class="">
+							<button class="cu-btn text-sm" @tap.stop.prevent="linkTo"
+							        :data-url="'../refund/apply?order_goods_id='+goodsItem.id">退款</button>
+						</view>
 					</view>
 					<view class="action">
 						<view class="text-price text-red text-lg text-bold text-right">{{ goodsItem.goods_price }}</view>

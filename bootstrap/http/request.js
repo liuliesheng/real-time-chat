@@ -1,4 +1,5 @@
-import $ from './$';
+import $ from '../$';
+import {combineURL, isAbsoluteURL} from "./util";
 
 /**
  * 防重复请求
@@ -72,7 +73,7 @@ function uploadAdapter(options) {
 	if (options.data) {
 		options.formData = options.data;
 	}
-	
+
 	return new Promise((resolve, reject) => {
 		const uploadTask = $.uploadFile(Object.assign({}, options, {
 			success: (res) => {
@@ -100,7 +101,7 @@ function uploadAdapter(options) {
 /**
  * 请求类
  */
-export class Http {
+export class Request {
 
 	/**
 	 * 默认构造器
@@ -216,7 +217,6 @@ export class Http {
 	removeResponseInterceptor(number) {
 		this.interceptors.response.splice(number, 0);
 	};
-
 }
 
 /**
@@ -227,7 +227,7 @@ export class Http {
  * @returns {Promise}
  */
 ['get', 'post', 'put', 'delete'].forEach(method => {
-	Http.prototype[method] = function(url, data, options) {
+	Request.prototype[method] = function(url, data, options) {
 		return this.request(Object.assign({}, this.defaults, options || {}, {
 			url: url,
 			data: data,
@@ -236,33 +236,8 @@ export class Http {
 	};
 });
 
-
 /**
  * 默认http请求
  * @type {Http}
  */
-export const http = new Http();
-
-/**
- * 是否是绝对url
- * @param {string} url
- * @returns {boolean}
- */
-export const isAbsoluteURL = (url) => {
-	// A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
-	// RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-	// by any combination of letters, digits, plus, period, or hyphen.
-	return /^([a-z][a-z\d+-.]*:)?\/\//i.test(url);
-};
-
-/**
- * 组合url
- * @param {string} baseURL
- * @param {string} relativeURL
- * @returns {string}
- */
-export const combineURL = (baseURL, relativeURL) => {
-	return relativeURL
-		? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-		: baseURL;
-};
+export const http = new Request();

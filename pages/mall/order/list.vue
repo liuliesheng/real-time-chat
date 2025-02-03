@@ -111,6 +111,7 @@
 				this.navList[index].mescroll = mescroll;
 				if (index === this.tabCur) { // 组件初始化完毕
 					this.useFrame(this.tabCur);
+					this.upCallback(mescroll);
 				}
 			},
 

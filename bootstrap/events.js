@@ -4,7 +4,6 @@
  * @param {string} type
  * @param {string} prefixErrorMsg
  */
-
 function checkType(value, type, prefixErrorMsg) {
 	if (!value || typeof value !== type)
 		throw new TypeError(prefixErrorMsg + '是一个' + type + '类型，传递的是一个' + (typeof name) + '类型');

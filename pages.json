@@ -67,7 +67,7 @@
 			}
 		},
 		{
-			"path": "pages/mall/shopping-cart",
+			"path": "pages/mall/cart/index",
 			"style": {
 				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "购物车"
@@ -109,12 +109,14 @@
 		{
 			"path": "pages/mall/refund/list",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "退款/售后"
 			}
 		},
 		{
 			"path": "pages/mall/refund/detail",
 			"style": {
+				"enablePullDownRefresh": true,
 				"navigationBarTitleText": "退款详情"
 			}
 		},

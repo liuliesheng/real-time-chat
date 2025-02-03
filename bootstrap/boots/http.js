@@ -1,9 +1,7 @@
 import $ from "../$";
-import { Http, http } from "../http";
-import uploader from "../uploader";
+import { Http, http, uploader } from "../http";
 import * as util from "../util/index";
-
-import * as logins from '../logins';
+import * as logins from './logins';
 
 // 请求类
 $.$define('http', http);

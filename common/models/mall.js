@@ -86,7 +86,7 @@ export default {
 			});
 
 			return res;
-		})
+		});
 	},
 
 	// 获取订单详情
@@ -145,19 +145,40 @@ export default {
 		return uni.$http.get('/plugin/mall/refund_apply', query, options);
 	},
 
-	// 创建预退款订单
-	createRefundOrder(data, options) {
-		return uni.$http.get('/plugin/mall/refund_apply', data, options);
+	// 创建售后单
+	applyRefund(data, options) {
+		return uni.$http.post('/plugin/mall/refund_apply', data, options);
 	},
 
-	// 获取退款订单列表
+	// 获取售后单列表
 	getRefundList(data, options) {
-		return uni.$http.get('/plugin/mall/refund', data, options);
+		return uni.$http.get('/plugin/mall/refund', data, options).then((res) => {
+			res.data.forEach((item) => {
+				const { stateTip, stateTipColor } = this.parseRefundState(item.order_status);
+				item.stateTip = stateTip;
+				item.stateTipColor = stateTipColor;
+			});
+
+			return res;
+		});
 	},
 
-	// 获取退款订单详情
-	getRefundList(id, options) {
+	// 获取售后单详情
+	getRefundDetail(id, options) {
 		return uni.$http.get('/plugin/mall/refund/detail', {
+			id: id
+		}, options).then((res) => {
+			const { stateTip, stateTipColor } = this.parseRefundState(res.status);
+			res.stateTip = stateTip;
+			res.stateTipColor = stateTipColor;
+
+			return res;
+		});
+	},
+	
+	// 删除订单
+	deleteRefund(id, options) {
+		return uni.$http.get('/plugin/mall/refund/delete', {
 			id: id
 		}, options);
 	},
@@ -183,6 +204,28 @@ export default {
 		} else if (50 === state) {
 			stateTip = '已关闭';
 			stateTipColor = '#909399';
+		}
+		return { stateTip, stateTipColor };
+	},
+
+	// 获取退款单状态
+	parseRefundState(state) {
+		state = parseInt(state);
+		let stateTip = '',
+			stateTipColor = '#909399';
+		if (0 === state) {
+			stateTip = '审核中';
+			stateTipColor = '#909399';
+		} else if (10 === state) {
+			stateTip = '已通过';
+		} else if (20 === state) {
+			stateTip = '已拒绝';
+		} else if (30 === state) {
+			stateTip = '待发货';
+		} else if (40 === state) {
+			stateTip = '待收货';
+		} else if (50 === state) {
+			stateTip = '已完成';
 		}
 		return { stateTip, stateTipColor };
 	}

@@ -1,4 +1,4 @@
-import $ from "../$";
+import $ from "../../$";
 
 export default function() {
 	const app = getApp();

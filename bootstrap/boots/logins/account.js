@@ -1,4 +1,4 @@
-import $ from "../$";
+import $ from "../../$";
 
 const LOGIN_INFO_KEY = '__login_info__';
 
