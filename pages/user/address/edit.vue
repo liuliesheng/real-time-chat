@@ -111,7 +111,6 @@
 			importWechatAddress() {
 				uni.chooseAddress({
 					success: (res) => {
-						console.log(res)
 						this.info.name = res.userName;
 						this.info.phone = res.telNumber;
 						this.info.province = res.provinceName;
@@ -159,10 +158,7 @@
 					});
 
 					this.hintSuccess(`收货地址${this.id ? '修改': '添加'}成功`);
-
-					setTimeout(function() {
-						uni.navigateBack({});
-					}, 500);
+					uni.$delayNavigateBack();
 				});
 			},
 		}

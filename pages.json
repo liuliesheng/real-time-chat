@@ -219,7 +219,16 @@
 			}
 		}
 
-	],
+	    ,{
+            "path" : "pages/mall/refund/express",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		// #ifdef H5
 		"navigationStyle": "custom",

@@ -175,12 +175,17 @@ export default {
 			return res;
 		});
 	},
-	
-	// 删除订单
+
+	// 删除售后单
 	deleteRefund(id, options) {
 		return uni.$http.get('/plugin/mall/refund/delete', {
 			id: id
 		}, options);
+	},
+
+	// 提交售后物流信息
+	submitRefundDelivery(data, options) {
+		return uni.$http.post('/plugin/mall/refund/delivery', data, options);
 	},
 
 	// 获取订单状态

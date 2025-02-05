@@ -46,7 +46,7 @@
 					</view>
 					<view class="text-black margin-left">
 						<text class="">退款金额：</text>
-						<text class="text-price text-red text-lg"> {{ item.refund_money }}</text>
+						<text class="text-price text-red text-lg"> {{ item.refund_amount }}</text>
 					</view>
 				</view>
 

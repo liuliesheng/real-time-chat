@@ -1,7 +1,7 @@
 import $ from "../../$";
 
 // 延迟返回上一页
-$.$$define($, '$delayNavigateBack', function(delay, options) {
+$.$$define($, '$delayNavigateBack', function(delay = 1500, options = {}) {
 	setTimeout(function() {
 		$.navigateBack(options);
 	}, delay);

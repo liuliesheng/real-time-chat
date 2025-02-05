@@ -153,8 +153,8 @@
 		onLoad(options) {
 			this.id = parseInt(options.id);
 			if (isNaN(this.id)) {
-				uni.$delayNavigateBack()
-				return uni.$hintError('参数错误！');
+				uni.$hintError('参数错误！');
+				return uni.$delayNavigateBack();
 			}
 
 			this.loadData();

@@ -4,36 +4,56 @@
 		<Hint />
 
 		<view class="status-tips bg-gradual-orange">
-			{{info.stateTip}}
+			<view class="">
+				{{info.stateTip}}
+			</view>
+			<view class="">￥{{info.refund_amount}}</view>
 		</view>
 
-		<!-- 售后商品信息 -->
+		<!-- 售后信息 -->
 		<view class="bg-white margin-top">
 			<view class="cu-bar bottom-border">
 				<view class="action">
 					<text class="cuIcon-titles text-red"></text>
-					<text>售后商品信息</text>
+					<text>售后信息</text>
 				</view>
 			</view>
 
 			<view class="cu-list goods-list">
-				<view class="cu-item flex padding-sm">
-					<view class="image-wrapper radius lg">
-						<image :src="info.order_goods.goods_cover" mode="aspectFit" lazy-load="true"></image>
-					</view>
-					<view class="content flex-sub padding-lr-sm">
-						<view class="title ellipsis-2 text-black">{{ info.order_goods.goods_title }}</view>
-						<view class="text-gray text-sm margin-top-xs">
-							<text>{{ info.order_goods.goods_spec || '' }}</text>
+				<view class="cu-item padding-sm">
+					<view class="flex goods-info">
+						<view class="image-wrapper radius lg">
+							<image :src="info.order_goods.goods_cover" mode="aspectFit" lazy-load="true"></image>
 						</view>
-						<view class="text-black">
-							<text>退款：</text>
-							<text>￥{{item.refund_money}}</text>
+						<view class="content flex-sub padding-lr-sm">
+							<view class="title ellipsis-2 text-black">{{ info.order_goods.goods_title }}</view>
+							<view class="text-gray text-sm margin-top-xs">
+								<text>{{ info.order_goods.goods_spec || '' }}</text>
+							</view>
+						</view>
+						<view class="action">
+							<view class="text-price text-red text-lg text-bold text-right">{{ info.order_goods.goods_price }}</view>
+							<view class="text-black text-sm text-right">×{{ info.order_goods.goods_num }}</view>
 						</view>
 					</view>
-					<view class="action">
-						<view class="text-price text-red text-lg text-bold text-right">{{ info.order_goods.goods_price }}</view>
-						<view class="text-black text-sm text-right">×{{ info.order_goods.goods_num }}</view>
+					<view class="text-sm margin-top-sm">
+						<view class="flex margin-top-sm">
+							<view class="title">退款原因：</view>
+							<view class="flex-sub">{{info.apply_desc}}</view>
+						</view>
+						<view class="flex margin-top-sm">
+							<view class="title">退款金额：</view>
+							<view class="flex-sub">￥{{info.refund_amount}}</view>
+						</view>
+						<view class="flex margin-top-sm">
+							<view class="title">申请时间：</view>
+							<view class="flex-sub">{{info.create_time | date(true)}}</view>
+						</view>
+						<view class="flex margin-top-sm">
+							<view class="title">售后单号：</view>
+							<view class="flex-sub">{{info.refund_no}}</view>
+							<view class="text-blue" @tap="copy(info.refund_no)">复制</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -84,7 +104,7 @@
 
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack(1000);
+				return uni.$delayNavigateBack();
 			}
 
 			this.loadData();
@@ -128,15 +148,13 @@
 		font-weight: bold;
 	}
 
-	.goods-list .cu-item .title {
-		font-size: 16px;
-		font-weight: bold;
+	.goods-list .goods-info .title {
 		color: #333333;
-		height: 80upx;
+		height: 38px;
 	}
 
-	.goods-list .cu-item .image-wrapper {
-		width: 160rpx;
-		height: 160rpx;
+	.goods-list .goods-info .image-wrapper {
+		width: 120rpx;
+		height: 120rpx;
 	}
 </style>
