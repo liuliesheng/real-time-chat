@@ -59,12 +59,12 @@
 			</view>
 		</view>
 
-		<!-- 收货地址信息 -->
+		<!-- 卖家收货地址信息 -->
 		<view class="bg-white margin-top">
 			<view class="cu-bar bottom-border">
 				<view class="action">
 					<text class="cuIcon-titles text-red"></text>
-					<text>售后商品信息</text>
+					<text>卖家收货地址信息</text>
 				</view>
 				<view class="action text-blue text-sm" @tap="onCopyReceiver">复制</view>
 			</view>
@@ -86,12 +86,23 @@
 				</view>
 			</view>
 		</view>
+
+		<!-- 底部操作栏 -->
+		<view class="cu-bar bg-white foot flex justify-end padding-lr">
+			<button class="cu-btn round text-sm margin-left-sm"
+			        @tap.stop.prevent="onDeleteRefund">删除售后单</button>
+			<button class="cu-btn round text-sm margin-left-sm"
+			        @tap.stop.prevent="linkTo" :data-url="'/pages/mall/refund/express?id='+info.id"
+			        v-if="info.status==10">填写发货物流</button>
+		</view>
 	</view>
 	<PageLoad v-else />
 </template>
 
 <script>
+	import refundMixin from './refund-mixins.js';
 	export default {
+		mixins: [refundMixin],
 		data() {
 			return {
 				id: 0,
@@ -109,6 +120,13 @@
 
 			this.loadData();
 		},
+		
+		onPullDownRefresh() {
+			this.loadData().finally(() => {
+				uni.stopPullDownRefresh();
+			});
+		},
+		
 		methods: {
 			// 加载数据
 			loadData() {
@@ -130,6 +148,13 @@
 					success: () => {
 						uni.$hintSuccess("已复制");
 					}
+				});
+			},
+
+			// 删除售后单
+			onDeleteRefund(index) {
+				this.deleteRefund(this.info, () => {
+					uni.$delayNavigateBack();
 				});
 			}
 		}

@@ -100,7 +100,7 @@
 					<text>收藏</text>
 				</template>
 			</view>
-			<view class="action" @tap="linkTo" data-url="../shopping-cart">
+			<view class="action" @tap="linkTo" data-url="../cart/index">
 				<view class="cuIcon-cart">
 					<view class="cu-tag badge" v-if="info.cart_count">{{info.cart_count}}</view>
 				</view>

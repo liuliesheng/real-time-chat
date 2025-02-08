@@ -46,8 +46,8 @@
 						<view class="text-gray text-sm margin-top-xs">
 							<text>{{ goodsItem.goods_spec || '' }}</text>
 						</view>
-						<view class="">
-							<button class="cu-btn text-sm" @tap.stop.prevent="linkTo"
+						<view class="" v-if="info.pay_status==20">
+							<button class="cu-btn text-sm sm" @tap.stop.prevent="linkTo"
 							        :data-url="'../refund/apply?order_goods_id='+goodsItem.id">退款</button>
 						</view>
 					</view>
@@ -146,7 +146,7 @@
 			<button class="cu-btn bg-red round text-sm margin-left-sm"
 			        @tap.stop.prevent="confirmOrder" v-if="info.order_status===20 || info.order_status===30">确认收货</button>
 			<button class="cu-btn bg-red round text-sm margin-left-sm"
-			        @tap.stop.prevent="confirmOrder" v-if="info.order_status===40">去评价</button>
+			        @tap.stop.prevent="linkTo" :data-url="'./evaluate?id='+item.id" v-if="info.order_status===40">去评价</button>
 		</view>
 
 	</view>
@@ -316,7 +316,7 @@
 		font-size: 16px;
 		font-weight: bold;
 		color: #333333;
-		height: 80upx;
+		height: 38px;
 	}
 
 	.goods-list .cu-item .image-wrapper {

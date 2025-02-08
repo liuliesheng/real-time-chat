@@ -60,7 +60,7 @@
 				</template>
 				<template v-else>
 					<button class="cu-btn bg-gradual-red round" @tap="linkTo"
-					        :data-url="'./order/create?cart_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
+					        :data-url="'../order/create?cart_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
 				</template>
 			</view>
 		</view>
@@ -139,7 +139,7 @@
 				return this.choiceGoods.length === this.data.length;
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.loadData();
 		},
 		onPullDownRefresh() {

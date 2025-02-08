@@ -128,9 +128,16 @@ export default {
 		}, options);
 	},
 
-	// 创建订单评价
-	createOrderEvaluate(data, options) {
-		return uni.$http.post('/plugin/mall/order/evaluate', data, options);
+	// 获取商品预评价信息
+	getPreGoodsEvaluate(id, options) {
+		return uni.$http.get('/plugin/mall/goods_evaluate/create', {
+			order_id: id
+		}, options);
+	},
+
+	// 创建商品评价
+	createGoodsEvaluate(data, options) {
+		return uni.$http.post('/plugin/mall/goods_evaluate/create', data, options);
 	},
 
 	// 获取订单物流信息
@@ -154,7 +161,7 @@ export default {
 	getRefundList(data, options) {
 		return uni.$http.get('/plugin/mall/refund', data, options).then((res) => {
 			res.data.forEach((item) => {
-				const { stateTip, stateTipColor } = this.parseRefundState(item.order_status);
+				const { stateTip, stateTipColor } = this.parseRefundState(item.status);
 				item.stateTip = stateTip;
 				item.stateTipColor = stateTipColor;
 			});
@@ -195,7 +202,8 @@ export default {
 			stateTipColor = '#909399';
 		if (0 === state) {
 			stateTip = '已取消';
-			stateTipColor = '#909399';
+		} else if (1 === state) {
+			stateTip = '已关闭';
 		} else if (10 === state) {
 			stateTip = '待付款';
 		} else if (20 === state) {
@@ -206,9 +214,6 @@ export default {
 			stateTip = '待评价';
 		} else if (50 === state) {
 			stateTip = '已完成';
-		} else if (50 === state) {
-			stateTip = '已关闭';
-			stateTipColor = '#909399';
 		}
 		return { stateTip, stateTipColor };
 	},
@@ -220,17 +225,14 @@ export default {
 			stateTipColor = '#909399';
 		if (0 === state) {
 			stateTip = '审核中';
-			stateTipColor = '#909399';
 		} else if (10 === state) {
-			stateTip = '已通过';
+			stateTip = '待买家退货';
 		} else if (20 === state) {
-			stateTip = '已拒绝';
+			stateTip = '待卖家签收';
 		} else if (30 === state) {
-			stateTip = '待发货';
+			stateTip = '维权结束';
 		} else if (40 === state) {
-			stateTip = '待收货';
-		} else if (50 === state) {
-			stateTip = '已完成';
+			stateTip = '商家已拒绝';
 		}
 		return { stateTip, stateTipColor };
 	}

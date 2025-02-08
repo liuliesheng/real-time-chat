@@ -86,10 +86,12 @@
 						if (this.categories[this.tabCur]) {
 							this.tabCur = 0;
 						}
-						this.loadGoodsData();
+						// this.loadGoodsData();
 					} else {
 						this.data = [];
 					}
+					
+					this.loaded = true;
 				});
 			},
 			upCallback(mescroll) {
@@ -108,8 +110,7 @@
 					this.data = page === 1 ? res.data : this.data.concat(res.data);
 					this.more = res.data.length >= res.per_page;
 					this.page = page;
-					this.loaded = true;
-
+					
 					return res;
 				});
 			},

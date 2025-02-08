@@ -2,21 +2,22 @@
 	<view class="page" v-if="loaded">
 		<XLoading />
 		<Hint />
-		
+
 		<!-- 订单列表 -->
 		<view class="cu-card dynamic no-card margin-top" v-for="(item,index) in data" :key="item.id">
 			<view class="cu-item shadow" @tap="linkTo" :data-url="'/pages/mall/refund/detail?id='+item.id">
 				<view class="padding flex flex-wrap">
 					<text class="flex-sub">{{item.create_time}}</text>
 					<text class="type">
-						<template v-if="item.type==10">
+						<template v-if="item.type==0">
 							<text class="cuIcon-refund text-red text-lg margin-right-xs"></text>
 							<text>退款</text>
 						</template>
-						<template v-else-if="item.type==20">
+						<template v-else-if="item.type==1">
 							<text class="cuIcon-refund text-red text-lg margin-right-xs"></text>
 							<text>退货</text>
 						</template>
+						（{{ item.stateTip }}）
 					</text>
 				</view>
 				<!-- 商品列表 -->
@@ -53,6 +54,9 @@
 				<view class="flex justify-end padding-lr padding-tb-sm">
 					<button class="cu-btn round text-sm margin-left-sm"
 					        @tap.stop.prevent="onDeleteRefund(index)">删除售后单</button>
+					<button class="cu-btn round text-sm margin-left-sm"
+					        @tap.stop.prevent="linkTo" :data-url="'/pages/mall/refund/express?id='+item.id"
+					        v-if="item.status==10">填写发货物流</button>
 					<button class="cu-btn round bg-red text-sm margin-left-sm" @tap="linkTo"
 					        :data-url="'/pages/mall/refund/detail?id='+item.id">查看详情</button>
 				</view>

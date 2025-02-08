@@ -113,7 +113,6 @@
 			</view>
 		</view>
 
-		{{info}}
 	</view>
 	<PageLoad v-else />
 </template>
