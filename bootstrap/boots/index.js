@@ -7,3 +7,4 @@ import "./config";
 import "./http";
 import "./middleware";
 import "./downrefresh";
+import "./map-api";

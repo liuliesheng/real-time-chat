@@ -2,10 +2,16 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/mall/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"disableScroll": false, //删除此项: mescroll-body必须允许原生页面滚动, 默认false
 				"enablePullDownRefresh": false
 			}
 		},
@@ -40,16 +46,11 @@
 				"navigationBarTitleText": "文章详情"
 			}
 		},
-		{
-			"path": "pages/mall/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "首页"
-			}
-		},
+
 		{
 			"path": "pages/mall/category/index",
 			"style": {
+				"navigationStyle": "custom",
 				"navigationBarTitleText": "分类"
 			}
 		},
@@ -69,7 +70,8 @@
 		{
 			"path": "pages/mall/cart/index",
 			"style": {
-				"enablePullDownRefresh": true,
+				"navigationStyle": "custom",
+				// "enablePullDownRefresh": true,
 				"navigationBarTitleText": "购物车"
 			}
 		},
@@ -121,6 +123,22 @@
 			}
 		},
 		{
+			"path": "pages/mall/refund/express",
+			"style": {
+				"navigationBarTitleText": "填写物流",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/mall/order/evaluate",
+			"style": {
+				"navigationBarTitleText": "我要评价",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
 			"path": "pages/mall/favorite/index",
 			"style": {
 				"navigationBarTitleText": "我的收藏",
@@ -132,7 +150,7 @@
 			"style": {
 				"navigationBarTextStyle": "white",
 				"navigationStyle": "custom",
-				"enablePullDownRefresh": true,
+				// "enablePullDownRefresh": true,
 				"navigationBarTitleText": "个人中心"
 			}
 		},
@@ -219,22 +237,17 @@
 			}
 		}
 
-		, {
-			"path": "pages/mall/refund/express",
-			"style": {
-				"navigationBarTitleText": "填写物流",
-				"enablePullDownRefresh": false
-			}
 
-		}, {
-			"path": "pages/mall/order/evaluate",
+		, {
+			"path": "pages/mall/goods/evaluate-list",
 			"style": {
-				"navigationBarTitleText": "我要评价",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "商品评价",
+				"enablePullDownRefresh": true
 			}
 
 		}
-    ],
+	],
+	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5
 		"navigationStyle": "custom",
@@ -250,20 +263,32 @@
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
-		"color": "#555555",
-		"selectedColor": "#1296db",
+		"color": "#C0C4CC",
+		"selectedColor": "#ff536f",
 		"backgroundColor": "white",
 		"list": [{
-				"pagePath": "pages/index/index",
+				"pagePath": "pages/mall/index",
 				"text": "首页",
-				"iconPath": "/static/tabbars/home.png",
-				"selectedIconPath": "/static/tabbars/home_in.png"
+				"iconPath": "/static/tabbar/home.png",
+				"selectedIconPath": "/static/tabbar/home_in.png"
+			},
+			{
+				"pagePath": "pages/mall/category/index",
+				"text": "分类",
+				"iconPath": "/static/tabbar/cate.png",
+				"selectedIconPath": "/static/tabbar/cate_in.png"
+			},
+			{
+				"pagePath": "pages/mall/cart/index",
+				"text": "购物车",
+				"iconPath": "/static/tabbar/cart.png",
+				"selectedIconPath": "/static/tabbar/cart_in.png"
 			},
 			{
 				"pagePath": "pages/user/index",
 				"text": "我的",
-				"iconPath": "/static/tabbars/user.png",
-				"selectedIconPath": "/static/tabbars/user_in.png"
+				"iconPath": "/static/tabbar/user.png",
+				"selectedIconPath": "/static/tabbar/user_in.png"
 			}
 		]
 	}

@@ -2,7 +2,8 @@
 	import Vue from 'vue';
 	export default {
 		globalData: {
-			userInfo: null
+			userInfo: null,
+			isLogged: null,
 		},
 		onLaunch: function() {
 			console.log('App Launch');

@@ -46,6 +46,10 @@ function connect(options) {
 					$.setStorageSync(LOGIN_INFO_KEY, options);
 
 					resolve(res);
+					
+					if ($.$http.defaults.onLogged) {
+						$.$http.defaults.onLogged(res);
+					}
 				} else {
 					reject({
 						code: res.code,

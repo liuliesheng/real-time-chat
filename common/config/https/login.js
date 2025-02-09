@@ -50,12 +50,16 @@ export default function(options) {
 
 			if (err.isAuthDeny) {
 				$.$hintError(
-					$.$http.defaults.loginFailedMsg
+					$.$http.defaults.authFailedMsg || "请先授权后再重试~"
 				)
 			} else {
-				$.$hintError(
-					$.$http.defaults.loginFailedMsg
-				);
+				const data = err.data;
+				const errMsg = err.errMsg || $.$http.defaults.loginFailedMsg;
+				if (data && data.tips_type === 'alert') {
+					$.showModal({ content: errMsg, showCancel: false });
+				} else {
+					$.$hintError(errMsg);
+				}
 			}
 
 			// #ifdef MP-WEIXIN
@@ -78,7 +82,7 @@ export default function(options) {
 // 登录完成
 function complete(err) {
 	lastError = err;
-	lastTime = new Date().getTime();
+	lastTime = Math.floor(new Date().getTime() / 1000);
 
 	setTimeout(function() {
 		loginPromise = null;

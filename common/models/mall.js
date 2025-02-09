@@ -128,6 +128,11 @@ export default {
 		}, options);
 	},
 
+	// 获取商品评价列表
+	getGoodsEvaluateList(query, options) {
+		return uni.$http.get('/plugin/mall/goods_evaluate', query, options);
+	},
+
 	// 获取商品预评价信息
 	getPreGoodsEvaluate(id, options) {
 		return uni.$http.get('/plugin/mall/goods_evaluate/create', {

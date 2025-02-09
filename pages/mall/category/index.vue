@@ -1,55 +1,53 @@
 <template>
-	<view class="page" v-if="loaded">
-		<!-- 		<view class="fixed">
-			<cu-custom :isBack="true" bgColor="bg-shadeTop text-white">
-				<block slot="backText">返回</block>
-				<block slot="content">垂直导航</block>
-			</cu-custom>
-		</view> -->
-		<!-- 		<swiper class="screen-swiper round-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
-		        duration="500">
-			<swiper-item v-for="(item,index) in 4" :key="index">
-				<image :src="'https://ossweb-img.qq.com/images/lol/web201310/skin/big3900'+index+ '.jpg'" mode="aspectFill"></image>
-			</swiper-item>
-		</swiper> -->
-		<view class="VerticalBox">
-			<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation
-			             :scroll-top="verticalNavTop" style="height:100vh">
-				<view class="cu-item padding-tb" :class="index==tabCur?'text-green cur':''"
-				      v-for="(item,index) in categories" :key="index"
-				      @tap="TabSelect" :data-id="index">
-					{{item.title}}
-				</view>
-			</scroll-view>
-			<view class="VerticalMain" style="height:100vh">
+	<view class="page">
+		<cu-custom bgColor="bg-gradual-red">
+			<block slot="content">分类</block>
+		</cu-custom>
+
+		<ad unit-id="adunit-1125620a898275d6" @load="onAdLoaded" id="ad"></ad>
+
+		<template v-if="loaded">
+			<view class="VerticalBox" :style="[{top:offsetTop+'px'}]">
+				<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation
+				             :scroll-top="verticalNavTop" style="height:100vh">
+					<view class="cu-item padding-tb" :class="index==tabCur?'text-green cur':''"
+					      v-for="(item,index) in categories" :key="index"
+					      @tap="TabSelect" :data-id="index">
+						{{item.title}}
+					</view>
+				</scroll-view>
 				<mescroll-uni class="VerticalMain" ref="mescrollRef" :fixed="false"
 				              @init="mescrollInit" @down="downCallback" @up="upCallback">
-
 					<!--商品列表-->
 					<view class="cu-list goods-list">
-						<view class="cu-item flex padding-sm" v-for="(item,index) in data"
-						      :key="item.id" :id="'main-'+item.id"
-						      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
-							<view class="image-wrapper radius lg">
-								<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
-							</view>
-							<view class="content flex-sub">
-								<view class="title ellipsis-2 text-black">{{ item.title }}</view>
-								<view class="text-gray text-sm margin-top-xs">
-									<text class="sales">月销 {{ item.sale_count || 0 }}</text>
+				
+						<template v-for="(item,index) in data">
+							<ad unit-id="adunit-02012c56bdf50736" ad-type="grid" v-if="index==2"></ad>
+				
+							<view class="cu-item flex padding-sm" :id="'main-'+item.id" :key="item.id"
+							      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
+								<view class="image-wrapper radius lg">
+									<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
 								</view>
-								<view class="flex flex-wrap margin-top-xs">
-									<text class="text-price text-red text-xl text-bold">{{ item.price }}</text>
-									<text v-if="item.market_price > item.price" class="m-price">￥{{ item.market_price }}</text>
+								<view class="content flex-sub">
+									<view class="title ellipsis-2 text-black">{{ item.title }}</view>
+									<view class="text-gray text-sm margin-top-xs">
+										<text class="sales">月销 {{ item.sale_count || 0 }}</text>
+									</view>
+									<view class="flex flex-wrap margin-top-xs">
+										<text class="text-price text-red text-xl text-bold">{{ item.price }}</text>
+										<text v-if="item.market_price > item.price" class="m-price">￥{{ item.market_price }}</text>
+									</view>
 								</view>
 							</view>
-						</view>
+						</template>
+				
 					</view>
 				</mescroll-uni>
 			</view>
-		</view>
+		</template>
+		<PageLoad v-else />
 	</view>
-	<PageLoad v-else />
 </template>
 
 <script>
@@ -67,17 +65,42 @@
 				tabCur: 0,
 				mainCur: 0,
 				verticalNavTop: 0,
+
+				adHeight: 0
 			};
 		},
 		computed: {
 			choiceCate() {
 				return this.categories[this.tabCur];
+			},
+			offsetTop() {
+				return this.CustomBar + this.adHeight;
 			}
 		},
 		onLoad() {
 			this.loadData();
 		},
+		onReady() {
+			setTimeout(() => {
+				this.calcAdHeight();
+			}, 300);
+		},
 		methods: {
+			// 计算广告的高度
+			calcAdHeight() {
+				const query = this.createSelectorQuery();
+				query.select('#ad').boundingClientRect();
+				query.exec((node) => {
+					this.adHeight = node[0].height;
+				})
+			},
+
+			// 广告加载完毕
+			onAdLoaded(e) {
+				this.calcAdHeight();
+			},
+
+			// 加载数据
 			loadData() {
 				return uni.$model.mall.getCategoryList().then((res) => {
 					this.categories = res;
@@ -90,7 +113,7 @@
 					} else {
 						this.data = [];
 					}
-					
+
 					this.loaded = true;
 				});
 			},
@@ -110,7 +133,7 @@
 					this.data = page === 1 ? res.data : this.data.concat(res.data);
 					this.more = res.data.length >= res.per_page;
 					this.page = page;
-					
+
 					return res;
 				});
 			},
@@ -160,10 +183,17 @@
 		z-index: 99;
 	}
 
+	.VerticalBox {
+		display: flex;
+		position: fixed;
+		bottom: 0;
+	}
+
 	.VerticalNav.nav {
 		width: 160upx;
 		white-space: initial;
 		background-color: #f1f1f1;
+		flex-shrink: 0;
 	}
 
 	.VerticalNav.nav .cu-item {
@@ -193,10 +223,6 @@
 		left: 5upx;
 		bottom: 0;
 		margin: auto;
-	}
-
-	.VerticalBox {
-		display: flex;
 	}
 
 	.VerticalMain {

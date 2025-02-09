@@ -13,7 +13,6 @@
 <script>
 // const successAudioContext = uni.createInnerAudioContext();
 // successAudioContext.src = uni.$config.successTipsAudio;
-
 // const failAudioContext = uni.createInnerAudioContext();
 // failAudioContext.src = uni.$config.failTipsAudio;
 export default {

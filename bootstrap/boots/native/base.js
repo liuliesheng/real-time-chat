@@ -2,7 +2,6 @@ import $ from "../../$";
 
 // 系统信息
 const systemInfo = $.getSystemInfoSync();
-$.$define('systemInfo', systemInfo);
 $.$define('isDev', systemInfo.platform === 'devtools');
 
 /**
@@ -25,6 +24,26 @@ $.$define('isShowPage', function(pageObj) {
 });
 
 /**
+ * 获取当前页面
+ * @return {*}
+ */
+$.$define('getCurrentPage', function() {
+	const pages = getCurrentPages();
+	const currentPage = pages[pages.length - 1];
+
+	return currentPage.$vm ? currentPage.$vm : currentPage;
+});
+
+/**
+ * 当前页面需要显示返回首页按钮
+ * @return {*}
+ */
+$.$define('isShowHome', function() {
+	const pages = getCurrentPages();
+	return pages.length === 1;
+});
+
+/**
  * 返回上一页面实例
  * @param {function} [cb]
  * @return {boolean}
@@ -33,12 +52,12 @@ $.$define('prePage', function(cb) {
 	const pages = getCurrentPages();
 	const prePage = pages[pages.length - 2];
 
-	if (cb && prePage) {
-		cb(prePage.$vm ? prePage.$vm : prePage);
+	if (!prePage) {
+		return null;
 	}
 
-	if(!prePage){
-		return null;
+	if (cb) {
+		cb(prePage.$vm ? prePage.$vm : prePage);
 	}
 
 	return prePage.$vm ? prePage.$vm : prePage;
@@ -53,3 +72,18 @@ $.$define('arr2obj', function(prefix, data, initIndex = 0) {
 	}
 	return result;
 });
+
+// 增加对微信原始API支持promise
+$.$define('promise', new Proxy($, {
+	get: function(target, key, receiver) {
+		const wxFunc = Reflect.get(target, key, receiver);
+		return function(options) {
+			return new Promise(function(resolve, reject) {
+				wxFunc(Object.assign(options || {}, {
+					success: resolve,
+					fail: reject
+				}));
+			});
+		}
+	}
+}));

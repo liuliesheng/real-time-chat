@@ -1,5 +1,5 @@
 import $ from "../../$";
-import {emitter} from "../../events";
+import { emitter } from "../../events";
 
 /**
  * 获取用户信息
@@ -11,8 +11,7 @@ $.$define('getUserInfo', function(options = {}) {
 	})).then(function(res) {
 		return options.full ? res : res.userInfo;
 	}, function(err) {
-		console.error('getUserInfo', err);
-
+		console.error('getUserInfo:', err);
 		return new Promise(function(resolve, reject) {
 			emitter.once('sys.getUserInfo.result', (res) => {
 				if (res && res.userInfo) {

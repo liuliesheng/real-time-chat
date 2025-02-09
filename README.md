@@ -8,66 +8,87 @@
 
 **目录说明**
 
-    ├─bootstrap                             核心目录
+    ├─bootstrap                             核心框架目录
     │  ├─libs                               第三方模块目录
     │  │  ├─qqmap-wx-jssdk.min.js           腾讯地图包
-    │  ├─native-init                        小程序原生语法扩展
-    │  │  ├─app.js                          扩展App函数
-    │  │  ├─component.js                    扩展Component函数
-    │  │  ├─index.js                      ES6 语法扩展
-    │  │  ├─global.ext.js                   全局对象扩展（wx,my,swan,tt）
-    │  │  └─page.js                         扩展Page函数
+    │  │  ├─bignumber.js           			BigNumber.js 用来处理对小数点精度比较高的业务逻辑
+    │  ├─boots                        		小程序启动时相关服务注册
+	│  │  ├─es6                        		ES6 语法扩展目录
+	│  │  ├─logins                          相关登录器存放目录
+	│  │  │  ├─account.js                   普通账号密码登录器，适用于H5
+	│  │  │  ├─basic.js                     小程序登录器
+	│  │  │  └─...                         	其他
+	│  │  ├─native                          小程序原生语法扩展目录
+	│  │  │  ├─floatings                    其他厂商小程序API向微信小程序API对齐
+	│  │  │  ├─base.js                      小程序基本API扩展
+    │  │  │  ├─location.js                  小程序定位API扩展（待废弃）
+    │  │  │  ├─mixin.js                    	混合Component,Page,App函数创建的实例
+    │  │  │  ├─ui.js                    	注册相关ui快捷操作方法
+    │  │  │  ├─user.js                    	优化用户信息相关方法
+	│  │  │  └─...                         	其他
+    │  │  ├─config.js                    	注册应用配置服务
+    │  │  ├─downrefresh.js                  下拉刷新扩展（可配置提示音，待废弃）
+    │  │  ├─event.js                    	注册事件器服务
+    │  │  ├─http.js                    		注册请求器服务
+    │  │  ├─map-api.js                    	注册腾讯地图API服务
+    │  │  ├─middleware.js                   注册中间件服务
+    │  │  ├─promise-cache.js                注册Promise缓存器服务
+    │  │  └─util.js                         注册相关工具方法服务
     │  │
-    │  ├─util                               相关助手库
-    │  │  ├─collection.js                   集合助手库
-    │  │  ├─function.js                     函数助手库
-    │  │  ├─number.js                       数字助手库
-    │  │  ├─string.js                       字符串助手库
-    │  │  └─time.js                         时间助手库
-    │  ├─_print_info.js                     打印相关信息
-    │  ├─bignumber.js                       BigNumber.js 用来处理对小数点精度比较高的业务逻辑
+    │  ├─http                               Http库
+    │  │  ├─request.js                   	请求器
+    │  │  ├─uploader.js                     上传器
+    │  │  └─...                         	其他
+	│  │
+	│  ├─util                               相关助手库
+	│  │  ├─collection.js                   集合助手库
+	│  │  ├─function.js                     函数助手库
+	│  │  ├─number.js                       数字助手库
+	│  │  ├─string.js                       字符串助手库
+	│  │  └─time.js                         时间助手库
+	│  │
+    │  ├─$.js                     			全局对象扩展（wx,my,swan,tt）
+    │  ├─cache.js                       	缓存器
     │  ├─events.js                          事件器
-    │  ├─http.js                            请求器
-    │  ├─index.js                           入口文件
     │  ├─middleware.js                      中间件
     │  ├─publisher.js                       发布者
     │  ├─uploader.js                        上传器
     │  └─validate.js                        验证器
     │
-    ├─config                                配置目录
-    │  ├─https                              https 拦截器存放目录
-    │  │  ├─basic.request.interceptor.js    集合助手库
-    │  │  ├─basic.response.interceptor.js   集合助手库
-    │  │  ├─formid.request.interceptor.js   集合助手库
-    │  │  └─page.js                         扩展Page函数
+    ├─common                                公共目录
+    │  ├─config                             配置目录
+    │  │  ├─https                              https拦截器存放目录
+    │  │  │  ├─basic.request.interceptor.js    请求拦截器
+    │  │  │  ├─basic.response.interceptor.js   响应拦截器
+    │  │  │  └─...                         	其他
+    │  │  ├─middlewares                        中间件存放目录
+    │  │  │  ├─app-show-params.js              集合助手库
+    │  │  │  └─...                             其他更多中间件
+    │  │  ├─app.js                             应用配置
+    │  │  ├─http.js                            请求器配置
+    │  │  ├─middleware.js                      中间件配置
+    │  │  ├─page.js                            Page实例混合
+    │  │  ├─component.js                       component实例混合
+    │  │  └─upload.js                          上传配置
     │  │
-    │  ├─middlewares                        中间件存放目录
-    │  │  ├─app-show-params.js                 集合助手库
-    │  │  └─...                             其他更多中间件
-    │  │
-    │  ├─app.js                             应用配置
-    │  ├─http.js                            请求器拦截器配置
-    │  ├─middleware.js                      中间件配置
-    │  ├─page.js                            Page方法混合
-    │  └─upload.js                          上传配置
-    │
-    ├─components                            自定义组件目录
-    │  └─...                                更多
+    │  ├─models                              数据模型目录
+    │  ├─services                            自定义服务目录
+    │  └─styles                              自定义样式目录
+    │  
+	├─components                             自定义组件目录
+    │  └─...                                 更多
     │
     ├─static                                静态资源存放目录
-    │  ├─audio                              音频资源
-    │  ├─images                             图片资源
-	│  └─icons                              图标存放目录
+	│  └─icons                              更多
     │
     ├─pages                                 页面存放目录
     │  └─...                                更多
     │
-    ├─styles                                样式目录
     ├─tests                                 测试文件
     ├─app.vue                                
-    ├─pages.json
     ├─main.js
-    ├─README.md
+    ├─pages.json
+    └─README.md
 
 #### 安装教程
 

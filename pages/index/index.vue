@@ -116,6 +116,7 @@
 				</view>
 			</view>
 		</mescroll-body>
+	
 	</view>
 	<PageLoad v-else />
 </template>

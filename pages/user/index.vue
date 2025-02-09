@@ -1,88 +1,115 @@
 <template>
 	<view class="page">
-		<view class="userinfo">
-			<image class="bg" src="/static/bg/user.jpg"></image>
-			<view class="userinfo-inner flex" v-if="hasUserInfo">
-				<image :src="userInfo.avatarUrl" background-size="cover"
-				       class="cu-avatar xl round userinfo-avatar"></image>
-				<view class="flex-sub padding-lr">
-					<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+		<XLoading />
+		<Hint />
+		<xin-auth-modal />
+
+		<cu-custom bgColor="bg-gradual-red">
+			<block slot="content"></block>
+		</cu-custom>
+
+		<mescroll-body ref="mescrollRef" :up="{use:false}" @init="mescrollInit"
+		               @down="downCallback" @up="upCallback">
+
+			<view class="userinfo">
+				<image class="bg" src="/static/bg/user.jpg"></image>
+				<view class="userinfo-inner flex" v-if="hasUserInfo">
+					<image :src="userInfo.avatarUrl" background-size="cover"
+					       class="cu-avatar xl round userinfo-avatar"></image>
+					<view class="flex-sub padding-lr">
+						<text class="userinfo-nickname"><text>Hi，</text>{{ userInfo.nickName }}</text>
+					</view>
+				</view>
+				<view v-else>
+					<!-- #ifdef MP-WEIXIN -->
+					<view class="userinfo-inner flex">
+						<view class="cu-avatar xl round userinfo-avatar">
+							<open-data type="userAvatarUrl" default-avatar="/static/icon/default-avatar.png"
+							           class="userinfo-avatar-inner" />
+						</view>
+						<view class="flex-sub padding-lr">
+							<view class="userinfo-nickname">
+								<text>Hi，</text>
+								<open-data type="userNickName" default-text="匿名用户" />
+							</view>
+						</view>
+					</view>
+					<!-- #endif -->
+					<!-- #ifdef H5 -->
+					<button @tap="onLogin" @getuserinfo="getUserInfo"
+					        class="cu-btn bg-red lg block shadow"
+					        open-type="getUserInfo">登 录</button>
+					<!-- #endif -->
+				</view>
+				<image class="arc-line" src="/static/icon/arc.png" mode="aspectFill"></image>
+			</view>
+
+			<!-- style="background-color: rgba(255,255,255,0.3);" -->
+			<view class="grid col-3 margin padding-tb-sm text-center bg-white radius-lg">
+				<view class="padding-sm">
+					<text class="num">{{userInfo.balance||'0.00'}}</text>
+					<text class="text-sm">余额</text>
+				</view>
+				<view class="padding-sm">
+					<text class="num">{{userInfo.coupon_count||'0'}}</text>
+					<text class="text-sm">优惠券</text>
+				</view>
+				<view class="padding-sm">
+					<text class="num">{{userInfo.growth||'0'}}</text>
+					<text class="text-sm">积分</text>
 				</view>
 			</view>
-			<view v-else>
-				<button @tap="onLogin" @getUserInfo="getUserInfo"
-				        class="cu-btn bg-blue lg block shadow"
-				        open-type="getUserInfo">登 录</button>
-			</view>
-			<image class="arc-line" src="/static/icon/arc.png" mode="aspectFill"></image>
-		</view>
 
-		<!-- style="background-color: rgba(255,255,255,0.3);" -->
-		<view class="grid col-3 margin padding-tb-sm text-center bg-white radius-lg">
-			<view class="padding-sm">
-				<text class="num">{{userInfo.balance||'0.00'}}</text>
-				<text class="text-sm">余额</text>
-			</view>
-			<view class="padding-sm">
-				<text class="num">{{userInfo.coupon_count||'0'}}</text>
-				<text class="text-sm">优惠券</text>
-			</view>
-			<view class="padding-sm">
-				<text class="num">{{userInfo.growth||'0'}}</text>
-				<text class="text-sm">积分</text>
-			</view>
-		</view>
+			<OrderStatusNav />
 
-		<OrderStatusNav />
+			<view class="cu-list menu sm-border card-menu radius-lg margin-top">
+				<view class="cu-item arrow">
+					<navigator class="content" url="/pages/user/address/list">
+						<text class="cuIcon-circlefill text-grey"></text>
+						<text>我的钱包</text>
+					</navigator>
+				</view>
+				<view class="cu-item arrow">
+					<navigator class="content" url="/pages/user/address/list">
+						<text class="cuIcon-locationfill text-grey"></text>
+						<text>收货地址</text></navigator>
+				</view>
+				<view class="cu-item arrow">
+					<navigator class="content" url="/pages/mall/favorite/index">
+						<text class="cuIcon-favorfill text-grey"></text>
+						<text>我的收藏</text>
+					</navigator>
+				</view>
+				<!-- #ifndef MP -->
+				<view class="cu-item arrow">
+					<navigator class="content" url="/pages/auth/rest.password">
+						<text class="cuIcon-circlefill text-grey"></text>
+						<text>修改密码</text>
+					</navigator>
+				</view>
+				<!-- #endif -->
+				<!-- #ifdef MP -->
+				<view class="cu-item arrow">
+					<button open-type="feedback" class="content text-left">
+						<text class="cuIcon-commentfill text-grey"></text>
+						<text>意见反馈</text>
+					</button>
+				</view>
+				<!-- #endif -->
+			</view>
+		</mescroll-body>
 
-		<view class="cu-list menu sm-border card-menu radius-lg margin-top">
-			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/user/address/list">
-					<text class="cuIcon-circlefill text-grey"></text>
-					<text>我的钱包</text>
-				</navigator>
-			</view>
-			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/user/address/list">
-					<text class="cuIcon-locationfill text-grey"></text>
-					<text>收货地址</text></navigator>
-			</view>
-			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/mall/favorite/index">
-					<text class="cuIcon-favorfill text-grey"></text>
-					<text>我的收藏</text>
-				</navigator>
-			</view>
-			<!-- #ifndef MP -->
-			<view class="cu-item arrow">
-				<navigator class="content" url="/pages/auth/rest.password">
-					<text class="cuIcon-circlefill text-grey"></text>
-					<text>修改密码</text>
-				</navigator>
-			</view>
-			<!-- #endif -->
-			<!-- #ifdef MP -->
-			<view class="cu-item arrow">
-				<button open-type="feedback" class="content text-left">
-					<text class="cuIcon-commentfill text-grey"></text>
-					<text>意见反馈</text>
-				</button>
-			</view>
-			<!-- #endif -->
-		</view>
 	</view>
 </template>
 
 <script>
+	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 	import OrderStatusNav from '@/pages/mall/components/order-status-nav.vue';
 	export default {
+		mixins: [MescrollMixin],
 		components: {
 			OrderStatusNav
 		},
-		
-		/**
-		 * 页面的初始数据
-		 */
 		data() {
 			return {
 				userInfo: {},
@@ -90,63 +117,52 @@
 			};
 		},
 
-		/**
-		 * 生命周期函数--监听页面加载
-		 */
-		onLoad: function(options) {
-			this.$callHook('onPullDownRefresh');
-		},
-
-		/**
-		 * 生命周期函数--监听页面显示
-		 */
+		onLoad: function(options) {},
 		onShow: function() {},
-
-		/**
-		 * 生命周期函数--监听页面隐藏
-		 */
 		onHide: function() {},
-
-		/**
-		 * 生命周期函数--监听页面卸载
-		 */
-		onUnload: function() {},
-
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {
-			uni.$getUserInfo().then((res) => {
-				this.userInfo = res;
-				this.userInfoStr = JSON.stringify(res);
-				this.hasUserInfo = true;
-			}).finally(() => {
-				uni.stopPullDownRefresh({ sound: true });
-			});
-		},
 
 		methods: {
 			onLogin(e) {
-				uni.showLoading();
-				setTimeout(() => {
-					uni.$hintSuccess('登录成功！');
-					this.userInfo = {
-						avatarUrl: '/static/images/icons/logo.png',
-						nickName: '刘小晋啦',
-					};
-					this.hasUserInfo = true;
-				}, 1000);
+				// uni.showLoading();
+				// setTimeout(() => {
+				// 	uni.$hintSuccess('登录成功！');
+				// 	this.userInfo = {
+				// 		avatarUrl: '/static/images/icons/default-avatar.png',
+				// 		nickName: '刘小晋啦',
+				// 	};
+				// 	this.hasUserInfo = true;
+				// 	uni.$emitter.emit('sys.getUserInfo.result', {
+				// 		userInfo: this.userInfo
+				// 	});
+				// }, 1000);
+				this.showAuthModal();
 			},
 
 			getUserInfo(e) {
 				const data = e.detail.value;
 				console.log(data)
+			},
+
+			downCallback() {
+				// this.mescroll.resetUpScroll();
+				uni.$getUserInfo().then((res) => {
+					this.userInfo = res;
+					this.userInfoStr = JSON.stringify(res);
+					this.hasUserInfo = true;
+				}).finally(() => {
+					this.mescroll.endSuccess();
+					// uni.stopPullDownRefresh({ sound: true });
+				});
 			}
 		}
 	};
 </script>
 
 <style>
+	.page {
+		padding-bottom: 30upx;
+	}
+
 	.userinfo {
 		background-color: white;
 		box-sizing: border-box;
@@ -154,6 +170,7 @@
 		padding-bottom: 3px;
 		overflow: hidden;
 		position: relative;
+		min-height: 330rpx;
 	}
 
 	.userinfo image.bg {
@@ -182,12 +199,17 @@
 	}
 
 	.userinfo-avatar {
-		/* 		width: 128upx;
-		height: 128upx;
-		margin: 20upx;
-		border-radius: 50%; */
+		width: 128rpx;
+		height: 128rpx;
+		border-radius: 128rpx;
 		background-color: white;
 		border: 2px solid #fff;
+		overflow: hidden;
+	}
+
+	.userinfo-avatar>.userinfo-avatar-inner {
+		width: 128rpx;
+		height: 128rpx;
 	}
 
 	.userinfo-nickname {

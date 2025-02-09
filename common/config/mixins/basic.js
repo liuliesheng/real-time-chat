@@ -5,19 +5,26 @@ export default {
 	linkTo: function(e) {
 		const dataset = (e.detail.target || e.currentTarget || e.target).dataset;
 		// const dataset = e.currentTarget.dataset;
+
 		const url = dataset.url;
-		const method = dataset.type || "navigateTo";
-		$[method]({
-			url: url
-		});
+		const type = dataset.type || "navigateTo";
+		const logged = dataset.logged;
+
+		if (logged && getApp().globalData.isLogged) {
+			$.$http.defaults.login().then(() => {
+				this.navTo(url, type);
+			});
+		} else {
+			this.navTo(url, type);
+		}
 	},
 
 	// 跳转
-	navTo: function(url) {
-		uni.navigateTo({
+	navTo: function(url, type) {
+		$[type]({
 			url: url,
 			fail() {
-				uni.switchTab({
+				$.switchTab({
 					url: url
 				});
 			}

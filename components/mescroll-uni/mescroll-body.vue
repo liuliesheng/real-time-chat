@@ -18,13 +18,11 @@
 			<!-- <mescroll-down :option="mescroll.optDown" :type="downLoadType" :rate="downRate"></mescroll-down> -->
 			<view v-if="mescroll.optDown.use" class="mescroll-downwarp" :style="{'background':mescroll.optDown.bgColor,'color':mescroll.optDown.textColor}">
 				<view class="downwarp-content">
-					<view class="">
-						<image src="/static/logo.png" mode="aspectFit"
-						       class="downwarp-progress mescroll-wxs-progress"
-						       :class="{'mescroll-rotate': isDownLoading}"
-						       :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"
-						       style="width: 50px;height: 50px;"></image>
-					</view>
+					<image src="/static/logo.png" mode="aspectFit"
+					       class="downwarp-progress mescroll-wxs-progress"
+					       :class="{'mescroll-rotate': isDownLoading}"
+					       :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"
+					       style="width: 20px;height: 20px;"></image>
 					<!-- <view class="downwarp-progress mescroll-wxs-progress" :class="{'mescroll-rotate': isDownLoading}" :style="{'border-color':mescroll.optDown.textColor, 'transform': downRotate}"></view> -->
 					<view class="downwarp-tip">{{downText}}</view>
 				</view>

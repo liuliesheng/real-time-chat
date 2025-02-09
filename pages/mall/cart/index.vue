@@ -1,48 +1,62 @@
 <template>
-	<view class="page" v-if="loaded">
+	<view class="page">
+		<cu-custom bgColor="bg-gradual-red">
+			<block slot="content">购物车</block>
+		</cu-custom>
+
 		<XLoading />
 		<Hint />
 
 		<!--顶部操作栏-->
-		<view class="cu-bar fixed bg-white" v-if="data.length">
+		<view class="cu-bar fixed bg-white" :style="[{top:offsetTop+'px'}]" v-if="data.length">
 			<view class="action">
-				<text class="text-sm">共{{goodsTotalCount}}件商品</text>
+				<text class="text-sm">共 {{goodsTotalCount}} 件商品</text>
 			</view>
 			<view class="action" @tap="isEdited=!isEdited">
 				<text>{{isEdited?'完成':'管理'}}</text>
 			</view>
 		</view>
 
-		<!--购物车列表-->
-		<view class="cu-list goods-list" v-if="data.length">
-			<view class="cu-item flex padding-sm"
-			      v-for="(item,index) in data" :key="item.id"
-			      @tap="linkTo" :data-url="'./goods/detail?id='+item.goods_id">
-				<view class="text-xxl" @tap.stop.prevent="itemToggleChecked(item)">
-					<text class="margin-right-xs" :class="item.checked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
-				</view>
-				<view class="image-wrapper radius lg">
-					<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
-				</view>
-				<view class="content flex-sub padding-lr-sm">
-					<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
-					<view class="text-gray text-sm margin-top-xs">
-						<text>{{ item.goods_spec || '' }}</text>
-					</view>
-					<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
-						<view class="flex-sub text-lg text-bold">
-							<text class="text-price text-red">{{ item.goods_price }}</text>
+		<template v-if="loaded">
+			<mescroll-uni ref="mescrollRef" @init="mescrollInit"
+			              :top="mescrollOffset.top" :bottom="mescrollOffset.bottom" :safearea="true"
+			              :down="{auto:false}" :up="{auto:false,empty:false}"
+			              @down="downCallback" @up="upCallback">
+
+				<!--购物车列表-->
+				<view class="cu-list goods-list" v-if="data.length">
+					<view class="cu-item flex padding-sm"
+					      v-for="(item,index) in data" :key="item.id"
+					      @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
+						<view class="text-xxl" @tap.stop.prevent="itemToggleChecked(item)">
+							<text class="margin-right-xs" :class="item.checked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
 						</view>
-						<view style="display: inline-block;">
-							<uni-number-box :min="1" :max="100" size="sm"
-							                :value="item.goods_num"
-							                @change="changeItemNum(item,$event)">
-							</uni-number-box>
+						<view class="image-wrapper radius lg">
+							<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
+						</view>
+						<view class="content flex-sub padding-lr-sm">
+							<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
+							<view class="text-gray text-sm margin-top-xs">
+								<text>{{ item.goods_spec || '' }}</text>
+							</view>
+							<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
+								<view class="flex-sub text-lg">
+									<text class="text-price text-red">{{ item.goods_price }}</text>
+								</view>
+								<view style="display: inline-block;">
+									<uni-number-box :min="1" :max="100" size="sm"
+									                :value="item.goods_num"
+									                @change="changeItemNum(item,$event)">
+									</uni-number-box>
+								</view>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-		</view>
+				<Empty :btns="emptyBtnList" tips="购物车是空的" style="padding-top: 100px;" v-else></Empty>
+			</mescroll-uni>
+		</template>
+		<PageLoad v-else />
 
 		<!--底部操作栏-->
 		<view class="cu-bar foot bg-white padding-lr" v-if="data.length">
@@ -64,18 +78,19 @@
 				</template>
 			</view>
 		</view>
-
-		<Empty :btns="emptyBtnList" tips="购物车是空的" v-if="!data.length"></Empty>
 	</view>
-	<PageLoad v-else />
 </template>
 
 <script>
+	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue";
 	export default {
+		mixins: [MescrollMixin],
 		components: { uniNumberBox },
 		data() {
 			return {
+				offsetTop: this.CustomBar,
+
 				data: [],
 				page: 1,
 				more: true,
@@ -137,24 +152,39 @@
 			// 是否是全选
 			isAllChecked() {
 				return this.choiceGoods.length === this.data.length;
+			},
+
+			// Mescroll 配置
+			mescrollOffset() {
+				if (this.data.length) {
+					return {
+						top: (this.CustomBar + uni.upx2px(100)) + 'px',
+						bottom: 100
+					};
+				} else {
+					return {
+						top: this.CustomBar + 'px',
+						bottom: 0
+					};
+				}
 			}
 		},
 		onShow() {
-			this.loadData();
-		},
-		onPullDownRefresh() {
-			this.loadData().finally(() => {
-				uni.stopPullDownRefresh();
-			});
-		},
-		onReachBottom() {
-			if (!this.more) {
-				return;
+			if (this.mescroll) {
+				this.mescroll.resetUpScroll();
+			} else {
+				this.loadData();
 			}
-
-			this.loadData(this.page + 1);
 		},
 		methods: {
+			// 上拉加载数据
+			upCallback(mescroll) {
+				this.loadData(mescroll.num).then((res) => {
+					mescroll.endSuccess(res.data.length, this.more);
+				}, () => {
+					mescroll.mescroll.endErr();
+				});
+			},
 			// 加载信息
 			loadData: function(page = 1) {
 				return uni.$model.mall.getShoppingCartList({
@@ -166,6 +196,8 @@
 					this.more = res.data.length >= res.per_page;
 					this.page = page;
 					this.loaded = true;
+
+					return res;
 				});
 			},
 
@@ -211,15 +243,14 @@
 
 <style scoped>
 	.page {
-		padding-top: 100upx;
-		padding-bottom: 130upx;
+		/* padding-top: 100upx; */
+		/* padding-bottom: 130upx; */
 		background-color: white;
 	}
 
 	.goods-list .cu-item .title {
 		font-size: 16px;
 		line-height: 1.2;
-		font-weight: bold;
 		color: #333333;
 		height: 38.4px;
 	}

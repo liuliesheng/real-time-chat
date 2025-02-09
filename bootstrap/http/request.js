@@ -1,5 +1,5 @@
 import $ from '../$';
-import {combineURL, isAbsoluteURL} from "./util";
+import { combineURL, isAbsoluteURL } from "./util";
 
 /**
  * 防重复请求
@@ -132,9 +132,8 @@ export class Request {
 	 */
 	request(options) {
 		//合并默认配置
-		options = Object.assign({
-			requestTime: Math.floor(new Date().getTime() / 1000)
-		}, this.defaults, options);
+		options = Object.assign({}, this.defaults, options);
+		options.requestTime = Math.floor(new Date().getTime() / 1000);
 
 		// Support baseURL config
 		if (options.baseURL && !isAbsoluteURL(options.url)) {

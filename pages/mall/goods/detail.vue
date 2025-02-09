@@ -26,10 +26,10 @@
 				</text>
 			</view>
 
-			<view class="flex margin-top">
-				<view class="flex-sub">销量: {{ info.sale_count }}</view>
-				<view class="flex-sub">库存: {{ info.stock }}</view>
-				<view class="flex-sub">浏览量: {{ info.view_count }}</view>
+			<view class="flex justify-between margin-top">
+				<view class="">销量: {{ info.sale_count }}</view>
+				<!-- <view class="flex-sub">库存: {{ info.stock }}</view> -->
+				<view class="">浏览量: {{ info.view_count }}</view>
 			</view>
 		</view>
 		<!-- /商品基本信息 -->
@@ -45,7 +45,10 @@
 			</view>
 			<view class="cu-item arrow">
 				<view class="cu-item-title">优惠券</view>
-				<view class="flex-sub text-red">选择优惠券</view>
+				<view class="flex-sub text-red">
+					<text v-if="info.coupon && info.coupon.length">选择优惠券</text>
+					<text v-else>无</text>
+				</view>
 			</view>
 			<!--<view class="cu-item">
 				<view class="cu-item-title">促销活动</view>
@@ -56,7 +59,7 @@
 					<view>单笔购买满两件免邮费</view>
 				</view>
 			</view> -->
-			<view class="cu-item" v-if="info.services">
+			<view class="cu-item" v-if="info.services&&info.services.length">
 				<view class="cu-item-title">服务</view>
 				<view class="flex-sub">{{servicesText}}</view>
 			</view>
@@ -68,19 +71,29 @@
 		<!-- /商品规格 -->
 
 		<!-- 商品评价 -->
-		<view class="padding bg-white margin-top">
-			<view class="">评价（65）</view>
-		</view>
-		<!-- 商品评价 -->
-
-		<!-- 商品详情 -->
-		<view class="padding bg-white margin-top">
-			<view class="text-black text-center">图文详情</view>
-			<view class="rich-text margin-top">
-				<MPHtml :content="info.content" />
+		<view class="cu-bar bg-white margin-top solid-bottom"
+		      @tap="linkTo" :data-url="'./evaluate-list?goods_id='+info.id">
+			<view class="action">
+				评价（{{info.evaluate_list_count}}）
+			</view>
+			<view class="action">
+				<text class="cuIcon-right"></text>
 			</view>
 		</view>
+		<GoodsEvaluateList :list="info.evaluate_list" />
+		<!-- 商品评价 -->
+
+
+		<!-- 商品详情 -->
+		<view class="cu-bar bg-white margin-top solid-bottom">
+			<view class="action">图文详情</view>
+		</view>
+		<view class="padding rich-text bg-white">
+			<MPHtml :content="info.content" />
+		</view>
 		<!-- /商品详情 -->
+
+		<ad unit-id="adunit-dca118409648c077" ad-type="video"></ad>
 
 		<!-- 底部操作栏 -->
 		<view class="cu-bar bg-white tabbar shop foot">
@@ -121,18 +134,19 @@
 	import MPHtml from '@/components/mp-html/mp-html';
 	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue";
 	import GoodsSku from '../components/goods-sku.vue';
+	import GoodsEvaluateList from '../components/goods-evaluate-list.vue';
 
 	export default {
 		components: {
 			MPHtml,
 			uniNumberBox,
-			GoodsSku
+			GoodsSku,
+			GoodsEvaluateList
 		},
 		data() {
 			return {
 				info: null,
 				loaded: false,
-
 				chooseSpec: [],
 			};
 		},
@@ -147,7 +161,7 @@
 				return this.chooseSpec.map(it => it.title).join(';');
 			},
 			servicesText() {
-				return this.info.services.map(it => it.title).join(' · ');
+				return this.info ? this.info.services.map(it => it.title).join(' · ') : '';
 			}
 		},
 		onLoad(options) {
@@ -249,7 +263,7 @@
 	}
 
 	.cu-bar.tabbar.shop .action {
-		width: 108upx;
+		width: 96upx;
 		font-size: 20upx;
 	}
 

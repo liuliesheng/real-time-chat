@@ -37,7 +37,7 @@ export default function() {
 					if (response.statusCode !== 200) {
 						reject({
 							code: response.statusCode,
-							errMsg: '登录失败，请稍后再试~',
+							// errMsg: '登录失败，请稍后再试~',
 							response: response
 						});
 					}
@@ -45,10 +45,15 @@ export default function() {
 					let res = response.data;
 					if (res.code === 1) {
 						resolve(res);
+
+						if ($.$http.defaults.onLogged) {
+							$.$http.defaults.onLogged(res);
+						}
 					} else {
 						reject({
 							code: res.code,
 							errMsg: res.msg,
+							data: res
 						});
 					}
 				},
