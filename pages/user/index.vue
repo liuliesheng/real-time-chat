@@ -64,28 +64,28 @@
 
 			<view class="cu-list menu sm-border card-menu radius-lg margin-top">
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/user/address/list">
+					<view class="content" @tap="linkTo" data-url="/pages/user/address/list" data-logged>
 						<text class="cuIcon-circlefill text-grey"></text>
 						<text>我的钱包</text>
-					</navigator>
+					</view>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/user/address/list">
+					<view class="content" @tap="linkTo" data-url="/pages/user/address/list" data-logged>
 						<text class="cuIcon-locationfill text-grey"></text>
-						<text>收货地址</text></navigator>
+						<text>收货地址</text></view>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/mall/favorite/index">
+					<view class="content" @tap="linkTo" data-url="/pages/mall/favorite/index" data-logged>
 						<text class="cuIcon-favorfill text-grey"></text>
 						<text>我的收藏</text>
-					</navigator>
+					</view>
 				</view>
 				<!-- #ifndef MP -->
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/auth/rest.password">
+					<view class="content" @tap="linkTo" data-url="/pages/auth/rest.password" data-logged>
 						<text class="cuIcon-circlefill text-grey"></text>
 						<text>修改密码</text>
-					</navigator>
+					</view>
 				</view>
 				<!-- #endif -->
 				<!-- #ifdef MP -->
@@ -122,7 +122,7 @@
 		onHide: function() {},
 
 		methods: {
-			onLogin(e) {
+			onLogin(options) {
 				// uni.showLoading();
 				// setTimeout(() => {
 				// 	uni.$hintSuccess('登录成功！');
@@ -135,7 +135,10 @@
 				// 		userInfo: this.userInfo
 				// 	});
 				// }, 1000);
-				this.showAuthModal();
+
+				if (!options.firstLoad) {
+					this.showAuthModal();
+				}
 			},
 
 			getUserInfo(e) {
@@ -145,7 +148,9 @@
 
 			downCallback() {
 				// this.mescroll.resetUpScroll();
-				uni.$getUserInfo().then((res) => {
+				uni.$getUserInfo({
+					firstLoad: true
+				}).then((res) => {
 					this.userInfo = res;
 					this.userInfoStr = JSON.stringify(res);
 					this.hasUserInfo = true;

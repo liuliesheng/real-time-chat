@@ -1,13 +1,13 @@
 import $ from "../../$";
 
-export default function() {
+export default function(options = {}) {
 	const app = getApp();
 	let code = null;
 
 	return $.$promise.login({}).then((res) => {
 		code = res.code;
 
-		if ($.$http.defaults.loginUserInfo) {
+		if ($.$http.defaults.loginUserInfo || (options.loginUserInfo !== undefined && options.loginUserInfo)) {
 			return $.$getUserInfo({
 				withCredentials: true
 			});

@@ -10,8 +10,10 @@ export default {
 		const type = dataset.type || "navigateTo";
 		const logged = dataset.logged;
 
-		if (logged && getApp().globalData.isLogged) {
-			$.$http.defaults.login().then(() => {
+		if (logged && !getApp().globalData.isLogged) {
+			$.$http.defaults.login({
+				loginUserInfo: true
+			}).then(() => {
 				this.navTo(url, type);
 			});
 		} else {

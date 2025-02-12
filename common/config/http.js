@@ -18,7 +18,12 @@ module.exports = {
 		loginUserInfo: false,
 
 		// account login uses
-		loginPage: '/pages/auth/login'
+		loginPage: '/pages/auth/login',
+
+		// 登录成功后的回调
+		onLogged: function() {
+			getApp().globalData.isLogged = true;
+		}
 	},
 	requestInterceptors: [
 		basicRequestInterceptor,
