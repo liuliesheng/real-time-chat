@@ -76,16 +76,20 @@
 			}
 		},
 		created() {
-			if (this.info.spec_list && this.info.spec_list.length) {
-				// this.chooseSpec = new Array(this.info.spec_list.length).fill(1);
-				this.chooseSpec = this.info.spec_list.map(it => it.value[0]);
-				this.specList = this.info.spec_list;
-			}
-
-			// 转换sku
-			this.skuList = uni.$collectionUtil.column(this.info.sku_list, null, 'spec_sku_id');
+			this.calcSpec();
 		},
 		methods: {
+			// 计算规格数据
+			calcSpec() {
+				if (this.info.spec_list && this.info.spec_list.length) {
+					this.chooseSpec = this.info.spec_list.map(it => it.value[0]);
+					this.specList = this.info.spec_list;
+				}
+
+				// 转换sku
+				this.skuList = uni.$collectionUtil.column(this.info.sku_list, null, 'spec_sku_id');
+			},
+
 			// 预览图片
 			previewSkuImage(src) {
 				uni.previewImage({
@@ -93,6 +97,7 @@
 					showmenu: true
 				})
 			},
+
 			// 设置选中规格
 			setChoiceSpecValue(specIndex, value) {
 				this.$set(this.chooseSpec, specIndex, value);
@@ -150,6 +155,10 @@
 					this.$options.resolve = resolve;
 				});
 			}
+		},
+
+		watch: {
+			info: 'calcSpec'
 		}
 	}
 </script>

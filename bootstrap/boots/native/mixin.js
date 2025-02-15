@@ -59,7 +59,6 @@ if (typeof Component !== "undefined") {
 		})();
 
 		options.methods = Object.assign({}, componentMixin.methods || {}, options.methods || {});
-
 		options = Object.assign({}, componentMixin, options);
 
 		originalComponent(options);

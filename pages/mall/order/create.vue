@@ -1,5 +1,7 @@
 <template>
 	<view class="page" v-if="loaded">
+		<XLoading />
+		<Hint />
 
 		<!--收货地址-->
 		<view class="flex align-center bg-white padding"
@@ -91,16 +93,17 @@
 				</view>
 				<radio class='radio' :checked="payType=='20'"></radio>
 			</view>
+			<!-- #endif -->
 			<view class="cu-form-group" @tap.stop="payType='10'">
 				<view class="title">
 					<text class="text-xxl margin-right-xs" style="vertical-align: sub;">
 						<text class="cuIcon-card text-pink"></text>
 					</text>
 					<text>余额支付</text>
+					<text class="text-sm text-red">(￥{{info.user_balance}})</text>
 				</view>
 				<radio class='radio' :checked="payType=='10'"></radio>
 			</view>
-			<!-- #endif -->
 		</radio-group>
 
 		<!--底部栏-->
@@ -109,7 +112,7 @@
 				<text class="text-xxl text-price text-bold text-red">{{orderAmount}}</text>
 			</view>
 			<view class="">
-				<button class="cu-btn bg-red round" @tap="goOrder">提交订单</button>
+				<button class="cu-btn bg-red round" @tap="goOrder" :disabled="isGoOrder || isSubmitDisabled">提交订单</button>
 			</view>
 		</view>
 
@@ -150,6 +153,16 @@
 			// 订单支付金额
 			orderAmount() {
 				return this.goodsTotalAmount;
+			},
+
+			// 是否禁用提交订单按钮
+			isSubmitDisabled() {
+				// 如果不是余额支付，则忽略
+				if ('10' != this.payType) {
+					return false;
+				}
+
+				return uni.$BigNumber(this.orderAmount).gt(this.info.user_balance);
 			}
 		},
 		onLoad(options) {
@@ -226,7 +239,10 @@
 
 			// 立即下单
 			goOrder() {
-				this.isGoOrder = true;
+				if (this.isGoOrder) {
+					return;
+				}
+
 				if (!this.info.user_address) {
 					return uni.$hintError("请选择收货地址！");
 				}
@@ -241,33 +257,59 @@
 					receiver_district: this.info.user_address.district,
 					receiver_address: this.info.user_address.address,
 				};
+
+				this.isGoOrder = true;
 				if (this.goodsId) {
 					return uni.$model.mall.createOrderFormGoods(Object.assign({
 						goods_id: this.goodsId,
 						goods_sku_id: this.goodsSkuId,
-						goods_num: this.goodsNum,
+						goods_num: this.info.goods_list[0].goods_num,
 					}, order), {
 						successTips: false
 					}).then((info) => {
-						uni.redirectTo({
-							url: './list'
-						});
-					}).finally(() => {
+						this.goPay(info);
+					}, () => {
 						this.isGoOrder = false;
 					});
 				} else {
 					return uni.$model.mall.createOrderFormCart(Object.assign({
-						ids: this.cartIds
+						ids: this.cartIds,
 					}, order), {
 						successTips: false
 					}).then((info) => {
-						uni.redirectTo({
-							url: './list'
-						});
-					}).finally(() => {
+						this.goPay(info);
+					}, () => {
 						this.isGoOrder = false;
 					});
 				}
+			},
+
+			// 去支付
+			goPay(order) {
+				uni.$model.mall.getOrderPaymentInfo({
+					id: order.id,
+					type: this.payType
+				}, {
+					loading: this,
+					hint: this,
+				}).then((res) => {
+					if (res.state === 1) { // 余额支付
+						this.hintSuccess('已支付！');
+					} else { // 微信支付
+						uni.requestPayment({
+							...res,
+							success: () => {
+								this.hintSuccess('已支付！');
+							}
+						});
+					}
+				}).finally(() => {
+					setTimeout(() => {
+						uni.redirectTo({
+							url: './list'
+						});
+					}, 1500);
+				});
 			}
 		}
 	}
@@ -293,7 +335,6 @@
 	.goods-list .cu-item .title {
 		font-size: 16px;
 		line-height: 1.2;
-		font-weight: bold;
 		color: #333333;
 		height: 38.4px;
 	}

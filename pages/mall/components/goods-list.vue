@@ -18,8 +18,7 @@
 					<text v-if="item.market_price > item.price" class="m-price">￥{{ item.market_price }}</text>
 				</view>
 				<view class="tags margin-top-xs">
-					<view class="cu-tag line-red text-xs"
-					      v-if="item.is_free_freight">免邮费</view>
+					<view class="cu-tag line-red text-xs" v-if="item.is_free_freight">免邮费</view>
 				</view>
 			</view>
 		</view>

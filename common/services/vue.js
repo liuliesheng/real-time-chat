@@ -11,20 +11,15 @@ Vue.prototype.$callHook = function(name) {
 	callbacks.forEach(cb => cb.call(this, ...args))
 };
 
-for (const k in pageMixin) {
-	if (!Vue.prototype[k] && pageMixin.hasOwnProperty(k)) {
-		Vue.prototype[k] = pageMixin[k];
-	}
-}
-
-if (componentMixin.methods) {
-	const methods = componentMixin.methods;
-	for (const k in methods) {
-		if (!Vue.prototype[k] && methods.hasOwnProperty(k)) {
-			Vue.prototype[k] = methods[k];
-		}
-	}
-}
+// #ifndef MP
+(function(){
+	// 页面属性混合
+	const methods = Object.assign({}, pageMixin, componentMixin.methods || {});
+	Vue.mixin({
+		methods: methods
+	});
+})();
+// #endif
 
 // 价格过滤器
 Vue.filter('price', function(price, fixed = 0) {
