@@ -45,7 +45,11 @@
 			return {
 				swiperList: [],
 				categoryList: [],
+
+				page: 1,
+				more: true,
 				goodsList: [],
+
 				loaded: false
 			};
 		},
@@ -75,11 +79,19 @@
 		methods: {
 			// 上拉加载数据
 			upCallback(mescroll) {
-				this.loadData(mescroll.num).then(() => {
-					mescroll.endSuccess();
-				}, () => {
-					mescroll.mescroll.endErr();
-				});
+				if (mescroll.num > 1) {
+					this.loadGoodsData(mescroll.num).then(() => {
+						mescroll.endSuccess(this.goodsList.length, this.more);
+					}, () => {
+						mescroll.endErr();
+					});
+				} else {
+					this.loadData(mescroll.num).then(() => {
+						mescroll.endSuccess();
+					}, () => {
+						mescroll.endErr();
+					});
+				}
 			},
 
 			// 数据加载
@@ -100,6 +112,17 @@
 				this.goodsList = baseConfig.goods_list || [];
 
 				this.loaded = true;
+			},
+
+			// 加载商品数据
+			loadGoodsData: function(page = 1) {
+				return uni.$model.mall.getGoodsList({
+					page: page,
+				}).then(res => {
+					this.goodsList = page === 1 ? res.data : this.goodsList.concat(res.data);
+					this.more = res.data.length >= res.per_page;
+					this.page = page;
+				});
 			},
 		}
 	}

@@ -244,9 +244,13 @@
 						return;
 					}
 
-					uni.navigateTo({
-						url: `../order/create?goods_id=${this.info.id}&goods_sku_id=${res.sku.id}&count=${res.count}`
-					})
+					uni.$logged({
+						loginUserInfo: true
+					}).then(() => {
+						uni.navigateTo({
+							url: `../order/create?goods_id=${this.info.id}&goods_sku_id=${res.sku.id}&count=${res.count}`
+						});
+					});
 				});
 			},
 		}

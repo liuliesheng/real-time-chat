@@ -1,32 +1,31 @@
 import $ from "../../$";
 
 export default function(options = {}) {
-	const app = getApp();
-	let code = null;
+	if (!$.$http.defaults.loginUrl) {
+		return Promise.reject({
+			errMsg: 'config/http.js not configure `defaults.loginUrl` !'
+		});
+	}
 
+	const app = getApp();
 	return $.$promise.login({}).then((res) => {
-		code = res.code;
+		delete res.errMsg;
+		const code = res.code;
 
 		if ($.$http.defaults.loginUserInfo || (options.loginUserInfo !== undefined && options.loginUserInfo)) {
 			return $.$getUserInfo({
 				withCredentials: true
+			}).then((user) => {
+				delete res.errMsg;
+				user.code = res.code;
+				return user;
 			});
 		}
 
-		return {};
+		return res;
 	}).then((res) => {
-		delete res.errMsg;
-
 		// 组装数据
-		res.code = code;
 		res.share_uid = app.globalData.shareUid;
-
-		if (!$.$http.defaults.loginUrl) {
-			return Promise.reject({
-				errMsg: 'config/http.js not configure `defaults.loginUrl` !'
-			});
-		}
-
 		return new Promise((resolve, reject) => {
 			$.request({
 				url: $.$http.defaults.loginUrl,
@@ -45,7 +44,6 @@ export default function(options = {}) {
 					let res = response.data;
 					if (res.code === 1) {
 						resolve(res);
-
 						if ($.$http.defaults.onLogged) {
 							$.$http.defaults.onLogged(res);
 						}

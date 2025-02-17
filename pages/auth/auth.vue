@@ -72,7 +72,7 @@ export default {
 
 	.tips {
 		position: relative;
-		padding: 15% 30upx;
+		padding: 15% 30upx 30upx 30upx;
 	}
 
 	.tips icon {

@@ -87,3 +87,36 @@ $.$define('promise', new Proxy($, {
 		}
 	}
 }));
+
+
+// 尝试订阅消息
+$.$define('tryRequestSubscribeMessage', function(options) {
+	return new Promise(function(resolve) {
+		$.getSetting({
+			withSubscriptions: true,
+			success: (res) => {
+				const subscriptionsSetting = res.subscriptionsSetting.itemSettings || {};
+
+				let isAuth = true;
+				options.tmplIds.forEach(temlId => {
+					if (subscriptionsSetting[temlId] != 'accept') {
+						isAuth = false;
+					}
+				});
+
+				if (isAuth) {
+					uni.requestSubscribeMessage({
+						tmplIds: options.tmplIds,
+						complete: resolve
+					});
+				} else {
+					resolve({
+						errMsg: 'Contains an unauthorized template message ID',
+					});
+				}
+
+			},
+			fail: resolve
+		});
+	});
+});

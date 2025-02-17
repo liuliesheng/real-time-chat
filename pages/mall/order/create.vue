@@ -145,6 +145,10 @@
 		computed: {
 			// 商品总金额
 			goodsTotalAmount() {
+				if (!this.info || !this.info.goods_list) {
+					return '0.00';
+				}
+
 				const result = this.info.goods_list.reduce((result, item) => {
 					return result.plus(item.total_price);
 				}, uni.$BigNumber(0));
@@ -160,6 +164,10 @@
 				// 如果不是余额支付，则忽略
 				if ('10' != this.payType) {
 					return false;
+				}
+
+				if (!this.info) {
+					return true;
 				}
 
 				return uni.$BigNumber(this.orderAmount).gt(this.info.user_balance);

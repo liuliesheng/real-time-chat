@@ -1,4 +1,6 @@
-uni.$define('parseHtmlImgs', function(nodes) {
+const $ = uni;
+
+$.$define('parseHtmlImgs', function(nodes) {
 	nodes.forEach(node => {
 		if (node.name === 'img' && node.attrs && node.attrs['data-img-size-val']) {
 			const sizes = node.attrs['data-img-size-val'].split(',');

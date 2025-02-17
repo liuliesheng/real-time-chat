@@ -1,3 +1,4 @@
+import "./basic";
 import "./vue";
 import "./richtext";
 import "./user";

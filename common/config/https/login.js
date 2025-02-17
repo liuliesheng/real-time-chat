@@ -32,14 +32,17 @@ export default function(options) {
 
 	if (!loginPromise) {
 		$.showNavigationBarLoading();
-		loginPromise = $.$http.defaults.login().then((res) => {
+		loginPromise = $.$http.defaults.login(options).then((res) => {
 			$.hideLoading();
 			$.hideNavigationBarLoading();
 
 			const app = getApp();
-			app.globalData.userInfo = res.data;
-			app.globalData.sessionId = res.session_id;
-			$.setStorageSync('session_id', res.session_id);
+			const globalData = app.globalData;
+			globalData.userInfo = res.data;
+			globalData.sessionId = res.session_id;
+
+			$.setStorageSync('userInfo', globalData.userInfo);
+			$.setStorageSync('session_id', globalData.sessionId);
 
 			complete();
 

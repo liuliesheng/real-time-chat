@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import App from './App';
-
 import './bootstrap';
 import "./common/services";
+
+import Vue from 'vue';
+import App from './App';
 
 // 组件区
 import Loading from '@/components/loading';

@@ -11,15 +11,13 @@ Vue.prototype.$callHook = function(name) {
 	callbacks.forEach(cb => cb.call(this, ...args))
 };
 
-// #ifndef MP
-(function(){
-	// 页面属性混合
+// 页面属性混合
+(function() {
 	const methods = Object.assign({}, pageMixin, componentMixin.methods || {});
 	Vue.mixin({
 		methods: methods
 	});
 })();
-// #endif
 
 // 价格过滤器
 Vue.filter('price', function(price, fixed = 0) {

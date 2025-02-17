@@ -46,6 +46,8 @@
 				default: 'row'
 			}
 		},
+		created() {
+		},
 		watch: {
 			list(list) {
 				if (this.loadType === 'add') {

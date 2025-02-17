@@ -26,14 +26,14 @@
 		name: 'cu-custom',
 		computed: {
 			style() {
-				var StatusBar= this.StatusBar;
-				var CustomBar= this.CustomBar;
+				var StatusBar = this.StatusBar;
+				var CustomBar = this.CustomBar;
 				var bgImage = this.bgImage;
-				var style = `height:${CustomBar}px;padding-top:${StatusBar}px;`;
+				var style = `height:${CustomBar}px;padding-top:${StatusBar}px;background-position: top;`;
 				if (this.bgImage) {
 					style = `${style}background-image:url(${bgImage});`;
 				}
-				return style
+				return style;
 			}
 		},
 		props: {

@@ -1,17 +1,20 @@
 import $ from "../../../bootstrap/$";
+import login from '../https/login';
 
 export default {
 	// 跳转
 	linkTo: function(e) {
 		const dataset = (e.detail.target || e.currentTarget || e.target).dataset;
-		// const dataset = e.currentTarget.dataset;
 
 		const url = dataset.url;
 		const type = dataset.type || "navigateTo";
 		const logged = dataset.logged;
 
-		if (logged && !getApp().globalData.isLogged) {
-			$.$http.defaults.login({
+		// 自动尝试订阅模板消息
+		$.$autoRequestSubscribeMessage();
+
+		if (logged && !getApp().globalData.userInfo) {
+			login({
 				loginUserInfo: true
 			}).then(() => {
 				this.navTo(url, type);
@@ -111,9 +114,9 @@ export default {
 	// 事件停止向上传递
 	stopPrevent: function() {},
 
-	// 复制订单号
+	// 快捷复制文本
 	copy: function(text) {
-		uni.setClipboardData({
+		$.setClipboardData({
 			data: text
 		});
 		this.hintSuccess && this.hintSuccess('已复制');

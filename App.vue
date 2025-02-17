@@ -3,7 +3,6 @@
 	export default {
 		globalData: {
 			userInfo: null,
-			isLogged: null,
 		},
 		onLaunch: function() {
 			console.log('App Launch');
@@ -31,12 +30,35 @@
 					// #endif
 				}
 			});
+
+			this.initUserState();
 		},
 		onShow: function() {
 			console.log('App Show');
 		},
 		onHide: function() {
 			console.log('App Hide');
+		},
+
+		methods: {
+			// 初始化用户状态
+			initUserState() {
+				// 从缓存中加载用户数据
+				uni.getStorage({
+					key: 'userInfo',
+					success: (res) => {
+						this.globalData.userInfo = res.data;
+					}
+				});
+
+				// 从缓存中加载SessionId
+				uni.getStorage({
+					key: 'session_id',
+					success: (res) => {
+						this.globalData.sessionId = res.data;
+					}
+				});
+			}
 		}
 	};
 </script>

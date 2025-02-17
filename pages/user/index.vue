@@ -4,7 +4,7 @@
 		<Hint />
 		<xin-auth-modal />
 
-		<cu-custom bgColor="bg-gradual-red">
+		<cu-custom bgColor="bg-gradual-red" bgImage="./static/bg/user.jpg">
 			<block slot="content"></block>
 		</cu-custom>
 
@@ -12,7 +12,7 @@
 		               @down="downCallback" @up="upCallback">
 
 			<view class="userinfo">
-				<image class="bg" src="/static/bg/user.jpg"></image>
+				<image class="bg" src="/static/bg/user.jpg" mode="widthFix" :style="{top:-CustomBar+'px'}"></image>
 				<view class="userinfo-inner flex" v-if="hasUserInfo">
 					<image :src="userInfo.avatarUrl" background-size="cover"
 					       class="cu-avatar xl round userinfo-avatar"></image>
@@ -171,11 +171,11 @@
 	.userinfo {
 		background-color: white;
 		box-sizing: border-box;
-		padding-top: calc(var(--status-bar-height) + 52rpx);
+		/* padding-top: calc(var(--status-bar-height) + 52rpx); */
 		padding-bottom: 3px;
 		overflow: hidden;
 		position: relative;
-		min-height: 330rpx;
+		/* min-height: 330rpx; */
 	}
 
 	.userinfo image.bg {
