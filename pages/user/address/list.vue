@@ -29,7 +29,7 @@
 				</view>
 			</view>
 		</view>
-		<Empty v-else />
+		<Empty type="address" v-else />
 
 		<view class="foot padding">
 			<button class="cu-btn round block bg-gradual-red lg" @tap="linkTo"

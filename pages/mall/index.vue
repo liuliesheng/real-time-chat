@@ -1,31 +1,31 @@
 <template>
-	<view class="page" v-if="loaded">
+	<view class="page">
+		<!-- #ifndef H5 -->
 		<cu-custom bgColor="bg-gradual-red">
 			<block slot="content">商城</block>
 		</cu-custom>
+		<!-- #endif -->
 
 		<template v-if="loaded">
 			<mescroll-body ref="mescrollRef" @init="mescrollInit"
+			               :down="{auto:false}" :up="{auto:false,empty:false}"
 			               @down="downCallback" @up="upCallback">
-
-				<view class="" style="overflow: hidden;">
-					<swiper class="screen-swiper round-dot" style="min-height: 256upx;"
-					        :indicator-dots="true" :circular="true"
-					        :autoplay="true" interval="5000" duration="500">
-						<swiper-item v-for="(item,index) in swiperList" :key="index">
-							<video :src="item.cover" autoplay loop muted :show-play-btn="false" :controls="false"
-							       objectFit="cover" v-if="item.type=='video'"></video>
-							<image :src="item.cover" mode="aspectFill" v-else></image>
-						</swiper-item>
-					</swiper>
-				</view>
+				<swiper class="screen-swiper round-dot" style="min-height: 256upx;"
+				        :indicator-dots="true" :circular="true"
+				        :autoplay="true" interval="5000" duration="500">
+					<swiper-item v-for="(item,index) in swiperList" :key="index">
+						<video :src="item.cover" autoplay loop muted :show-play-btn="false" :controls="false"
+						       objectFit="cover" v-if="item.type=='video'"></video>
+						<image :src="item.cover" mode="aspectFill" v-else></image>
+					</swiper-item>
+				</swiper>
 
 				<ad unit-id="adunit-1125620a898275d6"></ad>
 
 				<GoodsList :list="goodsList"></GoodsList>
 			</mescroll-body>
 		</template>
-		<PageLoad v-else />
+		<PageLoad @refresh="loadData" v-else />
 	</view>
 </template>
 

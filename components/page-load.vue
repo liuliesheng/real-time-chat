@@ -1,7 +1,7 @@
 <template>
-	<view class="page-load" :class="content?'content':''" v-else>
-		<view class="loading">
-			<image src="/static/logo.png" mode="aspectFit" class="response"></image>
+	<view class="page-load" :class="!fixed?'content':''" v-else>
+		<view class="load" @tap="refresh">
+			<image src="/static/load.png" mode="widthFix" class="response"></image>
 		</view>
 	</view>
 </template>
@@ -10,9 +10,19 @@
 	export default {
 		name: "PageLoad",
 		props: {
-			content: {
+			fixed: {
 				type: Boolean,
-				default: false
+				default: true
+			}
+		},
+		created() {
+			this.refreshThrottle = uni.$functionUtil.debounce(() => {
+				this.$emit('refresh');
+			}, 500);
+		},
+		methods: {
+			refresh() {
+				this.refreshThrottle();
 			}
 		}
 	}
@@ -34,17 +44,20 @@
 		height: 100vh;
 	}
 
-	.loading {
+	.load {
 		position: absolute;
 		top: 50%;
 		left: 0;
 		right: 0;
 		transform: translateY(-100%);
+
+		text-align: center;
 	}
 
 	.response {
-		height: 96upx;
-		animation: mescrollDownRotate 1s linear infinite;
+		width: 320rpx;
+		/* height: 96upx; */
+		/* animation: mescrollDownRotate 1s linear infinite; */
 	}
 
 	@keyframes mescrollDownRotate {

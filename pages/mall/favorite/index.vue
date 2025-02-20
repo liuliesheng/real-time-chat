@@ -22,11 +22,11 @@
 				</view>
 
 				<view class="move">
-					<view class="bg-red" @tap="unFavorite(index)">删除</view>
+					<view class="bg-red" @tap.stop="unFavorite(index)">删除</view>
 				</view>
 			</view>
 		</view>
-		<Empty v-else></Empty>
+		<Empty type="favorite" v-else></Empty>
 
 	</view>
 	<PageLoad v-else />

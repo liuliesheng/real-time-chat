@@ -1,6 +1,6 @@
 <template>
 	<view class="component">
-		<image src="/static/empty/default.png" mode="widthFix" class="img"></image>
+		<image :src="image" mode="widthFix" class="img"></image>
 		<view class="padding-lr padding-tb-sm text-center text-black text-lg" v-if="tips">
 			{{tips}}
 		</view>
@@ -19,6 +19,10 @@
 			};
 		},
 		props: {
+			type: {
+				type: String,
+				default: 'default',
+			},
 			tips: {
 				type: String,
 				default: ''
@@ -27,6 +31,12 @@
 				type: Array,
 				default: () => []
 			}
+		},
+		computed: {
+			image() {
+				let type = this.type;
+				return `/static/empty/${type}.png`;
+			},
 		},
 		methods: {
 			onBtnClick(item) {
@@ -49,7 +59,7 @@
 
 <style>
 	.img {
-		width: 240upx;
+		/* width: 240upx; */
 		display: block;
 		margin: 15% auto 30upx auto;
 	}

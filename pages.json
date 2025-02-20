@@ -245,6 +245,60 @@
 				"enablePullDownRefresh": true
 			}
 
+		}, {
+			"path": "pages/enterprise/article/index",
+			"style": {
+				"navigationBarTitleText": "文章列表",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/article/detail",
+			"style": {
+				"navigationBarTitleText": "文章详情",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/case/index",
+			"style": {
+				"navigationBarTitleText": "案例列表",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/case/detail",
+			"style": {
+				"navigationBarTitleText": "案例详情",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/enterprise/case/index",
+			"style": {
+				"navigationBarTitleText": "案例列表",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/case/detail",
+			"style": {
+				"navigationBarTitleText": "案例详情",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/product/index",
+			"style": {
+				"navigationBarTitleText": "产品列表",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/enterprise/product/detail",
+			"style": {
+				"navigationBarTitleText": "产品详情",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"entryPagePath": "pages/mall/index",

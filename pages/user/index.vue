@@ -1,12 +1,14 @@
 <template>
 	<view class="page">
-		<XLoading />
-		<Hint />
-		<xin-auth-modal />
-
+		<!-- #ifndef H5 -->
 		<cu-custom bgColor="bg-gradual-red" bgImage="./static/bg/user.jpg">
 			<block slot="content"></block>
 		</cu-custom>
+		<!-- #endif -->
+		
+		<XLoading />
+		<Hint />
+		<xin-auth-modal />
 
 		<mescroll-body ref="mescrollRef" :up="{use:false}" @init="mescrollInit"
 		               @down="downCallback" @up="upCallback">

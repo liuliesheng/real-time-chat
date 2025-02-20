@@ -8,13 +8,20 @@
 			console.log('App Launch');
 			uni.getSystemInfo({
 				success: function(e) {
-					// #ifndef MP
+					// #ifdef H5
+					Vue.prototype.StatusBar = e.statusBarHeight;
+					Vue.prototype.CustomBar = 0;
+					Vue.prototype.TabBar = 0;
+					// #endif
+
+					// #ifdef APP-VUE
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					if (e.platform === 'android') {
 						Vue.prototype.CustomBar = e.statusBarHeight + 50;
 					} else {
 						Vue.prototype.CustomBar = e.statusBarHeight + 45;
 					};
+					Vue.prototype.TabBar = 0;
 					// #endif
 
 					// #ifdef MP-WEIXIN
@@ -22,11 +29,13 @@
 					let custom = wx.getMenuButtonBoundingClientRect();
 					Vue.prototype.Custom = custom;
 					Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+					Vue.prototype.TabBar = 0;
 					// #endif
 
 					// #ifdef MP-ALIPAY
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
+					Vue.prototype.TabBar = 0;
 					// #endif
 				}
 			});

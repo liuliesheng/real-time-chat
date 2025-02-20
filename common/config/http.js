@@ -2,6 +2,7 @@ import basicRequestInterceptor from "./https/basic.request.interceptor";
 import basicResponseInterceptor from "./https/basic.response.interceptor";
 
 // http基础配置
+// const baseURL = 'https://mall.nlplant.cn/api';
 const baseURL = 'http://mall.test.com/api';
 module.exports = {
 	defaults: {
@@ -22,7 +23,7 @@ module.exports = {
 
 		// 登录成功后的回调
 		onLogged: function() {
-			getApp().globalData.isLogged = true;
+			
 		}
 	},
 	requestInterceptors: [

@@ -1,8 +1,10 @@
 <template>
 	<view class="page">
+		<!-- #ifndef H5 -->
 		<cu-custom bgColor="bg-gradual-red">
 			<block slot="content">购物车</block>
 		</cu-custom>
+		<!-- #endif -->
 
 		<XLoading />
 		<Hint />
@@ -53,10 +55,10 @@
 						</view>
 					</view>
 				</view>
-				<Empty :btns="emptyBtnList" tips="购物车是空的" style="padding-top: 100px;" v-else></Empty>
+				<Empty type="cart" :btns="emptyBtnList" tips="购物车是空的" style="padding-top: 100px;" v-else></Empty>
 			</mescroll-uni>
 		</template>
-		<PageLoad v-else />
+		<PageLoad @refresh="loadData" v-else />
 
 		<!--底部操作栏-->
 		<view class="cu-bar foot bg-white padding-lr" v-if="data.length">
@@ -265,5 +267,9 @@
 		text-decoration: line-through;
 		margin-left: 10rpx;
 		color: #999;
+	}
+
+	.cu-bar.foot {
+		bottom: var(--window-bottom);
 	}
 </style>

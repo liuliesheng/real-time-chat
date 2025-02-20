@@ -10,8 +10,10 @@ export default {
 		const type = dataset.type || "navigateTo";
 		const logged = dataset.logged;
 
+		//#ifdef MP-WEIXIN
 		// 自动尝试订阅模板消息
 		$.$autoRequestSubscribeMessage();
+		//#endif
 
 		if (logged && !getApp().globalData.userInfo) {
 			login({

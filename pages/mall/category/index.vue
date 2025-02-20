@@ -1,8 +1,10 @@
 <template>
 	<view class="page">
+		<!-- #ifndef H5 -->
 		<cu-custom bgColor="bg-gradual-red">
 			<block slot="content">分类</block>
 		</cu-custom>
+		<!-- #endif -->
 
 		<ad unit-id="adunit-1125620a898275d6" @load="onAdLoaded" id="ad"></ad>
 
@@ -19,11 +21,10 @@
 				<mescroll-uni class="VerticalMain" ref="mescrollRef" :fixed="false"
 				              @init="mescrollInit" @down="downCallback" @up="upCallback">
 					<!--商品列表-->
-					<view class="cu-list goods-list">
-				
+					<view class="cu-list goods-list" v-if="data.length">
 						<template v-for="(item,index) in data">
 							<ad unit-id="adunit-02012c56bdf50736" ad-type="grid" v-if="index==2"></ad>
-				
+
 							<view class="cu-item flex padding-sm" :id="'main-'+item.id" :key="item.id"
 							      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
 								<view class="image-wrapper radius lg">
@@ -41,12 +42,12 @@
 								</view>
 							</view>
 						</template>
-				
 					</view>
+					<Empty type="goods" v-else></Empty>
 				</mescroll-uni>
 			</view>
 		</template>
-		<PageLoad v-else />
+		<PageLoad @refresh="loadData" v-else />
 	</view>
 </template>
 

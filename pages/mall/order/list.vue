@@ -19,7 +19,7 @@
 				              @init="mescrollInit(tabIndex,$event)"
 				              @down="downCallback" @up="upCallback">
 
-					<PageLoad :content="true" v-if="!tabItem.loaded" />
+					<PageLoad :fixed="false" v-if="!tabItem.loaded" />
 
 					<!-- 订单列表 -->
 					<view class="cu-card dynamic no-card margin-top"
