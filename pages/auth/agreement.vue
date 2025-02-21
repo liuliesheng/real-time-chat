@@ -1,19 +1,22 @@
 <template>
-	<view class="page" v-if="loaded">
+	<view class="page">
 		<XLoading />
 		<Hint />
 
-		<view class="cu-bar fixed solid-bottom">
-			<view class="content text-bold text-xl">
-				{{info.title}}
+		<template v-if="loaded">
+			<view class="cu-bar fixed solid-bottom">
+				<view class="content text-bold text-xl">
+					{{info.title}}
+				</view>
 			</view>
-		</view>
-		<view class="padding rich-text">
-			<MPHtml :content="info.content" />
-		</view>
+			<view class="padding rich-text">
+				<MPHtml :content="info.content" />
+			</view>
+		</template>
+
+		<PageLoad @refresh="loadData" v-else />
 
 	</view>
-	<PageLoad v-else />
 </template>
 
 <script>

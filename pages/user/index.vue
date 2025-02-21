@@ -5,7 +5,7 @@
 			<block slot="content"></block>
 		</cu-custom>
 		<!-- #endif -->
-		
+
 		<XLoading />
 		<Hint />
 		<xin-auth-modal />
@@ -15,7 +15,8 @@
 
 			<view class="userinfo">
 				<image class="bg" src="/static/bg/user.jpg" mode="widthFix" :style="{top:-CustomBar+'px'}"></image>
-				<view class="userinfo-inner flex" v-if="hasUserInfo">
+				<view class="userinfo-inner flex" @tap="linkTo" data-url="/pages/user/info" data-logged
+				      v-if="hasUserInfo">
 					<image :src="userInfo.avatarUrl" background-size="cover"
 					       class="cu-avatar xl round userinfo-avatar"></image>
 					<view class="flex-sub padding-lr">
@@ -35,11 +36,11 @@
 								<open-data type="userNickName" default-text="匿名用户" />
 							</view>
 						</view>
+						<!-- @getuserinfo="getUserInfo" -->
 					</view>
 					<!-- #endif -->
 					<!-- #ifdef H5 -->
-					<button @tap="onLogin" @getuserinfo="getUserInfo"
-					        class="cu-btn bg-red lg block shadow"
+					<button @tap="onLogin" class="cu-btn bg-red lg block shadow"
 					        open-type="getUserInfo">登 录</button>
 					<!-- #endif -->
 				</view>
@@ -125,19 +126,6 @@
 
 		methods: {
 			onLogin(options) {
-				// uni.showLoading();
-				// setTimeout(() => {
-				// 	uni.$hintSuccess('登录成功！');
-				// 	this.userInfo = {
-				// 		avatarUrl: '/static/images/icons/default-avatar.png',
-				// 		nickName: '刘小晋啦',
-				// 	};
-				// 	this.hasUserInfo = true;
-				// 	uni.$emitter.emit('sys.getUserInfo.result', {
-				// 		userInfo: this.userInfo
-				// 	});
-				// }, 1000);
-
 				if (!options.firstLoad) {
 					this.showAuthModal();
 				}
@@ -153,6 +141,7 @@
 				uni.$getUserInfo({
 					firstLoad: true
 				}).then((res) => {
+					console.log(res)
 					this.userInfo = res;
 					this.userInfoStr = JSON.stringify(res);
 					this.hasUserInfo = true;

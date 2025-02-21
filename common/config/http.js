@@ -10,12 +10,19 @@ module.exports = {
 		returnRaw: false,
 
 		// Login
+		// #ifdef MP
 		login: uni.$logins.basic,
-		loginDenyAuthMsg: '此操作需要您先授权！',
-		loginFailedMsg: '登录失败，请稍后再试~',
+		loginUrl: baseURL + '/weapp_login',
+		// #endif
+
+		// #ifdef H5
+		login: uni.$logins.account,
+		loginUrl: baseURL + '/login',
+		// #endif
 
 		// basic login uses
-		loginUrl: baseURL + '/weapp_login',
+		loginDenyAuthMsg: '此操作需要您先授权！',
+		loginFailedMsg: '登录失败，请稍后再试~',
 		loginUserInfo: false,
 
 		// account login uses
@@ -23,7 +30,7 @@ module.exports = {
 
 		// 登录成功后的回调
 		onLogged: function() {
-			
+
 		}
 	},
 	requestInterceptors: [

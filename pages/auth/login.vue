@@ -8,7 +8,7 @@
 		<view class="left-bottom-sign"></view>
 		<view class="right-top-sign"></view>
 
-		<form class="form-wrapper" @submit="onSubmit">
+		<form class="form-wrapper" @submit.prevent="onSubmit">
 			<view class="left-top-sign">LOGIN</view>
 			<view class="welcome">
 				欢迎回来！
@@ -44,8 +44,16 @@
 				form: {
 					username: '',
 					password: ''
-				}
+				},
+				isLogged: false,
 			};
+		},
+		onUnload() {
+			if (!this.isLogged) {
+				uni.$emitter.emit('sys.login.result', {
+					errMsg: '取消登录！'
+				});
+			}
 		},
 		methods: {
 			// 返回上一页
@@ -63,21 +71,25 @@
 				})
 			},
 
-			/**
-			 * 登录
-			 */
-			onSubmit: function(e) {
+			// 登录
+			onSubmit(e) {
 				const data = e.detail.value;
 				if (!this.agreement) {
 					return uni.$hintError('请先确认用户服务协议与隐私权政策！');
 				}
 
-				uni.$http.post('login', this.form, {
-					loading: this,
-					hint: this
-				}).then(function() {
+				this.showLoading();
+				uni.$logins.account({
+					account: this.form.username,
+					password: this.form.password
+				}).then(() => {
 					uni.$hintSuccess('登录成功！');
-					uni.$delayNavigateBack(1200);
+					uni.$delayNavigateBack();
+				}, (err) => {
+					console.log(err);
+					uni.$hintError(err.errMsg || "登录失败！");
+				}).finally(() => {
+					this.hideLoading();
 				});
 			}
 		}

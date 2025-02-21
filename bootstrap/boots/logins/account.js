@@ -9,7 +9,7 @@ const LOGIN_INFO_KEY = '__login_info__';
  */
 export default function(options) {
 	// 静默登录
-	if (!options) {
+	if (options.account === undefined || options.password === undefined) {
 		options = $.getStorageSync(LOGIN_INFO_KEY);
 		if (!options) {
 			return fallback();
@@ -43,10 +43,13 @@ function connect(options) {
 				let res = response.data;
 				if (res.code === 1) {
 					// 存储登录信息
-					$.setStorageSync(LOGIN_INFO_KEY, options);
+					$.setStorageSync(LOGIN_INFO_KEY, {
+						account: options.account,
+						password: options.password
+					});
 
 					resolve(res);
-					
+
 					if ($.$http.defaults.onLogged) {
 						$.$http.defaults.onLogged(res);
 					}
@@ -59,6 +62,12 @@ function connect(options) {
 			},
 			fail: reject,
 		});
+	}).then(function(res) {
+		$.$emitter.emit('sys.login.result', res);
+		return res;
+	}, function(err) {
+		$.$emitter.emit('sys.login.result', err);
+		return Promise.reject(err);
 	});
 }
 

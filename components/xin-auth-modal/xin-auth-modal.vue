@@ -2,6 +2,7 @@
 	<view class="cu-modal bottom-modal" :class="{show:isShow}" @tap.stop="onClose">
 		<view class="cu-dialog" @tap.stop="">
 			<view class="padding-xl">
+				<!-- #ifdef MP-WEIXIN -->
 				<view class="auth-avatar-warpper">
 					<open-data type="userAvatarUrl" default-avatar="/static/icon/default-avatar.png"
 					           class="auth-avatar-inner" />
@@ -9,6 +10,7 @@
 				<view class="auth-nickname">
 					<open-data type="userNickName" default-text="匿名用户" />
 				</view>
+				<!-- #endif -->
 
 				<button @getuserinfo="getUserInfo"
 				        class="cu-btn bg-red lg block shadow margin-top"

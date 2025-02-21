@@ -155,6 +155,14 @@
 			}
 		},
 		{
+			"path": "pages/user/info",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
 			"path": "pages/auth/login",
 			"style": {
 				"navigationBarTitleText": "登录"
@@ -176,6 +184,12 @@
 			"path": "pages/auth/auth",
 			"style": {
 				"navigationBarTitleText": "用户授权"
+			}
+		},
+		{
+			"path": "pages/auth/certification",
+			"style": {
+				"navigationBarTitleText": "用户认证"
 			}
 		},
 		{
@@ -235,10 +249,7 @@
 			"style": {
 				"navigationBarTitleText": "获取用户信息"
 			}
-		}
-
-
-		, {
+		}, {
 			"path": "pages/mall/goods/evaluate-list",
 			"style": {
 				"navigationBarTitleText": "商品评价",

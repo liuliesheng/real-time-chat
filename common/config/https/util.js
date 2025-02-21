@@ -85,7 +85,7 @@ export function resolveHint(config) {
 		return hint;
 	}
 
-	if (config.hint && typeof config.loading === 'object') {
+	if (config.hint && typeof config.hint === 'object') {
 		return config.hint = {
 			hintError: config.hint.hintError,
 			hintSuccess: config.hint.hintSuccess

@@ -1,6 +1,6 @@
 <template>
-	<view class="page-load" :class="!fixed?'content':''" v-else>
-		<view class="load" @tap="refresh">
+	<view class="page-load" :class="!fixed?'content':''" @tap="refresh">
+		<view class="load">
 			<image src="/static/load.png" mode="widthFix" class="response"></image>
 		</view>
 	</view>
