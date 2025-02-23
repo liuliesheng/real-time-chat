@@ -30,6 +30,14 @@ export function format(formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date()) {
 	return formatStr;
 }
 
+/**
+ * 格式化成年
+ * @param {Number,Date} date
+ * @return {string}
+ */
+format.year = function(date = new Date()) {
+	return format('yyyy', date);
+}
 
 /**
  * 格式化成日期

@@ -17,8 +17,22 @@ export default {
 	},
 
 	// 获取商品收藏记录
-	getFavoriteList(query, options) {
+	getGoodsFavoriteList(query, options) {
 		return uni.$http.get('/plugin/mall/goods/favoriteList', query, options);
+	},
+
+	// 收藏商品
+	favoriteGoods(topicId, options = {}) {
+		return uni.$http.get('favorite/favorite', {
+			topic_id: topicId,
+		}, options);
+	},
+
+	// 取消收藏
+	unfavoriteGoods(topicId, options = {}) {
+		return uni.$http.get('favorite/unfavorite', {
+			topic_id: topicId
+		}, options);
 	},
 
 	// 获取分类列表

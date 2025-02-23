@@ -226,7 +226,7 @@ export class Request {
  * @returns {Promise}
  */
 ['get', 'post', 'put', 'delete'].forEach(method => {
-	Request.prototype[method] = function(url, data, options) {
+	Request.prototype[method] = function (url, data, options) {
 		return this.request(Object.assign({}, this.defaults, options || {}, {
 			url: url,
 			data: data,
@@ -237,6 +237,6 @@ export class Request {
 
 /**
  * 默认http请求
- * @type {Http}
+ * @type {Request}
  */
-export const http = new Request();
+export const request = new Request();

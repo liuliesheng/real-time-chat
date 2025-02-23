@@ -196,11 +196,11 @@
 					hint: this
 				};
 				if (!this.info.is_favorite) {
-					return uni.$model.favorite.favorite('goods', this.id, options).then(res => {
+					return uni.$model.favorite.favoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 1;
 					});
 				} else {
-					return uni.$model.favorite.unfavorite('goods', this.id, options).then(res => {
+					return uni.$model.favorite.unfavoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 0;
 					});
 				}

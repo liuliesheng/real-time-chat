@@ -97,16 +97,16 @@ $.$define('tryRequestSubscribeMessage', function(options) {
 			success: (res) => {
 				const subscriptionsSetting = res.subscriptionsSetting.itemSettings || {};
 
-				let isAuth = true;
+				const allowTempIds = [];
 				options.tmplIds.forEach(temlId => {
-					if (subscriptionsSetting[temlId] != 'accept') {
-						isAuth = false;
+					if (subscriptionsSetting[temlId] == 'accept') {
+						allowTempIds.push(temlId);
 					}
 				});
 
-				if (isAuth) {
+				if (allowTempIds.length) {
 					uni.requestSubscribeMessage({
-						tmplIds: options.tmplIds,
+						tmplIds: allowTempIds,
 						complete: resolve
 					});
 				} else {

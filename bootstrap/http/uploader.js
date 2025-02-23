@@ -1,18 +1,4 @@
-import {http} from "./request";
-
-// 基础配置
-const config = (function() {
-	try {
-		let config = require('../../common/config/upload.js');
-		if (typeof config === 'function') {
-			config = config();
-		}
-		return config || {};
-	} catch (e) {
-		console.warn("/common/config/upload.js not found!");
-		return {};
-	}
-})();
+import { request } from "./request";
 
 /**
  * 上传器
@@ -49,3 +35,6 @@ export default function uploader(files, options) {
 	};
 	upload(0);
 }
+
+// 默认配置
+uploader.defaults = {};
