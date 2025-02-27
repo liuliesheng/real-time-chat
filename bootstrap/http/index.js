@@ -1,8 +1,8 @@
 import { request, Request } from "./request";
-import uploader from "./uploader";
+import upload from "./upload";
 
 export {
 	Request,
 	request,
-	uploader
+	upload
 }

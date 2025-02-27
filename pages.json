@@ -329,6 +329,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/vcard/browse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "谁浏览了我",
+                "enablePullDownRefresh": true
+            }
+            
+        }
     ],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {

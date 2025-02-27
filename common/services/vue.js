@@ -31,4 +31,9 @@ Vue.filter('price', function(price, fixed = 0) {
 Vue.filter('date', (timeStamp, isSeconds = false) => {
 	if (!timeStamp) return '';
 	return uni.$timeUtil.format.datetime(timeStamp, isSeconds);
-})
+});
+
+// 友好的日期
+Vue.filter('firendlyDate', (timeStamp) => {
+	return uni.$timeUtil.fromNow(timeStamp);
+});

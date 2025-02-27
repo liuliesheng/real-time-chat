@@ -1,12 +1,12 @@
 import $ from "../$";
-import { Request, request, uploader } from "../http";
+import { Request, request, upload } from "../http";
 import * as util from "../util/index";
 import * as logins from './logins';
 
 // 请求类
 $.$define('http', request);
 $.$define('Http', Request);
-$.$define('uploader', uploader);
+$.$define('upload', upload);
 $.$define('logins', logins);
 
 
@@ -57,7 +57,7 @@ $.$define('logins', logins);
 (function() {
 	let config = null;
 	try {
-		let config = require('../../common/config/upload.js');
+		config = require('../../common/config/upload.js');
 		if (typeof config === 'function') {
 			config = config();
 		}
@@ -67,5 +67,5 @@ $.$define('logins', logins);
 	}
 
 	// 默认配置
-	util.assign(uploader.defaults, config);
+	util.assign(upload.defaults, config);
 })();

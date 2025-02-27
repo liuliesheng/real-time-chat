@@ -4,7 +4,7 @@
 		<Hint />
 
 		<template v-if="loaded">
-			<video src="https://video-qn.ibaotu.com/19/68/82/32r888piCzMR.mp4_10s.mp4" ></video>
+			<!-- <video src="https://video-qn.ibaotu.com/19/68/82/32r888piCzMR.mp4_10s.mp4"></video> -->
 			<VCard :info="info" class="card" />
 
 			<view class="flex text-center bg-white margin-top padding-top padding-bottom">
@@ -69,6 +69,7 @@
 		components: { VCard, },
 		data() {
 			return {
+				id: 0,
 				info: null,
 				loaded: false,
 
@@ -120,11 +121,11 @@
 				return model.getDynamicList(this.id, {
 					page: page
 				}).then(res => {
-					const dynamicData = this.dynamicData;
+					const dynamicData = page === 1 ? {} : this.dynamicData;
 					res.data.forEach(item => {
 						const itemCreateTime = new Date(item.create_time);
 						const itemKey = uni.$timeUtil.format.date(itemCreateTime);
-						if (!dynamicData[itemKey] || page === 1) {
+						if (!dynamicData[itemKey]) {
 							this.$set(dynamicData, itemKey, {
 								time: itemCreateTime,
 								items: []
@@ -135,6 +136,7 @@
 					});
 
 					if (page === 1) {
+						this.dynamicData = dynamicData;
 						this.isDynamicDataEmpty = res.data.length === 0;
 					}
 
@@ -143,7 +145,7 @@
 				});
 			},
 
-			
+
 
 			// 拨打手机号
 			callPhone() {
@@ -187,8 +189,8 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 3;
 	}
-	
-	.card{
+
+	.card {
 		/* position: absolute; */
 		/* top: 100px; */
 	}

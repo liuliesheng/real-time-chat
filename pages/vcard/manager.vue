@@ -12,7 +12,7 @@
 					<view class="text-sm text-gray">{{info.address}}</view>
 
 					<view class="flex text-center margin-top">
-						<view class="flex-sub">
+						<view class="flex-sub" @tap="linkTo" :data-url="'./browse?id='+info.id">
 							<view class="text-xxl"><text class="cuIcon-attentionfill"></text></view>
 							<view class="">{{info.view_count}}</view>
 						</view>
@@ -72,7 +72,7 @@
 						<view class="action"><text class="cuIcon-titles text-blue"></text>更多场景</view>
 					</view>
 					<view class="grid col-4 grid-square text-center text-sm">
-						<view class="padding-sm" @tap="makeVCardWeappQrcode">
+						<view class="padding-sm" @tap="showVCardWeappQrcode">
 							交换名片
 						</view>
 						<view class="padding-sm">
@@ -97,18 +97,9 @@
 					   @submit="modifyVCard"
 					   v-if="modifyFormItems.length" />
 
-			<view class="cu-modal show">
-				<view class="cu-dialog bg-white">
-					<view class="padding-top">
-						<image :src="info.weapp_qrcode.url" mode="widthFix"
-							   :show-menu-by-longpress="true"></image>
-					</view>
-					<view class="cu-bar bg-white">
-						<view class="action margin-0 flex-sub  solid-left" @tap="saveWeappQrcodeAlbum">保存到相册</view>
-					</view>
-				</view>
-			</view>
-
+			<ModalQrcode :url="info.weapp_qrcode.url" 
+			@close="isShowWeappQrcode=false"
+						 v-if="isShowWeappQrcode" />
 		</template>
 		<PageLoad @refresh="loadData" v-else />
 	</view>
@@ -118,10 +109,12 @@
 	import model from './model.js';
 	import VCardBasicEdit from './components/vcard-basic-edit.vue';
 	import ModalForm from './components/modal-form.vue';
+	import ModalQrcode from './components/modal-qrcode.vue';
 	export default {
 		components: {
 			VCardBasicEdit,
-			ModalForm
+			ModalForm,
+			ModalQrcode,
 		},
 		data() {
 			return {
@@ -129,7 +122,9 @@
 				loaded: false,
 
 				isSubmitting: false,
-				modifyFormItems: []
+				modifyFormItems: [],
+
+				isShowWeappQrcode: false
 			}
 		},
 
@@ -201,38 +196,24 @@
 			},
 
 			// 生成小程序码
-			makeVCardWeappQrcode() {
-				if (this.isSubmitting) {
-					return;
+			showVCardWeappQrcode() {
+				if (this.info.weapp_qrcode) {
+					this.isShowWeappQrcode = true;
+				} else {
+					if (this.isSubmitting) {
+						return;
+					}
+
+					this.isSubmitting = true;
+					model.makeVCardWeappQrcode().then((res) => {
+						this.$set(this.info, 'weapp_qrcode', res);
+						this.isShowWeappQrcode = true;
+					}).finally(() => {
+						this.isSubmitting = false;
+					});
 				}
 
-				this.isSubmitting = true;
-				model.makeVCardWeappQrcode().then((res) => {
-					console.log(res);
-					this.$set(this.info, 'weapp_qrcode', res);
-				}).finally(() => {
-					this.isSubmitting = false;
-				});
-			},
 
-			// 保存小程序码到相册
-			saveWeappQrcodeAlbum() {
-				uni.downloadFile({
-					url: this.info.weapp_qrcode.url,
-					success: (res) => {
-						uni.saveImageToPhotosAlbum({
-							filePath: res.tempFilePath,
-							fail: () => {
-								uni.showModal({
-									content: '图片保存失败，请确认是否开启相册权限！'
-								});
-							}
-						});
-					},
-					fail: () => {
-						this.hintError('图片下载失败！');
-					}
-				});
 			},
 		}
 	}

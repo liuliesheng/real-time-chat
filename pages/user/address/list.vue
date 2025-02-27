@@ -51,8 +51,8 @@
 				loaded: false
 			};
 		},
-		onLoad(option) {
-			this.source = parseInt(option.source);
+		onLoad(options) {
+			this.source = parseInt(options.source);
 			this.loadData();
 		},
 		onPullDownRefresh() {

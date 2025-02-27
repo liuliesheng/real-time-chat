@@ -14,10 +14,10 @@
 				<view class="text-xxl"><text :class="info.is_favorite?'cuIcon-favorfill':'cuIcon-favor'"></text></view>
 				<view class="">{{info.collect_count}}</view>
 			</view>
-			<view class="flex-sub">
-				<view class="text-xxl"><text :class="info.is_good?'cuIcon-appreciatefill':'cuIcon-appreciate'"></text>
+			<view class="flex-sub" @tap="onLike">
+				<view class="text-xxl"><text :class="info.is_like?'cuIcon-appreciatefill':'cuIcon-appreciate'"></text>
 				</view>
-				<view class="">{{info.good_count}}</view>
+				<view class="">{{info.like_count}}</view>
 			</view>
 		</view>
 	</view>
@@ -53,6 +53,21 @@
 						this.info.collect_count++;
 					});
 				}
+			},
+
+			// 去点赞
+			onLike() {
+				if (this.info.is_like) {
+					return;
+				}
+				
+				model.like(this.info.id, {
+					hint: this.$root,
+					loading: this.$root
+				}).then(() => {
+					this.info.is_like = true;
+					this.info.like_count++;
+				});
 			},
 		}
 	}

@@ -1,10 +1,6 @@
 <template>
-	<view class="cu-modal bottom-modal text-left show" @tap="close">
+	<view class="cu-modal bottom-modal text-left" :class="{show:isShow}" @tap="close">
 		<view class="cu-dialog" @tap.stop="">
-			<!-- 			<view class="cu-bar bg-white">
-				<view class="action text-green">确定</view>
-				<view class="action text-blue" @tap="hideModal">取消</view>
-			</view> -->
 			<view class="cu-form-group" v-for="(item,index) in items" :key="index">
 				<view class="title">{{item.label}}</view>
 				<input :type="item.type||'text'"
@@ -12,7 +8,12 @@
 					   :placeholder="item.placeholder"
 					   :maxlength="item.maxlength"
 					   :value="form[item.name]"
-					   @input="form[item.name] = $event.detail.value" />
+					   @input="form[item.name] = $event.detail.value"
+					   v-if="isInputType(item.type)" />
+
+				<view class="" @tap="onUpload" v-if="item.type==='image'">
+					上传
+				</view>
 			</view>
 
 			<view class="padding">
@@ -44,16 +45,49 @@
 				}
 			});
 			return {
-				form: form
+				form: form,
+				isShow: false,
 			};
+		},
+		mounted() {
+			setTimeout(() => {
+				this.isShow = true;
+			}, 0);
 		},
 		methods: {
 			close() {
-				this.$emit('close');
+				this.isShow = false;
+				setTimeout(() => {
+					this.$emit('close');
+				}, 200);
 			},
 			submit() {
 				this.$emit('submit', this.form);
-			}
+			},
+
+			// 是否是输入框类型
+			isInputType(type) {
+				return [
+					'text', 'number'
+				].indexOf(type) !== -1;
+			},
+
+			// 上传图片
+			onUpload() {
+				uni.chooseImage({
+					success: (res) => {
+						const path = res.tempFilePaths[0];
+						if (!path) {
+							return;
+						}
+
+						uni.$upload({
+							files: [path],
+						});
+						console.log(res)
+					}
+				})
+			},
 		}
 	}
 </script>
