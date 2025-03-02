@@ -5,6 +5,7 @@
 
 		<template v-if="loaded">
 			<template v-if="info">
+
 				<view class="padding text-center bg-white">
 					<view class="cu-avatar xl round" :style="'background-image:url('+info.avatar+');'"></view>
 					<view class="text-bold">{{info.name}}</view>
@@ -16,16 +17,17 @@
 							<view class="text-xxl"><text class="cuIcon-attentionfill"></text></view>
 							<view class="">{{info.view_count}}</view>
 						</view>
-						<view class="flex-sub" @tap="toggleFavorite">
-							<view class="text-xxl"><text
-									  :class="info.is_favorite?'cuIcon-favorfill':'cuIcon-favor'"></text>
+						<view class="flex-sub">
+							<view class="text-xxl">
+								<text :class="info.is_favorite?'cuIcon-favorfill':'cuIcon-favor'"></text>
 							</view>
 							<view class="">{{info.collect_count}}</view>
 						</view>
 						<view class="flex-sub">
-							<view class="text-xxl"><text
-									  :class="info.is_good?'cuIcon-appreciatefill':'cuIcon-appreciate'"></text></view>
-							<view class="">{{info.good_count}}</view>
+							<view class="text-xxl">
+								<text :class="info.is_like?'cuIcon-appreciatefill':'cuIcon-appreciate'"></text>
+							</view>
+							<view class="">{{info.like_count}}</view>
 						</view>
 					</view>
 				</view>
@@ -63,6 +65,9 @@
 						<view class="padding-sm">
 							群通讯录
 						</view>
+						<view class="padding-sm">
+							动态
+						</view>
 					</view>
 				</view>
 
@@ -97,8 +102,8 @@
 					   @submit="modifyVCard"
 					   v-if="modifyFormItems.length" />
 
-			<ModalQrcode :url="info.weapp_qrcode.url" 
-			@close="isShowWeappQrcode=false"
+			<ModalQrcode :url="info.weapp_qrcode.url"
+						 @close="isShowWeappQrcode=false"
 						 v-if="isShowWeappQrcode" />
 		</template>
 		<PageLoad @refresh="loadData" v-else />

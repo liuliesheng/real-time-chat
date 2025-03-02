@@ -22,29 +22,41 @@ export default function upload(options) {
 	};
 
 
-	return new Promise((resolve, reject) => {
-		const result = [];
+	const result = [];
+	const files = options.files;
 
-		(function handler(file, index) {
-			options.file = file;
-			driver(options).then((res) => {
-				res.state = 1;
-				res.index = index;
-				result.push(res);
-				triggerChange(res);
-			}, (err) => {
-				err.state = 2;
-				result.push(res);
-				triggerChange(err);
-			}).finally(() => {
-				if (index < files.length - 1) {
-					handler(index + 1);
-				} else {
-					resolve();
-				}
-			});
-		})(0);
+	let promise = Promise.resolve();
+
+	files.forEach((file, index) => {
+		options.file = file;
+		promise = promise.then(() => {
+			const item = {
+				state: 0,
+				index: index,
+			};
+			triggerChange(item);
+			return driver(options);
+		}).then((res) => {
+			const item = {
+				id: res.id,
+				url: res.url || res.path,
+				state: 1,
+				index: index,
+			};
+			result.push(item);
+			triggerChange(item);
+		}, (err) => {
+			const item = {
+				state: 2,
+				index: index,
+				errMsg: err.errMsg
+			};
+			result.push(item);
+			triggerChange(item);
+		});
 	});
+
+	return promise.then(() => result);
 }
 
 // 解析驱动

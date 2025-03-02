@@ -284,20 +284,6 @@
 				"enablePullDownRefresh": true
 			}
 		}, {
-			"path": "pages/enterprise/case/index",
-			"style": {
-				"navigationBarTitleText": "案例列表",
-				"enablePullDownRefresh": true
-			}
-
-		}, {
-			"path": "pages/enterprise/case/detail",
-			"style": {
-				"navigationBarTitleText": "案例详情",
-				"enablePullDownRefresh": true
-			}
-
-		}, {
 			"path": "pages/enterprise/product/index",
 			"style": {
 				"navigationBarTitleText": "产品列表",

@@ -4,7 +4,6 @@
 		<Hint />
 
 		<template v-if="loaded">
-			<!-- <video src="https://video-qn.ibaotu.com/19/68/82/32r888piCzMR.mp4_10s.mp4"></video> -->
 			<VCard :info="info" class="card" />
 
 			<view class="flex text-center bg-white margin-top padding-top padding-bottom">

@@ -11,8 +11,9 @@
 					   @input="form[item.name] = $event.detail.value"
 					   v-if="isInputType(item.type)" />
 
-				<view class="" @tap="onUpload" v-if="item.type==='image'">
-					上传
+				<view class="" @tap="onUpload(item.name)" v-if="item.type==='image'">
+					<image :src="form[item.name]" mode="aspectFill" v-if="form[item.name]"></image>
+					<text v-else>上传</text>
 				</view>
 			</view>
 
@@ -73,7 +74,7 @@
 			},
 
 			// 上传图片
-			onUpload() {
+			onUpload(formName) {
 				uni.chooseImage({
 					success: (res) => {
 						const path = res.tempFilePaths[0];
@@ -83,8 +84,13 @@
 
 						uni.$upload({
 							files: [path],
+						}).then(res => {
+							if (res[0].state !== 1) {
+								return uni.$hintError('上传失败！');
+							}
+
+							this.form[formName] = res[0].url;
 						});
-						console.log(res)
 					}
 				})
 			},

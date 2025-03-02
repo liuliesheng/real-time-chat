@@ -1,6 +1,7 @@
 import $ from './$';
 
-const CACHE_EXPIRE_SUFFIX = 'expire';
+const CACHE_EXPIRE_SUFFIX = 'cache';
+
 export default {
 
 	/**

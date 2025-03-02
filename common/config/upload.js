@@ -14,12 +14,15 @@ module.exports = {
 		// 七牛上传
 		qiniu: {
 			driver: 'qiniu',
+			
 			// 获取token信息地址，优先级最高
-			tokenUrl: '/upload/token',
-			uptokenURL: 'https://yourserver.com/api/uptoken',
+			tokenInfoUrl: '/upload/token',
+			
+			// 七牛配置(获取token地址)
+			// uptokenURL: 'https://yourserver.com/api/uptoken',
 			// uptoken: 'xxxx',
-			domain: 'http://owzs78.bkt.clouddn.com/'
-			region: 'NCN', // 华北区
+			// domain: 'http://yourserver.com/'
+			// region: 'NCN', // 华北区
 		}
 	}
 };

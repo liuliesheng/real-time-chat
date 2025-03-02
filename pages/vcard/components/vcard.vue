@@ -1,5 +1,6 @@
 <template>
 	<view class="padding text-center bg-white">
+		<!-- <video src="https://video-qn.ibaotu.com/19/68/82/32r888piCzMR.mp4_10s.mp4"></video> -->
 		<view class="cu-avatar xl round" :style="'background-image:url('+info.avatar+');'"></view>
 		<view class="text-bold">{{info.name}}</view>
 		<view class="">{{info.description}}</view>
