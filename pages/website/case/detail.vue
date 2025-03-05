@@ -53,7 +53,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/enterprise/case/detail', {
+				return uni.$http.get('/plugin/website/case/detail', {
 					id: this.id
 				}).then(res => {
 					this.info = res;

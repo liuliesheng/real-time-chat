@@ -1,23 +1,34 @@
 <template>
 	<view class="page">
-		<view class="padding bg-white" v-if="loaded">
-			<view class="h3 text-black">{{info.title}}</view>
-			<view class="flex">
-				<view>
-					<text class="cuIcon-attention"></text>
-					<text class="margin-left-xs">{{info.view_count}}</text>
+		<template v-if="loaded">
+			<view class="padding bg-white">
+				<view class="h3 text-black">{{info.title}}</view>
+				<view class="flex">
+					<view>
+						<text class="cuIcon-attention"></text>
+						<text class="margin-left-xs">{{info.view_count}}</text>
+					</view>
+					<view class="margin-left-sm">
+						<text class="cuIcon-appreciate"></text>
+						<text class="margin-left-xs">{{info.good_count}}</text>
+					</view>
+					<view class="margin-left-sm">
+						<text class="cuIcon-favor"></text>
+						<text class="margin-left-xs">{{info.collect_count}}</text>
+					</view>
 				</view>
-				<view class="margin-left-sm">
-					<text class="cuIcon-appreciate"></text>
-					<text class="margin-left-xs">{{info.good_count}}</text>
-				</view>
-				<view class="margin-left-sm">
-					<text class="cuIcon-favor"></text>
-					<text class="margin-left-xs">{{info.collect_count}}</text>
-				</view>
+				<MPHtml :content="info.content" />
 			</view>
-			<MPHtml :content="info.content" />
-		</view>
+			<view class="cu-bar bg-white tabbar shop foot">
+				<view class="action text-orange">
+					<view class="cuIcon-favorfill"></view> 已收藏
+				</view>
+				<view class="action">
+					<view class="cuIcon-appreciate"></view>点赞
+				</view>
+				<button open-type="contact" class="bg-red submit">立即咨询</button>
+			</view>
+		</template>
 		<PageLoad @refresh="loadData" v-else />
 	</view>
 </template>
@@ -53,7 +64,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/enterprise/product/detail', {
+				return uni.$http.get('/plugin/website/product/detail', {
 					id: this.id
 				}).then(res => {
 					this.info = res;

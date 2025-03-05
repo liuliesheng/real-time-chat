@@ -2,8 +2,8 @@ import basicRequestInterceptor from "./https/basic.request.interceptor";
 import basicResponseInterceptor from "./https/basic.response.interceptor";
 
 // http基础配置
-// const baseURL = 'https://mall.nlplant.cn/api';
-const baseURL = 'http://mall.test.com/api';
+const baseURL = 'https://mall.nlplant.cn/api';
+// const baseURL = 'http://mall.test.com/api';
 module.exports = {
 	defaults: {
 		baseURL: baseURL,

@@ -64,7 +64,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/enterprise/article/detail', {
+				return uni.$http.get('/plugin/website/article/detail', {
 					id: this.id
 				}).then(res => {
 					this.info = res;

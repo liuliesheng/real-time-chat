@@ -1,14 +1,7 @@
 <template>
 	<view class="page">
 		<template v-if="loaded">
-			<view class="" v-if="data.length">
-				<view class=""
-				      v-for="(item,index) in data"
-				      :key="item.id"
-				      @tap="linkTo" :data-url="'/pages/enterprise/case/detail?id='+item.id">
-					<view class="">{{item.title}}</view>
-				</view>
-			</view>
+			<CaseList :list="data" :isCard="true" v-if="data.length" />
 			<Empty type="article" v-else />
 		</template>
 		<PageLoad @refresh="loadData" v-else />
@@ -16,7 +9,11 @@
 </template>
 
 <script>
+	import CaseList from '../components/case-list.vue';
 	export default {
+		components: {
+			CaseList
+		},
 		data() {
 			return {
 				data: [],
@@ -44,7 +41,7 @@
 		methods: {
 			// 加载数据
 			loadData: function(page = 1) {
-				return uni.$http.get('/plugin/enterprise/case', {
+				return uni.$http.get('/plugin/website/case', {
 					keywords: this.keywords,
 					page: page,
 				}).then(res => {

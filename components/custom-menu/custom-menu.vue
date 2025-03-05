@@ -1,6 +1,7 @@
 <template>
-	<view class="grid col-5">
-		<view class="item" v-for="(item,index) in list" :key="index">
+	<view class="grid col-4">
+		<view class="item" v-for="(item,index) in list" :key="index"
+			  @tap="itemClickHandle(index)">
 			<view class="image">
 				<image class="round" :src="item.icon" mode="aspectFill"></image>
 			</view>
@@ -18,10 +19,27 @@
 				default: () => []
 			}
 		},
-		data() {
-			return {
+		methods: {
+			itemClickHandle(index) {
+				const item = this.list[index];
 
-			};
+				if (item.type === 'custom') {
+					const result = {
+						index: index,
+						data: item,
+					};
+					this.$emit('itemtap', result);
+				} else {
+					this._dispatch(item);
+				}
+			},
+			_dispatch(item) {
+				switch (item.type) {
+					case "page":
+						this.navTo(item.url);
+						break;
+				}
+			}
 		}
 	}
 </script>
@@ -60,16 +78,19 @@
 
 	.text {
 		text-align: center;
+		margin-top: 10rpx;
+		font-size: 12px;
 	}
 
 	.image {
 		position: relative;
-		padding-bottom: 100%;
+		padding-bottom: 80%;
 	}
 
 	.image>image {
-		width: 100%;
+		width: 80%;
 		height: 100%;
+		left: 10%;
 		position: absolute;
 	}
 </style>

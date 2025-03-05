@@ -1,61 +1,55 @@
 <template>
 	<view class="page">
+		<XLoading />
+		<Hint />
+
 		<template v-if="loaded">
-			<view class="margin radius" style="overflow: hidden;">
-				<custom-swiper :list="swiperList" />
+			<view class="margin radius" style="overflow: hidden;" v-if="bannerList.length">
+				<custom-swiper :list="bannerList" />
 			</view>
 
-			<view class="margin">
-				<custom-menu :list="menus" />
+			<view class="margin" v-if="navList">
+				<custom-menu :list="navList" />
 			</view>
 
-			<custom-titlebar title="产品列表" :transparent="true" />
-			<view class="cu-card case" v-if="productList.length">
-				<view class="cu-item shadow" v-for="(item,index) in productList" :key="item.id">
-					<view class="image">
-						<image :src="item.cover" mode="widthFix"></image>
-						<view class="cu-tag bg-blue">史诗</view>
-						<view class="cu-bar bg-shadeBottom"> <text
-								  class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text></view>
-					</view>
-					<view class="padding-sm text-gray text-sm">
-						<text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-						<text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-						<text class="cuIcon-messagefill margin-lr-xs"></text> 30
-					</view>
-				</view>
+			<view class="" v-if="articleList.length">
+				<custom-titlebar title="文章列表" :transparent="true" style="margin-bottom: -30rpx;"
+								 :isMore="true" moreUrl='/pages/website/article/index' />
+				<ArticleList :list="articleList" />
 			</view>
 
-			<custom-titlebar title="案例列表" :transparent="true" />
-			<view class="cu-card case" v-if="caseList.length">
-				<view class="cu-item shadow" v-for="(item,index) in caseList" :key="item.id">
-					<view class="image">
-						<image :src="item.cover" mode="widthFix"></image>
-						<view class="cu-tag bg-blue">史诗</view>
-						<view class="cu-bar bg-shadeBottom"> <text
-								  class="text-cut">我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。</text></view>
-					</view>
-					<view class="padding-sm text-gray text-sm">
-						<text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-						<text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-						<text class="cuIcon-messagefill margin-lr-xs"></text> 30
-					</view>
-				</view>
+			<view class="" v-if="productList.length">
+				<custom-titlebar title="产品列表" :transparent="true" style="margin-bottom: -30rpx;"
+								 :isMore="true" moreUrl='/pages/website/product/index' />
+				<ProductList :list="productList" />
 			</view>
 
-			<view class="margin radius" style="overflow: hidden;">
-				<custom-map address="河南省郑州市惠济区" />
+			<view class="" v-if="caseList.length">
+				<custom-titlebar title="案例列表" :transparent="true" style="margin-bottom: -30rpx;"
+								 :isMore="true" moreUrl='/pages/website/case/index' />
+				<ProductList :list="caseList" />
+			</view>
+
+			<view class="margin radius bg-white" style="overflow: hidden;">
+				<custom-titlebar title="企业地址" :transparent="true" />
+				<custom-map :address="websiteInfo.address"
+							:latitude="websiteInfo.lat"
+							:longitude="websiteInfo.lng" />
 			</view>
 
 			<view class="margin radius" style="overflow: hidden;">
 				<custom-card title="留言给我们">
-					<custom-forms :items="leavingMsgForm.items" />
+					<custom-forms :items="leavingMsgForm.items"
+								  :isLoading="isLeavingMsgLoading"
+								  @submit="submitLeavingMsg" />
 				</custom-card>
 			</view>
 
-			<custom-floating-button :list="floatingButtionList" :radius="true" />
+			<custom-footer :company="websiteInfo.title"
+						   :phone="websiteInfo.phone"
+						   :wechatQrcode="websiteInfo.wechat_qrcode" />
 
-			<custom-footer v-bind="enterpriseInfo" />
+			<custom-floating-button :list="floatingButtionList" :radius="true" />
 
 		</template>
 		<PageLoad @refresh="loadData" v-else />
@@ -63,18 +57,29 @@
 </template>
 
 <script>
+	import ArticleList from './components/article-list.vue';
+	import ProductList from './components/product-list.vue';
+	import CaseList from './components/case-list.vue';
 	export default {
+		components: {
+			ArticleList,
+			ProductList,
+			CaseList
+		},
 		data() {
 			return {
-				loaded: true,
+				loaded: false,
 
-				swiperList: [],
-				menus: [],
+				bannerList: [],
+				noticeList: [],
+				navList: [],
+				articleList: [],
 				productList: [],
 				caseList: [],
 				floatingButtionList: [],
 				leavingMsgForm: {},
-				enterpriseInfo: {},
+				isLeavingMsgLoading: false,
+				websiteInfo: {},
 			}
 		},
 		onLoad(options) {
@@ -83,16 +88,23 @@
 		methods: {
 			async loadData() {
 				const baseConfig = await uni.$http.get('plugin/website/index/index');
+				this.loaded = true;
 
 				// 轮播图
-				const swiperList = baseConfig.banners;
-				this.swiperList = swiperList;
-				if (this.swiperList.length) {
-					this.titleNViewBackground = swiperList[0].background;
+				const bannerList = baseConfig.banner_list;
+				this.bannerList = bannerList;
+				if (this.bannerList.length) {
+					this.titleNViewBackground = bannerList[0].background;
 				}
 
+				// 通知列表
+				this.noticeList = baseConfig.notice_list || [];
+
 				// 菜单列表
-				this.menus = baseConfig.menus || [];
+				this.navList = baseConfig.nav_list || [];
+
+				// 文章列表
+				this.articleList = baseConfig.article_list || [];
 
 				// 产品列表
 				this.productList = baseConfig.product_list || [];
@@ -101,18 +113,32 @@
 				this.caseList = baseConfig.case_list || [];
 
 				// 留言表单配置
-				this.leavingMsgForm = baseConfig.leavingMsgForm || {};
+				this.leavingMsgForm = baseConfig.leaving_msg_form || {};
 
 				// 企业信息
-				this.enterpriseInfo = baseConfig.enterprise_info || {};
+				this.websiteInfo = baseConfig.website_info || {};
 
 				// 悬浮按钮
-				this.floatingButtionList = baseConfig.floating_buttion_list || [];
+				this.floatingButtionList = baseConfig.floating_button_list || [];
 			},
-		}
+
+			// 提交留言
+			submitLeavingMsg({ values, forms }) {
+				this.isLeavingMsgLoading = true;
+				uni.$http.post('plugin/website/index/submitleavingmsg', {
+					data: forms
+				}, {
+					loading: false,
+					hint: this
+				}).then(() => {
+					this.hintSuccess('已提交');
+				}).finally(() => {
+					this.isLeavingMsgLoading = false;
+				});
+			}
+		},
 	}
 </script>
 
 <style>
-
 </style>

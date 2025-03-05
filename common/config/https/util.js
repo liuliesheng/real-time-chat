@@ -23,6 +23,8 @@ export function attachGetParams(config, attachData) {
  */
 export function makeBasicGetParams() {
 	return {
+		// access_id
+		access_id: $.$config.access_id,
 		// 附加版本号
 		version: $.$config.version,
 		// 时间戳

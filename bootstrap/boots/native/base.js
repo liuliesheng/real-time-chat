@@ -2,6 +2,7 @@ import $ from "../../$";
 
 // 系统信息
 const systemInfo = $.getSystemInfoSync();
+$.$define('systemInfo', systemInfo);
 $.$define('isDev', systemInfo.platform === 'devtools');
 
 /**

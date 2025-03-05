@@ -1,9 +1,9 @@
 <template>
 	<view class="cu-card article" :class="isCard?'':'no-card'">
 		<view class="cu-item" :class="isCard?'':'solid-bottom'"
-		      v-for="(item,index) in list"
-		      :key="item.id"
-		      @tap="linkTo" :data-url="'/pages/enterprise/article/detail?id='+item.id">
+			  v-for="(item,index) in list"
+			  :key="item.id"
+			  @tap="linkTo" :data-url="'/pages/website/article/detail?id='+item.id">
 			<view class="content">
 				<image :src="item.cover" class="cover" mode="aspectFill" lazy-load="true"></image>
 				<view class="desc">
@@ -38,7 +38,10 @@
 					return []
 				}
 			},
-			isCard: Boolean
+			isCard: {
+				type: Boolean,
+				default: true
+			}
 		}
 	}
 </script>

@@ -128,14 +128,16 @@
             }
         },
         "devServer" : {
-            "https" : false
+            "https" : true
         },
         "title" : "演示应用",
         "router" : {
-            "base" : "/h5/"
+            "base" : "/h5/",
+            "mode" : "hash"
         },
         "uniStatistics" : {
             "enable" : false
-        }
+        },
+        "domain" : "mall.nlplant.cn"
     }
 }

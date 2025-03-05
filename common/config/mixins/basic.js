@@ -28,6 +28,7 @@ export default {
 
 	// 跳转
 	navTo: function(url, type) {
+		type = type || "navigateTo";
 		$[type]({
 			url: url,
 			fail() {

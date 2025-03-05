@@ -146,6 +146,14 @@
 			}
 		},
 		{
+			"path": "pages/mall/goods/evaluate-list",
+			"style": {
+				"navigationBarTitleText": "商品评价",
+				"enablePullDownRefresh": true
+			}
+
+		},
+		{
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTextStyle": "white",
@@ -250,13 +258,6 @@
 				"navigationBarTitleText": "获取用户信息"
 			}
 		}, {
-			"path": "pages/mall/goods/evaluate-list",
-			"style": {
-				"navigationBarTitleText": "商品评价",
-				"enablePullDownRefresh": true
-			}
-
-		}, {
 			"path": "pages/website/index",
 			"style": {
 				"navigationBarTitleText": "首页",
@@ -304,6 +305,13 @@
 				"enablePullDownRefresh": true
 			}
 		}, {
+			"path": "pages/website/about",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
 			"path": "pages/vcard/info",
 			"style": {
 				"navigationBarTitleText": "名片详情",
@@ -325,6 +333,7 @@
 			}
 
 		}
+
 
 	],
 	"entryPagePath": "pages/mall/index",
