@@ -257,74 +257,76 @@
 			}
 
 		}, {
-			"path": "pages/enterprise/article/index",
+			"path": "pages/website/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/website/article/index",
 			"style": {
 				"navigationBarTitleText": "文章列表",
 				"enablePullDownRefresh": true
 			}
 
 		}, {
-			"path": "pages/enterprise/article/detail",
+			"path": "pages/website/article/detail",
 			"style": {
 				"navigationBarTitleText": "文章详情",
 				"enablePullDownRefresh": true
 			}
 
 		}, {
-			"path": "pages/enterprise/case/index",
+			"path": "pages/website/case/index",
 			"style": {
 				"navigationBarTitleText": "案例列表",
 				"enablePullDownRefresh": true
 			}
 
 		}, {
-			"path": "pages/enterprise/case/detail",
+			"path": "pages/website/case/detail",
 			"style": {
 				"navigationBarTitleText": "案例详情",
 				"enablePullDownRefresh": true
 			}
 		}, {
-			"path": "pages/enterprise/product/index",
+			"path": "pages/website/product/index",
 			"style": {
 				"navigationBarTitleText": "产品列表",
 				"enablePullDownRefresh": true
 			}
 
 		}, {
-			"path": "pages/enterprise/product/detail",
+			"path": "pages/website/product/detail",
 			"style": {
 				"navigationBarTitleText": "产品详情",
 				"enablePullDownRefresh": true
 			}
+		}, {
+			"path": "pages/vcard/info",
+			"style": {
+				"navigationBarTitleText": "名片详情",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/vcard/manager",
+			"style": {
+				"navigationBarTitleText": "我的名片",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/vcard/browse",
+			"style": {
+				"navigationBarTitleText": "谁浏览了我",
+				"enablePullDownRefresh": true
+			}
+
 		}
-	    ,{
-            "path" : "pages/vcard/info",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "名片详情",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/vcard/manager",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的名片",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/vcard/browse",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "谁浏览了我",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-    ],
+
+	],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5

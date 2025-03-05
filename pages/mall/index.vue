@@ -98,7 +98,7 @@
 			async loadData() {
 				const baseConfig = await uni.$http.get('plugin/mall/index/index');
 
-				// // 轮播图
+				// 轮播图
 				const swiperList = baseConfig.banners;
 				this.swiperList = swiperList;
 				if (this.swiperList.length) {
