@@ -6,9 +6,9 @@
 		<!-- 商品轮播图 -->
 		<view class="" style="overflow: hidden;">
 			<swiper class="screen-swiper round-dot" style="min-height: 356upx;"
-			        :indicator-dots="true" :circular="true"
-			        :autoplay="true" interval="5000" duration="500"
-			        @tap="previewImage" :data-urls="swiperList">
+					:indicator-dots="true" :circular="true"
+					:autoplay="true" interval="5000" duration="500"
+					@tap="previewImage" :data-urls="swiperList">
 				<swiper-item v-for="(item,index) in swiperList" :key="index" :data-current="index">
 					<image :src="item" mode="aspectFill"></image>
 				</swiper-item>
@@ -22,7 +22,7 @@
 			<view class="margin-top">
 				<text class="text-price text-red text-xl">{{ info.price }}</text>
 				<text class="text-price text-gray margin-left-sm"
-				      style="text-decoration: line-through;">{{ info.market_price }}
+					  style="text-decoration: line-through;">{{ info.market_price }}
 				</text>
 			</view>
 
@@ -72,7 +72,7 @@
 
 		<!-- 商品评价 -->
 		<view class="cu-bar bg-white margin-top solid-bottom"
-		      @tap="linkTo" :data-url="'./evaluate-list?goods_id='+info.id">
+			  @tap="linkTo" :data-url="'./evaluate-list?goods_id='+info.id">
 			<view class="action">
 				评价（{{info.evaluate_list_count}}）
 			</view>
@@ -93,7 +93,9 @@
 		</view>
 		<!-- /商品详情 -->
 
+		<!-- #ifndef H5 -->
 		<ad unit-id="adunit-dca118409648c077" ad-type="video"></ad>
+		<!-- #endif -->
 
 		<!-- 底部操作栏 -->
 		<view class="cu-bar bg-white tabbar shop foot">
@@ -122,7 +124,7 @@
 			<view class="btn-group flex">
 				<view class="cu-btn bg-gradual-orange round flex-sub" @tap="toShoppingCart">加入购物车</view>
 				<view class="cu-btn bg-gradual-red round flex-sub margin-left-sm"
-				      @tap="toBuy">立即订购</view>
+					  @tap="toBuy">立即订购</view>
 			</view>
 		</view>
 		<!-- /底部操作栏 -->

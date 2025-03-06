@@ -11,14 +11,14 @@
 		<xin-auth-modal />
 
 		<mescroll-body ref="mescrollRef" :up="{use:false}" @init="mescrollInit"
-		               @down="downCallback" @up="upCallback">
+					   @down="downCallback" @up="upCallback">
 
 			<view class="userinfo">
 				<image class="bg" src="/static/bg/user.jpg" mode="widthFix" :style="{top:-CustomBar+'px'}"></image>
 				<view class="userinfo-inner flex" @tap="linkTo" data-url="/pages/user/info" data-logged
-				      v-if="hasUserInfo">
+					  v-if="hasUserInfo">
 					<image :src="userInfo.avatarUrl" background-size="cover"
-					       class="cu-avatar xl round userinfo-avatar"></image>
+						   class="cu-avatar xl round userinfo-avatar"></image>
 					<view class="flex-sub padding-lr">
 						<text class="userinfo-nickname"><text>Hi，</text>{{ userInfo.nickName }}</text>
 					</view>
@@ -27,8 +27,10 @@
 					<!-- #ifdef MP-WEIXIN -->
 					<view class="userinfo-inner flex">
 						<view class="cu-avatar xl round userinfo-avatar">
+							<!-- #ifndef H5 -->
 							<open-data type="userAvatarUrl" default-avatar="/static/icon/default-avatar.png"
-							           class="userinfo-avatar-inner" />
+									   class="userinfo-avatar-inner" />
+							<!-- #endif -->
 						</view>
 						<view class="flex-sub padding-lr">
 							<view class="userinfo-nickname">
@@ -41,7 +43,7 @@
 					<!-- #endif -->
 					<!-- #ifdef H5 -->
 					<button @tap="onLogin" class="cu-btn bg-red lg block shadow"
-					        open-type="getUserInfo">登 录</button>
+							open-type="getUserInfo">登 录</button>
 					<!-- #endif -->
 				</view>
 				<image class="arc-line" src="/static/icon/arc.png" mode="aspectFill"></image>
@@ -75,7 +77,8 @@
 				<view class="cu-item arrow">
 					<view class="content" @tap="linkTo" data-url="/pages/user/address/list" data-logged>
 						<text class="cuIcon-locationfill text-grey"></text>
-						<text>收货地址</text></view>
+						<text>收货地址</text>
+					</view>
 				</view>
 				<view class="cu-item arrow">
 					<view class="content" @tap="linkTo" data-url="/pages/mall/favorite/index" data-logged>

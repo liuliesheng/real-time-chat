@@ -8,19 +8,21 @@
 
 		<template v-if="loaded">
 			<mescroll-body ref="mescrollRef" @init="mescrollInit"
-			               :down="{auto:false}" :up="{auto:false,empty:false}"
-			               @down="downCallback" @up="upCallback">
+						   :down="{auto:false}" :up="{auto:false,empty:false}"
+						   @down="downCallback" @up="upCallback">
 				<swiper class="screen-swiper round-dot" style="min-height: 256upx;"
-				        :indicator-dots="true" :circular="true"
-				        :autoplay="true" interval="5000" duration="500">
+						:indicator-dots="true" :circular="true"
+						:autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">
 						<video :src="item.cover" autoplay loop muted :show-play-btn="false" :controls="false"
-						       objectFit="cover" v-if="item.type=='video'"></video>
+							   objectFit="cover" v-if="item.type=='video'"></video>
 						<image :src="item.cover" mode="aspectFill" v-else></image>
 					</swiper-item>
 				</swiper>
 
+				<!-- #ifndef H5 -->
 				<ad unit-id="adunit-1125620a898275d6"></ad>
+				<!-- #endif -->
 
 				<GoodsList :list="goodsList"></GoodsList>
 			</mescroll-body>

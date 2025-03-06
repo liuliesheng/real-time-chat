@@ -1,8 +1,10 @@
 <template>
 	<div class="auth">
 		<view class="tips">
+			<!-- #ifndef H5 -->
 			<open-data class="avatar" type="userAvatarUrl"></open-data>
 			<open-data class="nickname" type="userNickName"></open-data>
+			<!-- #endif -->
 			<view>为了你能够更好的体验，本应用需要获取你的基本信息（昵称、头像等）</view>
 		</view>
 		<view class="container">
@@ -12,39 +14,37 @@
 </template>
 
 <script>
-export default {
-	name: 'auth',
-	data() {
-		return {
-			userInfo: null
-		};
-	},
-	onLoad: function(options) {
-	},
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function() {
-		uni.$emitter.emit('sys.getUserInfo.result', this.userInfo);
-	},
-	methods: {
+	export default {
+		name: 'auth',
+		data() {
+			return {
+				userInfo: null
+			};
+		},
+		onLoad: function(options) {},
 		/**
-		 * 获取用户信息
+		 * 生命周期函数--监听页面卸载
 		 */
-		getUserInfo: function(e) {
-			if (e.detail.userInfo) {
-				this.userInfo = e.detail;
-				uni.navigateBack();
+		onUnload: function() {
+			uni.$emitter.emit('sys.getUserInfo.result', this.userInfo);
+		},
+		methods: {
+			/**
+			 * 获取用户信息
+			 */
+			getUserInfo: function(e) {
+				if (e.detail.userInfo) {
+					this.userInfo = e.detail;
+					uni.navigateBack();
+				}
 			}
 		}
-	}
-};
+	};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	.auth {
-	}
+	.auth {}
 
 	.avatar {
 		display: block;

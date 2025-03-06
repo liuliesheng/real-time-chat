@@ -6,27 +6,29 @@
 		</cu-custom>
 		<!-- #endif -->
 
+		<!-- #ifndef H5 -->
 		<ad unit-id="adunit-1125620a898275d6" @load="onAdLoaded" id="ad"></ad>
+		<!-- #endif -->
 
 		<template v-if="loaded">
 			<view class="VerticalBox" :style="[{top:offsetTop+'px'}]">
 				<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation
-				             :scroll-top="verticalNavTop" style="height:100vh">
+							 :scroll-top="verticalNavTop" style="height:100vh">
 					<view class="cu-item padding-tb" :class="index==tabCur?'text-green cur':''"
-					      v-for="(item,index) in categories" :key="index"
-					      @tap="TabSelect" :data-id="index">
+						  v-for="(item,index) in categories" :key="index"
+						  @tap="TabSelect" :data-id="index">
 						{{item.title}}
 					</view>
 				</scroll-view>
 				<mescroll-uni class="VerticalMain" ref="mescrollRef" :fixed="false"
-				              @init="mescrollInit" @down="downCallback" @up="upCallback">
+							  @init="mescrollInit" @down="downCallback" @up="upCallback">
 					<!--商品列表-->
 					<view class="cu-list goods-list" v-if="data.length">
 						<template v-for="(item,index) in data">
 							<ad unit-id="adunit-02012c56bdf50736" ad-type="grid" v-if="index==2"></ad>
 
 							<view class="cu-item flex padding-sm" :id="'main-'+item.id" :key="item.id"
-							      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
+								  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
 								<view class="image-wrapper radius lg">
 									<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
 								</view>
@@ -37,7 +39,8 @@
 									</view>
 									<view class="flex flex-wrap margin-top-xs">
 										<text class="text-price text-red text-xl text-bold">{{ item.price }}</text>
-										<text v-if="item.market_price > item.price" class="m-price">￥{{ item.market_price }}</text>
+										<text v-if="item.market_price > item.price"
+											  class="m-price">￥{{ item.market_price }}</text>
 									</view>
 								</view>
 							</view>
