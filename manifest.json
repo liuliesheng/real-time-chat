@@ -124,7 +124,7 @@
     "h5" : {
         "optimization" : {
             "treeShaking" : {
-                "enable" : true
+                "enable" : false
             }
         },
         "devServer" : {

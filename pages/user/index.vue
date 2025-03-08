@@ -27,10 +27,8 @@
 					<!-- #ifdef MP-WEIXIN -->
 					<view class="userinfo-inner flex">
 						<view class="cu-avatar xl round userinfo-avatar">
-							<!-- #ifndef H5 -->
 							<open-data type="userAvatarUrl" default-avatar="/static/icon/default-avatar.png"
 									   class="userinfo-avatar-inner" />
-							<!-- #endif -->
 						</view>
 						<view class="flex-sub padding-lr">
 							<view class="userinfo-nickname">

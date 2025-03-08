@@ -84,13 +84,13 @@
 
 	.image {
 		position: relative;
-		padding-bottom: 80%;
+		/* padding-bottom: 80%; */
+		text-align: center;
 	}
 
 	.image>image {
-		width: 80%;
-		height: 100%;
-		left: 10%;
-		position: absolute;
+		width: 120rpx;
+		height: 120rpx;
+		/* position: absolute; */
 	}
 </style>

@@ -1,8 +1,11 @@
 <template>
-	<view class="padding bg-black">
-		<view class="" v-if="phone" @tap="callPhone">联系电话：{{phone}}</view>
-		<view class="" v-if="wechat_qrcode">官方公众号</view>
-		<view class="" v-if="company">{{company}}</view>
+	<view class="footer bg-black">
+		<view class="margin-bottom-sm" v-if="phone" @tap="callPhone">联系电话：{{phone}}</view>
+		<view class="margin-bottom-sm" v-if="company">{{company}}</view>
+		<view class="margin-bottom-sm" v-if="wechatQrcode">
+			<view class="margin-bottom-xs text-bold">微信二维码</view>
+			<image :src="wechatQrcode" mode="aspectFill" show-menu-by-longpress="true" class="qrcode"></image>
+		</view>
 	</view>
 </template>
 
@@ -10,9 +13,9 @@
 	export default {
 		name: "custom-footer",
 		props: {
-			phone: String,
-			wechat_qrcode: String,
 			company: String,
+			phone: String,
+			wechatQrcode: String,
 		},
 		methods: {
 			callPhone() {
@@ -25,5 +28,12 @@
 </script>
 
 <style>
+	.footer {
+		padding: 60rpx 30rpx;
+	}
 
+	.qrcode {
+		width: 240rpx;
+		height: 240rpx;
+	}
 </style>

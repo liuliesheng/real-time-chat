@@ -1,8 +1,8 @@
 <template>
-	<view class="page">
+	<view class="page" :style="'padding-top: '+pagePaddingTop+'rpx;'">
 		<template v-if="loaded">
 			<template v-if="categories.length>1">
-				<scroll-view scroll-x class="bg-white nav" scroll-with-animation :scroll-left="scrollLeft">
+				<scroll-view scroll-x class="bg-white nav fixed" scroll-with-animation :scroll-left="scrollLeft">
 					<view class="cu-item" :class="index==tabCur?'text-green cur':''"
 						  v-for="(item,index) in categories" :key="index"
 						  @tap="tabSelect(index)">
@@ -35,6 +35,12 @@
 				tabCur: 0,
 				scrollLeft: 0,
 			}
+		},
+		computed: {
+			pagePaddingTop() {
+				return this.categories.length ? 90 : 0;
+				// return this.categories.length ? uni.upx2px(90) : 0;
+			},
 		},
 		onLoad(option) {
 			this.loadCategoires();

@@ -20,7 +20,7 @@
 					</swiper-item>
 				</swiper>
 
-				<!-- #ifndef H5 -->
+				<!-- #ifdef MP-WEIXIN -->
 				<ad unit-id="adunit-1125620a898275d6"></ad>
 				<!-- #endif -->
 

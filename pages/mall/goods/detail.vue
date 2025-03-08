@@ -93,7 +93,7 @@
 		</view>
 		<!-- /商品详情 -->
 
-		<!-- #ifndef H5 -->
+		<!-- #ifdef MP-WEIXIN -->
 		<ad unit-id="adunit-dca118409648c077" ad-type="video"></ad>
 		<!-- #endif -->
 

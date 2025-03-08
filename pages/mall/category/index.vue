@@ -6,14 +6,14 @@
 		</cu-custom>
 		<!-- #endif -->
 
-		<!-- #ifndef H5 -->
+		<!-- #ifdef MP-WEIXIN -->
 		<ad unit-id="adunit-1125620a898275d6" @load="onAdLoaded" id="ad"></ad>
 		<!-- #endif -->
 
 		<template v-if="loaded">
 			<view class="VerticalBox" :style="[{top:offsetTop+'px'}]">
 				<scroll-view class="VerticalNav nav" scroll-y scroll-with-animation
-							 :scroll-top="verticalNavTop" style="height:100vh">
+							 :scroll-top="verticalNavTop" v-if="categories.length">
 					<view class="cu-item padding-tb" :class="index==tabCur?'text-green cur':''"
 						  v-for="(item,index) in categories" :key="index"
 						  @tap="TabSelect" :data-id="index">
@@ -21,6 +21,7 @@
 					</view>
 				</scroll-view>
 				<mescroll-uni class="VerticalMain" ref="mescrollRef" :fixed="false"
+							  :up="{auto:false,empty:false}"
 							  @init="mescrollInit" @down="downCallback" @up="upCallback">
 					<!--商品列表-->
 					<view class="cu-list goods-list" v-if="data.length">
@@ -92,11 +93,13 @@
 		methods: {
 			// 计算广告的高度
 			calcAdHeight() {
+				// #ifdef MP-WEIXIN
 				const query = this.createSelectorQuery();
 				query.select('#ad').boundingClientRect();
 				query.exec((node) => {
 					this.adHeight = node[0].height;
-				})
+				});
+				// #endif
 			},
 
 			// 广告加载完毕
@@ -113,8 +116,16 @@
 						if (this.categories[this.tabCur]) {
 							this.tabCur = 0;
 						}
-						// this.loadGoodsData();
+
+						if (!this.loaded) {
+							this.loadGoodsData();
+						}
 					} else {
+						if (!this.loaded) {
+							setTimeout(() => {
+								this.mescroll.endSuccess(0, false);
+							}, 500);
+						}
 						this.data = [];
 					}
 
@@ -122,6 +133,10 @@
 				});
 			},
 			upCallback(mescroll) {
+				if (this.loaded) {
+					return;
+				}
+
 				this.loadGoodsData(mescroll.num).then((res) => {
 					mescroll.endSuccess(res.data.length, this.more);
 				}, () => {
@@ -129,6 +144,10 @@
 				});
 			},
 			loadGoodsData(page = 1) {
+				if (!this.categories.length) {
+					return Promise.resolve();
+				}
+
 				const category = this.categories[this.tabCur];
 				return uni.$model.mall.getGoodsList({
 					category_id: category.id,
@@ -191,6 +210,8 @@
 		display: flex;
 		position: fixed;
 		bottom: 0;
+		height: 100vh;
+		width: 100%;
 	}
 
 	.VerticalNav.nav {
