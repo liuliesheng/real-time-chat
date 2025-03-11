@@ -9,7 +9,7 @@
 				</view>
 				<view class="margin-left-sm">
 					<text class="cuIcon-appreciate"></text>
-					<text class="margin-left-xs">{{info.good_count}}</text>
+					<text class="margin-left-xs">{{info.like_count}}</text>
 				</view>
 				<view class="margin-left-sm">
 					<text class="cuIcon-favor"></text>

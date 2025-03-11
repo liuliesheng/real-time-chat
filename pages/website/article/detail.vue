@@ -1,5 +1,8 @@
 <template>
 	<view class="page">
+		<XLoading />
+		<Hint />
+		
 		<template v-if="loaded">
 			<view class="padding bg-white">
 				<view class="h3 text-black">{{info.title}}</view>
@@ -10,7 +13,7 @@
 					</view>
 					<view class="margin-left-sm">
 						<text class="cuIcon-appreciate"></text>
-						<text class="margin-left-xs">{{info.good_count}}</text>
+						<text class="margin-left-xs">{{info.like_count}}</text>
 					</view>
 					<view class="margin-left-sm">
 						<text class="cuIcon-favor"></text>
@@ -20,13 +23,17 @@
 				<MPHtml :content="info.content" />
 			</view>
 			<view class="cu-bar bg-white tabbar shop foot">
-				<view class="action text-orange">
-					<view class="cuIcon-favorfill"></view> 已收藏
+				<view class="action" :class="info.is_favorite?'text-orange':''" @tap="toggleFavorite">
+					<view :class="info.is_favorite?'cuIcon-favorfill':'cuIcon-favor'"></view>
+					{{info.is_favorite?'已收藏':'点赞'}}
 				</view>
-				<view class="action">
-					<view class="cuIcon-appreciate"></view>点赞
+				<view class="action" :class="info.is_like?'text-red':''" @tap="onLike">
+					<view :class="info.is_like?'cuIcon-appreciatefill':'cuIcon-appreciate'"></view>
+					{{info.is_like?'已点赞':'点赞'}}
 				</view>
-				<view class="bg-red submit">立即评论</view>
+				<!-- #ifdef MP -->
+				<button class="bg-orange submit" open-type="share" style="border-radius: 0;">立即分享</button>
+				<!-- #endif -->
 			</view>
 		</template>
 		<PageLoad @refresh="loadData" v-else />
@@ -61,6 +68,10 @@
 			});
 		},
 
+		onShareAppMessage() {
+			return {};
+		},
+
 		methods: {
 			// 加载数据
 			loadData() {
@@ -69,6 +80,50 @@
 				}).then(res => {
 					this.info = res;
 					this.loaded = true;
+				});
+			},
+
+			// 去收藏
+			toggleFavorite() {
+				const options = {
+					hint: this,
+					loading: this
+				};
+
+				console.log(options)
+				if (this.info.is_favorite) {
+					uni.$http.get('/plugin/website/favorite/unfavorite', {
+						topic_id: this.info.id
+					}, options).then(() => {
+						this.info.is_favorite = false;
+						if (this.info.collect_count > 0) {
+							this.info.collect_count--;
+						}
+					});
+				} else {
+					uni.$http.get('/plugin/website/favorite/favorite', {
+						topic_id: this.info.id
+					}, options).then(() => {
+						this.info.is_favorite = true;
+						this.info.collect_count++;
+					});
+				}
+			},
+
+			// 去点赞
+			onLike() {
+				if (this.info.is_like) {
+					return;
+				}
+
+				uni.$http.get('/plugin/website/like/like', {
+					topic_id: this.info.id
+				}, {
+					hint: this,
+					loading: this
+				}).then(() => {
+					this.info.is_like = true;
+					this.info.like_count++;
 				});
 			},
 		}

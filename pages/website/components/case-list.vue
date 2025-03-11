@@ -4,15 +4,15 @@
 			  @tap="linkTo" :data-url="'/pages/website/product/detail?id='+item.id">
 			<view class="image">
 				<image :src="item.cover" mode="widthFix"></image>
-				<view class="cu-tag bg-blue">史诗</view>
+				<!-- <view class="cu-tag bg-blue">史诗</view> -->
 				<view class="cu-bar bg-shadeBottom">
 					<text class="text-cut">{{item.title}}</text>
 				</view>
 			</view>
 			<view class="padding-sm text-gray text-sm">
-				<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.view_count}}
-				<text class="cuIcon-appreciatefill margin-lr-xs"></text> {{item.collect_count}}
-				<text class="cuIcon-messagefill margin-lr-xs"></text> {{item.view_count}}
+				<text class="cuIcon-attention margin-lr-xs"></text> {{item.view_count}}
+				<text class="cuIcon-appreciate margin-lr-xs"></text> {{item.like_count}}
+				<text class="cuIcon-favor margin-lr-xs"></text> {{item.collect_count}}
 			</view>
 		</view>
 	</view>
