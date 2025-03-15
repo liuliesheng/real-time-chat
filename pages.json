@@ -16,38 +16,6 @@
 			}
 		},
 		{
-			"path": "pages/forum/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/forum/category",
-			"style": {
-				"navigationBarTitleText": "分类"
-			}
-		},
-		{
-			"path": "pages/forum/article/list",
-			"style": {
-				"navigationBarTitleText": "文章列表"
-			}
-		},
-		{
-			"path": "pages/forum/article/create",
-			"style": {
-				"navigationBarTitleText": "发布文章"
-			}
-		},
-		{
-			"path": "pages/forum/article/detail",
-			"style": {
-				"navigationBarTitleText": "文章详情"
-			}
-		},
-
-		{
 			"path": "pages/mall/category/index",
 			"style": {
 				"navigationStyle": "custom",
