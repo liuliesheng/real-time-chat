@@ -1,17 +1,29 @@
 # weapp-template & uni-app
 
 #### 介绍
-微信小程序模板：里面封装了一些常用的类库和方法（日期时间的转换、用户授权、请求封装，多文件上传，表单验证器、监听器、中间件、发布/订阅者、原生JS函数扩展等），方便开发人员二次开发时能够快速搭建一个微信小程序。
+微信小程序模板：里面封装了一些常用的类库和方法，方便开发人员二次开发时能够快速搭建一个前端应用。
+1. 用户授权（底层API优化，并和后端接入进行抽象，后端按照指定的要求处理程序即可）
+2. 请求封装（日常开发中，最常用的无非就是网络请求和后端进行交互，借鉴Axios设计思想，对原始的Http进行封装处理）
+3. 多文件上传（多文件上传，再也不不用写太多的代码了，内部目前支持：远程上传、七牛上传驱动，有兴趣的同学可以扩展OSS和COS上传驱动以满足开发中的需求）
+4. 事件监听（多页面复杂数据传递，再也不用编写复杂的代码）
+5. 中间件（小程序启动时要处理复杂的业务）
+6. 发布/订阅者
+7. 原生JS函数扩展等
+8. 日期时间的转换
+9. 数据验证（快速验证数据是否合法）
 
 #### 软件架构
-在设计方面，大量借鉴了thinkphp5的设计思想，主要是中thinkphp的毒太深，已经无法自拔。
+1. uni-app 作为底层依托可输出多端应用（微信小程序、支付宝小程序、App、H5等）
+2. 抽离大量重复且庞杂代码作为核心业务驱动
+3. 可根据业务需求随时定制的业务代码
+4. 预置大量日常开发中常用的组件
+5. 整合高颜值，高效率的小程序组件库（ColorUI）
+6. 整合强大的CSS动画库并进行对移动端相关优化（animation.css）
+7. 数据模式可以构建复杂的应用
 
 **目录说明**
 
     ├─bootstrap                             核心框架目录
-    │  ├─libs                               第三方模块目录
-    │  │  ├─qqmap-wx-jssdk.min.js           腾讯地图包
-    │  │  ├─bignumber.js           			BigNumber.js 用来处理对小数点精度比较高的业务逻辑
     │  ├─boots                        		小程序启动时相关服务注册
 	│  │  ├─es6                        		ES6 语法扩展目录
 	│  │  ├─logins                          相关登录器存放目录
@@ -40,7 +52,12 @@
     │  │  ├─uploader.js                     上传器
     │  │  └─...                         	其他
 	│  │
-	│  ├─util                               相关助手库
+    │  ├─libs                               第三方模块目录
+    │  │  ├─qqmap-wx-jssdk.min.js           腾讯地图包
+    │  │  ├─bignumber.js           			BigNumber.js 用来处理对小数点精度比较高的业务逻辑（涉及到金额计算或对数字精度要求的必备类库）
+    │  │  └─...                         	其他
+    │  │
+    │  ├─util                               相关助手库
 	│  │  ├─collection.js                   集合助手库
 	│  │  ├─function.js                     函数助手库
 	│  │  ├─number.js                       数字助手库
@@ -71,6 +88,7 @@
     │  │  ├─component.js                       component实例混合
     │  │  └─upload.js                          上传配置
     │  │
+    │  ├─middlewares                         中间件目录
     │  ├─models                              数据模型目录
     │  ├─services                            自定义服务目录
     │  └─styles                              自定义样式目录
@@ -128,7 +146,7 @@
         name:'file'
     }).then(()=>console.log,err=>console.error)
     
-**事件：**
+**事件监听：**
 
     // 监听一个事件
     wx.emitter.on('choose.address', function(address) {
@@ -156,7 +174,7 @@
         wx.emitter.off('choose.address', addressFn);
     });
     
-**验证器：**
+**数据验证：**
 
     //实例化模式，一般用于表单提交前的验证
 
@@ -312,18 +330,48 @@
 #### 相关配置
 一些配置信息都放在config目录下，你可以在你的代码的任何地方使用 wx.config 获取config/app.js中的配置。
 
-**config/app.js 项目配置**
+**common/config/app.js 项目配置**
 
     module.exports = {
-    	stopPullDownRefreshAudio:'/audio/loadover.mp3'
+    	stopPullDownRefreshAudio:'/audio/loadover.mp3', // 废弃
+    	
+        // 版本号
+	    version: '1.0',
+    	
+        // 订阅消息模板ID
+	    tmplIds: [],
     };
 
-**config/http.js http基础配置**
+**common/config/http.js http基础配置**
 
     module.exports = {
         defaults: {
             // baseURL: 'http://127.0.0.1',
-            baseURL: 'https://product.domin.com'
+            baseURL: 'https://product.domin.com',
+
+            // Login
+            // #ifdef MP
+            login: uni.$logins.basic, // 使用小程序登录器
+            loginUrl: baseURL + '/weapp_login',
+            // #endif
+    
+            // #ifdef H5
+            login: uni.$logins.account, // 使用默认账号密码登录器
+            loginUrl: baseURL + '/login',
+            // #endif
+    
+            // basic login uses
+            loginDenyAuthMsg: '此操作需要您先授权！',
+            loginFailedMsg: '登录失败，请稍后再试~',
+            loginUserInfo: false,
+    
+            // account login uses
+            loginPage: '/pages/auth/login',
+    
+            // 登录成功后的回调
+            onLogged: function() {
+    
+            }
         },
         
         requestInterceptors: [
@@ -335,7 +383,7 @@
         ]
     };
 
-**config/middleware.js 中间件**
+**common/config/middleware.js 中间件**
 
     import testAppIsStart from './middlewares/test-app-is-start'
     import printParams from './middlewares/print-params'
@@ -353,7 +401,7 @@
     	appUnhang: [],
     };
 
-**config/page.js 扩展page实例方法**
+**common/config/page.js 扩展page实例方法**
 
     module.exports = {
     	// 设置data值
