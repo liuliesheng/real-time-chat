@@ -1,10 +1,24 @@
+/** @var {*} $ */
 import $ from "../$";
-import {emitter, EventEmitter} from "../events";
-import publisher from "../publisher";
-import middleware from "../middleware";
 
-// 事件类
-$.$define('emitter', emitter);
-$.$define('EventEmitter', EventEmitter);
-$.$define('publisher', publisher);
-$.$define('middleware', middleware);
+let events = null;
+
+try {
+	events = require('../../common/middlewares/index.js');
+
+	if (typeof events === 'function') {
+		events = events();
+	}
+} catch (e) {
+	console.warn("/common/middlewares/index.js not found!");
+	events = {};
+}
+
+// 监听事件
+for (const key in events) {
+	if (!events.hasOwnProperty(key)) {
+		continue;
+	}
+
+	$.$emitter.on(key, events[key]);
+}

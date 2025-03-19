@@ -108,7 +108,7 @@
         "usingComponents" : true,
         "permission" : {
             "scope.userLocation" : {
-                "desc" : "演示定位能力"
+                "desc" : "此能力需要获取你的位置信息"
             }
         }
     },

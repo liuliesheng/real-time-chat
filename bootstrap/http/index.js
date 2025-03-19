@@ -1,8 +1,9 @@
-import { request, Request } from "./request";
+import Request from "./request";
 import upload from "./upload";
+import * as logins from './logins';
 
 export {
 	Request,
-	request,
-	upload
+	upload,
+	logins
 }

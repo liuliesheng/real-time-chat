@@ -160,7 +160,7 @@
 	}
 
 	.order-frame {
-		height: calc(100vh - 90upx);
+		height: calc(100vh - 90rpx);
 	}
 
 	.goods-list .cu-item .title {

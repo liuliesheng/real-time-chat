@@ -245,8 +245,8 @@
 
 <style scoped>
 	.page {
-		/* padding-top: 100upx; */
-		/* padding-bottom: 130upx; */
+		/* padding-top: 100rpx; */
+		/* padding-bottom: 130rpx; */
 		background-color: white;
 	}
 

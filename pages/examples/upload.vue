@@ -101,8 +101,8 @@
 
 	.upload-item {
 		float: left;
-		padding: 10upx;
-		border: 1upx solid #ddd;
+		padding: 10rpx;
+		border: 1rpx solid #ddd;
 		width: 33.333333%;
 	}
 

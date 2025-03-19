@@ -3,13 +3,13 @@ import qiniuDriver from "./upload/qiniu.js";
 
 /**
  * 上传器
- * @param {files:Array,...} options
+ * @param {*} options
  */
 export default function upload(options) {
 	const disk = options.disk || upload.defaults.disk || 'remote';
 	const diskConfig = upload.defaults.disks[disk];
 	if (!diskConfig) {
-		return Promise.reject({ errMsg: "找不到磁盘信息！" });
+		return Promise.reject({errMsg: "找不到磁盘信息！"});
 	}
 
 	options = Object.assign({}, diskConfig, options);

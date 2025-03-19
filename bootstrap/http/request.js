@@ -1,5 +1,5 @@
 import $ from '../$';
-import { combineURL, isAbsoluteURL } from "./util";
+import {combineURL, isAbsoluteURL} from "./util";
 
 /**
  * 防重复请求
@@ -101,7 +101,7 @@ function uploadAdapter(options) {
 /**
  * 请求类
  */
-export class Request {
+export default class Request {
 
 	/**
 	 * 默认构造器
@@ -226,7 +226,7 @@ export class Request {
  * @returns {Promise}
  */
 ['get', 'post', 'put', 'delete'].forEach(method => {
-	Request.prototype[method] = function (url, data, options) {
+	Request.prototype[method] = function(url, data, options) {
 		return this.request(Object.assign({}, this.defaults, options || {}, {
 			url: url,
 			data: data,
@@ -234,9 +234,3 @@ export class Request {
 		}));
 	};
 });
-
-/**
- * 默认http请求
- * @type {Request}
- */
-export const request = new Request();

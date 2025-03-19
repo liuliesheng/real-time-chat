@@ -169,7 +169,7 @@
 		overflow: visible;
 		background-color: white;
 		border-radius: 12rpx 12rpx 0 0;
-		max-width: 1120upx;
+		max-width: 1120rpx;
 	}
 
 	.spec-image {

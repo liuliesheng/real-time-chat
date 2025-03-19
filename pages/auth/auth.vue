@@ -8,7 +8,7 @@
 			<view>为了你能够更好的体验，本应用需要获取你的基本信息（昵称、头像等）</view>
 		</view>
 		<view class="container">
-			<button @getuserinfo="getUserInfo" open-type="getUserInfo" type="primary">授权</button>
+			<button @tap="getUserInfo" type="primary">授权</button>
 		</view>
 	</div>
 </template>
@@ -21,7 +21,7 @@
 				userInfo: null
 			};
 		},
-		onLoad: function(options) {},
+
 		/**
 		 * 生命周期函数--监听页面卸载
 		 */
@@ -33,10 +33,15 @@
 			 * 获取用户信息
 			 */
 			getUserInfo: function(e) {
-				if (e.detail.userInfo) {
-					this.userInfo = e.detail;
-					uni.navigateBack();
-				}
+				uni.getUserProfile({
+					lang: 'zh_CN',
+					desc: '此操作需要您授权基本信息',
+					success: (res) => {
+						this.userInfo = res;
+						uni.setStorageSync('user_profile', res.userInfo);
+						uni.navigateBack();
+					}
+				});
 			}
 		}
 	};
@@ -54,10 +59,10 @@
 		white-space: nowrap;
 		position: relative;
 		overflow: hidden;
-		width: 128upx;
-		height: 128upx;
-		line-height: 128upx;
-		border-radius: 64upx;
+		width: 128rpx;
+		height: 128rpx;
+		line-height: 128rpx;
+		border-radius: 64rpx;
 		font-size: 72px;
 		margin: 0 auto;
 	}
@@ -66,13 +71,13 @@
 		display: block;
 		text-align: center;
 		font-weight: bold;
-		margin-top: 32upx;
-		margin-bottom: 32upx;
+		margin-top: 32rpx;
+		margin-bottom: 32rpx;
 	}
 
 	.tips {
 		position: relative;
-		padding: 15% 30upx 30upx 30upx;
+		padding: 15% 30rpx 30rpx 30rpx;
 	}
 
 	.tips icon {

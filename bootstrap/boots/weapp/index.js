@@ -1,9 +1,9 @@
 import "./base";
 import "./user";
 import "./location";
-import "./ui";
 
 // #ifdef MP
-import "./floatings/alipay";
+import "./alipay2weapp";
+import "./subscribe-message";
 import "./mixin";
 // #endif

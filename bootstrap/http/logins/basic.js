@@ -1,20 +1,20 @@
 import $ from "../../$";
 
 export default function(options = {}) {
-	if (!$.$http.defaults.loginUrl) {
+	if (!$.$http.config.loginUrl) {
 		return Promise.reject({
-			errMsg: 'config/http.js not configure `defaults.loginUrl` !'
+			errMsg: 'common/config/http.js not configure `loginUrl` !'
 		});
 	}
 
-	const app = getApp();
 	return $.$promise.login({}).then((res) => {
 		delete res.errMsg;
 		const code = res.code;
 
-		if ($.$http.defaults.loginUserInfo || (options.loginUserInfo !== undefined && options.loginUserInfo)) {
+		if ((options.loginUserInfo === undefined && $.$http.config.loginUserInfo) || options.loginUserInfo) {
 			return $.$getUserInfo({
-				withCredentials: true
+				withCredentials: true,
+				desc: $.$http.config.loginAuthTips
 			}).then((user) => {
 				delete res.errMsg;
 				user.code = res.code;
@@ -25,10 +25,12 @@ export default function(options = {}) {
 		return res;
 	}).then((res) => {
 		// 组装数据
-		res.share_uid = app.globalData.shareUid;
+		const globalData = getApp().globalData;
+		res.share_uid = globalData.shareUid || 0;
+
 		return new Promise((resolve, reject) => {
 			$.request({
-				url: $.$http.defaults.loginUrl,
+				url: $.$http.config.loginUrl,
 				method: 'POST',
 				data: res,
 				dataType: 'json',
@@ -36,7 +38,6 @@ export default function(options = {}) {
 					if (response.statusCode !== 200) {
 						reject({
 							code: response.statusCode,
-							// errMsg: '登录失败，请稍后再试~',
 							response: response
 						});
 					}
@@ -44,9 +45,6 @@ export default function(options = {}) {
 					let res = response.data;
 					if (res.code === 1) {
 						resolve(res);
-						if ($.$http.defaults.onLogged) {
-							$.$http.defaults.onLogged(res);
-						}
 					} else {
 						reject({
 							code: res.code,

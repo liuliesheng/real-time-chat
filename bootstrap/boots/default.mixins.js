@@ -1,5 +1,5 @@
-import $ from "../../../bootstrap/$";
-import login from '../https/login';
+import $ from "../../bootstrap/$";
+// import login from '../https/login';
 
 export default {
 	// 跳转
@@ -15,7 +15,7 @@ export default {
 		$.$autoRequestSubscribeMessage();
 		//#endif
 
-		if (logged && !getApp().globalData.userInfo) {
+		if (logged && !$.$isLogged()) {
 			login({
 				loginUserInfo: true
 			}).then(() => {
@@ -31,6 +31,9 @@ export default {
 		type = type || "navigateTo";
 		$[type]({
 			url: url,
+			success(){
+				$.$config.onLinkTo(url, type);
+			},
 			fail() {
 				$.switchTab({
 					url: url

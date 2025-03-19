@@ -5,7 +5,7 @@
 
 		<!-- 商品轮播图 -->
 		<view class="" style="overflow: hidden;">
-			<swiper class="screen-swiper round-dot" style="min-height: 356upx;"
+			<swiper class="screen-swiper round-dot" style="min-height: 356rpx;"
 					:indicator-dots="true" :circular="true"
 					:autoplay="true" interval="5000" duration="500"
 					@tap="previewImage" :data-urls="swiperList">
@@ -261,7 +261,7 @@
 
 <style scoped>
 	.page {
-		padding-bottom: 130upx;
+		padding-bottom: 130rpx;
 	}
 
 	.cu-item-title {
@@ -269,12 +269,12 @@
 	}
 
 	.cu-bar.tabbar.shop .action {
-		width: 96upx;
-		font-size: 20upx;
+		width: 96rpx;
+		font-size: 20rpx;
 	}
 
 	.cu-bar.tabbar.shop .action [class*="cuIcon-"] {
-		width: 54upx;
+		width: 54rpx;
 	}
 
 	.cu-bar.tabbar .btn-group {

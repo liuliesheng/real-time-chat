@@ -157,7 +157,7 @@
 
 <style>
 	.page {
-		padding-bottom: 30upx;
+		padding-bottom: 30rpx;
 	}
 
 	.userinfo {
@@ -217,8 +217,8 @@
 
 	.userinfo .grid {
 		position: absolute;
-		bottom: 30upx;
-		width: calc(100% - 60upx);
+		bottom: 30rpx;
+		width: calc(100% - 60rpx);
 	}
 
 	.num {
@@ -229,9 +229,9 @@
 	}
 
 	.grid image {
-		width: 64upx;
-		height: 64upx;
-		margin: 10upx auto;
+		width: 64rpx;
+		height: 64rpx;
+		margin: 10rpx auto;
 		display: block;
 		background-color: #f9f9f9;
 	}
@@ -252,6 +252,6 @@
 	}
 
 	.cu-list.card-menu {
-		border-radius: 6upx;
+		border-radius: 6rpx;
 	}
 </style>

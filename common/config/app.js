@@ -6,10 +6,21 @@ module.exports = {
 
 	// 版本号
 	version: '1.0',
-	// stopPullDownRefreshAudio: '/static/audio/loadover.mp3',
-	// successTipsAudio: '/static/audio/success.mp3',
-	// failTipsAudio: '/static/audio/fail.mp3',
 
 	// 订阅消息模板ID
-	tmplIds: ['pUo_htDxnZx9x2M8EhmlQUz9sjtASI4GUfhwFSe99GY'],
+	tmplIds: [
+		'pUo_htDxnZx9x2M8EhmlQUz9sjtASI4GUfhwFSe99GY'
+	],
+
+	// 自动订阅模板消息
+	autoSubscribeTmplMsg: true,
+
+	// 下来刷新完成提示音
+	stopPullDownRefreshAudio: '',
+
+	// 跳转地址
+	onLinkTo: function(url, type) {},
+
+	// 腾讯地图key列表
+	QQMapKeys: []
 };

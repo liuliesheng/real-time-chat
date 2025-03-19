@@ -96,6 +96,6 @@
 	}
 
 	.order-info .title {
-		width: 160upx;
+		width: 160rpx;
 	}
 </style>

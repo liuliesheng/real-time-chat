@@ -4,17 +4,12 @@
 		globalData: {
 			userInfo: null,
 		},
-		onLaunch: function() {
-			console.log('App Launch');
+		onLaunch: function(options) {
+			console.log('App Launch', options);
+
 			uni.getSystemInfo({
 				success: function(e) {
-					// #ifdef H5
-					Vue.prototype.StatusBar = e.statusBarHeight;
-					Vue.prototype.CustomBar = 0;
-					Vue.prototype.TabBar = 0;
-					// #endif
-
-					// #ifdef APP-VUE
+					// #ifndef MP
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					if (e.platform === 'android') {
 						Vue.prototype.CustomBar = e.statusBarHeight + 50;
@@ -42,11 +37,11 @@
 
 			this.initUserState();
 		},
-		onShow: function() {
-			console.log('App Show');
+		onShow: function(options) {
+			console.log('App Show', options);
 		},
-		onHide: function() {
-			console.log('App Hide');
+		onHide: function(options) {
+			console.log('App Hide', options);
 		},
 
 		methods: {

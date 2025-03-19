@@ -24,7 +24,7 @@
 				<view class="cu-form-group">
 					<input id="password" v-model="form.password" placeholder="密码" type="password" />
 				</view>
-				<view class="cu-form-group" style="border-bottom: 1upx solid #eee;">
+				<view class="cu-form-group" style="border-bottom: 1rpx solid #eee;">
 					<input id="password" v-model="form.password" placeholder="确认密码" type="password" />
 				</view>
 			</view>
@@ -97,7 +97,7 @@
 		position: relative;
 		width: 100vw;
 		height: 100vh;
-		max-width: 1120upx;
+		max-width: 1120rpx;
 		overflow: hidden;
 		background: #fff;
 	}

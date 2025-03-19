@@ -69,6 +69,12 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 	color: #fff;
 }
 
+radio::before,
+checkbox::before {
+	margin-top: -10px;
+	right: 2px;
+}
+
 checkbox-group>label,
 radio-group>label {
 	line-height: 22px;

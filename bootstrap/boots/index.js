@@ -1,10 +1,10 @@
 import "./es6/index";
-import "./native/index";
-import "./promise-cache";
-import "./util";
+import "./weapp/index";
+import "./base";
 import "./event";
-import "./config";
 import "./http";
 import "./middleware";
-import "./downrefresh";
-import "./map-api";
+import "./third";
+import "./model";
+import "./service";
+import "./vue";

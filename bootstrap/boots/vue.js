@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import pageMixin from "@/common/config/page.js";
-import componentMixin from "@/common/config/component.js";
+import defaultMixins from './default.mixins';
+import pageMixin from "@/common/mixins/page";
+import componentMixin from "@/common/mixins/component";
 
 // 调用生命周期钩子函数
 Vue.prototype.$callHook = function(name) {
@@ -13,7 +14,7 @@ Vue.prototype.$callHook = function(name) {
 
 // 页面属性混合
 (function() {
-	const methods = Object.assign({}, pageMixin, componentMixin.methods || {});
+	const methods = Object.assign({}, defaultMixins, pageMixin, componentMixin.methods || {});
 	Vue.mixin({
 		methods: methods
 	});
@@ -29,7 +30,9 @@ Vue.filter('price', function(price, fixed = 0) {
 
 // 日期
 Vue.filter('date', (timeStamp, isSeconds = false) => {
-	if (!timeStamp) return '';
+	if (!timeStamp) {
+		return '';
+	}
 	return uni.$timeUtil.format.datetime(timeStamp, isSeconds);
 });
 

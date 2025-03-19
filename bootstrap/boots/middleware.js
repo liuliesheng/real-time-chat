@@ -28,7 +28,9 @@ $.$define('middlewares', middlewareList);
 
 // 注册中间件
 const callbackMiddlewareHandle = function(callbackName, middlewareName) {
-	if (!$[callbackName] || !middlewareList[middlewareName]) return;
+	if (!$[callbackName] || !middlewareList[middlewareName]) {
+		return;
+	}
 
 	$[callbackName](function(options) {
 		console.groupCollapsed(middlewareName, options);

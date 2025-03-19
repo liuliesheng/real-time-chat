@@ -68,13 +68,13 @@ export default {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 30upx;
+		margin-bottom: 30rpx;
 	}
 
 	.userinfo-avatar {
-		width: 128upx;
-		height: 128upx;
-		margin: 20upx;
+		width: 128rpx;
+		height: 128rpx;
+		margin: 20rpx;
 		border-radius: 50%;
 	}
 

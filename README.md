@@ -1,9 +1,12 @@
-# weapp-template & uni-app
+# fast-mobile-app & uni-app
 
-#### 介绍
-微信小程序模板：里面封装了一些常用的类库和方法，方便开发人员二次开发时能够快速搭建一个前端应用。
+## 介绍
+
+**fast-mobile-app** 是一个基于 uni-app 开发的移动应用的框架，它抽离和封装了日常开发中的80%的常规业务逻辑，在开发中无需额外编写复杂难以维护的业务逻辑，
+为你的应用提供了一整套健壮的能力，在1分钟内即可拥有一套完整的应用
+
 1. 用户授权（底层API优化，并和后端接入进行抽象，后端按照指定的要求处理程序即可）
-2. 请求封装（日常开发中，最常用的无非就是网络请求和后端进行交互，借鉴Axios设计思想，对原始的Http进行封装处理）
+2. 请求封装（日常开发中最常用的无非就是网络请求和后端进行交互，借鉴Axios设计思想对原始的Http进行封装处理，同时提供一整套请求鉴权处理机制）
 3. 多文件上传（多文件上传，再也不不用写太多的代码了，内部目前支持：远程上传、七牛上传驱动，有兴趣的同学可以扩展OSS和COS上传驱动以满足开发中的需求）
 4. 事件监听（多页面复杂数据传递，再也不用编写复杂的代码）
 5. 中间件（小程序启动时要处理复杂的业务）
@@ -13,7 +16,10 @@
 9. 数据验证（快速验证数据是否合法）
 
 #### 软件架构
-1. uni-app 作为底层依托可输出多端应用（微信小程序、支付宝小程序、App、H5等）
+
+**遵循配置优先，从繁杂的业务逻辑中解脱您的双手，让更多细节变得清晰可控**，框架本身提供的API是通过服务注册模式完成的， 在任何地方均可使用uni.$[API名称]进行使用，如：uni.$getUserInfo()
+
+1. 使用 uni-app 作为底层依托可输出多端应用（微信小程序、支付宝小程序、App、H5等）
 2. 抽离大量重复且庞杂代码作为核心业务驱动
 3. 可根据业务需求随时定制的业务代码
 4. 预置大量日常开发中常用的组件
@@ -26,10 +32,6 @@
     ├─bootstrap                             核心框架目录
     │  ├─boots                        		小程序启动时相关服务注册
 	│  │  ├─es6                        		ES6 语法扩展目录
-	│  │  ├─logins                          相关登录器存放目录
-	│  │  │  ├─account.js                   普通账号密码登录器，适用于H5
-	│  │  │  ├─basic.js                     小程序登录器
-	│  │  │  └─...                         	其他
 	│  │  ├─native                          小程序原生语法扩展目录
 	│  │  │  ├─floatings                    其他厂商小程序API向微信小程序API对齐
 	│  │  │  ├─base.js                      小程序基本API扩展
@@ -50,6 +52,11 @@
     │  ├─http                               Http库
     │  │  ├─request.js                   	请求器
     │  │  ├─uploader.js                     上传器
+	│  │  ├─logins                          相关登录器存放目录
+	│  │  │  ├─account.js                   普通账号密码登录器，适用于H5
+	│  │  │  ├─official.js                  微信公众号登录器，适用于H5
+	│  │  │  ├─basic.js                     小程序登录器
+	│  │  │  └─...                         	其他
     │  │  └─...                         	其他
 	│  │
     │  ├─libs                               第三方模块目录
@@ -108,72 +115,320 @@
     ├─pages.json
     └─README.md
 
-#### 安装教程
+## 安装教程
 
-下载即用
+方式一：开箱即用
 
-#### 使用说明
+## 使用说明
 
-在小程序 app.js 中引入 bootstrap/index.js 全局api,配置加载等等一切都可以运转起来了。
+在小程序 main.js 中引入 bootstrap/index.js 全局api,配置加载等等一切都可以运转起来了。
 
-    // main.js
-    import "./bootstrap/index";
-	// 会自动注入到 `uni.$` 变量下
-    
-	// plugins/init.js
-    uni.$.emitter.on('sys.getUserInfo.to', function() {
-        uni.navigateTo({
-            url: '/pages/user/auth/auth',
-        });
-    });
-    
-	// App.vue
-    export default {
-    	globalData: {
-    		userInfo: null
-    	},
-	};
+```javascript
+// main.js
+import "./bootstrap/index";
+// 相关API会自动注入到 `uni.$` 变量下
+```
 
-**网络请求：**
+### 配置总览
 
-    // 发送一个网络请求
-    wx.http.get(uri,data).then(()=>console.log,err=>console.error)
-    
-    // 上传文件
-    wx.http({
-        filePath:'',
-        formData:{},
-        name:'file'
-    }).then(()=>console.log,err=>console.error)
-    
-**事件监听：**
+框架所有的业务配置均在 common/config 目录下。
 
-    // 监听一个事件
-    wx.emitter.on('choose.address', function(address) {
-        console.log(address);
-    });
-    
-    // 触发一个事件
-    wx.emitter.emit('choose.address',{
-        adddress:'郑州郑东新区...'
-    });
-    
-    // 监听一个事件，只执行一次
-    wx.emitter.once('choose.address', function(address) {
-        console.log(address);
-    });
-    
-    // 监听一个事件，只执行一次
-    wx.emitter.once('choose.address', function(address) {
-        console.log(address);
-    });
-    
-    // 移除一个监听回调
-    wx.emitter.on('choose.address', function addressFn(address) {
-        console.log(address);
-        wx.emitter.off('choose.address', addressFn);
-    });
-    
+```javascript
+// 应用基础配置
+// 获取配置 $.$config
+module.exports = {
+	// 应用ID
+	access_id: '',
+
+	// 版本号
+	version: '1.0',
+
+	// 订阅消息模板ID
+	tmplIds: [],
+	// 自动订阅模板消息
+	autoSubscribeTmplMsg: true,
+
+	// 跳转地址
+	onLinkTo: function(url, type) {
+	}
+};
+```
+
+```javascript
+import $ from '../../bootstrap/$';
+
+// http基础配置
+// const baseURL = 'http://localhost/api';
+module.exports = {
+	defaults: {
+		// 网络请求基础URL
+		baseURL: baseURL,
+
+		// 是否返回原始数据
+		returnRaw: false,
+
+		// 是否显示错误提示语
+		isShowErrorTips: true,
+	},
+
+	// 使用小程序原始登录器
+	// #ifdef MP
+	login: uni.$logins.basic, // 使用小程序原始登录器
+	loginUrl: baseURL + '/weapp_login', // 登录地址
+	loginUserInfo: true, // 登录时是否获取用户信息
+	// #endif
+
+	// 使用账户登录器
+	// #ifdef H5
+	login: uni.$logins.account, // 使用账户登录
+	loginUrl: baseURL + '/login', // 登录地址
+	loginPage: '/pages/auth/login', // 自定义登录页面地址
+	// #endif
+
+	// 登录成功后的回调
+	onLogged: function(res) {
+		console.log(res)
+		if (res.partner_id && !res.is_vip) {
+			uni.navigateTo({
+				url: '/pages/user/vip_apply'
+			})
+		}
+	},
+
+	// 所有请求回调
+	onRequest: function(config) {
+	},
+
+	// 业务成功码
+	successCode: 1,
+	// 业务成功处理器（所有通过的业务请求，都会回调此函数）
+	onSuccess: function(data, response) {
+	},
+
+	// 默认提示语
+	loadingText: '请稍后...',
+	errorTips: '网络错误，请稍后~', // 默认错误提示语
+	loginAuthTips: '此操作需要您授权基本信息', // 授权提示语
+	loginAuthFailedTips: '请先授权后，进行重试~', // 授权失败提示语
+	loginFailedMsg: '登录失败，请稍后再试~', // 登录失败提示语
+
+	// 登录失效错误码
+	loginInvalidCode: -1,
+	// 登录最大尝试次数
+	loginMaxCount: 1,
+	// 登录超时操作
+	onLoginTimout: function(config, response) {
+		$.showModal({
+			content: '登录超时，请稍后再试~',
+			showCancel: false
+		});
+	},
+
+	// 无权限错误码
+	unauthorizedCode: -10,
+	// 无权限处理器
+	onUnauthorized: function(config, response) {
+		uni.$http.resolveModal(config)({
+			title: '温馨提示',
+			content: '暂无权限，详细请查看权限说明？',
+			showCancel: true,
+			confirmColor: '#2E8B57',
+			confirmText: '了解一下',
+			success: (res) => {
+				if (res.cancel) {
+					return;
+				}
+
+				$.navigateTo({
+					url: '/pages/auth/unauthorized'
+				});
+			}
+		});
+	},
+
+	// 其他业务处理器
+	logicErrors: {
+		// '40000': function(data, response) { // 数据验证错误
+		// }
+	},
+
+	// 默认HTTP错误处理器
+	statusErrors: {
+		'404': function(config, response) {
+			if (config.method.toUpperCase() === 'GET') {
+				$.navigateBack();
+			}
+		},
+		// '500': function(response) {
+		// },
+	},
+
+	// 请求拦截器
+	requestInterceptors: [
+		uni.$http.basicRequestInterceptor,
+	],
+
+	// 响应拦截器
+	responseInterceptors: [
+		uni.$http.basicResponseInterceptor
+	]
+};
+```
+
+```javascript
+// 上传配置
+module.exports = {
+	// 默认磁盘
+	disk: 'qiniu',
+
+	// 上传驱动
+	disks: {
+		// 远程服务器上传
+		remote: {
+			driver: 'remote',
+			url: '/upload'
+		},
+
+		// 七牛上传
+		qiniu: {
+			driver: 'qiniu',
+			
+			// 获取token信息地址，优先级最高
+			tokenInfoUrl: '/upload/token',
+			
+			// 七牛配置(获取token地址)
+			// uptokenURL: 'https://yourserver.com/api/uptoken',
+			// uptoken: 'xxxx',
+			// domain: 'http://yourserver.com/'
+			// region: 'NCN', // 华北区
+		}
+	}
+};
+```
+
+### 网络请求
+
+**基本请求**
+
+```javascript
+// GET 请求
+uni.$http.get(uri, data, options).then(() => console.log, err => console.error);
+
+// POST 请求
+uni.$http.post(uri, data, options).then(() => console.log, err => console.error);
+
+// PUT 请求
+uni.$http.put(uri, data, options).then(() => console.log, err => console.error);
+
+// DELETE 请求
+uni.$http.delete(uri, data, options).then(() => console.log, err => console.error);
+```
+
+**参数说明**
+
+    uri:String 请求的URL，如果在 /common/config/http.js 中设置了baseURL，那么你可以在此处使用相对路径
+    data:Object 请求的参数，GET与DELETE请求中是query参数，POST与PUT请求时是body参数
+    options:Object 请求选项，如果在请求过程中，你有额外对请求的一些描述时，它是非常有用的，比如发送一个请求时
+    让它弹窗一个loading，请求失败或业务失败的时候进行Toast提示，当然这些在内部已经进行智能判断了，实际上在开发过程中
+    如无特殊请求描述，无需指定此参数，下面会展示完整的options参数细节：
+
+```javascript
+// options:Object 描述
+const options = {
+
+	// 是否显示错误提示语
+	isShowErrorTips: true,
+
+	// 是否返回原始数据
+	returnRaw: false,
+
+	// 是否显示成功提示
+	successTips: undefined, // POST,PUT 为true，其他为false
+
+	// 提示器
+	hint: {
+		hintSuccess: function(msg) {
+		}, hintError: function(msg) {
+		}
+	},
+
+	// 模态框提示器，一版用于强提醒
+	modal: function(options: ModalOptions) {
+	},
+
+	// 是否显示loading
+	loading: Boolean | String | {
+		showLoading: function() {
+		}, hideLoading: function() {
+		}
+	},
+	// loading 显示文字
+	loadingText: String,
+
+	// http status error
+	statusErrors: {
+		'404': function(config, response) {
+
+		}
+	},
+
+	// 应用业务失败
+	logicErrors: {
+		'40040': function(data, response) {
+
+		}
+	}
+}
+```
+
+**文件上传**
+
+除了基本的网络请求，在日常开发中，上传应该是比较高频的一个操作，在每个上传地方都写大量的上传业务逻辑，哦， 想想都很头大，那么现在回到这里，上传将变的轻而易举。
+
+```javascript
+// 上传文件
+uni.$upload({
+	filePath: '',
+	formData: {},
+	name: 'file'
+}).then(() => console.log, err => console.error)
+```
+
+### 事件
+
+跨页面数据传递，将不用在通过getApp().globalData进行传递，使用getApp().globalData进行传递数据时，很容易出现混乱， 而且不利于维护，通过事件进行数据传递，可解锁更多的场景实现。
+
+在框架中用户的鉴权机制即基于事件机制实现的。
+
+**基本使用**
+```javascript
+// 监听一个事件
+wx.emitter.on('choose.address', function(address) {
+    console.log(address);
+});
+
+// 触发一个事件
+wx.emitter.emit('choose.address',{
+    adddress:'郑州郑东新区...'
+});
+
+// 监听一个事件，只执行一次
+wx.emitter.once('choose.address', function(address) {
+    console.log(address);
+});
+
+// 监听一个事件，只执行一次
+wx.emitter.once('choose.address', function(address) {
+    console.log(address);
+});
+
+// 移除一个监听回调
+wx.emitter.on('choose.address', function addressFn(address) {
+    console.log(address);
+    wx.emitter.off('choose.address', addressFn);
+});
+```
+
 **数据验证：**
 
     //实例化模式，一般用于表单提交前的验证
@@ -234,7 +489,7 @@
     console.log('是否为整型：', wx.Validate.is('48.56', 'integer'));
     console.log('是否为布尔值：', wx.Validate.is('false', 'boolean'));
     console.log('是否为数组：', wx.Validate.is([], 'array'));
-    
+
 **相关工具方法：**
 
     // 随机打乱数组
@@ -327,61 +582,6 @@
     // 获取今天开始和结束的时间
     wx.timeUtil.today(start = new Date(), end = new Date())
 
-#### 相关配置
-一些配置信息都放在config目录下，你可以在你的代码的任何地方使用 wx.config 获取config/app.js中的配置。
-
-**common/config/app.js 项目配置**
-
-    module.exports = {
-    	stopPullDownRefreshAudio:'/audio/loadover.mp3', // 废弃
-    	
-        // 版本号
-	    version: '1.0',
-    	
-        // 订阅消息模板ID
-	    tmplIds: [],
-    };
-
-**common/config/http.js http基础配置**
-
-    module.exports = {
-        defaults: {
-            // baseURL: 'http://127.0.0.1',
-            baseURL: 'https://product.domin.com',
-
-            // Login
-            // #ifdef MP
-            login: uni.$logins.basic, // 使用小程序登录器
-            loginUrl: baseURL + '/weapp_login',
-            // #endif
-    
-            // #ifdef H5
-            login: uni.$logins.account, // 使用默认账号密码登录器
-            loginUrl: baseURL + '/login',
-            // #endif
-    
-            // basic login uses
-            loginDenyAuthMsg: '此操作需要您先授权！',
-            loginFailedMsg: '登录失败，请稍后再试~',
-            loginUserInfo: false,
-    
-            // account login uses
-            loginPage: '/pages/auth/login',
-    
-            // 登录成功后的回调
-            onLogged: function() {
-    
-            }
-        },
-        
-        requestInterceptors: [
-            ... 请求拦截器
-        ],
-        
-        responseInterceptors: [
-           ... 响应拦截器
-        ]
-    };
 
 **common/config/middleware.js 中间件**
 

@@ -62,8 +62,8 @@
 <style scoped>
 	.page {
 		background-color: white;
-		padding-top: 100upx;
-		padding-bottom: 100upx;
+		padding-top: 100rpx;
+		padding-bottom: 100rpx;
 	}
 
 	.cu-bar {

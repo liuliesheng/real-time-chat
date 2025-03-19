@@ -5,16 +5,14 @@
 				<!-- #ifdef MP-WEIXIN -->
 				<view class="auth-avatar-warpper">
 					<open-data type="userAvatarUrl" default-avatar="/static/icon/default-avatar.png"
-					           class="auth-avatar-inner" />
+							   class="auth-avatar-inner" />
 				</view>
 				<view class="auth-nickname">
 					<open-data type="userNickName" default-text="匿名用户" />
 				</view>
 				<!-- #endif -->
 
-				<button @getuserinfo="getUserInfo"
-				        class="cu-btn bg-red lg block shadow margin-top"
-				        open-type="getUserInfo">登 录</button>
+				<button @tap="getUserInfo" class="cu-btn bg-red lg block shadow margin-top">登 录</button>
 			</view>
 		</view>
 	</view>
@@ -31,13 +29,28 @@
 		created: function() {
 			this.$root.showAuthModal = this.show;
 			this.$root.hideAuthModal = this.hide;
+
+			uni.$emitter.on('sys.getUserInfo.to', this.onShowing, true);
+		},
+		detached() {
+			uni.$emitter.off('sys.getUserInfo.to', this.onShowing);
 		},
 		methods: {
 			getUserInfo(e) {
-				const data = e.detail;
-				uni.$emitter.emit('sys.getUserInfo.result', data);
+				uni.getUserProfile({
+					lang: 'zh_CN',
+					desc: '此操作需要您授权基本信息',
+					success: (res) => {
+						uni.setStorageSync('user_profile', res.userInfo);
+						uni.$emitter.emit('sys.getUserInfo.result', res);
+						this.hide();
+					}
+				});
+			},
+			onShowing(options) {
+				this.show();
 
-				this.hide();
+				return false;
 			},
 			show(allowClose = true) {
 				this.allowClose = allowClose;
@@ -48,6 +61,7 @@
 			},
 			onClose() {
 				if (this.allowClose) {
+					uni.$emitter.emit('sys.getUserInfo.result', null);
 					this.hide();
 				}
 			}

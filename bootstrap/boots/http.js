@@ -1,14 +1,5 @@
 import $ from "../$";
-import { Request, request, upload } from "../http";
 import * as util from "../util/index";
-import * as logins from './logins';
-
-// 请求类
-$.$define('http', request);
-$.$define('Http', Request);
-$.$define('upload', upload);
-$.$define('logins', logins);
-
 
 //初始化网络请求配置
 (function() {
@@ -25,10 +16,12 @@ $.$define('logins', logins);
 		config = {};
 	}
 
+	// 挂载config属性
+	$.request.config = config;
 
-	// 默认配置
+	// 默认参数
 	if (config.defaults) {
-		util.assign(request.defaults, config.defaults);
+		util.assign($.request.defaults, config.defaults);
 	}
 
 	// 请求拦截器
@@ -37,7 +30,7 @@ $.$define('logins', logins);
 			if (typeof interceptor === 'function') {
 				interceptor.fulfilled = interceptor;
 			}
-			request.addRequestInterceptor(interceptor.fulfilled, interceptor.rejected)
+			$.request.addRequestInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});
 	}
 
@@ -47,7 +40,7 @@ $.$define('logins', logins);
 			if (typeof interceptor === 'function') {
 				interceptor.fulfilled = interceptor;
 			}
-			request.addResponseInterceptor(interceptor.fulfilled, interceptor.rejected)
+			$.request.addResponseInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});
 	}
 })();
@@ -67,5 +60,5 @@ $.$define('logins', logins);
 	}
 
 	// 默认配置
-	util.assign(upload.defaults, config);
+	util.assign($.upload.defaults, config);
 })();

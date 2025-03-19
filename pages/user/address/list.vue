@@ -138,7 +138,7 @@
 <style scoped>
 	.page {
 		background-color: white;
-		padding-bottom: 140upx;
+		padding-bottom: 140rpx;
 	}
 
 	.foot {
@@ -152,7 +152,7 @@
 	.default {
 		line-height: 1.2;
 		height: auto;
-		padding: 4upx 6upx;
-		margin-right: 6upx;
+		padding: 4rpx 6rpx;
+		margin-right: 6rpx;
 	}
 </style>

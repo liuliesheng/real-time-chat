@@ -32,7 +32,9 @@ export default function(options) {
 
 	if (!loginPromise) {
 		$.showNavigationBarLoading();
-		loginPromise = $.$http.defaults.login(options).then((res) => {
+		loginPromise = $.$http.config.login(options).then((res) => {
+			console.log("login success:", res);
+			
 			$.hideLoading();
 			$.hideNavigationBarLoading();
 
@@ -44,7 +46,14 @@ export default function(options) {
 			$.setStorageSync('userInfo', globalData.userInfo);
 			$.setStorageSync('session_id', globalData.sessionId);
 
-			complete();
+			// 触发登录事件
+			setTimeout(() => {
+				if ($.$http.config.onLogged) {
+					$.$http.config.onLogged(res.data);
+				}
+			}, 0);
+
+			complete(res);
 
 			return options;
 		}, (err) => {
@@ -52,12 +61,10 @@ export default function(options) {
 			$.hideNavigationBarLoading();
 
 			if (err.isAuthDeny) {
-				$.$hintError(
-					$.$http.defaults.authFailedMsg || "请先授权后再重试~"
-				)
+				$.$hintError($.$http.config.loginAuthFailedTips)
 			} else {
 				const data = err.data;
-				const errMsg = err.errMsg || $.$http.defaults.loginFailedMsg;
+				const errMsg = err.errMsg || $.$http.config.loginFailedMsg;
 				if (data && data.tips_type === 'alert') {
 					$.showModal({ content: errMsg, showCancel: false });
 				} else {
@@ -70,6 +77,7 @@ export default function(options) {
 			// #endif
 
 			complete(err);
+			
 			return Promise.reject(err);
 		});
 	}

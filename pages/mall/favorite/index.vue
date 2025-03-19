@@ -143,12 +143,12 @@
 	}
 
 	.goods-list>.cu-item.move-cur {
-		transform: translateX(-130upx);
+		transform: translateX(-130rpx);
 	}
 
 	.goods-list>.cu-item .move {
 		top: 0;
-		width: 130upx;
+		width: 130rpx;
 	}
 
 	.m-price {

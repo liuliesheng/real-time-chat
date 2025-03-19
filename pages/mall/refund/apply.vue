@@ -36,7 +36,7 @@
 			<view class="title">退款金额</view>
 			<view class="flex-sub">
 				<view class="flex">
-					<text style="margin-top: 22upx;vertical-align: middle;">￥</text>
+					<text style="margin-top: 22rpx;vertical-align: middle;">￥</text>
 					<input type="number" style="color: #e54d42;font-size: 24px;" v-model="form.amount" :disabled="true" />
 				</view>
 				<view class="text-grey text-xs">

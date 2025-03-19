@@ -43,6 +43,6 @@ export default {
 	}
 
 	page {
-		padding: 30upx;
+		padding: 30rpx;
 	}
 </style>

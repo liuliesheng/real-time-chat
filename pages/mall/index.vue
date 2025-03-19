@@ -10,7 +10,7 @@
 			<mescroll-body ref="mescrollRef" @init="mescrollInit"
 						   :down="{auto:false}" :up="{auto:false,empty:false}"
 						   @down="downCallback" @up="upCallback">
-				<swiper class="screen-swiper round-dot" style="min-height: 256upx;"
+				<swiper class="screen-swiper round-dot" style="min-height: 256rpx;"
 						:indicator-dots="true" :circular="true"
 						:autoplay="true" interval="5000" duration="500">
 					<swiper-item v-for="(item,index) in swiperList" :key="index">

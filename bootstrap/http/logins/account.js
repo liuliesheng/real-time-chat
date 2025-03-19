@@ -25,9 +25,15 @@ export default function(options) {
 
 // 登录服务器
 function connect(options) {
+	if (!$.$http.config.loginUrl) {
+		return Promise.reject({
+			errMsg: 'common/config/http.js not configure `loginUrl` !'
+		});
+	}
+	
 	return new Promise(function(resolve, reject) {
 		$.request({
-			url: $.$http.defaults.loginUrl,
+			url: $.$http.config.loginUrl,
 			method: 'POST',
 			data: options,
 			dataType: 'json',
@@ -35,7 +41,6 @@ function connect(options) {
 				if (response.statusCode !== 200) {
 					reject({
 						code: response.statusCode,
-						errMsg: '登录失败，请稍后再试~',
 						response: response
 					});
 				}
@@ -49,10 +54,6 @@ function connect(options) {
 					});
 
 					resolve(res);
-
-					if ($.$http.defaults.onLogged) {
-						$.$http.defaults.onLogged(res);
-					}
 				} else {
 					reject({
 						code: res.code,
@@ -82,7 +83,7 @@ function fallback() {
 			}
 		});
 		$.navigateTo({
-			url: $.$http.defaults.loginPage
+			url: $.$http.config.loginPage
 		})
 	});
 }

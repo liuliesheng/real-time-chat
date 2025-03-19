@@ -325,18 +325,18 @@
 
 <style scoped>
 	.page {
-		padding-bottom: 130upx;
+		padding-bottom: 130rpx;
 	}
 
 	.user-address-default {
 		line-height: 1.2;
 		height: auto;
-		padding: 4upx 6upx;
-		margin-right: 6upx;
+		padding: 4rpx 6rpx;
+		margin-right: 6rpx;
 	}
 
 	.goods-list {
-		margin-top: 30upx;
+		margin-top: 30rpx;
 		background-color: white;
 	}
 
@@ -364,9 +364,9 @@
 	}
 
 	.cu-list.menu.price-info>.cu-item.solid-top::after {
-		left: 30upx;
+		left: 30rpx;
 		top: 0;
-		width: calc(200% - 120upx);
-		border-top: 1upx solid rgba(0, 0, 0, 0.1);
+		width: calc(200% - 120rpx);
+		border-top: 1rpx solid rgba(0, 0, 0, 0.1);
 	}
 </style>

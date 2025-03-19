@@ -6,18 +6,31 @@ export default function middleware(handles = []) {
 				return func.call(context, params);
 			}
 
-			let handle = handles[index++];
 			let handleParams = [next, params];
 			let handleName = 'anonymous@' + new Date().getTime();
+			let handleFunc = null;
+
+			const handle = handles[index++];
 			if (typeof handle === 'object') {
-				if (handle.params) handleParams.push(handle.params);
-				if (handle.name) handleName = handle.name;
-				handle = handle.handle;
+				if (handle.params) {
+					handleParams.push(handle.params);
+				}
+
+				if (handle.name) {
+					handleName = handle.name;
+				}
+
+				handle.context = context;
+				handleFunc = handle.handle;
+			} else if (typeof handle !== 'function') {
+				handleFunc = handle;
+				handleFunc.context = context;
+			} else {
+				throw new Error(`${handle}不是一个function`);
 			}
-			if (typeof handle !== 'function') throw new Error(`${handle}不是一个function`);
 
 			console.group(handleName);
-			const result = handle.apply(context, handleParams);
+			const result = handleFunc.apply(handle, handleParams);
 			console.groupEnd();
 			return result;
 		};

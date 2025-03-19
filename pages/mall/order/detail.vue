@@ -302,11 +302,11 @@
 
 <style scoped>
 	.page {
-		padding-bottom: 130upx;
+		padding-bottom: 130rpx;
 	}
 
 	.order-status {
-		padding: 100upx 30upx;
+		padding: 100rpx 30rpx;
 		text-align: center;
 		font-size: 24px;
 		font-weight: bold;
@@ -325,6 +325,6 @@
 	}
 
 	.order-info .title {
-		width: 160upx;
+		width: 160rpx;
 	}
 </style>

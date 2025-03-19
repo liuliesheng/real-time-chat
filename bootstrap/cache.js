@@ -1,41 +1,57 @@
 import $ from './$';
 
-const CACHE_EXPIRE_SUFFIX = 'cache';
+const CACHE_PREFIX = 'cache:';
 
 export default {
+
+	/**
+	 * 解析缓存键名
+	 * @param {String} key
+	 * @return {String}
+	 */
+	resolveKey(key) {
+		return CACHE_PREFIX + key;
+	},
+
+	/**
+	 * 解析缓存值
+	 * @param {String} key
+	 * @param {*} defaultValue
+	 * @return {*}
+	 */
+	resolveValue(key, defaultValue) {
+		if (typeof defaultValue === 'function') {
+			defaultValue = defaultValue();
+			setTimeout(() => {
+				this.set(key, defaultValue);
+			}, 0);
+		}
+
+		return defaultValue;
+	},
 
 	/**
 	 * 获取缓存
 	 * @param {string} key
 	 * @param {*} defaultValue
-	 * @param {boolean|number} isSet
 	 * @return {*}
 	 */
-	get(key, defaultValue = null, isSet = false) {
-		let value = null;
+	get(key, defaultValue = null) {
+		let value = $.getStorageSync(
+			this.resolveKey(key)
+		);
 
-		const expireTime = parseInt($.getStorageSync(key + CACHE_EXPIRE_SUFFIX))
-		if (expireTime) {
-			const timestamp = Math.floor(new Date().getTime() / 1000);
-			if (parseInt(expireTime) < timestamp) {
-				value = typeof defaultValue === 'function' ? defaultValue() : defaultValue;
-				if (isSet && value) {
-					this.set(key, value, typeof isSet === 'number' ? isSet : 60);
-				}
-
-				return value;
-			}
+		if (!value) {
+			return this.resolveValue(defaultValue);
 		}
 
-		value = $.getStorageSync(key);
-		if (value === null) {
-			value = typeof defaultValue === 'function' ? defaultValue() : defaultValue;
-			if (isSet && value) {
-				this.set(key, value, typeof isSet === 'number' ? isSet : 60);
-			}
+		const nowTime = Math.floor(new Date().getTime() / 1000);
+		const expireTime = parseInt(value.expire_at);
+		if (expireTime < nowTime) {
+			return this.resolveValue(defaultValue);
 		}
 
-		return value;
+		return value.data;
 	},
 
 	/**
@@ -45,16 +61,15 @@ export default {
 	 * @param {number} ttl
 	 * @return {*}
 	 */
-	set(key, value, ttl = 60) {
-		$.setStorageSync(key, value);
-
+	set(key, value, ttl = 3600) {
 		ttl = parseInt(ttl);
-		if (ttl > 0) {
-			const timestamp = Math.floor(new Date().getTime() / 1000) + ttl;
-			$.setStorageSync(key + CACHE_EXPIRE_SUFFIX, timestamp + "");
-		} else {
-			$.removeStorageSync(key + CACHE_EXPIRE_SUFFIX);
-		}
+		const timestamp = Math.floor(new Date().getTime() / 1000);
+		$.setStorageSync(
+			this.resolveKey(key), {
+				expire_at: ttl > 0 ? timestamp + ttl : 0,
+				data: value
+			}
+		);
 	},
 
 	/**
@@ -62,7 +77,8 @@ export default {
 	 * @param {string} key
 	 */
 	forget(key) {
-		$.removeStorageSync(key);
-		$.removeStorageSync(key + CACHE_EXPIRE_SUFFIX);
+		$.removeStorageSync(
+			this.resolveKey(key)
+		);
 	}
 }

@@ -1,4 +1,3 @@
-/** @var {*} $ */
 import $ from "../../$";
 
 /**
@@ -15,35 +14,65 @@ function invokeLocationAndAuth(invokeFunc, options) {
 				content: '此操作需要你的授权，我们不会泄露你的隐私，操作方法：【右上角···->设置->允许位置信息】',
 				showCancel: false,
 			});
-			return Promise.reject(err);
-		}
-
-		if (err.errMsg.indexOf("require permission") !== -1) {
+		} else if (err.errMsg.indexOf("require permission") !== -1) {
 			$.showModal({
 				title: '温馨提示',
 				content: '此操作需要你的开启手机定位，我们不会泄露你的隐私',
 				showCancel: false,
 			});
-			return;
+		} else {
+			$.showModal({
+				title: '温馨提示',
+				content: '授权地理位置失败：' + err.errMsg,
+				showCancel: false,
+			});
 		}
-
-		$.showModal({
-			title: '温馨提示',
-			content: '授权地理位置失败：' + JSON.stringify(err),
-			showCancel: false,
-		});
-
 		return Promise.reject(err);
 	});
 }
 
+// 优化获取定位能力
+let currentLocation = null;
+$.$define('startLocationUpdate', function(options = {}) {
+	if (this.inited) {
+		return;
+	}
+
+	console.log('初始化定位能力！');
+
+	this.inited = true;
+	$.startLocationUpdate(options);
+	$.onLocationChange(function(res) {
+		console.log('更新位置信息：', res);
+		currentLocation = res;
+	});
+});
+
+let locationPromise = null;
+let prevLocationTime = 0;
 /**
  * 获取当前位置信息
  * @param {*} options
  * @return Promise<*>
  */
 $.$define('getLocation', function(options) {
-	return invokeLocationAndAuth('getLocation', options);
+	const now = parseInt(new Date().getTime() / 1000);
+	if (!locationPromise) {
+		locationPromise = invokeLocationAndAuth('getLocation', options).then((res) => {
+			return res;
+		}, () => {
+			locationPromise = null;
+		});
+	} else if (prevLocationTime < now - 35) {
+		console.log('刷新定位信息...');
+		invokeLocationAndAuth('getLocation', options).then((res) => {
+			locationPromise = Promise.resolve(res);
+		});
+	}
+
+	prevLocationTime = now;
+
+	return locationPromise;
 });
 
 /**
@@ -63,5 +92,3 @@ $.$define('openLocation', function(options) {
 $.$define('chooseLocation', function(options) {
 	return invokeLocationAndAuth('chooseLocation', options);
 });
-
-

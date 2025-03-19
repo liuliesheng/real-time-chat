@@ -116,7 +116,7 @@
 				</view>
 			</view>
 		</mescroll-body>
-	
+
 	</view>
 	<PageLoad v-else />
 </template>
@@ -177,7 +177,7 @@
 
 <style>
 	.page {
-		padding: 30upx;
+		padding: 30rpx;
 		overflow-x: hidden;
 	}
 
@@ -190,7 +190,7 @@
 	.logo image {
 		display: block;
 		margin: 0 auto;
-		width: 200upx;
-		height: 200upx;
+		width: 200rpx;
+		height: 200rpx;
 	}
 </style>

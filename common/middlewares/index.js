@@ -1,16 +1,14 @@
 // 中间件配置
 // 创建一个中间件 $.$middleware();
 // 系统内置中间件列表 $.$middlewares
-
-import appLoadParams from './app-load-params'
-import appShowParams from './app-show-params'
+import appBindUser from './app-bind-user';
 
 module.exports = {
 	appLaunch: [
-		appLoadParams,
+		appBindUser
 	],
 	appShow: [
-		appShowParams
+		appBindUser
 	],
 	appHide: [],
 	appRoute: [],

@@ -120,13 +120,13 @@
 
 			this.loadData();
 		},
-		
+
 		onPullDownRefresh() {
 			this.loadData().finally(() => {
 				uni.stopPullDownRefresh();
 			});
 		},
-		
+
 		methods: {
 			// 加载数据
 			loadData() {
@@ -163,11 +163,11 @@
 
 <style scoped>
 	.page {
-		padding-bottom: 130upx;
+		padding-bottom: 130rpx;
 	}
 
 	.status-tips {
-		padding: 100upx 30upx;
+		padding: 100rpx 30rpx;
 		text-align: center;
 		font-size: 24px;
 		font-weight: bold;
