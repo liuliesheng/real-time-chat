@@ -1,3 +1,5 @@
+import $ from "../../$";
+
 // 增加Promise最终方法
 if (!Promise.prototype.finally) {
 	Promise.prototype.finally = function(callback) {

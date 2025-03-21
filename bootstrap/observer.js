@@ -2,7 +2,7 @@ export class Observer {
 
 	/**
 	 * 默认构造器
-	 * @param {string} name 
+	 * @param {string} name
 	 */
 	constructor(name) {
 
@@ -12,7 +12,19 @@ export class Observer {
 		 */
 		this._callbackList = [];
 
+		/**
+		 * 订阅者名称
+		 * @type {string}
+		 * @private
+		 */
 		this._name = name;
+
+		/**
+		 * 当前值
+		 * @type {*}
+		 * @private
+		 */
+		this._value = null;
 	}
 
 	/**
@@ -46,7 +58,12 @@ export class Observer {
 		}
 	}
 
+	/**
+	 * 通知事件
+	 * @param {*} data
+	 */
 	notify(data) {
+		this._value = data;
 		this._callbackList.forEach(function(callback) {
 			setTimeout(function() {
 				const event = {
@@ -59,11 +76,19 @@ export class Observer {
 			}, 0);
 		});
 	}
+
+	/**
+	 * 获取当前值
+	 * @return {*}
+	 */
+	value() {
+		return this._value;
+	}
 }
 
 /**
  * 创建一个观察者
- * @param {string} name 
+ * @param {string} name
  */
 export default function observer(name) {
 	return new Observer(name);

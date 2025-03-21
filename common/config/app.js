@@ -18,8 +18,20 @@ module.exports = {
 	// 下来刷新完成提示音
 	stopPullDownRefreshAudio: '',
 
+	// 登录用户缓存标识
+	userInfoKey: '__USER_INFO__',
+
+	// 登录用户SessionId标识
+	sessionIdKey: '__SESSION__',
+
+	// 当前用户信息发生变更
+	onUserChange: function(user) {
+		console.info('user info change:', user);
+	},
+
 	// 跳转地址
-	onLinkTo: function(url, type) {},
+	onLinkTo: function(url, type) {
+	},
 
 	// 腾讯地图key列表
 	QQMapKeys: []

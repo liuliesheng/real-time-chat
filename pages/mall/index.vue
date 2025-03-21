@@ -57,6 +57,7 @@
 		},
 		onLoad() {
 			// 在页面onLoad回调事件中创建插屏广告实例
+			// #ifdef MP-WEIXIN
 			if (wx.createInterstitialAd) {
 				interstitialAd = wx.createInterstitialAd({
 					adUnitId: 'adunit-3e248324e734cf57'
@@ -66,6 +67,7 @@
 				interstitialAd.onClose(() => {});
 				interstitialAd.createTime = Math.floor(new Date().getTime());
 			}
+			// #endif
 
 			this.loadData();
 		},

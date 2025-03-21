@@ -96,14 +96,14 @@ $.$define('promise', new Proxy($, {
 }));
 
 // 延迟返回上一页
-$.$define($, 'back', function(delay = 1500, options = {}) {
+$.$define('back', function(delay = 1500, options = {}) {
 	setTimeout(function() {
 		$.navigateBack(options);
 	}, delay);
 });
 
 // 错误提示
-$.$define($, 'hintError', function(msg) {
+$.$define('hintError', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'none',
@@ -112,7 +112,7 @@ $.$define($, 'hintError', function(msg) {
 });
 
 // 成功提示
-$.$define($, 'hintSuccess', function(msg) {
+$.$define('hintSuccess', function(msg) {
 	$.showToast({
 		title: msg,
 		icon: 'success',

@@ -1,4 +1,4 @@
-import $ from "../../../$";
+import $ from "../../$";
 
 // 扁平化支付宝接口
 if (typeof my !== 'undefined' && typeof uni === 'undefined') {

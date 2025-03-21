@@ -1,2 +1,3 @@
-export { default as basic } from './basic';
-export { default as account } from './account';
+export {default as account} from './account';
+export {default as weapp} from './weapp';
+export {default as official} from './official';

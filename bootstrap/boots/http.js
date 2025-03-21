@@ -1,27 +1,33 @@
 import $ from "../$";
 import * as util from "../util/index";
+import basicRequestInterceptor from './http-interceptors/basic.request.interceptor';
+import basicResponseInterceptor from './http-interceptors/basic.request.interceptor';
 
 //初始化网络请求配置
 (function() {
+	$.$http.basicRequestInterceptor = basicRequestInterceptor;
+	$.$http.basicResponseInterceptor = basicResponseInterceptor;
+
 	let config = null;
 
 	try {
 		config = require('../../common/config/http.js');
+		console.log(config)
 
 		if (typeof config === 'function') {
 			config = config();
 		}
 	} catch (e) {
-		console.warn("/common/config/http.js not found!");
+		console.warn("/common/config/http.js not found!", e.message);
 		config = {};
 	}
 
 	// 挂载config属性
-	$.request.config = config;
+	$.$http.config = config;
 
 	// 默认参数
 	if (config.defaults) {
-		util.assign($.request.defaults, config.defaults);
+		util.assign($.$http.defaults, config.defaults);
 	}
 
 	// 请求拦截器
@@ -30,7 +36,7 @@ import * as util from "../util/index";
 			if (typeof interceptor === 'function') {
 				interceptor.fulfilled = interceptor;
 			}
-			$.request.addRequestInterceptor(interceptor.fulfilled, interceptor.rejected)
+			$.$http.addRequestInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});
 	}
 
@@ -40,7 +46,7 @@ import * as util from "../util/index";
 			if (typeof interceptor === 'function') {
 				interceptor.fulfilled = interceptor;
 			}
-			$.request.addResponseInterceptor(interceptor.fulfilled, interceptor.rejected)
+			$.$http.addResponseInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});
 	}
 })();
@@ -60,5 +66,5 @@ import * as util from "../util/index";
 	}
 
 	// 默认配置
-	util.assign($.upload.defaults, config);
+	util.assign($.$upload.defaults, config);
 })();

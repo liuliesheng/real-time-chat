@@ -1,9 +1,9 @@
-import "./es6/index";
-import "./weapp/index";
+import "./es6";
+import "./weapp";
 import "./base";
-import "./event";
+import "./user";
 import "./http";
-import "./middleware";
+import "./event";
 import "./third";
 import "./model";
 import "./service";
