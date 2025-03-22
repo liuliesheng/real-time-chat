@@ -189,7 +189,7 @@
 			},
 			// 加载信息
 			loadData: function(page = 1) {
-				return uni.$model.mall.getShoppingCartList({
+				return uni.$models.mall.getShoppingCartList({
 					page: page,
 				}).then(res => {
 					res.data.forEach(it => it.checked = true);
@@ -219,14 +219,14 @@
 			// 更新商品数量
 			changeItemNum(item, num) {
 				item.goods_num = num;
-				uni.$model.mall.changeShoppingCart(item.id, num, {
+				uni.$models.mall.changeShoppingCart(item.id, num, {
 					successTips: false
 				});
 			},
 
 			// 删除购物车
 			deleteShoppingCart() {
-				uni.$model.mall.forgetShoppingCart(this.choiceGoodsIdListStr, {
+				uni.$models.mall.forgetShoppingCart(this.choiceGoodsIdListStr, {
 					loading: this,
 					hint: this,
 					successTips: true

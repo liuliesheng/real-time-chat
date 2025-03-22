@@ -48,12 +48,12 @@
 		},
 		onLoad(options) {
 			this.id = parseInt(options.id);
-			
+
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
 				return uni.$delayNavigateBack();
 			}
-			
+
 			this.loadExpressList();
 		},
 		methods: {
@@ -90,7 +90,7 @@
 				}
 
 				data.id = this.id;
-				uni.$model.mall.submitRefundDelivery(data, {
+				uni.$models.mall.submitRefundDelivery(data, {
 					loading: this,
 					hint: this
 				}).then((res) => {

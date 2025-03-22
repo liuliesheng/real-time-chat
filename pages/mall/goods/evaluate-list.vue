@@ -46,7 +46,7 @@
 		methods: {
 			// 加载信息
 			loadData: function(page = 1) {
-				return uni.$model.mall.getGoodsEvaluateList({
+				return uni.$models.mall.getGoodsEvaluateList({
 					goods_id: this.goodsId,
 					page: page,
 				}).then(res => {

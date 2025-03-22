@@ -1,5 +1,4 @@
 import $ from '../../../bootstrap/$';
-import login from "./login";
 import { resolveHint, resolveModal } from './util';
 
 export default {
@@ -109,7 +108,7 @@ function resolveLogin(response) {
 
 	config.loginCount = (config.loginCount || 0) + 1;
 
-	return login(config).then(options => $.$http.request(options));
+	return $.$login(config).then(options => $.$http.request(options));
 }
 
 // 解析无权限错误

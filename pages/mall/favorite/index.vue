@@ -64,7 +64,7 @@
 		methods: {
 			// 加载信息
 			loadData: function(page = 1) {
-				return uni.$model.mall.getGoodsFavoriteList({
+				return uni.$models.mall.getGoodsFavoriteList({
 					page: page,
 				}).then(res => {
 					res.data.forEach(it => it.checked = true);
@@ -79,7 +79,7 @@
 			// 取消收藏
 			unFavorite(index) {
 				const item = this.data[index];
-				uni.$model.favorite.unfavoriteGoods(item.topic_id, {
+				uni.$models.favorite.unfavoriteGoods(item.topic_id, {
 					loading: this,
 					hint: this
 				}).then(() => {

@@ -109,7 +109,7 @@
 
 			// 加载数据
 			loadData() {
-				return uni.$model.mall.getCategoryList().then((res) => {
+				return uni.$models.mall.getCategoryList().then((res) => {
 					this.categories = res;
 
 					if (this.categories.length) {
@@ -149,7 +149,7 @@
 				}
 
 				const category = this.categories[this.tabCur];
-				return uni.$model.mall.getGoodsList({
+				return uni.$models.mall.getGoodsList({
 					category_id: category.id,
 					page: page,
 				}).then((res) => {

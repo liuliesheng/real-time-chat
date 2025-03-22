@@ -102,7 +102,7 @@
 		methods: {
 			// 加载数据
 			loadData: function(page = 1) {
-				return uni.$model.mall.getRefundList({
+				return uni.$models.mall.getRefundList({
 					keywords: this.keywords,
 					page: page,
 				}).then(res => {

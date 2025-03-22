@@ -120,7 +120,7 @@
 
 			// 加载商品数据
 			loadGoodsData: function(page = 1) {
-				return uni.$model.mall.getGoodsList({
+				return uni.$models.mall.getGoodsList({
 					page: page,
 				}).then(res => {
 					this.goodsList = page === 1 ? res.data : this.goodsList.concat(res.data);

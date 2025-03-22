@@ -185,7 +185,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$model.mall.getGoodsDetail(this.id).then(res => {
+				return uni.$models.mall.getGoodsDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});
@@ -198,11 +198,11 @@
 					hint: this
 				};
 				if (!this.info.is_favorite) {
-					return uni.$model.favorite.favoriteGoods(this.id, options).then(res => {
+					return uni.$models.favorite.favoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 1;
 					});
 				} else {
-					return uni.$model.favorite.unfavoriteGoods(this.id, options).then(res => {
+					return uni.$models.favorite.unfavoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 0;
 					});
 				}
@@ -226,7 +226,7 @@
 						return;
 					}
 
-					return uni.$model.mall.addShoppingCart({
+					return uni.$models.mall.addShoppingCart({
 						goods_id: this.id,
 						goods_sku_id: res.sku.id,
 						count: res.count

@@ -12,7 +12,6 @@ import basicResponseInterceptor from './http-interceptors/basic.request.intercep
 
 	try {
 		config = require('../../common/config/http.js');
-		console.log(config)
 
 		if (typeof config === 'function') {
 			config = config();

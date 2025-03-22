@@ -2,7 +2,7 @@ export default {
 	methods: {
 		// 重新解析订单状态
 		parseOrderStatus(index, state, targetNavIndex) {
-			const { stateTip, stateTipColor } = uni.$model.mall.parseOrderState(state);
+			const { stateTip, stateTipColor } = uni.$models.mall.parseOrderState(state);
 
 			const list = this.choiceNav.data,
 				item = list[index];
@@ -68,7 +68,7 @@ export default {
 						return;
 					}
 
-					uni.$model.mall.deleteOrder(item.id, {
+					uni.$models.mall.deleteOrder(item.id, {
 						loading: this,
 						hint: this,
 					}).then((res) => {
@@ -91,7 +91,7 @@ export default {
 						return;
 					}
 
-					uni.$model.mall.setOrderCancel(item.id, {
+					uni.$models.mall.setOrderCancel(item.id, {
 						loading: this,
 						hint: this,
 					}).then((res) => {
@@ -126,7 +126,7 @@ export default {
 				success: (res) => {
 					const type = payTypeMap[res.tapIndex];
 
-					uni.$model.mall.getOrderPaymentInfo({
+					uni.$models.mall.getOrderPaymentInfo({
 						id: item.id,
 						type: type
 					}, {
@@ -163,7 +163,7 @@ export default {
 						return;
 					}
 
-					uni.$model.mall.setOrderReceipt(item.id, {
+					uni.$models.mall.setOrderReceipt(item.id, {
 						loading: this,
 						hint: this,
 					}).then((res) => {

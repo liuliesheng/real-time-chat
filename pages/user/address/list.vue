@@ -70,7 +70,7 @@
 		methods: {
 			// 加载地址
 			loadData: function(page = 1) {
-				return uni.$model.address.getList({
+				return uni.$models.address.getList({
 					keywords: this.keywords,
 					page: page,
 				}).then(res => {
@@ -92,7 +92,7 @@
 					success: (res) => {
 						const item = this.data[index];
 						if (res.tapIndex === 0) {
-							uni.$model.address.forget(item.id, {
+							uni.$models.address.forget(item.id, {
 								loading: this,
 								hint: this
 							}).then(() => {
@@ -100,7 +100,7 @@
 								this.data.splice(index, 1);
 							});
 						} else if (res.tapIndex === 1) {
-							uni.$model.address.setDefault(item.id, {
+							uni.$models.address.setDefault(item.id, {
 								loading: this,
 								hint: this
 							}).then(() => {

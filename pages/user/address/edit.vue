@@ -75,7 +75,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$model.address.getDetail(this.id, {
+				return uni.$models.address.getDetail(this.id, {
 					loading: this,
 					hint: this
 				}).then(res => {
@@ -140,12 +140,12 @@
 
 				let promise = null;
 				if (this.id) {
-					promise = uni.$model.address.update(this.id, data, {
+					promise = uni.$models.address.update(this.id, data, {
 						loading: this,
 						hint: this
 					});
 				} else {
-					promise = uni.$model.address.create(data, {
+					promise = uni.$models.address.create(data, {
 						loading: this,
 						hint: this
 					});

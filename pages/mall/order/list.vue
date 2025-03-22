@@ -133,7 +133,7 @@
 				}
 				navItem.loading = true;
 
-				uni.$model.mall.getOrderList({
+				uni.$models.mall.getOrderList({
 					page: page,
 					state: navItem.state
 				}).then((res) => {

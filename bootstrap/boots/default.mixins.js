@@ -1,5 +1,4 @@
 import $ from "../../bootstrap/$";
-// import login from '../https/login';
 
 export default {
 	// 跳转
@@ -16,7 +15,7 @@ export default {
 		//#endif
 
 		if (logged && !$.$isLogged()) {
-			login({
+			$.$login({
 				loginUserInfo: true
 			}).then(() => {
 				this.navTo(url, type);
@@ -31,7 +30,7 @@ export default {
 		type = type || "navigateTo";
 		$[type]({
 			url: url,
-			success(){
+			success() {
 				$.$config.onLinkTo(url, type);
 			},
 			fail() {
@@ -118,7 +117,8 @@ export default {
 	},
 
 	// 事件停止向上传递
-	stopPrevent: function() {},
+	stopPrevent: function() {
+	},
 
 	// 快捷复制文本
 	copy: function(text) {

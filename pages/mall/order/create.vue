@@ -208,7 +208,7 @@
 					hint: this
 				};
 				if (this.goodsId) {
-					return uni.$model.mall.getAdvanceOrderFormGoods({
+					return uni.$models.mall.getAdvanceOrderFormGoods({
 						goods_id: this.goodsId,
 						goods_sku_id: this.goodsSkuId,
 						goods_num: this.goodsNum,
@@ -217,7 +217,7 @@
 						this.loaded = true;
 					});
 				} else {
-					return uni.$model.mall.getAdvanceOrderFormCart({
+					return uni.$models.mall.getAdvanceOrderFormCart({
 						ids: this.cartIds
 					}).then((res) => {
 						this.info = res;
@@ -268,7 +268,7 @@
 
 				this.isGoOrder = true;
 				if (this.goodsId) {
-					return uni.$model.mall.createOrderFormGoods(Object.assign({
+					return uni.$models.mall.createOrderFormGoods(Object.assign({
 						goods_id: this.goodsId,
 						goods_sku_id: this.goodsSkuId,
 						goods_num: this.info.goods_list[0].goods_num,
@@ -280,7 +280,7 @@
 						this.isGoOrder = false;
 					});
 				} else {
-					return uni.$model.mall.createOrderFormCart(Object.assign({
+					return uni.$models.mall.createOrderFormCart(Object.assign({
 						ids: this.cartIds,
 					}, order), {
 						successTips: false
@@ -294,7 +294,7 @@
 
 			// 去支付
 			goPay(order) {
-				uni.$model.mall.getOrderPaymentInfo({
+				uni.$models.mall.getOrderPaymentInfo({
 					id: order.id,
 					type: this.payType
 				}, {

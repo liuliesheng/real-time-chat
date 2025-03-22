@@ -61,7 +61,7 @@
 		methods: {
 			// 加载认证
 			loadData() {
-				uni.$model.user.getIdentityInfo().then((res) => {
+				uni.$models.user.getIdentityInfo().then((res) => {
 					this.form = res || {
 						realname: '',
 						card_no: '',
@@ -89,7 +89,7 @@
 					return this.hintError('请填写身份证号！');
 				}
 
-				uni.$model.user.applyIdentity(form, {
+				uni.$models.user.applyIdentity(form, {
 					hint: this,
 					loading: this
 				}).then(() => {

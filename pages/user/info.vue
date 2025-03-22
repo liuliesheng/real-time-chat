@@ -95,7 +95,7 @@
 		methods: {
 			//加载用户信息
 			loadData() {
-				return uni.$model.user.get().then((res) => {
+				return uni.$models.user.get().then((res) => {
 					this.info = res;
 				});
 			},
@@ -103,7 +103,7 @@
 			// 同步微信信息
 			syncWechat() {
 				this.syncLoading = true;
-				return uni.$model.user.syncWechat({
+				return uni.$models.user.syncWechat({
 					hint: this
 				}).finally(() => {
 					this.syncLoading = false;
