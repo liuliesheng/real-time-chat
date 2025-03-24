@@ -1,7 +1,7 @@
 import $ from "../$";
 import * as util from "../util/index";
 import basicRequestInterceptor from './http-interceptors/basic.request.interceptor';
-import basicResponseInterceptor from './http-interceptors/basic.request.interceptor';
+import basicResponseInterceptor from './http-interceptors/basic.response.interceptor';
 
 //初始化网络请求配置
 (function() {
@@ -33,7 +33,9 @@ import basicResponseInterceptor from './http-interceptors/basic.request.intercep
 	if (config.requestInterceptors) {
 		config.requestInterceptors.forEach(interceptor => {
 			if (typeof interceptor === 'function') {
-				interceptor.fulfilled = interceptor;
+				interceptor = {
+					fulfilled: interceptor
+				};
 			}
 			$.$http.addRequestInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});
@@ -43,7 +45,9 @@ import basicResponseInterceptor from './http-interceptors/basic.request.intercep
 	if (config.responseInterceptors) {
 		config.responseInterceptors.forEach(interceptor => {
 			if (typeof interceptor === 'function') {
-				interceptor.fulfilled = interceptor;
+				interceptor = {
+					fulfilled: interceptor
+				};
 			}
 			$.$http.addResponseInterceptor(interceptor.fulfilled, interceptor.rejected)
 		});

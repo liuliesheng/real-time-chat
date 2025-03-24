@@ -23,8 +23,6 @@ import middleware from "../middleware";
 			continue;
 		}
 
-		console.log(key)
-
 		$.$emitter.on(key, events[key]);
 	}
 })();

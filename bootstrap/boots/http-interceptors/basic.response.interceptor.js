@@ -1,9 +1,9 @@
 import $ from '../../../bootstrap/$';
-import { resolveHint, resolveModal } from './util';
+import {resolveHint, resolveModal} from './util';
 
 export default {
 	fulfilled: function(response) {
-		const { config, data } = response;
+		const {config, data} = response;
 
 		const hint = resolveHint(config);
 		const showModal = resolveModal(config);
@@ -25,7 +25,6 @@ export default {
 			} else if (data.code === $.$http.config.unauthorizedCode) { // 暂无权限
 				return resolveUnauthorizedError(response);
 			}
-
 			return resolveBasicError(response);
 		}
 
@@ -146,7 +145,7 @@ function resolveBasicError(response) {
 	const globalLogicErrors = $.$http.config.logicErrors;
 	if (logicErrors && logicErrors[logicCode]) {
 		logicErrors[logicCode](data, response);
-	} else if (globalLogicErrors) {
+	} else if (globalLogicErrors[logicCode]) {
 		globalLogicErrors[logicCode](data, response);
 	}
 
