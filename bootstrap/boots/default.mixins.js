@@ -35,7 +35,10 @@ export default {
 			},
 			fail() {
 				$.switchTab({
-					url: url
+					url: url,
+					success(res) {
+						$.$config.onLinkTo(url, 'switchTab');
+					}
 				});
 			}
 		});

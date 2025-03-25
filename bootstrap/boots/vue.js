@@ -1,15 +1,19 @@
 import Vue from 'vue';
 import defaultMixins from './default.mixins';
-import pageMixin from "@/common/mixins/page";
-import componentMixin from "@/common/mixins/component";
+import pageMixin from "../../common/mixins/page";
+import componentMixin from "../../common/mixins/component";
 
 // 调用生命周期钩子函数
 Vue.prototype.$callHook = function(name) {
 	const callbacks = this.$options[name];
-	if (!callbacks) return;
+	if (!callbacks) {
+		return;
+	}
 
 	const args = Array.prototype.shift.call(arguments);
-	callbacks.forEach(cb => cb.call(this, ...args))
+	callbacks.forEach(cb => {
+		cb.call(this, ...args)
+	});
 };
 
 // 页面属性混合

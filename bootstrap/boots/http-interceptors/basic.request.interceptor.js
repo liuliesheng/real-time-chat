@@ -1,5 +1,5 @@
 import $ from '../../../bootstrap/$';
-import { resolveLoading } from "./util";
+import {resolveLoading} from "./util";
 
 export default function(config) {
 	const needTips = ['post', 'put'].indexOf(config.method) !== -1;
@@ -27,14 +27,8 @@ export default function(config) {
 		config.data = {};
 	}
 
-	// 附加用户session_id
-	const globalData = getApp().globalData;
-	if (!globalData.sessionId) {
-		globalData.sessionId = $.getStorageSync('session_id');
-	}
-
 	const basicParams = makeBasicGetParams();
-	basicParams.session_id = globalData.sessionId;
+
 	attachGetParams(config, basicParams);
 
 	return config;
@@ -63,12 +57,17 @@ function attachGetParams(config, attachData) {
  */
 function makeBasicGetParams() {
 	return {
-		// access_id
-		access_id: $.$config.access_id,
 		// 附加版本号
 		version: $.$config.version,
+
+		// access_id
+		access_id: $.$config.access_id,
+
+		// session id
+		session_id: $.$getSessionId(),
+
 		// 时间戳
-		timestamp: Math.floor(new Date().getTime() / 1000)
+		timestamp: Math.floor(new Date().getTime() / 1000),
 	};
 }
 

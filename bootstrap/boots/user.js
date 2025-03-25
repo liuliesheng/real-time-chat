@@ -1,16 +1,41 @@
 import $ from "../$";
 import observer from '../observer';
 
-// 注入用户信息
-const globalUserInfo = observer('user');
-$.$define('user', globalUserInfo);
-globalUserInfo.subscribe($.$config.onUserChange);
-
 // 注入获取登录标识
-let globalSessionId = null;
-$.$define('sessionId', function() {
-	return globalSessionId;
-});
+(function() {
+	let globalSessionId = $.getStorageSync($.$config.sessionIdKey);
+
+	$.$define('getSessionId', function() {
+		return globalSessionId;
+	});
+
+	$.$define('setSessionId', function(sessionId) {
+		console.info('new session_id:', sessionId);
+
+		globalSessionId = sessionId;
+		$.setStorageSync($.$config.sessionIdKey, globalSessionId);
+	});
+})();
+
+// 注入用户信息
+(function() {
+	const globalUserInfo = observer('user');
+
+	const userInfo = $.getStorageSync($.$config.userInfoKey);
+	if (userInfo) {
+		globalUserInfo._value = userInfo;
+	}
+
+	globalUserInfo.subscribe(function(user) {
+		console.info('new user:', user);
+
+		$.setStorageSync($.$config.userInfoKey, user);
+	});
+
+	globalUserInfo.subscribe($.$config.onUserChange);
+
+	$.$define('user', globalUserInfo);
+})();
 
 /**
  * 是否登录中...
@@ -50,17 +75,12 @@ $.$define('login', function(options) {
 			$.hideLoading();
 			$.hideNavigationBarLoading();
 
-			globalUserInfo.notify(res.data);
-			globalSessionId = res.session_id;
-
-			$.setStorageSync($.$config.userInfoKey, globalUserInfo.value());
-			$.setStorageSync($.$config.sessionIdKey, globalSessionId);
+			$.$user.notify(res.data);
+			$.$setSessionId(res.session_id);
 
 			// 触发登录事件
 			setTimeout(() => {
-				if ($.$http.config.onLogged) {
-					$.$http.config.onLogged(res.data);
-				}
+				$.$config.onLogged(res.data);
 			}, 0);
 
 			complete(res);
@@ -112,7 +132,7 @@ function complete(err) {
 
 // 注入智能检测登录器
 $.$define('logged', function(options) {
-	const userInfo = globalUserInfo.value();
+	const userInfo = $.$user.value();
 	if (userInfo) {
 		return Promise.resolve(userInfo);
 	}
@@ -122,19 +142,6 @@ $.$define('logged', function(options) {
 
 // 注入用户是否已登录
 $.$define('isLogged', function(options) {
-	const userInfo = globalUserInfo.value();
+	const userInfo = $.$user.value();
 	return !!userInfo;
 });
-
-// 加载本地用户缓存信息
-setTimeout(function() {
-	const sessionId = $.getStorageSync($.$config.sessionIdKey);
-	if (sessionId) {
-		globalSessionId = sessionId;
-	}
-
-	const userInfo = $.getStorageSync($.$config.userInfoKey);
-	if (userInfo) {
-		globalUserInfo.notify(userInfo);
-	}
-}, 0);

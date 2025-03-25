@@ -1,10 +1,10 @@
 import "./es6";
 import "./weapp";
+import "./third";
 import "./base";
 import "./user";
 import "./http";
 import "./event";
-import "./third";
 import "./model";
 import "./service";
 import "./vue";

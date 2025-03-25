@@ -1,4 +1,3 @@
-/** @var {*} $ */
 import $ from "../$";
 import middleware from "../middleware";
 
@@ -53,7 +52,7 @@ import middleware from "../middleware";
 	}
 	$.$define('middlewares', middlewareList);
 
-// 注册中间件
+	// 注册中间件
 	const callbackMiddlewareHandle = function(callbackName, middlewareName) {
 		if (!$[callbackName] || !middlewareList[middlewareName]) {
 			return;
@@ -74,4 +73,3 @@ import middleware from "../middleware";
 	callbackMiddlewareHandle('onAppRouteDone', 'appRouteDone');
 	callbackMiddlewareHandle('onLocationChange', 'locationChange');
 })();
-

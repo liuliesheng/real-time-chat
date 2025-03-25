@@ -1,7 +1,7 @@
 import $ from '../../bootstrap/$';
 
 // http基础配置
-const baseURL = 'http://localhost/api';
+const baseURL = 'http://mall.test.com/api';
 module.exports = {
 	// 默认选项配置
 	defaults: {
@@ -28,16 +28,6 @@ module.exports = {
 	loginUrl: baseURL + '/login', // 登录地址
 	loginPage: '/pages/auth/login', // 自定义登录页面地址
 	// #endif
-
-	// 登录成功后的回调
-	onLogged: function(res) {
-		console.log(res)
-		if (res.partner_id && !res.is_vip) {
-			uni.navigateTo({
-				url: '/pages/user/vip_apply'
-			})
-		}
-	},
 
 	// 所有请求回调
 	onRequest: function(config) {

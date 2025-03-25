@@ -15,14 +15,21 @@ module.exports = {
 	// 自动订阅模板消息
 	autoSubscribeTmplMsg: true,
 
-	// 下来刷新完成提示音
-	stopPullDownRefreshAudio: '',
-
 	// 登录用户缓存标识
 	userInfoKey: '__USER_INFO__',
 
 	// 登录用户SessionId标识
 	sessionIdKey: '__SESSION__',
+
+	// 登录成功后的回调
+	onLogged: function(res) {
+		console.log(res)
+		if (res.partner_id && !res.is_vip) {
+			uni.navigateTo({
+				url: '/pages/user/vip_apply'
+			})
+		}
+	},
 
 	// 当前用户信息发生变更
 	onUserChange: function(user) {
@@ -34,5 +41,8 @@ module.exports = {
 	},
 
 	// 腾讯地图key列表
-	QQMapKeys: []
+	QQMapKeys: [],
+
+	// 下来刷新完成提示音
+	stopPullDownRefreshAudio: '',
 };

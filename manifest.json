@@ -128,7 +128,7 @@
             }
         },
         "devServer" : {
-            "https" : true
+            "https" : false
         },
         "title" : "演示应用",
         "router" : {
