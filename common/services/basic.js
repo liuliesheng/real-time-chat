@@ -1,2 +1,3 @@
 const $ = uni;
 
+export default {};
