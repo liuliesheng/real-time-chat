@@ -100,6 +100,14 @@
 					</button>
 				</view>
 				<!-- #endif -->
+				<!-- #ifndef MP -->
+				<view class="cu-item arrow">
+					<view class="content" @tap="linkTo" data-url="/pages/index/feedback">
+						<text class="cuIcon-circlefill text-grey"></text>
+						<text>意见反馈</text>
+					</view>
+				</view>
+				<!-- #endif -->
 			</view>
 		</mescroll-body>
 
