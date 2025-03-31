@@ -50,7 +50,7 @@
 			<textarea maxlength="255" v-model="form.desc" placeholder="请输入申请说明"></textarea>
 		</view>
 		<view class="cu-form-group">
-			<xin-uploader v-model="form.desc_imgs"></xin-uploader>
+			<custom-uploader v-model="form.desc_imgs"></custom-uploader>
 		</view>
 
 		<view class="cu-form-group margin-top">

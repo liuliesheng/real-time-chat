@@ -1,12 +1,15 @@
 <template>
 	<view v-show="showMsg" class="hint padding text-center shadow-blur animated"
-			:class="{
-				'bg-gradual-red': showType !== 'success',
-				'bg-gradual-green': showType === 'success',
+		:class="{
+				'bg-grey': showType === '',
+				'bg-red': showType === 'error',
+				'bg-green': showType === 'success',
+				'bg-blue': showType==='info',
+				'bg-yellow': showType==='warn',
 				slideInDown: isShow,
 				slideOutUp: !isShow
 			}">
-		{{showMsg}}
+		{{ showMsg }}
 	</view>
 </template>
 
@@ -25,11 +28,12 @@ export default {
 		}
 	},
 	created: function() {
+		this.$root.hint = this.hint;
 		this.$root.hintError = this.hintError;
 		this.$root.hintSuccess = this.hintSuccess;
 	},
 	methods: {
-		hint: function(type, msg) {
+		hint: function(msg, type = '') {
 			const handler = () => {
 				this.showMsg = msg;
 				this.showType = type;
@@ -47,12 +51,12 @@ export default {
 		},
 
 		hintError: function(msg) {
-			this.hint('error', msg);
+			this.hint(msg, 'error');
 			// failAudioContext.play();
 		},
 
 		hintSuccess: function(msg) {
-			this.hint('success', msg);
+			this.hint(msg, 'success');
 			// successAudioContext.play();
 		},
 
@@ -67,11 +71,11 @@ export default {
 </script>
 
 <style>
-	.hint {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		z-index: 2000;
-	}
+.hint {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2000;
+}
 </style>

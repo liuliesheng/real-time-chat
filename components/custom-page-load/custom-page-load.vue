@@ -8,7 +8,7 @@
 
 <script>
 	export default {
-		name: "PageLoad",
+		name: "CustomPageLoad",
 		props: {
 			fixed: {
 				type: Boolean,

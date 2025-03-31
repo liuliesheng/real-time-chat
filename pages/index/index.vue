@@ -1,8 +1,6 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded" :showNavbar="true" navbarBackgroundColor="bg-gradual-red">
+		<block slot="navbar-title">hello world</block>
 		<mescroll-body ref="mescrollRef" :up="mescrollOptions.up" @init="mescrollInit"
 		               @down="downCallback" @up="upCallback">
 			<view class="cu-bar bg-white solid-bottom margin-top">
@@ -16,10 +14,19 @@
 					<view class="content" @tap="$showLoading">Loading</view>
 				</view>
 				<view class="cu-item">
-					<view class="content" @tap="hintError('这是一个警告消息')">警告提示</view>
+					<view class="content" @tap="hint('这是一个默认消息')">默认提示</view>
+				</view>
+				<view class="cu-item">
+					<view class="content" @tap="hint('这是一个信息消息','info')">信息提示</view>
+				</view>
+				<view class="cu-item">
+					<view class="content" @tap="hintError('这是一个错误消息')">错误提示</view>
 				</view>
 				<view class="cu-item">
 					<view class="content" @tap="hintSuccess('这是一个成功消息')">成功提示</view>
+				</view>
+				<view class="cu-item">
+					<view class="content" @tap="hint('这是一个警告消息','warn')">警告提示</view>
 				</view>
 				<view class="cu-item">
 					<view class="content" @tap="loaded=false">页面初始状态</view>
@@ -116,9 +123,7 @@
 				</view>
 			</view>
 		</mescroll-body>
-
-	</view>
-	<PageLoad v-else />
+	</custom-page>
 </template>
 
 <script>

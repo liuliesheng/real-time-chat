@@ -8,7 +8,7 @@
 
 		<XLoading />
 		<Hint />
-		<xin-auth-modal />
+		<CustomAuthModal />
 
 		<mescroll-body ref="mescrollRef" :up="{use:false}" @init="mescrollInit"
 					   @down="downCallback" @up="upCallback">

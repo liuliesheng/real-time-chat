@@ -19,7 +19,7 @@
 				</view>
 				<view class="cu-form-group">
 					<input id="mobile" v-model="form.username" placeholder="验证码" type="number" />
-					<xin-verify-code />
+					<custom-verify-code />
 				</view>
 				<view class="cu-form-group">
 					<input id="password" v-model="form.password" placeholder="密码" type="password" />

@@ -27,7 +27,7 @@
 					<textarea maxlength="500" v-model="goodsItem.content" placeholder="多多描述商品和使用感受,更受欢迎哦"></textarea>
 				</view>
 				<view class="cu-form-group">
-					<xin-uploader></xin-uploader>
+					<custom-uploader/>
 				</view>
 
 			</view>
