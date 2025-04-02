@@ -84,7 +84,7 @@
 					hint: this
 				}).then(function() {
 					uni.$hintSuccess('登录成功！');
-					uni.$delayNavigateBack(1200);
+					uni.$back();
 				});
 			}
 		}

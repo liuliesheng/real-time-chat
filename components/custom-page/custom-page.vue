@@ -14,6 +14,8 @@
 		</cu-custom>
 		<slot v-if="loaded"></slot>
 		<custom-page-load v-else/>
+
+		<custom-auth-modal />
 		<custom-loading/>
 		<custom-hint/>
 	</view>

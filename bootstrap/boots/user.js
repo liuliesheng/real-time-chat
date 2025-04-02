@@ -11,7 +11,6 @@ import observer from '../observer';
 
 	$.$define('setSessionId', function(sessionId) {
 		console.info('new session_id:', sessionId);
-
 		globalSessionId = sessionId;
 		$.setStorageSync($.$config.sessionIdKey, globalSessionId);
 	});
@@ -26,9 +25,8 @@ import observer from '../observer';
 		globalUserInfo._value = userInfo;
 	}
 
-	globalUserInfo.subscribe(function(user) {
+	globalUserInfo.subscribe(function({detail: user}) {
 		console.info('new user:', user);
-
 		$.setStorageSync($.$config.userInfoKey, user);
 	});
 

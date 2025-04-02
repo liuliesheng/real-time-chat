@@ -36,7 +36,7 @@
 
 			if (!this.name || !this.name.trim()) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack(1000);
+				return uni.$back();
 			}
 
 			this.loadData();

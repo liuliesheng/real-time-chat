@@ -77,7 +77,7 @@
 			this.id = parseInt(options.id);
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.isPayPageIn = options.is_pay_page_in || 0;

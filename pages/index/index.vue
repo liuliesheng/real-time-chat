@@ -1,6 +1,5 @@
 <template>
 	<custom-page class="page" :loaded="loaded" :showNavbar="true" navbarBackgroundColor="bg-gradual-red">
-		<block slot="navbar-title">hello world</block>
 		<mescroll-body ref="mescrollRef" :up="mescrollOptions.up" @init="mescrollInit"
 		               @down="downCallback" @up="upCallback">
 			<view class="cu-bar bg-white solid-bottom margin-top">

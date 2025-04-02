@@ -2,7 +2,7 @@
 	<view class="page">
 		<XLoading />
 		<Hint />
-		
+
 		<template v-if="loaded">
 			<view class="padding bg-white">
 				<view class="h3 text-black">{{info.title}}</view>
@@ -56,7 +56,7 @@
 			this.id = parseInt(options.id);
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.loadData();

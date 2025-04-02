@@ -26,7 +26,7 @@
 			this.goodsId = parseInt(options.goods_id);
 			if (isNaN(this.goodsId)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.loadData();

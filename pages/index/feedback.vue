@@ -1,8 +1,5 @@
 <template>
-	<view class="feedback">
-		<loading/>
-		<hint/>
-
+	<custom-page class="feedback" :loaded="true">
 		<view class="form-group">
 			<view class="form-item">
 				<textarea @input="onRemarkInput" maxlength="500" placeholder="感谢提出建议"></textarea>
@@ -30,7 +27,7 @@
 		<view class="form-btn-group">
 			<button @tap="onSubmit">提交</button>
 		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -75,7 +72,7 @@ export default {
 			setTimeout(() => {
 				this.hideLoading();
 				this.hintError('已提交');
-				uni.$delayNavigateBack(1200);
+				uni.$back();
 			}, 1000);
 		}
 	}
@@ -83,6 +80,4 @@ export default {
 </script>
 
 <style>
-	.feedback {
-	}
 </style>

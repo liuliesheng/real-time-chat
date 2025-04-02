@@ -181,22 +181,22 @@
 				this.goodsNum = this.goodsNum || 1;
 				if (!this.goodsId) {
 					uni.$hintError('参数错误！');
-					return uni.$delayNavigateBack(1500);
+					return uni.$back();
 				}
 
 				if (!this.goodsSkuId) {
 					uni.$hintError('参数错误！');
-					return uni.$delayNavigateBack(1500);
+					return uni.$back();
 				}
 			} else if (options.cart_ids) {
 				this.cartIds = options.cart_ids;
 				if (!this.cartIds) {
 					uni.$hintError('参数错误！');
-					return uni.$delayNavigateBack(1500);
+					return uni.$back();
 				}
 			} else {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack(1500);
+				return uni.$back();
 			}
 
 			this.loadData();

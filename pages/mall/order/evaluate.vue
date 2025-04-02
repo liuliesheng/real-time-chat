@@ -59,7 +59,7 @@
 
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.loadData();
@@ -96,7 +96,7 @@
 					loading: this,
 				}).then(() => {
 					this.hintSuccess(`提交成功！`);
-					uni.$delayNavigateBack();
+					uni.$back();
 				});
 			}
 		}

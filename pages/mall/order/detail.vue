@@ -167,7 +167,7 @@
 
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.loadData();
@@ -200,7 +200,7 @@
 							hint: this,
 						}).then((res) => {
 							this.hintSuccess('订单已删除！');
-							uni.$delayNavigateBack(1000);
+							uni.$back();
 						});
 					}
 				});

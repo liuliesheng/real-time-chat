@@ -23,16 +23,16 @@ module.exports = {
 
 	// 登录成功后的回调
 	onLogged: function(res) {
-		console.log(res)
-		if (res.partner_id && !res.is_vip) {
-			uni.navigateTo({
-				url: '/pages/user/vip_apply'
-			})
-		}
+		console.info('app.onLogged', res)
+	},
+
+	// 登出成功后的回调
+	onLogout: function(res) {
+		console.info('app.onLogout', res)
 	},
 
 	// 当前用户信息发生变更
-	onUserChange: function(user) {
+	onUserChange: function({detail: user}) {
 		console.info('user info change:', user);
 	},
 

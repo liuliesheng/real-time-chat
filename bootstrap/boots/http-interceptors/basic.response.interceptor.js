@@ -81,9 +81,12 @@ function resolveHttpStatusError(response) {
 		hint.hintError(data.msg || $.$http.config.errorTips);
 	}
 
-	if ($.$http.config.statusErrors[statusCode]) {
-		const statusErrHandler = $.$http.config.statusErrors[statusCode];
-		statusErrHandler(config, response);
+	const statusErrors = config.statusErrors;
+	const globalStatusErrors = $.$http.config.logicErrors;
+	if(statusErrors && statusErrors[statusCode]){
+		statusErrors[statusCode](config, response);
+	}else if (globalStatusErrors[statusCode]) {
+		globalStatusErrors[statusCode](config, response);
 	}
 
 	return Promise.reject(response);

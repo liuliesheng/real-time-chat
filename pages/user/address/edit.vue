@@ -158,7 +158,7 @@
 					});
 
 					this.hintSuccess(`收货地址${this.id ? '修改': '添加'}成功`);
-					uni.$delayNavigateBack();
+					uni.$back();
 				});
 			},
 		}

@@ -1,11 +1,16 @@
 export default {
+	// 获取用户中心数据
+	center(options = {}) {
+		return uni.$http.get('user/center', null, options).then(res => {
+			uni.$user.notify(res.userinfo);
+			return res;
+		});
+	},
+
 	// 获取用户详情信息
 	get(options = {}) {
 		return uni.$http.get('user/info', null, options).then(res => {
-			const globalData = getApp().globalData;
-			globalData.userInfo = res;
-			uni.setStorageSync('userInfo', globalData.userInfo);
-
+			uni.$user.notify(res);
 			return res;
 		});
 	},
@@ -52,6 +57,20 @@ export default {
 		return uni.$http.post('user.identity/apply', data, options);
 	},
 
+	// 获取钱包中心
+	getWalletCenter(query, options = {}) {
+		return uni.$http.get('user.wallet/center', query, options);
+	},
+
+	// 获取钱包账单列表
+	getWalletBillList(query, options = {}) {
+		return uni.$http.get('user.wallet/index', query, options);
+	},
+
+	// 获取钱包账单详情
+	getWalletBillDetail(query, options = {}) {
+		return uni.$http.get('user.wallet/detail', query, options);
+	},
 
 	// 获取提现记录地址
 	getCashoutList(query, options = {}) {
@@ -74,14 +93,4 @@ export default {
 	applyCashout(data, options = {}) {
 		return uni.$http.post('user.cashout/apply', data, options);
 	},
-
-	// 申请合伙人
-	applyVip(data, options = {}) {
-		return uni.$http.post('user.vip/apply', data, options);
-	},
-
-	// 获取申请合伙人信息
-	getApplyVipInfo(data, options = {}) {
-		return uni.$http.get('user.vip/getinfo', data, options);
-	}
 }

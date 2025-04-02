@@ -71,8 +71,7 @@ export class Observer {
 					name: this._name,
 					detail: data
 				};
-
-				callback.call(event);
+				callback(event);
 			}, 0);
 		});
 	}

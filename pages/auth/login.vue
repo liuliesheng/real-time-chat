@@ -84,7 +84,7 @@
 					password: this.form.password
 				}).then(() => {
 					uni.$hintSuccess('登录成功！');
-					uni.$delayNavigateBack();
+					uni.$back();
 				}, (err) => {
 					console.log(err);
 					uni.$hintError(err.errMsg || "登录失败！");

@@ -93,7 +93,7 @@
 		},
 		onLoad(options) {
 			if (!options.order_goods_id) {
-				uni.$delayNavigateBack()
+				uni.$back()
 				return uni.$hintError('参数错误！');
 			}
 

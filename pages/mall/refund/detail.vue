@@ -115,7 +115,7 @@
 
 			if (isNaN(this.id)) {
 				uni.$hintError('参数错误！');
-				return uni.$delayNavigateBack();
+				return uni.$back();
 			}
 
 			this.loadData();
@@ -154,7 +154,7 @@
 			// 删除售后单
 			onDeleteRefund(index) {
 				this.deleteRefund(this.info, () => {
-					uni.$delayNavigateBack();
+					uni.$back();
 				});
 			}
 		}

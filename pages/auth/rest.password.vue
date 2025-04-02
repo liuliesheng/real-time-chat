@@ -38,8 +38,8 @@ export default {
 
 			uni.showLoading();
 			setTimeout(() => {
-				uni.$showTips('更新成功！');
-				uni.$delayNavigateBack(1200);
+				uni.$hintSuccess('更新成功！');
+				uni.$back();
 			});
 		}
 	}

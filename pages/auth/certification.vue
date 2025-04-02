@@ -95,7 +95,7 @@
 				}).then(() => {
 					this.form.status = 0;
 					this.hintSuccess('已提交！');
-					uni.$delayNavigateBack();
+					uni.$back();
 				});
 			},
 		}
