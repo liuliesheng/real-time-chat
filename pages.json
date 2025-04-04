@@ -189,28 +189,28 @@
 			}
 		},
 		{
-			"path":"pages/store/manager/wallet/log",
+			"path":"pages/store/manager/wallet/bill-log",
 			"style":{
 				"navigationBarTitleText":"收入明细",
 				"enablePullDownRefresh":true
 			}
 		},
 		{
-			"path":"pages/store/manager/cashout/index",
+			"path":"pages/store/manager/wallet/cashout",
 			"style":{
 				"navigationBarTitleText":"提现",
 				"enablePullDownRefresh":true
 			}
 		},
 		{
-			"path":"pages/store/manager/cashout/log",
+			"path":"pages/store/manager/wallet/cashout-log",
 			"style":{
 				"navigationBarTitleText":"提现记录",
 				"enablePullDownRefresh":true
 			}
 		},
 		{
-			"path":"pages/store/manager/bank",
+			"path":"pages/store/manager/wallet/bank",
 			"style":{
 				"navigationBarTitleText":"银行卡",
 				"enablePullDownRefresh":true
@@ -342,16 +342,30 @@
 			}
 		},
 		{
-			"path":"pages/user/cashout/index",
+			"path":"pages/user/wallet/bill-log",
+			"style":{
+				"navigationBarTitleText":"账单记录",
+				"enablePullDownRefresh":true
+			}
+		},
+		{
+			"path":"pages/user/wallet/cashout",
 			"style":{
 				"navigationBarTitleText":"提现",
 				"enablePullDownRefresh":true
 			}
 		},
 		{
-			"path":"pages/user/cashout/log",
+			"path":"pages/user/wallet/cashout-log",
 			"style":{
 				"navigationBarTitleText":"提现记录",
+				"enablePullDownRefresh":true
+			}
+		},
+		{
+			"path":"pages/user/wallet/bank",
+			"style":{
+				"navigationBarTitleText":"提现银行卡",
 				"enablePullDownRefresh":true
 			}
 		},

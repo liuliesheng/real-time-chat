@@ -12,7 +12,8 @@
 				<slot name="navbar-right"></slot>
 			</block>
 		</cu-custom>
-		<slot v-if="loaded"></slot>
+
+		<slot name="default" v-if="loaded"></slot>
 		<custom-page-load v-else/>
 
 		<custom-auth-modal />

@@ -63,13 +63,13 @@ export default {
 	},
 
 	// 获取钱包账单列表
-	getWalletBillList(query, options = {}) {
+	getBillList(query, options = {}) {
 		return uni.$http.get('user.wallet/index', query, options);
 	},
 
 	// 获取钱包账单详情
-	getWalletBillDetail(query, options = {}) {
-		return uni.$http.get('user.wallet/detail', query, options);
+	getBillDetail(query, options = {}) {
+		return uni.$http.get('user.wallet/info', query, options);
 	},
 
 	// 获取提现记录地址
@@ -82,6 +82,11 @@ export default {
 		return uni.$http.get('user.cashout/detail', {
 			id: id
 		}, options);
+	},
+
+	// 获取银行卡信息
+	getBankInfo(query, options = {}) {
+		return uni.$http.get('user.bank/info', query, options);
 	},
 
 	// 获取提现数据

@@ -1,7 +1,6 @@
 <template>
-	<view class="page">
-		<template v-if="loaded">
-			<view class="margin padding amount radius-lg">
+	<custom-page class="page" :loaded="loaded">
+			<view class="padding amount">
 				<view class="text-sm margin-bottom-xs cf">
 					账户余额（元）
 					<view class="fr text-blue" @tap="linkTo" data-url="./index">提现记录</view>
@@ -9,7 +8,7 @@
 				<view class="amount-text">{{info.cash_amount}}</view>
 			</view>
 
-			<view class="margin padding bg-white radius">
+			<view class="margin-top padding bg-white">
 				<scroll-view scroll-x class="bg-white nav">
 					<view class="flex text-center">
 						<view class="cu-item flex-sub" :class="'0'==type?'text-orange cur':''"
@@ -17,7 +16,11 @@
 							<image src="/static/icon/wechat.png" mode="widthFix" class="icon"></image>微信余额
 						</view>
 						<view class="cu-item flex-sub" :class="'1'==type?'text-orange cur':''"
-							  @tap="type='1'">
+							@tap="type='1'">
+							<image src="/static/icon/bank.png" mode="widthFix" class="icon"></image>银行卡
+						</view>
+						<view class="cu-item flex-sub" :class="'2'==type?'text-orange cur':''"
+							  @tap="type='2'">
 							<image src="/static/icon/balance.png" mode="widthFix" class="icon"></image>转余额
 						</view>
 					</view>
@@ -33,7 +36,7 @@
 					<view class="flex-sub">
 						账户余额：￥{{info.cash_amount}}
 					</view>
-					<view class="" v-if="type!='1'">
+					<view class="" v-if="type!='2'">
 						提现费率 {{info.service_rate*100}}%
 					</view>
 				</view>
@@ -43,9 +46,7 @@
 				<button class="cu-btn block bg-gradual-orange lg shadow radius" @tap="confirm"
 						:disabled="info.cash_amount<0.01">确认提现</button>
 			</view>
-		</template>
-		<PageLoad v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>

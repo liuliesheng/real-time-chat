@@ -1,104 +1,116 @@
 <template>
-	<view class="page">
-		<view class="cu-list menu" v-if="data.length">
-			<view class="cu-item"
-				  v-for="(item, index) in data"
-				  :key="index">
-				<view class="content">
-					<view class="">
-						<text v-if="'1'==tabCur">付款给 {{item.shop.title}}</text>
-						<text v-if="'2'==tabCur">在 {{item.shop.title}} 的消费返利</text>
-						<text v-if="'3'==tabCur">来自 {{item.user.nickname}} 的成员</text>
-					</view>
-					<view class="text-gray">
-						{{item.create_time}}
-					</view>
+	<custom-page class="page" :loaded="loaded">
+		<view class="padding amount">
+			<view class="text-sm margin-bottom-xs cf">
+				账户余额（元）
+				<view class="fr cu-btn sm cash-btn" @tap="linkTo" data-url="../cashout">提现</view>
+			</view>
+			<view class="amount-text">{{info.cash_amount}}</view>
+		</view>
+
+		<view class="grid col-4 grid-square text-center text-sm">
+			<view class="padding-sm" @tap="linkTo" data-url="./bill-log">
+				<view class="icon">
+					<image src="/static/icon/bill.png" mode="aspectFit"></image>
 				</view>
-				<view class="action margin-right-sm">
-					<view class="text-red" v-if="'1'==tabCur">
-						-￥{{item.total_amount}}
-					</view>
-					<view class="text-green" v-else-if="'2'==tabCur">
-						+￥{{item.user_rebate_amount}}
-					</view>
-					<view class="text-green" v-else-if="'3'==tabCur">
-						+￥{{item.partner_rebate_amount}}
-					</view>
+				<view class="margin-top-xs">收入明细</view>
+			</view>
+			<view class="padding-sm" @tap="linkTo" data-url="./cashout-log">
+				<view class="icon">
+					<image src="/static/icon/cashout.png" mode="aspectFit"></image>
 				</view>
+				<view class="margin-top-xs">提现记录</view>
+			</view>
+			<view class="padding-sm" @tap="linkTo" data-url="./bank">
+				<view class="icon">
+					<image src="/static/icon/bank.png" mode="aspectFit"></image>
+				</view>
+				<view class="margin-top-xs">银行卡</view>
 			</view>
 		</view>
-		<Empty @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
+				info: null,
 				loaded: false,
-				data: [],
-				page: 1,
-				total: 1,
-				more: true,
 
-				tabCur: '1',
-				userInfo: {}
+				type: '0',
+				cashAmount: ''
 			}
 		},
 		onLoad() {
-			this.loadUserInfo();
 			this.loadData();
 		},
 		onPullDownRefresh() {
-			this.loadUserInfo();
 			this.loadData().finally(() => {
 				uni.stopPullDownRefresh();
 			});
 		},
-		onReachBottom() {
-			if (!this.more) {
-				return;
-			}
-
-			this.loadData(this.page + 1);
-		},
 		methods: {
-			loadUserInfo() {
-				uni.$models.user.get().then((res) => {
-					this.userInfo = res;
-				});
-			},
-			loadData(page = 1) {
-				return uni.$models.store.getUserOrderList({
-					page: page,
-					type: this.tabCur
-				}).then((res) => {
-					this.data = page === 1 ? res.data : this.data.concat(res.data);
-					this.more = res.data.length >= res.per_page;
-					this.page = page;
+			// 加载数据
+			loadData() {
+				return uni.$models.user.getCashoutInfo().then(res => {
 					this.loaded = true;
+					this.info = res;
 				});
 			},
-			tabSelect(key) {
-				this.tabCur = key;
-				this.data = [];
-				this.loadData();
-			},
+
+			// 确认提现
+			confirm() {
+				const cashAmount = parseFloat(this.cashAmount);
+				const orginalAmount = parseFloat(this.info.cash_amount);
+				if (isNaN(cashAmount) || cashAmount < 0.01) {
+					return uni.$hintError('提现金额不能少于0.01元！');
+				}
+
+				if (cashAmount > orginalAmount) {
+					return uni.$hintError('提现金额不足！');
+				}
+
+				return uni.$models.user.applyCashout({
+					type: this.type,
+					apply_money: this.cashAmount
+				}).then((res) => {
+					this.info.cash_amount = res.cash_amount;
+					this.cashAmount = '';
+				});
+			}
 		}
 	}
 </script>
 
 <style>
-	.page {
-		padding-top: 90rpx;
+	.amount {
+		background-image: linear-gradient(#FF6B55, #FF3F5E);
+		color: white;
+		box-shadow: 0 9px 12px rgba(255, 64, 94, 0.24);
 	}
 
-	.cu-list.menu .cu-item {
-		padding-top: 10rpx;
-		padding-bottom: 10rpx;
+	.amount-text {
+		font-size: 64rpx;
 	}
 
-	.cu-list.menu .action {
-		width: auto;
+	.cash-btn {
+		background-color: rgba(0, 0, 0, 0.2) !important;
+		color: white;
+	}
+
+	.icon {
+		position: relative;
+		width: 72rpx;
+		height: 72rpx;
+		margin: 0 auto;
+	}
+
+	.icon image {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
 	}
 </style>

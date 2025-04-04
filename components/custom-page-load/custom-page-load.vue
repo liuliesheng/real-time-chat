@@ -55,12 +55,12 @@
 	}
 
 	.response {
-		width: 320rpx;
+		width: 64rpx;
 		/* height: 96upx; */
-		/* animation: mescrollDownRotate 1s linear infinite; */
+		 animation: turn 1.2s linear infinite;
 	}
 
-	@keyframes mescrollDownRotate {
+	@keyframes turn {
 		0% {
 			transform: rotate(0deg);
 		}

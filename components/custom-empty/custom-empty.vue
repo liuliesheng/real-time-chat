@@ -59,8 +59,8 @@
 
 <style>
 	.img {
-		/* width: 240upx; */
+		max-width: 400rpx;
 		display: block;
-		margin: 15% auto 30upx auto;
+		margin: 15% auto 30rpx auto;
 	}
 </style>
