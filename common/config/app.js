@@ -8,9 +8,7 @@ module.exports = {
 	version: '1.0',
 
 	// 订阅消息模板ID
-	tmplIds: [
-		'pUo_htDxnZx9x2M8EhmlQUz9sjtASI4GUfhwFSe99GY'
-	],
+	tmplIds: [],
 
 	// 自动订阅模板消息
 	autoSubscribeTmplMsg: true,

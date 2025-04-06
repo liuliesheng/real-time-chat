@@ -3,7 +3,7 @@
 		<XLoading />
 		<Hint />
 
-		<scroll-view scroll-x class="bg-white nav" style="box-shadow: 0px 1px 3px rgba(26, 26, 26, 0.2);">
+		<scroll-view scroll-x class="bg-white nav" style="box-shadow: 0px 1px 1px rgba(26, 26, 26, 0.1);">
 			<view class="flex text-center">
 				<view class="cu-item flex-sub"
 				      v-for="(item, index) in navList" :key="index"

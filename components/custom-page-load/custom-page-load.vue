@@ -1,7 +1,7 @@
 <template>
 	<view class="page-load" :class="!fixed?'content':''" @tap="refresh">
 		<view class="load">
-			<image src="/static/load.png" mode="widthFix" class="response"></image>
+			<image src="/static/load.png" mode="scaleToFill" class="response"></image>
 		</view>
 	</view>
 </template>
@@ -56,7 +56,7 @@
 
 	.response {
 		width: 64rpx;
-		/* height: 96upx; */
+		 height: 64rpx;
 		 animation: turn 1.2s linear infinite;
 	}
 
