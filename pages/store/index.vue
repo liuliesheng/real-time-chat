@@ -1,7 +1,6 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
+	<custom-page class="page" :loaded="loaded">
+		<custom-search></custom-search>
 		<scroll-view scroll-x class="bg-white nav solid-bottom" scroll-with-animation :scroll-left="scrollLeft">
 			<view class="cu-item" :class="'default'==tabCur?'text-green cur':''"
 				  @tap="tabSelect('default')">
@@ -43,7 +42,7 @@
 			</view>
 		</view>
 		<Empty @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>

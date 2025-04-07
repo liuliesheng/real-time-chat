@@ -7,6 +7,7 @@
 		<mescroll-body ref="mescrollRef" @init="mescrollInit"
 					   :down="{auto:false}" :up="{auto:false,empty:false}"
 					   @down="downCallback" @up="upCallback">
+
 			<swiper class="screen-swiper round-dot" style="min-height: 256rpx;"
 					:indicator-dots="true" :circular="true"
 					:autoplay="true" interval="5000" duration="500">
@@ -16,6 +17,9 @@
 					<image :src="item.cover" mode="aspectFill" v-else></image>
 				</swiper-item>
 			</swiper>
+			
+			<custom-coupon></custom-coupon>
+			<custom-pic-group></custom-pic-group>
 
 			<!-- #ifdef MP-WEIXIN -->
 			<ad unit-id="adunit-1125620a898275d6"></ad>
@@ -46,7 +50,7 @@
 				// #ifndef H5
 				showNavbar: true,
 				// #endif
-				
+
 				swiperList: [],
 				categoryList: [],
 

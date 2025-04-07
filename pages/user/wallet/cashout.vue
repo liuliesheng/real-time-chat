@@ -1,51 +1,43 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-			<view class="padding amount">
-				<view class="text-sm margin-bottom-xs cf">
-					账户余额（元）
-					<view class="fr text-blue" @tap="linkTo" data-url="./index">提现记录</view>
-				</view>
-				<view class="amount-text">{{info.cash_amount}}</view>
-			</view>
-
-			<view class="margin-top padding bg-white">
-				<scroll-view scroll-x class="bg-white nav">
-					<view class="flex text-center">
-						<view class="cu-item flex-sub" :class="'0'==type?'text-orange cur':''"
-							  @tap="type='0'">
-							<image src="/static/icon/wechat.png" mode="widthFix" class="icon"></image>微信余额
-						</view>
-						<view class="cu-item flex-sub" :class="'1'==type?'text-orange cur':''"
-							@tap="type='1'">
-							<image src="/static/icon/bank.png" mode="widthFix" class="icon"></image>银行卡
-						</view>
-						<view class="cu-item flex-sub" :class="'2'==type?'text-orange cur':''"
-							  @tap="type='2'">
-							<image src="/static/icon/balance.png" mode="widthFix" class="icon"></image>转余额
-						</view>
+		<view class="margin-top padding bg-white">
+			<scroll-view scroll-x class="bg-white nav">
+				<view class="flex text-center">
+					<view class="cu-item flex-sub" :class="'0'==type?'text-orange cur':''"
+						  @tap="type='0'">
+						<image src="/static/icon/wechat.png" mode="widthFix" class="icon"></image>微信余额
 					</view>
-				</scroll-view>
-
-				<view class="flex cash-wrapper margin-top">
-					<view class="cash-amount-icon">￥</view>
-					<input class="cash-amount-input" :min="0.00" type="digit" v-model="cashAmount"
-						   placeholder="请输入提现金额" />
-					<view class="text-blue text-sm cash-amount-all" @tap="cashAmount=info.cash_amount">全部</view>
-				</view>
-				<view class="flex margin-top-sm">
-					<view class="flex-sub">
-						账户余额：￥{{info.cash_amount}}
+					<view class="cu-item flex-sub" :class="'1'==type?'text-orange cur':''"
+						  @tap="type='1'">
+						<image src="/static/icon/bank.png" mode="widthFix" class="icon"></image>银行卡
 					</view>
-					<view class="" v-if="type!='2'">
-						提现费率 {{info.service_rate*100}}%
+					<view class="cu-item flex-sub" :class="'2'==type?'text-orange cur':''"
+						  @tap="type='2'">
+						<image src="/static/icon/balance.png" mode="widthFix" class="icon"></image>转余额
 					</view>
 				</view>
-			</view>
+			</scroll-view>
 
-			<view class="margin">
-				<button class="cu-btn block bg-gradual-orange lg shadow radius" @tap="confirm"
-						:disabled="info.cash_amount<0.01">确认提现</button>
+			<view class="flex cash-wrapper margin-top">
+				<view class="cash-amount-icon">￥</view>
+				<input class="cash-amount-input" :min="0.00" type="digit" v-model="cashAmount"
+					   placeholder="请输入提现金额" />
+				<view class="text-blue text-sm cash-amount-all" @tap="cashAmount=info.cash_amount">全部</view>
 			</view>
+			<view class="flex margin-top-sm">
+				<view class="flex-sub">
+					账户余额：￥{{info.cash_amount}}
+				</view>
+				<view class="" v-if="type!='2'">
+					提现费率 {{info.service_rate*100}}%
+				</view>
+			</view>
+		</view>
+
+		<view class="margin">
+			<button class="cu-btn block bg-gradual-orange lg shadow radius" @tap="confirm"
+					:disabled="info.cash_amount<0.01">确认提现</button>
+		</view>
 	</custom-page>
 </template>
 
@@ -102,16 +94,6 @@
 </script>
 
 <style>
-	.amount {
-		background-image: linear-gradient(#FF6B55, #FF3F5E);
-		color: white;
-		box-shadow: 0 9px 12px rgba(255, 64, 94, 0.24);
-	}
-
-	.amount-text {
-		font-size: 64rpx;
-	}
-
 	.cash-wrapper {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 		padding: 10rpx 0;

@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="true">
 		<view class="wrapper">
 			<view class="text-center" style="font-size: 240rpx;">
 				<text class="cuIcon-roundcheckfill text-green"></text>
@@ -11,7 +11,7 @@
 			<button class="cu-btn block lg"
 					@tap="toHome">返回首页</button>
 		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>

@@ -1,19 +1,16 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<view class="cu-list menu sm-border" v-if="data.length">
 			<view class="cu-item"
-			      v-for="(item, index) in data"
-			      :key="index"
-			      @click="checkAddress(item)"
-			      @longtap="showActionList(index)">
+				  v-for="(item, index) in data"
+				  :key="index"
+				  @click="checkAddress(item)"
+				  @longtap="showActionList(index)">
 
 				<view class="content padding-tb-sm">
 					<view class="text-gray text-df">
 						<view class="cu-tag bg-red radius text-xs default"
-						      v-if="item.is_default">默认</view>
+							  v-if="item.is_default">默认</view>
 						<text>{{ item.province }}{{ item.city }}{{ item.district }}</text>
 					</view>
 					<view class="text-black text-bold text-lg">{{ item.address }}</view>
@@ -25,18 +22,17 @@
 
 				<view class="action" @tap.stop.prevent="stopPrevent">
 					<view class="cuIcon-write text-bold" @tap="linkTo"
-					      :data-url="'/pages/user/address/edit?id='+item.id"></view>
+						  :data-url="'/pages/user/address/edit?id='+item.id"></view>
 				</view>
 			</view>
 		</view>
-		<Empty type="address" v-else />
+		<Empty v-else />
 
 		<view class="foot padding">
 			<button class="cu-btn round block bg-gradual-red lg" @tap="linkTo"
-			        data-url="/pages/user/address/edit">新建收货地址</button>
+					data-url="/pages/user/address/edit">新建收货地址</button>
 		</view>
-	</view>
-	<PageLoad v-else />
+	</custom-page>
 </template>
 
 <script>
@@ -87,26 +83,27 @@
 			showActionList: function(index) {
 				uni.showActionSheet({
 					itemList: [
-						'删除', '设置为默认地址'
+						'删除',
+						'设置为默认地址'
 					],
 					success: (res) => {
 						const item = this.data[index];
 						if (res.tapIndex === 0) {
 							uni.$models.address.forget(item.id, {
 								loading: this,
-								hint: this
+								hint: this,
+								successTips: true
 							}).then(() => {
-								uni.$hintSuccess('已删除');
 								this.data.splice(index, 1);
 							});
 						} else if (res.tapIndex === 1) {
 							uni.$models.address.setDefault(item.id, {
 								loading: this,
-								hint: this
+								hint: this,
+								successTips: true
 							}).then(() => {
 								this.data.forEach(it => it.is_default = 0);
 								item.is_default = 1;
-								uni.$hintSuccess('已设置');
 							});
 						}
 					},

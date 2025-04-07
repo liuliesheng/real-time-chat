@@ -287,7 +287,15 @@
 				"navigationBarTitleText":"名片详情",
 				"enablePullDownRefresh":true
 			}
-		},
+		},{
+            "path" : "pages/vcard/square",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "广场",
+                "enablePullDownRefresh": false
+            }
+            
+        },
 		{
 			"path":"pages/vcard/manager",
 			"style":{
@@ -301,7 +309,59 @@
 				"navigationBarTitleText":"谁浏览了我",
 				"enablePullDownRefresh":true
 			}
-		},
+		} ,{
+            "path" : "pages/vcard/enterprise/dynamic",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "企业动态",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vcard/enterprise/product",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "产品展示",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vcard/enterprise/team",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "团队",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vcard/enterprise/manager",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的企业",
+                "enablePullDownRefresh": false
+            }
+            
+        }       ,{
+            "path" : "pages/vcard/upgrade",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "升级VIP",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/vcard/enterprise/upgrade",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "升级企业",
+                "enablePullDownRefresh": false
+            }
+            
+        },
 		// 用户相关
 		{
 			"path":"pages/user/index",
@@ -407,7 +467,17 @@
 				"enablePullDownRefresh":false
 			}
 		}
-	],
+        ,{
+            "path" : "pages/index/deploy",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "独立部署",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+       
+    ],
 	"entryPagePath":"pages/mall/index",
 	"globalStyle":{
 		// #ifdef H5

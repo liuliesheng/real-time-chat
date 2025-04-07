@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<template v-if="loaded">
 			<view class="store-info">
 				<view class="store-content">
@@ -49,8 +46,7 @@
 				</view>
 			</view>
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>

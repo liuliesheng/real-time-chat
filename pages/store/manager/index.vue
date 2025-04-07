@@ -8,13 +8,13 @@
 
 			<view class="cu-list menu sm-border margin-top">
 				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="./myinfo" data-logged>
+					<view class="content" @tap="linkTo" data-url="./info" data-logged>
 						<text class="cuIcon-homefill text-grey"></text>
 						<text>我的店铺</text>
 					</view>
 				</view>
 				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="./mywallet" data-logged>
+					<view class="content" @tap="linkTo" data-url="./wallet/index" data-logged>
 						<text class="cuIcon-moneybagfill text-grey"></text>
 						<text>我的钱包</text>
 					</view>

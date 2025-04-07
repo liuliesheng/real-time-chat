@@ -1,15 +1,12 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<view class="cu-list goods-list" v-if="data.length">
 			<view class="cu-item flex padding-sm solid-bottom"
-			      v-for="(item,index) in data" :key="item.id"
-			      :class="modalName=='move-box-'+ index?'move-cur':''"
-			      @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
-			      :data-target="'move-box-' + index"
-			      @tap="linkTo" :data-url="'../goods/detail?id='+item.topic_id">
+				  v-for="(item,index) in data" :key="item.id"
+				  :class="modalName=='move-box-'+ index?'move-cur':''"
+				  @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
+				  :data-target="'move-box-' + index"
+				  @tap="linkTo" :data-url="'../goods/detail?id='+item.topic_id">
 				<view class="image-wrapper radius lg">
 					<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
 				</view>
@@ -26,10 +23,8 @@
 				</view>
 			</view>
 		</view>
-		<Empty type="favorite" v-else></Empty>
-
-	</view>
-	<PageLoad v-else />
+		<Empty v-else></Empty>
+	</custom-page>
 </template>
 
 <script>

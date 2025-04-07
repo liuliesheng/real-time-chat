@@ -50,6 +50,8 @@
 				total: 1,
 				more: true,
 
+				selectDate: '',
+
 				tabCur: '1',
 				userInfo: {}
 			}

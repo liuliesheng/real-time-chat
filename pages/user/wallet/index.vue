@@ -1,14 +1,14 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<view class="padding amount">
+		<view class="amount">
 			<view class="text-sm margin-bottom-xs cf">
 				账户余额（元）
-				<view class="fr cu-btn sm cash-btn" @tap="linkTo" data-url="../cashout">提现</view>
+				<view class="fr cu-btn sm cash-btn" @tap="linkTo" data-url="./cashout">提现</view>
 			</view>
 			<view class="amount-text">{{info.cash_amount}}</view>
 		</view>
 
-		<view class="grid col-4 grid-square text-center text-sm">
+		<view class="grid col-4 grid-square text-center text-sm margin-top">
 			<view class="padding-sm" @tap="linkTo" data-url="./bill-log">
 				<view class="icon">
 					<image src="/static/icon/bill.png" mode="aspectFit"></image>
@@ -87,7 +87,8 @@
 	.amount {
 		background-image: linear-gradient(#FF6B55, #FF3F5E);
 		color: white;
-		box-shadow: 0 9px 12px rgba(255, 64, 94, 0.24);
+		box-shadow: 0 3px 12px rgba(255, 64, 94, 0.24);
+		padding: 100rpx 30rpx;
 	}
 
 	.amount-text {

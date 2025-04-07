@@ -1,7 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
+	<custom-page class="page" :loaded="loaded">
 
 		<!-- #ifdef MP-WEIXIN -->
 		<view class="text-blue margin-lr margin-top" @tap="importWechatAddress">
@@ -30,15 +28,15 @@
 		</view>
 		<view class="cu-form-group margin-top">
 			<view class="title">设为默认</view>
-			<switch @change="switchDefault"
-			        :class="info.is_default?'checked':''"
-			        :checked="info.is_default?true:false"></switch>
+			<switch value="1" :checked="!!info.is_default"
+					@change="setField('is_default', $event.detail.value)"></switch>
 		</view>
 
 		<view class="padding">
 			<button class="cu-btn block bg-gradual-red lg" @click="confirm">提交</button>
 		</view>
-	</view>
+
+	</custom-page>
 </template>
 
 <script>
@@ -57,6 +55,7 @@
 					longitude: 0,
 					is_default: 0,
 				},
+				loaded: false,
 			};
 		},
 		onLoad(options) {
@@ -76,16 +75,21 @@
 			// 加载数据
 			loadData() {
 				return uni.$models.address.getDetail(this.id, {
-					loading: this,
 					hint: this
 				}).then(res => {
 					this.info = res;
+					this.loaded = true;
 				});
 			},
 
 			// 切换默认地址
 			switchDefault(e) {
 				this.info.is_default = e.detail ? 1 : 0;
+			},
+			
+			// 设置值
+			setField(name, value) {
+				this.info[name] = value;
 			},
 
 			// 选择地区

@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<template v-if="loaded">
 			<view class="padding bg-white">
 				<swiper class="screen-swiper round-dot radius-lg" style="min-height: 356upx;overflow: hidden;"
@@ -39,12 +36,10 @@
 
 			<view class="margin">
 				<button class="cu-btn bg-gradual-blue block lg" v-if="isShowPayBtn"
-						@tap="linkTo" :data-url="'/pages/pay/index?id='+info.id">支付</button>
+						@tap="linkTo" :data-url="'./pay/index?id='+info.id">支付</button>
 			</view>
-
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
