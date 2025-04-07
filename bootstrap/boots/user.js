@@ -25,7 +25,7 @@ import observer from '../observer';
 		globalUserInfo._value = userInfo;
 	}
 
-	globalUserInfo.subscribe(function({detail: user}) {
+	globalUserInfo.subscribe(function({ detail: user }) {
 		console.info('new user:', user);
 		$.setStorageSync($.$config.userInfoKey, user);
 	});
@@ -94,7 +94,7 @@ $.$define('login', function(options) {
 				const data = err.data;
 				const errMsg = err.errMsg || $.$http.config.loginFailedMsg;
 				if (data && data.tips_type === 'alert') {
-					$.showModal({content: errMsg, showCancel: false});
+					$.showModal({ content: errMsg, showCancel: false });
 				} else {
 					$.$hintError(errMsg);
 				}
@@ -142,4 +142,9 @@ $.$define('logged', function(options) {
 $.$define('isLogged', function(options) {
 	const userInfo = $.$user.value();
 	return !!userInfo;
+});
+
+// 退出登录
+$.$define('logout', function(options) {
+	uni.$setSessionId(null);
 });

@@ -24,11 +24,8 @@ export default {
 	syncWechat(options = {}) {
 		return new Promise((resolve, reject) => {
 			const syncTime = uni.getStorageSync('sync_user_info_time') || null;
-			if (!options.force && !syncTime) {
-				resolve({
-					errMsg: 'ok'
-				});
-			} else {
+			if (options.force || !syncTime) {
+				console.log(syncTime)
 				uni.$getUserInfo({
 					force: true
 				}).then((res) => {
@@ -40,11 +37,23 @@ export default {
 						province: res.province,
 						city: res.city,
 					}, options);
-				}).then(() => resolve({
+				}).then(() => {
+					uni.setStorageSync('sync_user_info_time', syncTime);
+					resolve({
+						errMsg: 'ok'
+					});
+				}, reject);
+			} else {
+				resolve({
 					errMsg: 'ok'
-				}), reject);
+				});
 			}
 		});
+	},
+
+	// 更新密码
+	restPassword(data, options = {}) {
+		return uni.$http.post('user.rest_password/rest', data, options);
 	},
 
 	// 获取认证信息

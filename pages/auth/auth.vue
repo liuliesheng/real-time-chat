@@ -1,5 +1,5 @@
 <template>
-	<div class="auth">
+	<custom-page class="page" :loaded="true">
 		<view class="tips">
 			<!-- #ifndef H5 -->
 			<open-data class="avatar" type="userAvatarUrl"></open-data>
@@ -10,7 +10,7 @@
 		<view class="container">
 			<button @tap="getUserInfo" type="primary">授权</button>
 		</view>
-	</div>
+	</custom-page>
 </template>
 
 <script>

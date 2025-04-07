@@ -1,8 +1,5 @@
 <template>
-	<div class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="true">
 		<view class="back-btn cuIcon-close" @click="navBack"></view>
 
 		<view class="left-bottom-sign"></view>
@@ -40,7 +37,7 @@
 				<button class="cu-btn block lg" form-type='submit'>登录</button>
 			</view>
 		</form>
-	</div>
+	</custom-page>
 </template>
 
 <script>

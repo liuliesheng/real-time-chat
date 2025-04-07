@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<view class="padding light" :class="statusClass" v-if="form.status!==-1">
 			<text class="cuIcon-infofill margin-right-xs"></text>
 			<text v-if="form.status===0">审核中...</text>
@@ -10,7 +7,7 @@
 			<text v-else-if="form.status===2">审核失败：{{form.audit_msg}}</text>
 		</view>
 
-		<form class="bg-white">
+		<form @submit="onSubmit">
 			<view class="cu-form-group margin-top">
 				<view class="title required">真实姓名</view>
 				<input v-model="form.realname" placeholder="请输入" />
@@ -19,17 +16,17 @@
 				<view class="title required">身份证号</view>
 				<input v-model="form.card_no" placeholder="请输入" />
 			</view>
+
+			<view class="text-gray text-sm margin">
+				<text class="cuIcon-safe text-green margin-right-xs"></text>
+				<text>我们会保障你的信息安全，信息仅用于实名认证</text>
+			</view>
+
+			<view class="padding">
+				<button class="cu-btn block bg-blue lg" :disabled="isDisabled">提交</button>
+			</view>
 		</form>
-
-		<view class="text-gray text-sm margin">
-			<text class="cuIcon-safe text-green margin-right-xs"></text>
-			<text>我们会保障你的信息安全，信息仅用于实名认证</text>
-		</view>
-
-		<view class="padding flex flex-direction">
-			<button class="cu-btn bg-blue lg" @tap="onSubmit" :disabled="isDisabled">提交</button>
-		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>

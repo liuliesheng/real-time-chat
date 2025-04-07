@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<view class="bg-white">
 			<view class="solid-bottom">
 				<view class="flex align-center padding-sm">
@@ -26,7 +23,7 @@
 			<view class="cu-form-group margin-top">
 				<view class="title required">性别</view>
 				<picker @change="pickerChange($event,'genderIndex')" :value="genderIndex"
-				        :range="genders" range-key="text">
+						:range="genders" range-key="text">
 					<view class="picker">
 						{{ genderIndex > -1 ? genders[genderIndex].text : '请选择性别' }}
 					</view>
@@ -36,7 +33,7 @@
 			<view class="cu-form-group">
 				<view class="title required">生日</view>
 				<picker mode="date" @change="info.birthday = $event.detail.value"
-				        :value="info.birthday">
+						:value="info.birthday">
 					<view class="picker">
 						{{ info.birthday ? info.birthday : '请选择您的生日' }}
 					</view>
@@ -67,7 +64,7 @@
 				</view>
 			</view>
 		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -75,6 +72,7 @@
 		data() {
 			return {
 				info: {},
+				loaded: false,
 
 				index: 0,
 				genders: [{
@@ -97,6 +95,7 @@
 			loadData() {
 				return uni.$models.user.get().then((res) => {
 					this.info = res;
+					this.loaded = true;
 				});
 			},
 
@@ -104,7 +103,8 @@
 			syncWechat() {
 				this.syncLoading = true;
 				return uni.$models.user.syncWechat({
-					hint: this
+					hint: this,
+					loading: false,
 				}).finally(() => {
 					this.syncLoading = false;
 				});

@@ -1,34 +1,29 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :showNavbar="showNavbar" navbarBackgroundColor="bg-gradual-red" :loaded="true">
 		<!-- #ifndef H5 -->
-		<cu-custom bgColor="bg-gradual-red">
-			<block slot="content">商城</block>
-		</cu-custom>
+		<block slot="navbar-title">商城</block>
 		<!-- #endif -->
 
-		<template v-if="loaded">
-			<mescroll-body ref="mescrollRef" @init="mescrollInit"
-						   :down="{auto:false}" :up="{auto:false,empty:false}"
-						   @down="downCallback" @up="upCallback">
-				<swiper class="screen-swiper round-dot" style="min-height: 256rpx;"
-						:indicator-dots="true" :circular="true"
-						:autoplay="true" interval="5000" duration="500">
-					<swiper-item v-for="(item,index) in swiperList" :key="index">
-						<video :src="item.cover" autoplay loop muted :show-play-btn="false" :controls="false"
-							   objectFit="cover" v-if="item.type=='video'"></video>
-						<image :src="item.cover" mode="aspectFill" v-else></image>
-					</swiper-item>
-				</swiper>
+		<mescroll-body ref="mescrollRef" @init="mescrollInit"
+					   :down="{auto:false}" :up="{auto:false,empty:false}"
+					   @down="downCallback" @up="upCallback">
+			<swiper class="screen-swiper round-dot" style="min-height: 256rpx;"
+					:indicator-dots="true" :circular="true"
+					:autoplay="true" interval="5000" duration="500">
+				<swiper-item v-for="(item,index) in swiperList" :key="index">
+					<video :src="item.cover" autoplay loop muted :show-play-btn="false" :controls="false"
+						   objectFit="cover" v-if="item.type=='video'"></video>
+					<image :src="item.cover" mode="aspectFill" v-else></image>
+				</swiper-item>
+			</swiper>
 
-				<!-- #ifdef MP-WEIXIN -->
-				<ad unit-id="adunit-1125620a898275d6"></ad>
-				<!-- #endif -->
+			<!-- #ifdef MP-WEIXIN -->
+			<ad unit-id="adunit-1125620a898275d6"></ad>
+			<!-- #endif -->
 
-				<GoodsList :list="goodsList"></GoodsList>
-			</mescroll-body>
-		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+			<GoodsList :list="goodsList"></GoodsList>
+		</mescroll-body>
+	</custom-page>
 </template>
 
 <script>
@@ -45,6 +40,13 @@
 		},
 		data() {
 			return {
+				// #ifdef H5
+				showNavbar: false,
+				// #endif
+				// #ifndef H5
+				showNavbar: true,
+				// #endif
+				
 				swiperList: [],
 				categoryList: [],
 
