@@ -26,8 +26,8 @@
 		},
 		methods: {
 			toHome() {
-				uni.navigateBack({
-					delta: 100
+				uni.reLaunch({
+					url: '/pages/index/index'
 				})
 			}
 		}

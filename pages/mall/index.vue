@@ -106,7 +106,7 @@
 
 			// 数据加载
 			async loadData() {
-				const baseConfig = await uni.$http.get('plugin/mall/index/index');
+				const baseConfig = await uni.$http.get('app/mall/index/index');
 
 				// 轮播图
 				const swiperList = baseConfig.banners;

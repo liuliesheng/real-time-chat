@@ -1,5 +1,5 @@
 <template>
-	<view class="grid col-4">
+	<view class="grid col-4 padding-tb">
 		<view class="item" v-for="(item,index) in list" :key="index"
 			  @tap="itemClickHandle(index)">
 			<view class="image">
@@ -23,15 +23,15 @@
 			itemClickHandle(index) {
 				const item = this.list[index];
 
-				if (item.type === 'custom') {
-					const result = {
-						index: index,
-						data: item,
-					};
-					this.$emit('itemtap', result);
-				} else {
+				if (item.type !== 'custom') {
 					this._dispatch(item);
 				}
+
+				const result = {
+					index: index,
+					data: item,
+				};
+				this.$emit('itemtap', result);
 			},
 			_dispatch(item) {
 				switch (item.type) {

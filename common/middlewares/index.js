@@ -1,14 +1,16 @@
 // 中间件配置
 // 创建一个中间件 $.$middleware();
 // 系统内置中间件列表 $.$middlewares
-import appBindUser from './app-bind-user';
+import bindUser from './bind-user';
+import loadConfig from './load-config';
 
 module.exports = {
 	appLaunch: [
-		appBindUser
+		bindUser,
+		loadConfig
 	],
 	appShow: [
-		appBindUser
+		bindUser
 	],
 	appHide: [],
 	appRoute: [],

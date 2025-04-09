@@ -9,7 +9,7 @@
 			</view>
 
 			<view class="margin" v-if="navList">
-				<custom-menu :list="navList" />
+				<custom-nav :list="navList" />
 			</view>
 
 			<view class="" v-if="articleList.length">

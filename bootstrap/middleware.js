@@ -22,7 +22,7 @@ export default function middleware(handles = []) {
 
 				handle.context = context;
 				handleFunc = handle.handle;
-			} else if (typeof handle !== 'function') {
+			} else if (typeof handle === 'function') {
 				handleFunc = handle;
 				handleFunc.context = context;
 			} else {

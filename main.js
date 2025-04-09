@@ -1,5 +1,4 @@
 import './bootstrap';
-import "./common/services";
 
 import Vue from 'vue';
 import App from './App';

@@ -4,15 +4,13 @@ import defaultMixins from '../default.mixins';
 // 重置App函数
 if (typeof App !== "undefined") {
 	const originalApp = App;
-
 	App = function(appInstance) {
-		const callbackMiddlewareHandle = function(callbackName, middlewareName) {
+		const registerAppMiddleware = function(callbackName, middlewareName) {
 			if (!$.$middlewares[middlewareName]) {
 				return;
 			}
 
 			const oldFunc = appInstance[callbackName] || function() {};
-
 			appInstance[callbackName] = function(options) {
 				console.groupCollapsed(middlewareName, options);
 				$.$middlewares[middlewareName](oldFunc, options, appInstance);
@@ -20,16 +18,15 @@ if (typeof App !== "undefined") {
 			};
 		};
 
-		callbackMiddlewareHandle('onLaunch', 'appLaunch');
-		callbackMiddlewareHandle('onShow', 'appShow');
-		callbackMiddlewareHandle('onHide', 'appHide');
-		callbackMiddlewareHandle('onError', 'appError');
-		callbackMiddlewareHandle('onPageNotFound', 'appPageNotFound');
+		registerAppMiddleware('onLaunch', 'appLaunch');
+		registerAppMiddleware('onShow', 'appShow');
+		registerAppMiddleware('onHide', 'appHide');
+		registerAppMiddleware('onError', 'appError');
+		registerAppMiddleware('onPageNotFound', 'appPageNotFound');
 
 		originalApp(appInstance);
 	};
 }
-
 
 // 重置Page函数
 if (typeof Page !== "undefined" && typeof uni === 'undefined') {

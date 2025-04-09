@@ -125,7 +125,7 @@ export class EventEmitter {
 	/**
 	 * 触发监听器
 	 * @param {string} name
-	 * @param {*} [param]
+	 * @param {*} param
 	 * @return {EventEmitter}
 	 */
 	emit(name, param) {
