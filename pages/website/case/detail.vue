@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
 		<view class="padding bg-white" v-if="loaded">
 			<view class="h3 text-black">{{info.title}}</view>
 			<view class="flex">
@@ -18,8 +18,7 @@
 			</view>
 			<MPHtml :content="info.content" />
 		</view>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -53,9 +52,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/website/case/detail', {
-					id: this.id
-				}).then(res => {
+				return uni.$models.website.getCaseDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});

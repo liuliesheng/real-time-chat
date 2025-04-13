@@ -74,9 +74,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/website/product/detail', {
-					id: this.id
-				}).then(res => {
+				return uni.$models.website.getProductDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});

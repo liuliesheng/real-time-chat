@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<template v-if="loaded">
 			<view class="padding bg-white">
 				<view class="h3 text-black">{{info.title}}</view>
@@ -36,8 +33,7 @@
 				<!-- #endif -->
 			</view>
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -75,9 +71,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$http.get('/plugin/website/article/detail', {
-					id: this.id
-				}).then(res => {
+				return uni.$models.website.getArticleDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});

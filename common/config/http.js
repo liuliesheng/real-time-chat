@@ -1,7 +1,7 @@
 import $ from '../../bootstrap/$';
 
 // http基础配置
-const baseURL = 'http://mall.test.com/api';
+const baseURL = typeof HTTP_BASE_URL !== 'undefined' ? HTTP_BASE_URL : 'http://mall.test.com/api';
 module.exports = {
 	// 默认选项配置
 	defaults: {
@@ -30,14 +30,12 @@ module.exports = {
 	// #endif
 
 	// 所有请求回调
-	onRequest: function(config) {
-	},
+	onRequest: function(config) {},
 
 	// 业务成功码
 	successCode: 1,
 	// 业务成功处理器（所有通过的业务请求，都会回调此函数）
-	onSuccess: function(data, response) {
-	},
+	onSuccess: function(data, response) {},
 
 	// 默认提示语
 	loadingText: '请稍后...',

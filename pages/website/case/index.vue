@@ -1,11 +1,10 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
 		<template v-if="loaded">
 			<CaseList :list="data" :isCard="true" v-if="data.length" />
 			<Empty type="article" v-else />
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -41,7 +40,7 @@
 		methods: {
 			// 加载数据
 			loadData: function(page = 1) {
-				return uni.$http.get('/plugin/website/case', {
+				return uni.$models.website.getCaseList({
 					keywords: this.keywords,
 					page: page,
 				}).then(res => {

@@ -1,5 +1,5 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="loaded">
 		<template v-if="loaded">
 			<view class="padding bg-white" v-if="info">
 				<MPHtml :content="info.content" />
@@ -7,7 +7,7 @@
 			<Empty type="article" v-else />
 		</template>
 		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -27,7 +27,7 @@
 		},
 		methods: {
 			loadData() {
-				uni.$http.get('plugin/website/index/about').then((res) => {
+				uni.$models.website.getAbout().then((res) => {
 					this.info = res;
 					this.loaded = true;
 				});

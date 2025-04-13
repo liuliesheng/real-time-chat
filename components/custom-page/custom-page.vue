@@ -16,7 +16,7 @@
 		<block v-if="loaded">
 			<slot name="default"></slot>
 		</block>
-		<custom-page-load v-else />
+		<custom-page-load @refresh="$emit('refresh',$event)" v-else />
 
 		<custom-technical-support />
 

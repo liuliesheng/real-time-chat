@@ -1,24 +1,7 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<custom-search :show-search-btn="false" :disabled="true"
-					   @click.native="linkTo" :data-url="'/pages/store/list'" />
-
-		<custom-nav :list="navList" @itemtap="navItemClick" />
-
-		<scroll-view scroll-x class="bg-white nav solid-bottom" style="z-index: 9;"
-					 scroll-with-animation :scroll-left="scrollLeft">
-			<view class="cu-item" :class="'default'==tabCur?'text-green cur':''"
-				  @tap="tabSelect('default')">
-				默认排序
-			</view>
-			<view class="cu-item" :class="'nearby'==tabCur?'text-green cur':''"
-				  @tap="tabSelect('nearby')">
-				离我最近
-			</view>
-		</scroll-view>
-
+		<custom-search v-model="search" @search="loadData()" />
 		<store-list :list="data" @refresh="loadData()"></store-list>
-
 	</custom-page>
 </template>
 
@@ -34,20 +17,17 @@
 				data: [],
 				page: 1,
 				more: true,
-
-				navList: [],
-
-				tabCur: 'default',
-				scrollLeft: 0,
+				search: '',
+				categoryId: 0,
 
 				location: null
 			}
 		},
-		onLoad() {
+		onLoad(options) {
+			this.categoryId = parseInt(options.cid);
 			this.$callHook('onPullDownRefresh');
 		},
 		onPullDownRefresh() {
-			this.loadCategories();
 			this.loadData().finally(() => {
 				uni.stopPullDownRefresh();
 			});
@@ -60,21 +40,6 @@
 			this.loadData(this.page + 1);
 		},
 		methods: {
-			// 加载分类
-			loadCategories() {
-				return uni.$models.store.getCategories().then((data) => {
-					this.navList = data.map((item) => {
-						return {
-							id: item.id,
-							text: item.title,
-							icon: item.cover
-						};
-					});
-
-					return this.navList;
-				});
-			},
-
 			// 加载数据
 			loadData(page = 1) {
 				return this.getLocation().then(res => {
@@ -82,6 +47,7 @@
 						lng: res.longitude,
 						lat: res.latitude,
 						keywords: this.search,
+						category_id: this.categoryId,
 						page: page,
 						nearby: this.tabCur === 'nearby' ? 1 : 0
 					})
@@ -92,11 +58,7 @@
 					this.loaded = true;
 				});
 			},
-			tabSelect(key) {
-				this.tabCur = key;
-				// this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60;
-				this.loadData();
-			},
+
 
 			getLocation() {
 				this.location = {
@@ -118,14 +80,6 @@
 					return res;
 				});
 			},
-
-			// nav item click
-			navItemClick({ data }) {
-				uni.navigateTo({
-					url: './list?cid=' + data.id
-				})
-			},
-
 		}
 	}
 </script>

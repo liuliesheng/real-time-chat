@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
 		<template v-if="loaded">
 			<view class="margin radius" style="overflow: hidden;" v-if="bannerList.length">
 				<custom-swiper :list="bannerList" />
@@ -52,8 +49,7 @@
 			<custom-floating-button :list="floatingButtionList" :radius="true" />
 
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -87,7 +83,7 @@
 		},
 		methods: {
 			async loadData() {
-				const baseConfig = await uni.$http.get('plugin/website/index/index');
+				const baseConfig = await uni.$models.website.getBasicConfig();
 				this.loaded = true;
 
 				// 轮播图

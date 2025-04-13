@@ -1,5 +1,5 @@
 <template>
-	<view class="page" :style="'padding-top: '+pagePaddingTop+'rpx;'">
+	<custom-page class="page" :style="'padding-top: '+pagePaddingTop+'rpx;'" :loaded="loaded">
 		<template v-if="loaded">
 			<template v-if="categories.length>1">
 				<scroll-view scroll-x class="bg-white nav fixed" scroll-with-animation :scroll-left="scrollLeft">
@@ -13,8 +13,7 @@
 			<ArticleList :list="data" :isCard="true" v-if="data.length" />
 			<Empty type="article" v-else />
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -62,7 +61,7 @@
 			// 加载数据
 			loadData: function(page = 1) {
 				const categoryId = this.categories[this.tabCur] ? this.categories[this.tabCur].id : 0;
-				return uni.$http.get('/plugin/website/article', {
+				return uni.$models.website.getArticleList({
 					keywords: this.keywords,
 					page: page,
 					category_id: categoryId
@@ -77,7 +76,7 @@
 			},
 			// 加载分类列表
 			loadCategoires: function() {
-				uni.$http.get('plugin/website/article_category/index').then((res) => {
+				uni.$models.website.getArticleCategoryList().then((res) => {
 					this.categories = [{
 						id: 0,
 						title: '全部',

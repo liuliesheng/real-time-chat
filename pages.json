@@ -531,6 +531,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/store/list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "门店列表",
+                "enablePullDownRefresh": true
+            }
+            
+        }
     ],
 	"entryPagePath":"pages/mall/index",
 	"globalStyle":{

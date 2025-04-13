@@ -1,12 +1,12 @@
 <template>
 	<view class="component">
-		<image :src="image" mode="widthFix" class="img"></image>
+		<image :src="image" mode="widthFix" class="img" @tap="$emit('refresh')"></image>
 		<view class="padding-lr padding-tb-sm text-center text-black text-lg" v-if="tips">
 			{{tips}}
 		</view>
-		<view class="padding text-center" v-if="btns.length">
-			<button class="cu-btn round margin-right" v-for="(item,index) in btns" :key="index"
-			        :class="item.class" @tap="onBtnClick(item)">{{item.text}}</button>
+		<view class="padding text-center flex" v-if="btns.length">
+			<button class="cu-btn round margin-right flex-sub" v-for="(item,index) in btns" :key="index"
+					:class="item.class?item.class:'line-grey'" @tap="onBtnClick(item)">{{item.text}}</button>
 		</view>
 	</view>
 </template>
