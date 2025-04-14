@@ -62,7 +62,6 @@
 </template>
 
 <script>
-	import model from './model.js';
 	import VCard from './components/vcard.vue';
 	export default {
 		components: { VCard, },
@@ -107,7 +106,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return model.getVCardDetail(this.id).then(res => {
+				return uni.$models.vcard.getVCardDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 
@@ -117,7 +116,7 @@
 
 			// 加载动态数据
 			loadDynamicData(page = 1) {
-				return model.getDynamicList(this.id, {
+				return uni.$models.vcard.getDynamicList(this.id, {
 					page: page
 				}).then(res => {
 					const dynamicData = page === 1 ? {} : this.dynamicData;

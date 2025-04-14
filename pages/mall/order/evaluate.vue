@@ -1,44 +1,44 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
+		<template v-if="loaded">
 
-		<view class="cu-list goods-list">
-			<view class="cu-item bg-white" v-for="(goodsItem,goodsIndex) in info.goods_list" :key="goodsItem.id">
-				<view class="flex padding-sm margin radius">
-					<view class="image-wrapper radius lg">
-						<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"></image>
-					</view>
-					<view class="content flex-sub padding-lr-sm">
-						<view class="title ellipsis-2 text-black">{{ goodsItem.goods_title }}</view>
-						<view class="text-gray text-sm margin-top-xs">
-							<text>{{ goodsItem.goods_spec || '' }}</text>
+			<view class="cu-list goods-list">
+				<view class="cu-item bg-white" v-for="(goodsItem,goodsIndex) in info.goods_list" :key="goodsItem.id">
+					<view class="flex padding-sm margin radius">
+						<view class="image-wrapper radius lg">
+							<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"></image>
+						</view>
+						<view class="content flex-sub padding-lr-sm">
+							<view class="title ellipsis-2 text-black">{{ goodsItem.goods_title }}</view>
+							<view class="text-gray text-sm margin-top-xs">
+								<text>{{ goodsItem.goods_spec || '' }}</text>
+							</view>
 						</view>
 					</view>
-				</view>
 
-				<view class="cu-form-group margin-top">
-					<view class="title">综合评分</view>
-					<view class="flex-sub">
-						<uni-rate v-model="goodsItem.score"></uni-rate>
+					<view class="cu-form-group margin-top">
+						<view class="title">综合评分</view>
+						<view class="flex-sub">
+							<uni-rate v-model="goodsItem.score"></uni-rate>
+						</view>
 					</view>
-				</view>
-				<view class="cu-form-group">
-					<textarea maxlength="500" v-model="goodsItem.content" placeholder="多多描述商品和使用感受,更受欢迎哦"></textarea>
-				</view>
-				<view class="cu-form-group">
-					<custom-uploader/>
-				</view>
+					<view class="cu-form-group">
+						<textarea maxlength="500" v-model="goodsItem.content"
+								  placeholder="多多描述商品和使用感受,更受欢迎哦"></textarea>
+					</view>
+					<view class="cu-form-group">
+						<custom-uploader />
+					</view>
 
+				</view>
 			</view>
-		</view>
 
-		<view class="padding">
-			<button class="cu-btn block bg-gradual-red lg" @tap="onSubmit">提交</button>
-		</view>
+			<view class="padding">
+				<button class="cu-btn block bg-gradual-red lg" @tap="onSubmit">提交</button>
+			</view>
 
-	</view>
-	<PageLoad v-else />
+		</template>
+	</custom-page>
 </template>
 
 <script>

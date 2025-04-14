@@ -14,11 +14,10 @@
 		</cu-custom>
 
 		<block v-if="loaded">
-			<slot name="default"></slot>
+			<slot name="default" v-if="loaded"></slot>
+			<custom-technical-support v-if="showTechnicalSupport" />
 		</block>
 		<custom-page-load @refresh="$emit('refresh',$event)" v-else />
-
-		<custom-technical-support />
 
 		<custom-auth-modal />
 		<custom-loading />
@@ -35,6 +34,10 @@
 			navbarBackgroundColor: String,
 			navbarBackgroundImage: String,
 			navbarText: String,
+			showTechnicalSupport: {
+				type: Boolean,
+				default: true
+			}
 		},
 		data() {
 			return {};

@@ -1,7 +1,8 @@
 import $ from '../../bootstrap/$';
 
 // http基础配置
-const baseURL = typeof HTTP_BASE_URL !== 'undefined' ? HTTP_BASE_URL : 'http://mall.test.com/api';
+const baseURL = typeof HTTP_BASE_URL !== 'undefined' ? HTTP_BASE_URL : 'https://fn.nlplant.cn/api';
+// const baseURL = 'http://mall.test.com/api';
 module.exports = {
 	// 默认选项配置
 	defaults: {

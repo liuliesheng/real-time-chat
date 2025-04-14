@@ -59,22 +59,22 @@ export default {
 	},
 
 	// 获取我的门店
-	getMyDetail(options = {}) {
+	getSelf(options = {}) {
 		return uni.$http.get('/app/shop/manager/getinfo', null, options);
 	},
 
 	// 获取我的门店绑定的银行卡信息
-	getMyBankInfo(options = {}) {
+	getSelfBankInfo(options = {}) {
 		return uni.$http.get('/app/shop/manager/getbank', null, options);
 	},
 
 	// 获取我的门店二维码信息
-	getMyPayQrCode(options = {}) {
+	getSelfPayQrCode(options = {}) {
 		return uni.$http.get('/app/shop/manager/getpayqrcode', null, options);
 	},
 
 	// 获取我的门店订单列表
-	getMyOrderList(data, options = {}) {
+	getOrderList(data, options = {}) {
 		return uni.$http.get('/app/shop/order/index', data, options);
 	},
 

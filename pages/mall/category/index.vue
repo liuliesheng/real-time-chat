@@ -1,9 +1,8 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="loaded" @refresh="loadData" :showTechnicalSupport="false"
+				 navbarBackgroundColor="bg-gradual-red">
 		<!-- #ifndef H5 -->
-		<cu-custom bgColor="bg-gradual-red">
-			<block slot="content">分类</block>
-		</cu-custom>
+		<block slot="navbar-title">分类</block>
 		<!-- #endif -->
 
 		<!-- #ifdef MP-WEIXIN -->
@@ -51,8 +50,7 @@
 				</mescroll-uni>
 			</view>
 		</template>
-		<PageLoad @refresh="loadData" v-else />
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -79,16 +77,18 @@
 				return this.categories[this.tabCur];
 			},
 			offsetTop() {
-				return this.CustomBar + this.adHeight;
+				return this.CustomBarUnH5 + this.adHeight;
 			}
 		},
 		onLoad() {
 			this.loadData();
 		},
 		onReady() {
+			// #ifdef MP-WEIXIN
 			setTimeout(() => {
 				this.calcAdHeight();
 			}, 300);
+			// #endif
 		},
 		methods: {
 			// 计算广告的高度

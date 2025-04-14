@@ -25,7 +25,6 @@
 </template>
 
 <script>
-	import model from '../model.js';
 	export default {
 		props: {
 			info: {
@@ -42,14 +41,14 @@
 				};
 
 				if (this.info.is_favorite) {
-					model.unfavoriteVCard(this.info.id, options).then(() => {
+					uni.$models.vcard.unfavoriteVCard(this.info.id, options).then(() => {
 						this.info.is_favorite = false;
 						if (this.info.collect_count > 0) {
 							this.info.collect_count--;
 						}
 					});
 				} else {
-					model.favoriteVCard(this.info.id, options).then(() => {
+					uni.$models.vcard.favoriteVCard(this.info.id, options).then(() => {
 						this.info.is_favorite = true;
 						this.info.collect_count++;
 					});

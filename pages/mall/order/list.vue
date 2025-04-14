@@ -1,14 +1,11 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="true" @refresh="loadData">
 		<scroll-view scroll-x class="bg-white nav" style="box-shadow: 0px 1px 1px rgba(26, 26, 26, 0.1);">
 			<view class="flex text-center">
 				<view class="cu-item flex-sub"
-				      v-for="(item, index) in navList" :key="index"
-				      :class="tabCur === index?'text-red cur':''"
-				      @click="tabClick(index)">
+					  v-for="(item, index) in navList" :key="index"
+					  :class="tabCur === index?'text-red cur':''"
+					  @click="tabClick(index)">
 					{{ item.text }}
 				</view>
 			</view>
@@ -16,16 +13,17 @@
 		<swiper class="order-frame" :current="tabCur" duration="300" @change="changeTab">
 			<swiper-item v-for="(tabItem,tabIndex) in navList" :key="tabIndex">
 				<mescroll-uni :ref="'mescrollRef'+tabIndex"
-				              @init="mescrollInit(tabIndex,$event)"
-				              @down="downCallback" @up="upCallback">
+							  @init="mescrollInit(tabIndex,$event)"
+							  @down="downCallback" @up="upCallback">
 
-					<PageLoad :fixed="false" v-if="!tabItem.loaded" />
+					<custom-page-load :fixed="false" v-if="!tabItem.loaded" />
 
 					<!-- 订单列表 -->
 					<view class="cu-card dynamic no-card margin-top"
-					      v-for="(item,index) in tabItem.data"
-					      :key="item.id">
-						<view class="cu-item shadow" @tap="linkTo" :data-url="'/pages/mall/order/detail?id='+item.id">
+						  v-for="(item,index) in tabItem.data"
+						  :key="item.id">
+						<view class="cu-item shadow" @tap="linkTo"
+							  :data-url="'/pages/mall/order/detail?id='+item.id">
 							<view class="padding flex flex-wrap">
 								<text class="flex-sub">{{item.create_time}}</text>
 								<text class="state" :style="{color: item.stateTipColor}">{{item.stateTip}}</text>
@@ -33,10 +31,10 @@
 							<!-- 商品列表 -->
 							<view class="cu-list goods-list">
 								<view class="cu-item flex padding-sm"
-								      v-for="(goodsItem,goodsIndex) in item.goods_list" :key="goodsItem.id">
+									  v-for="(goodsItem,goodsIndex) in item.goods_list" :key="goodsItem.id">
 									<view class="image-wrapper radius lg" :class="{loaded: goodsItem.loaded}">
 										<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"
-										       @load="imageOnLoad(goodsItem)"></image>
+											   @load="imageOnLoad(goodsItem)"></image>
 									</view>
 									<view class="content flex-sub padding-lr-sm">
 										<view class="title ellipsis-2 text-black">{{ goodsItem.goods_title }}</view>
@@ -45,8 +43,10 @@
 										</view>
 									</view>
 									<view class="action">
-										<view class="text-price text-red text-lg text-bold text-right">{{ goodsItem.goods_price }}</view>
-										<view class="text-black text-sm text-right">×{{ goodsItem.goods_num }}</view>
+										<view class="text-price text-red text-lg text-bold text-right">
+											{{ goodsItem.goods_price }}</view>
+										<view class="text-black text-sm text-right">×{{ goodsItem.goods_num }}
+										</view>
 									</view>
 								</view>
 							</view>
@@ -70,18 +70,23 @@
 
 							<view class="flex justify-end padding-lr padding-tb-sm" v-if="item.order_status !== 50">
 								<button class="cu-btn round text-sm margin-left-sm "
-								        @tap.stop.prevent="deleteOrder(index)" v-if="item.order_status===0">删除订单</button>
+										@tap.stop.prevent="deleteOrder(index)"
+										v-if="item.order_status===0">删除订单</button>
 								<button class="cu-btn round text-sm margin-left-sm"
-								        @tap.stop.prevent="cancelOrder(index)" v-if="item.order_status===10">取消订单</button>
+										@tap.stop.prevent="cancelOrder(index)"
+										v-if="item.order_status===10">取消订单</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"
-								        @tap.stop.prevent="payOrder(index)" v-if="item.order_status===10">立即支付</button>
+										@tap.stop.prevent="payOrder(index)"
+										v-if="item.order_status===10">立即支付</button>
 								<button class="cu-btn round text-sm margin-left-sm"
-								        @tap.stop.prevent="linkTo" :data-url="'./express?id='+item.id"
-								        v-if="item.delivery_type==10 && item.delivery_status==20">查看物流</button>
+										@tap.stop.prevent="linkTo" :data-url="'./express?id='+item.id"
+										v-if="item.delivery_type==10 && item.delivery_status==20">查看物流</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"
-								        @tap.stop.prevent="confirmOrder(index)" v-if="item.order_status===20 || item.order_status===30">确认收货</button>
+										@tap.stop.prevent="confirmOrder(index)"
+										v-if="item.order_status===20 || item.order_status===30">确认收货</button>
 								<button class="cu-btn bg-red round text-sm margin-left-sm"
-								        @tap.stop.prevent="linkTo" :data-url="'./evaluate?id='+item.id" v-if="item.order_status===40">去评价</button>
+										@tap.stop.prevent="linkTo" :data-url="'./evaluate?id='+item.id"
+										v-if="item.order_status===40">去评价</button>
 							</view>
 
 						</view>
@@ -90,7 +95,7 @@
 				</mescroll-uni>
 			</swiper-item>
 		</swiper>
-	</view>
+	</custom-page>
 </template>
 
 <script>

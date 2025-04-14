@@ -31,7 +31,6 @@
 </template>
 
 <script>
-	import model from '../model.js';
 	export default {
 		props: {
 			info: {
@@ -62,7 +61,7 @@
 				}
 
 				this.isSubmitting = true;
-				model.saveVCard(this.form, {
+				uni.$models.vcard.saveVCard(this.form, {
 					hint: this.$root,
 					loading: this.$root
 				}).then(() => {

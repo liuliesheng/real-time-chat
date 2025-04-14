@@ -35,7 +35,6 @@
 </template>
 
 <script>
-	import model from './model.js';
 	export default {
 		data() {
 			return {

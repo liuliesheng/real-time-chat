@@ -32,6 +32,11 @@
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					Vue.prototype.TabBar = 0;
 					// #endif
+					
+					Vue.prototype.CustomBarUnH5 = Vue.prototype.CustomBar;
+					// #ifdef H5
+					Vue.prototype.CustomBarUnH5 = 0;
+					// #endif
 				}
 			});
 

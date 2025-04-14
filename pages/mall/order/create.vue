@@ -1,123 +1,124 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
+		<template v-if="loaded">
 
-		<!--收货地址-->
-		<view class="flex align-center bg-white padding"
-		      @tap="linkTo" data-url="/pages/user/address/list?source=1">
-			<view class="text-xxl margin-right-sm">
-				<text class="cuIcon-locationfill text-pink"></text>
-			</view>
-			<view class="flex-sub" v-if="info.user_address">
-				<view class="text-black">
-					<text class="cu-tag bg-red radius text-xs user-address-default"
-					      v-if="info.user_address.is_default">默认</text>
-					<text>{{info.user_address.province}}{{info.user_address.city}}{{info.user_address.district}}</text>
+			<!--收货地址-->
+			<view class="flex align-center bg-white padding"
+				  @tap="linkTo" data-url="/pages/user/address/list?source=1">
+				<view class="text-xxl margin-right-sm">
+					<text class="cuIcon-locationfill text-pink"></text>
 				</view>
-				<view class="text-black text-bold text-xl margin-top-sm">{{info.user_address.address}}</view>
-				<view class="text-black margin-top-sm">
-					<text>{{info.user_address.name}}</text>
-					<text class="margin-left-sm">{{info.user_address.phone}}</text>
-				</view>
-			</view>
-			<view class="flex-sub" v-else>添加收货地址</view>
-			<view class="cuIcon-right text-gray"></view>
-		</view>
-
-		<!--商品列表-->
-		<view class="cu-list goods-list" v-if="info.goods_list.length">
-			<view class="cu-item flex padding-sm"
-			      v-for="(item,index) in info.goods_list" :key="item.id"
-			      @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
-				<view class="image-wrapper radius lg">
-					<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
-				</view>
-				<view class="content flex-sub padding-lr-sm">
-					<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
-					<view class="text-gray text-sm margin-top-xs">
-						<text>{{ item.goods_spec || '' }}</text>
+				<view class="flex-sub" v-if="info.user_address">
+					<view class="text-black">
+						<text class="cu-tag bg-red radius text-xs user-address-default"
+							  v-if="info.user_address.is_default">默认</text>
+						<text>{{info.user_address.province}}{{info.user_address.city}}{{info.user_address.district}}</text>
 					</view>
-					<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
-						<view class="flex-sub text-lg text-bold">
-							<text class="text-price text-red">{{ item.goods_price }}</text>
-						</view>
-						<view style="display: inline-block;">
-							<uni-number-box :min="1" :max="100" size="sm" :value="item.goods_num"
-							                @change="changeItemNum(item,$event)">
-							</uni-number-box>
-						</view>
+					<view class="text-black text-bold text-xl margin-top-sm">{{info.user_address.address}}</view>
+					<view class="text-black margin-top-sm">
+						<text>{{info.user_address.name}}</text>
+						<text class="margin-left-sm">{{info.user_address.phone}}</text>
 					</view>
 				</view>
+				<view class="flex-sub" v-else>添加收货地址</view>
+				<view class="cuIcon-right text-gray"></view>
 			</view>
-		</view>
 
-		<!--订单金额信息-->
-		<view class="cu-list menu price-info">
-			<view class="cu-item">
-				<view class="content">商品金额</view>
-				<view class="action text-black text-price text-bold">{{goodsTotalAmount}}</view>
-			</view>
-			<view class="cu-item">
-				<view class="content">运费</view>
-				<view class="action text-black text-price text-bold">0.00</view>
-			</view>
-			<view class="cu-item arrow">
-				<view class="content">优惠券</view>
-				<view class="action">
-					<text class="text-red" v-if="info.user_coupon_list.length">{{info.user_coupon_list.length}}张可用</text>
-					<text class="text-gray" v-else>无可用</text>
+			<!--商品列表-->
+			<view class="cu-list goods-list" v-if="info.goods_list.length">
+				<view class="cu-item flex padding-sm"
+					  v-for="(item,index) in info.goods_list" :key="item.id"
+					  @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
+					<view class="image-wrapper radius lg">
+						<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
+					</view>
+					<view class="content flex-sub padding-lr-sm">
+						<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>
+						<view class="text-gray text-sm margin-top-xs">
+							<text>{{ item.goods_spec || '' }}</text>
+						</view>
+						<view class="flex margin-top-xs" @tap.stop.prevent="stopPrevent">
+							<view class="flex-sub text-lg text-bold">
+								<text class="text-price text-red">{{ item.goods_price }}</text>
+							</view>
+							<view style="display: inline-block;">
+								<uni-number-box :min="1" :max="100" size="sm" :value="item.goods_num"
+												@change="changeItemNum(item,$event)">
+								</uni-number-box>
+							</view>
+						</view>
+					</view>
 				</view>
 			</view>
-			<view class="cu-item solid-top">
-				<view class="content"></view>
-				<view class="action">
-					<text class="text-black">合计：</text>
-					<text class="text-red text-price text-bold">{{orderAmount}}</text>
+
+			<!--订单金额信息-->
+			<view class="cu-list menu price-info">
+				<view class="cu-item">
+					<view class="content">商品金额</view>
+					<view class="action text-black text-price text-bold">{{goodsTotalAmount}}</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">运费</view>
+					<view class="action text-black text-price text-bold">0.00</view>
+				</view>
+				<view class="cu-item arrow">
+					<view class="content">优惠券</view>
+					<view class="action">
+						<text class="text-red"
+							  v-if="info.user_coupon_list.length">{{info.user_coupon_list.length}}张可用</text>
+						<text class="text-gray" v-else>无可用</text>
+					</view>
+				</view>
+				<view class="cu-item solid-top">
+					<view class="content"></view>
+					<view class="action">
+						<text class="text-black">合计：</text>
+						<text class="text-red text-price text-bold">{{orderAmount}}</text>
+					</view>
 				</view>
 			</view>
-		</view>
 
-		<!--支付方式-->
-		<view class="cu-bar">
-			<view class="action">支付方式</view>
-		</view>
-		<radio-group class="block">
-			<!-- #ifndef MP-ALIPAY -->
-			<view class="cu-form-group" @tap.stop="payType='20'">
-				<view class="title">
-					<text class="text-xxl margin-right-xs">
-						<text class="cuIcon-weixin text-green"></text>
-					</text>
-					<text>微信支付</text>
+			<!--支付方式-->
+			<view class="cu-bar">
+				<view class="action">支付方式</view>
+			</view>
+			<radio-group class="block">
+				<!-- #ifndef MP-ALIPAY -->
+				<view class="cu-form-group" @tap.stop="payType='20'">
+					<view class="title">
+						<text class="text-xxl margin-right-xs">
+							<text class="cuIcon-weixin text-green"></text>
+						</text>
+						<text>微信支付</text>
+					</view>
+					<radio class='radio' :checked="payType=='20'"></radio>
 				</view>
-				<radio class='radio' :checked="payType=='20'"></radio>
-			</view>
-			<!-- #endif -->
-			<view class="cu-form-group" @tap.stop="payType='10'">
-				<view class="title">
-					<text class="text-xxl margin-right-xs" style="vertical-align: sub;">
-						<text class="cuIcon-card text-pink"></text>
-					</text>
-					<text>余额支付</text>
-					<text class="text-sm text-red">(￥{{info.user_balance}})</text>
+				<!-- #endif -->
+				<view class="cu-form-group" @tap.stop="payType='10'">
+					<view class="title">
+						<text class="text-xxl margin-right-xs" style="vertical-align: sub;">
+							<text class="cuIcon-card text-pink"></text>
+						</text>
+						<text>余额支付</text>
+						<text class="text-sm text-red">(￥{{info.user_balance}})</text>
+					</view>
+					<radio class='radio' :checked="payType=='10'"></radio>
 				</view>
-				<radio class='radio' :checked="payType=='10'"></radio>
-			</view>
-		</radio-group>
+			</radio-group>
 
-		<!--底部栏-->
-		<view class="cu-bar foot padding-lr bg-white">
-			<view class="flex-sub">
-				<text class="text-xxl text-price text-bold text-red">{{orderAmount}}</text>
+			<!--底部栏-->
+			<view class="cu-bar foot padding-lr bg-white">
+				<view class="flex-sub">
+					<text class="text-xxl text-price text-bold text-red">{{orderAmount}}</text>
+				</view>
+				<view class="">
+					<button class="cu-btn bg-red round" @tap="goOrder"
+							:disabled="isGoOrder || isSubmitDisabled">提交订单</button>
+				</view>
 			</view>
-			<view class="">
-				<button class="cu-btn bg-red round" @tap="goOrder" :disabled="isGoOrder || isSubmitDisabled">提交订单</button>
-			</view>
-		</view>
 
-	</view>
-	<PageLoad v-else />
+		</template>
+	</custom-page>
 </template>
 
 <script>

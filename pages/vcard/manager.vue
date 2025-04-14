@@ -111,7 +111,6 @@
 </template>
 
 <script>
-	import model from './model.js';
 	import VCardBasicEdit from './components/vcard-basic-edit.vue';
 	import ModalForm from './components/modal-form.vue';
 	import ModalQrcode from './components/modal-qrcode.vue';
@@ -145,7 +144,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return model.getSelfVCard(this.id).then(res => {
+				return uni.$models.vcard.getSelfVCard(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});
@@ -189,7 +188,7 @@
 				}
 
 				this.isSubmitting = true;
-				model.updateVCard(info, {
+				uni.$models.vcard.updateVCard(info, {
 					hint: this.$root,
 					loading: this.$root
 				}).then(() => {
@@ -210,7 +209,7 @@
 					}
 
 					this.isSubmitting = true;
-					model.makeVCardWeappQrcode().then((res) => {
+					uni.$models.vcard.makeVCardWeappQrcode().then((res) => {
 						this.$set(this.info, 'weapp_qrcode', res);
 						this.isShowWeappQrcode = true;
 					}).finally(() => {

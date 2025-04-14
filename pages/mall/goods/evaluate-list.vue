@@ -1,8 +1,7 @@
 <template>
-	<view class="page" v-if="loaded">
+	<custom-page class="page" :loaded="loaded" @refresh="loadData">
 		<GoodsEvaluateList :list="data" />
-	</view>
-	<PageLoad v-else />
+	</custom-page>
 </template>
 
 <script>

@@ -1,16 +1,12 @@
 <template>
-	<view class="page">
+	<custom-page class="page" :loaded="loaded" @refresh="loadData" :showTechnicalSupport="false"
+				 navbarBackgroundColor="bg-gradual-red">
 		<!-- #ifndef H5 -->
-		<cu-custom bgColor="bg-gradual-red">
-			<block slot="content">购物车</block>
-		</cu-custom>
+		<block slot="navbar-title">购物车</block>
 		<!-- #endif -->
 
-		<XLoading />
-		<Hint />
-
 		<!--顶部操作栏-->
-		<view class="cu-bar fixed bg-white" :style="[{top:offsetTop+'px'}]" v-if="data.length">
+		<view class="cu-bar fixed bg-white" :style="[{top:offsetTop+'px'}]">
 			<view class="action">
 				<text class="text-sm">共 {{goodsTotalCount}} 件商品</text>
 			</view>
@@ -21,17 +17,18 @@
 
 		<template v-if="loaded">
 			<mescroll-uni ref="mescrollRef" @init="mescrollInit"
-			              :top="mescrollOffset.top" :bottom="mescrollOffset.bottom" :safearea="true"
-			              :down="{auto:false}" :up="{auto:false,empty:false}"
-			              @down="downCallback" @up="upCallback">
+						  :top="mescrollOffset.top" :bottom="mescrollOffset.bottom" :safearea="true"
+						  :down="{auto:false}" :up="{auto:false,empty:false}"
+						  @down="downCallback" @up="upCallback">
 
 				<!--购物车列表-->
 				<view class="cu-list goods-list" v-if="data.length">
 					<view class="cu-item flex padding-sm"
-					      v-for="(item,index) in data" :key="item.id"
-					      @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
+						  v-for="(item,index) in data" :key="item.id"
+						  @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
 						<view class="text-xxl" @tap.stop.prevent="itemToggleChecked(item)">
-							<text class="margin-right-xs" :class="item.checked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
+							<text class="margin-right-xs"
+								  :class="item.checked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
 						</view>
 						<view class="image-wrapper radius lg">
 							<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
@@ -47,8 +44,8 @@
 								</view>
 								<view style="display: inline-block;">
 									<uni-number-box :min="1" :max="100" size="sm"
-									                :value="item.goods_num"
-									                @change="changeItemNum(item,$event)">
+													:value="item.goods_num"
+													@change="changeItemNum(item,$event)">
 									</uni-number-box>
 								</view>
 							</view>
@@ -64,7 +61,8 @@
 		<view class="cu-bar foot bg-white padding-lr" v-if="data.length">
 			<view class="flex-sub">
 				<view class="text-xxl" style="display: inline-block;" @tap="toggleCheckAll">
-					<text class="margin-right-xs" :class="isAllChecked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
+					<text class="margin-right-xs"
+						  :class="isAllChecked?'cuIcon-roundcheckfill text-red':'cuIcon-roundcheck text-gray'"></text>
 					<text class="margin-right-xs text-sm">全选</text>
 				</view>
 				<text class="text-df text-black text-bold">合计:</text>
@@ -76,11 +74,11 @@
 				</template>
 				<template v-else>
 					<button class="cu-btn bg-gradual-red round" @tap="linkTo"
-					        :data-url="'../order/create?cart_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
+							:data-url="'../order/create?cart_ids='+choiceGoodsIdListStr">去结算({{choiceGoodsNum}})</button>
 				</template>
 			</view>
 		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>
@@ -91,7 +89,7 @@
 		components: { uniNumberBox },
 		data() {
 			return {
-				offsetTop: this.CustomBar,
+				offsetTop: this.CustomBarUnH5,
 
 				data: [],
 				page: 1,
@@ -158,17 +156,10 @@
 
 			// Mescroll 配置
 			mescrollOffset() {
-				if (this.data.length) {
-					return {
-						top: (this.CustomBar + uni.upx2px(100)) + 'px',
-						bottom: 100
-					};
-				} else {
-					return {
-						top: this.CustomBar + 'px',
-						bottom: 0
-					};
-				}
+				return {
+					top: (this.CustomBarUnH5 + uni.upx2px(100)) + 'px',
+					bottom: 100
+				};
 			}
 		},
 		onShow() {

@@ -1,5 +1,5 @@
 <template>
-	<custom-page class="page" :loaded="true">
+	<custom-page class="page" :loaded="true" :showTechnicalSupport="false">
 		<view class="back-btn cuIcon-close" @click="navBack"></view>
 
 		<view class="left-bottom-sign"></view>

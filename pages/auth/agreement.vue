@@ -1,8 +1,5 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<template v-if="loaded">
 			<view class="cu-bar fixed solid-bottom">
 				<view class="content text-bold text-xl">
@@ -13,10 +10,7 @@
 				<MPHtml :content="info.content" />
 			</view>
 		</template>
-
-		<PageLoad @refresh="loadData" v-else />
-
-	</view>
+	</custom-page>
 </template>
 
 <script>

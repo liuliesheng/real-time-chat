@@ -1,8 +1,7 @@
 <template>
-	<view class="page" v-if="loaded">
+	<custom-page class="page" :loaded="loaded">
 		<h1>Title</h1>
-	</view>
-	<PageLoad v-else/>
+	</custom-page>
 </template>
 
 <script>

@@ -9,13 +9,13 @@ export default function(next, options) {
 					title: config['web.support_title'],
 					icon: config['web.support_icon']
 				};
-			} else if (config['web.site_title']) {
-				globalData.support = {
-					title: config['web.site_title'],
-					icon: config['web.site_logo']
-				};
-			}
-
+			} 
+			// else if (config['web.site_title']) {
+			// 	globalData.support = {
+			// 		title: config['web.site_title'],
+			// 		icon: config['web.site_logo']
+			// 	};
+			// }
 		}
 
 		uni.$emitter.emit('refresh-global-config', config);
