@@ -7,8 +7,22 @@
 		onLaunch: function(options) {
 			console.log('App Launch', options);
 
+			Vue.prototype.MenuButtonRect = {
+				width: 0,
+				height: 0,
+				top: 0,
+				right: 0,
+				left: 0,
+				bottom: 0,
+			};
+			
+			// #ifdef MP-WEIXIN
+			Vue.prototype.MenuButtonRect = uni.getMenuButtonBoundingClientRect();
+			// #endif
+			
 			uni.getSystemInfo({
 				success: function(e) {
+					console.log(e)
 					// #ifndef MP
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					if (e.platform === 'android') {
@@ -32,15 +46,13 @@
 					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
 					Vue.prototype.TabBar = 0;
 					// #endif
-					
+
 					Vue.prototype.CustomBarUnH5 = Vue.prototype.CustomBar;
 					// #ifdef H5
 					Vue.prototype.CustomBarUnH5 = 0;
 					// #endif
 				}
 			});
-
-			this.initUserState();
 		},
 		onShow: function(options) {
 			console.log('App Show', options);
@@ -49,26 +61,7 @@
 			console.log('App Hide', options);
 		},
 
-		methods: {
-			// 初始化用户状态
-			initUserState() {
-				// 从缓存中加载用户数据
-				uni.getStorage({
-					key: 'userInfo',
-					success: (res) => {
-						this.globalData.userInfo = res.data;
-					}
-				});
-
-				// 从缓存中加载SessionId
-				uni.getStorage({
-					key: 'session_id',
-					success: (res) => {
-						this.globalData.sessionId = res.data;
-					}
-				});
-			}
-		}
+		methods: {}
 	};
 </script>
 

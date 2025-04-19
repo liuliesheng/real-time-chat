@@ -1,16 +1,18 @@
 <template>
-	<view class="border">
-		图片组
-	</view>
+	<custom-page class="page" :loaded="loaded">
+
+	</custom-page>
 </template>
 
 <script>
 	export default {
-		name:"custom-pic-group",
 		data() {
 			return {
-				
-			};
+				loaded: false
+			}
+		},
+		methods: {
+
 		}
 	}
 </script>

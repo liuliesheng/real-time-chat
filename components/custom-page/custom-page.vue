@@ -15,9 +15,10 @@
 
 		<block v-if="loaded">
 			<slot name="default" v-if="loaded"></slot>
-			<custom-technical-support v-if="showTechnicalSupport" />
 		</block>
 		<custom-page-load @refresh="$emit('refresh',$event)" v-else />
+
+		<custom-technical-support v-if="showTechnicalSupport" :class="!loaded?'fixed-bottom':''" />
 
 		<custom-auth-modal />
 		<custom-loading />
@@ -45,6 +46,11 @@
 	}
 </script>
 
-<style>
-
+<style scoped>
+	.fixed-bottom {
+		position: fixed;
+		width: 100%;
+		left: 0;
+		bottom: 30rpx;
+	}
 </style>

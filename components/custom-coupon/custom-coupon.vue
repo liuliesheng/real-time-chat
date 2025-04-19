@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="padding bg-gradual-red margin radius">
 		优惠券
 	</view>
 </template>

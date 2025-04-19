@@ -540,6 +540,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/vcard/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "名片",
+                "enablePullDownRefresh": true
+            }
+            
+        }
     ],
 	"entryPagePath":"pages/mall/index",
 	"globalStyle":{

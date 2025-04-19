@@ -1,5 +1,5 @@
 <template>
-	<view class="cu-list goods-list">
+	<view class="cu-list goods-list" v-if="list.length">
 		<view class="cu-item padding"
 		      v-if="listType === 'row'"
 		      v-for="item in list"
@@ -22,8 +22,8 @@
 				</view>
 			</view>
 		</view>
-
 	</view>
+	<custom-empty @refresh="$emit('refresh')" v-else />
 </template>
 
 <script>

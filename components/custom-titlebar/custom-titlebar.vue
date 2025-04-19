@@ -1,8 +1,9 @@
 <template>
 	<view class="cu-bar" :class="wrapperClass">
-		<view class="action">
-			<text class="cuIcon-title text-green"></text>
+		<view class="action sub-title">
+			<text class="cuIcon-titles text-green"></text>
 			<text>{{title}}</text>
+			<text class="bg-green"></text>
 		</view>
 		<view class="action" @tap="moreHandle" v-if="isMore">
 			<text class="text-gray text-sm">{{moreText}}</text>

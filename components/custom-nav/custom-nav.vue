@@ -34,10 +34,9 @@
 				this.$emit('itemtap', result);
 			},
 			_dispatch(item) {
-				switch (item.type) {
-					case "page":
-						this.navTo(item.url);
-						break;
+				const type = item.type || 'page';
+				if ('page' === type && item.url) {
+					this.navTo(item.url);
 				}
 			}
 		}

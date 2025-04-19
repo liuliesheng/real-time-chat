@@ -1,8 +1,11 @@
 <template>
-	<custom-page class="page" :showNavbar="showNavbar" navbarBackgroundColor="bg-gradual-red" :loaded="true">
+	<custom-page class="page" :showNavbar="false" navbarBackgroundColor="bg-gradual-red" :loaded="true">
 		<!-- #ifndef H5 -->
-		<block slot="navbar-title">商城</block>
 		<!-- #endif -->
+		<!-- <block slot="navbar-title">商城</block> -->
+		
+		<custom-search :show-search-btn="false" :disabled="true"
+					   @click.native="linkTo" :data-url="'/pages/mall/goods/list'" />
 
 		<mescroll-body ref="mescrollRef" @init="mescrollInit"
 					   :down="{auto:false}" :up="{auto:false,empty:false}"
@@ -17,14 +20,22 @@
 					<image :src="item.cover" mode="aspectFill" v-else></image>
 				</swiper-item>
 			</swiper>
-			
+
+			<custom-nav :list="navList"></custom-nav>
+
 			<custom-coupon></custom-coupon>
-			<custom-pic-group></custom-pic-group>
+
+			<custom-titlebar title="回馈会员"></custom-titlebar>
+			<custom-pic-group class="margin-bottom"></custom-pic-group>
+			
+			<custom-titlebar title="豪礼放送"></custom-titlebar>
+			<custom-pic-group class="margin-bottom"></custom-pic-group>
 
 			<!-- #ifdef MP-WEIXIN -->
 			<ad unit-id="adunit-1125620a898275d6"></ad>
 			<!-- #endif -->
 
+			<custom-titlebar title="精品推荐"></custom-titlebar>
 			<GoodsList :list="goodsList"></GoodsList>
 		</mescroll-body>
 	</custom-page>
@@ -33,6 +44,7 @@
 <script>
 	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 	import GoodsList from './components/goods-list';
+	import navList from '../index/nav-list.js';
 
 	// 在页面中定义插屏广告
 	let interstitialAd = null
@@ -50,6 +62,8 @@
 				// #ifndef H5
 				showNavbar: true,
 				// #endif
+
+				navList: navList,
 
 				swiperList: [],
 				categoryList: [],

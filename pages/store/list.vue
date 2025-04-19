@@ -1,6 +1,6 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<custom-search v-model="search" @search="loadData()" />
+		<custom-search v-model="search" @search="loadData()" :isBackButton="true" />
 		<store-list :list="data" @refresh="loadData()"></store-list>
 	</custom-page>
 </template>
