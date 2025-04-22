@@ -2,7 +2,11 @@
 // 获取配置 $.$config
 module.exports = {
 	// 应用ID
-	access_id: '6e447d93b9cd83fb049de15aa5c55d4e',
+	accessId: '6e447d93b9cd83fb049de15aa5c55d4e',
+	// 应用密钥
+	accessKey: 'sjda8YrbnNvmNL16jRHfv6MWhtZ0e61y',
+	// 签名类型
+	signType: 'md5',
 
 	// 版本号
 	version: '1.0',
@@ -30,13 +34,12 @@ module.exports = {
 	},
 
 	// 当前用户信息发生变更
-	onUserChange: function({detail: user}) {
+	onUserChange: function({ detail: user }) {
 		console.info('user info change:', user);
 	},
 
 	// 跳转地址
-	onLinkTo: function(url, type) {
-	},
+	onLinkTo: function(url, type) {},
 
 	// 腾讯地图key列表
 	QQMapKeys: [],

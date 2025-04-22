@@ -1,7 +1,7 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
 		<custom-search :show-search-btn="false" :disabled="true"
-					   @click.native="linkTo" :data-url="'/pages/store/list'" />
+					   @searchtap="navTo('/pages/store/list')" />
 
 		<custom-nav :list="navList" @itemtap="navItemClick" />
 
@@ -81,7 +81,6 @@
 					return uni.$models.store.getList({
 						lng: res.longitude,
 						lat: res.latitude,
-						keywords: this.search,
 						page: page,
 						nearby: this.tabCur === 'nearby' ? 1 : 0
 					})

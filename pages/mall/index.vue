@@ -1,11 +1,11 @@
 <template>
 	<custom-page class="page" :showNavbar="false" navbarBackgroundColor="bg-gradual-red" :loaded="true">
 		<!-- #ifndef H5 -->
-		<!-- #endif -->
 		<!-- <block slot="navbar-title">商城</block> -->
-		
+		<!-- #endif -->
+
 		<custom-search :show-search-btn="false" :disabled="true"
-					   @click.native="linkTo" :data-url="'/pages/mall/goods/list'" />
+					   @searchtap="navTo('/pages/mall/goods/list')" />
 
 		<mescroll-body ref="mescrollRef" @init="mescrollInit"
 					   :down="{auto:false}" :up="{auto:false,empty:false}"
@@ -27,7 +27,7 @@
 
 			<custom-titlebar title="回馈会员"></custom-titlebar>
 			<custom-pic-group class="margin-bottom"></custom-pic-group>
-			
+
 			<custom-titlebar title="豪礼放送"></custom-titlebar>
 			<custom-pic-group class="margin-bottom"></custom-pic-group>
 

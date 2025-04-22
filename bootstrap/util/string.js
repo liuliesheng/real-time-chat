@@ -1,4 +1,4 @@
-import {random} from "./core";
+import { random } from "./core";
 
 /**
  * 左填充
@@ -49,7 +49,8 @@ export function uuid(prefix = '') {
  */
 export function orderedUuid(prefix = '') {
 	const date = new Date();
-	const timer = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
+	const timer = date.getFullYear() + date.getMonth() + date.getDate() + date.getHours() + date.getMinutes() + date
+		.getSeconds() + date.getMilliseconds();
 	return prefix + timer + random(100000, 999999);
 }
 
@@ -59,7 +60,9 @@ export function orderedUuid(prefix = '') {
  * @return {object}     解析后的数据
  */
 export function parseUrl(url) {
-	const parse = url.match(/^(?:([a-z]+):\/\/)?([\w-]+(?:\.[\w-]+)+)?(?::(\d+))?([\w-\/.]+)?(?:\?((?:\w+=[^#&=\/]*)?(?:&\w+=[^#&=\/]*)*))?(?:#([\w-]+))?$/i);
+	const parse = url.match(
+		/^(?:([a-z]+):\/\/)?([\w-]+(?:\.[\w-]+)+)?(?::(\d+))?([\w-\/.]+)?(?:\?((?:\w+=[^#&=\/]*)?(?:&\w+=[^#&=\/]*)*))?(?:#([\w-]+))?$/i
+		);
 	if (!parse) throw new Error("url格式不正确！");
 	return {
 		scheme: parse[1],
@@ -78,7 +81,9 @@ export function parseUrl(url) {
  */
 export function parseUrlQuery(str) {
 	if (!str) return {};
-	let value = str.split("&"), vars = {}, param;
+	let value = str.split("&"),
+		vars = {},
+		param;
 	for (const val in value) {
 		param = value[val].split("=");
 		vars[param[0]] = param[1];
@@ -97,7 +102,7 @@ export function buildUrl(obj) {
 	const keys = Object.keys(obj);
 	for (let i = 0; i < keys.length; i++) {
 		const key = keys[i];
-		const value = obj[key];
+		const value = typeof obj[key] === 'object' ? JSON.stringify(obj[key]) : obj[key];
 		result.push(key + "=" + encodeURIComponent(value));
 	}
 

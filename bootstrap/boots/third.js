@@ -1,5 +1,6 @@
 import $ from "../$";
-import {collectionUtil, random} from "../util/index";
+import { collectionUtil, random } from "../util/index";
+import md5 from '../libs/md5';
 
 /**
  * 获取腾讯地图实例
@@ -28,3 +29,5 @@ Object.defineProperty($, '$BigNumber', {
 	}
 });
 
+// MD5
+$.$define('md5', md5.hexMD5);

@@ -131,7 +131,7 @@ export function column(arr, columnKey, indexKey) {
 	if (columnKey) {
 		columnKey = columnKey.split(",");
 	}
-	
+
 	arr.forEach(function(it, i) {
 		let item = it;
 		if (columnKey) {
@@ -144,4 +144,19 @@ export function column(arr, columnKey, indexKey) {
 		result[indexKey ? it[indexKey] : i] = item;
 	});
 	return result;
+}
+
+/**
+ * 排序对象
+ * @param {Object} obj
+ * @return {*}
+ */
+export function objectSort(obj) {
+	const newData = {};
+
+	Object.keys(obj).sort().forEach(key => {
+		newData[key] = obj[key];
+	});
+
+	return newData;
 }

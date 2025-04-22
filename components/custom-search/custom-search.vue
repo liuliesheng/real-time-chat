@@ -4,7 +4,7 @@
 			<view class="action" @tap="BackPage" v-if="isBackButton">
 				<text class="cuIcon-back"></text>
 			</view>
-			<view class="search-form round">
+			<view class="search-form round" @tap="onSearchTap">
 				<text class="cuIcon-search"></text>
 				<input type="text" :adjust-position="adjustPosition" :placeholder="placeholder"
 					   :maxlength="maxLength" confirm-type="search"
@@ -38,17 +38,17 @@
 			showSearchBtn: {
 				type: Boolean,
 				default: true
-			},
-			isBackButton: {
-				type: [Boolean, String],
-				default: false
-			},
+			}
 		},
 		data() {
 			return {
 				search: '',
-				CustomBar: this.CustomBar
+				CustomBar: this.CustomBar,
+				isBackButton: false
 			};
+		},
+		created() {
+			this.isBackButton = !uni.$isShowHomeButton();
 		},
 		computed: {
 			style() {
@@ -83,8 +83,8 @@
 			},
 
 			// 被点击
-			onTap() {
-				this.$emit('tap1');
+			onSearchTap(e) {
+				this.$emit('searchtap', e);
 			},
 
 			// 返回上一页

@@ -45,7 +45,14 @@ $.$define('getCurrentPage', function() {
  */
 $.$define('isShowHomeButton', function() {
 	const pages = getCurrentPages();
-	return pages.length === 1;
+	// const currentPage = pages[pages.length - 1];
+	// if (typeof __wxConfig !== 'undefined') {
+	// 	const tabBarLlist = __wxConfig.tabBar.list;
+	// 	for (let i = 0; i < tabBarLlist.length; i++) {
+	// 		const item = tabBarLlist[i];
+	// 	}
+	// }
+	return pages.length <= 1;
 });
 
 /**

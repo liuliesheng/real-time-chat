@@ -147,7 +147,7 @@
 						@tap.stop.prevent="confirmOrder"
 						v-if="info.order_status===20 || info.order_status===30">确认收货</button>
 				<button class="cu-btn bg-red round text-sm margin-left-sm"
-						@tap.stop.prevent="linkTo" :data-url="'./evaluate?id='+item.id"
+						@tap.stop.prevent="linkTo" :data-url="'./evaluate?id='+info.id"
 						v-if="info.order_status===40">去评价</button>
 			</view>
 		</template>
