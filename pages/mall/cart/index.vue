@@ -52,10 +52,9 @@
 						</view>
 					</view>
 				</view>
-				<Empty type="cart" :btns="emptyBtnList" tips="购物车是空的" style="padding-top: 100px;" v-else></Empty>
+				<custom-empty :btns="emptyBtnList" tips="购物车是空的" style="padding-top: 100px;" v-else></custom-empty>
 			</mescroll-uni>
 		</template>
-		<PageLoad @refresh="loadData" v-else />
 
 		<!--底部操作栏-->
 		<view class="cu-bar foot bg-white padding-lr" v-if="data.length">

@@ -64,12 +64,6 @@
 					</view>
 				</view>
 				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/user/cashout/index" data-logged>
-						<text class="cuIcon-circlefill text-grey"></text>
-						<text>我的提现</text>
-					</view>
-				</view>
-				<view class="cu-item arrow">
 					<view class="content" @tap="linkTo" data-url="/pages/user/address/list" data-logged>
 						<text class="cuIcon-locationfill text-grey"></text>
 						<text>收货地址</text>

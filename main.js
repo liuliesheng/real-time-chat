@@ -14,6 +14,7 @@ import MescrollUNI from "@/components/mescroll-uni/mescroll-uni.vue";
 import cuCustom from '@/common/colorui/components/cu-custom.vue';
 
 Vue.component('Empty', Empty);
+Vue.component('custom-empty', Empty);
 Vue.component('LoadMore', LoadMore);
 Vue.component('mescroll-body', MescrollBody);
 Vue.component('mescroll-uni', MescrollUNI);

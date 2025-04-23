@@ -1,33 +1,35 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<view class="amount">
-			<view class="text-sm margin-bottom-xs cf">
-				账户余额（元）
-				<view class="fr cu-btn sm cash-btn" @tap="linkTo" data-url="./cashout">提现</view>
+		<template v-if="loaded">
+			<view class="amount">
+				<view class="text-sm margin-bottom-xs cf">
+					账户余额（元）
+					<view class="fr cu-btn sm cash-btn" @tap="linkTo" data-url="./cashout">提现</view>
+				</view>
+				<view class="amount-text">{{info.cash_amount}}</view>
 			</view>
-			<view class="amount-text">{{info.cash_amount}}</view>
-		</view>
 
-		<view class="grid col-4 grid-square text-center text-sm margin-top">
-			<view class="padding-sm" @tap="linkTo" data-url="./bill-log">
-				<view class="icon">
-					<image src="/static/icon/bill.png" mode="aspectFit"></image>
+			<view class="grid col-4 grid-square text-center text-sm margin-top">
+				<view class="padding-sm" @tap="linkTo" data-url="./bill-log">
+					<view class="icon">
+						<image src="/static/icon/bill.png" mode="aspectFit"></image>
+					</view>
+					<view class="margin-top-xs">收入明细</view>
 				</view>
-				<view class="margin-top-xs">收入明细</view>
-			</view>
-			<view class="padding-sm" @tap="linkTo" data-url="./cashout-log">
-				<view class="icon">
-					<image src="/static/icon/cashout.png" mode="aspectFit"></image>
+				<view class="padding-sm" @tap="linkTo" data-url="./cashout-log">
+					<view class="icon">
+						<image src="/static/icon/cashout.png" mode="aspectFit"></image>
+					</view>
+					<view class="margin-top-xs">提现记录</view>
 				</view>
-				<view class="margin-top-xs">提现记录</view>
-			</view>
-			<view class="padding-sm" @tap="linkTo" data-url="./bank">
-				<view class="icon">
-					<image src="/static/icon/bank.png" mode="aspectFit"></image>
+				<view class="padding-sm" @tap="linkTo" data-url="./bank">
+					<view class="icon">
+						<image src="/static/icon/bank.png" mode="aspectFit"></image>
+					</view>
+					<view class="margin-top-xs">银行卡</view>
 				</view>
-				<view class="margin-top-xs">银行卡</view>
 			</view>
-		</view>
+		</template>
 	</custom-page>
 </template>
 
