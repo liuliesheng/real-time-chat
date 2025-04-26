@@ -181,7 +181,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$models.mall.getOrderDetail(this.id).then(res => {
+				return uni.$models.order.getOrderDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});
@@ -196,7 +196,7 @@
 							return;
 						}
 
-						uni.$models.mall.deleteOrder(this.id, {
+						uni.$models.order.deleteOrder(this.id, {
 							loading: this,
 							hint: this,
 						}).then((res) => {
@@ -216,7 +216,7 @@
 							return;
 						}
 
-						uni.$models.mall.setOrderCancel(this.id, {
+						uni.$models.order.setOrderCancel(this.id, {
 							loading: this,
 							hint: this,
 						}).then((res) => {
@@ -243,7 +243,7 @@
 					success: (res) => {
 						const type = payTypeMap[res.tapIndex];
 
-						uni.$models.mall.getOrderPaymentInfo({
+						uni.$models.order.getOrderPaymentInfo({
 							id: this.id,
 							type: type
 						}, {
@@ -277,7 +277,7 @@
 							return;
 						}
 
-						uni.$models.mall.setOrderReceipt(this.id, {
+						uni.$models.order.setOrderReceipt(this.id, {
 							loading: this,
 							hint: this,
 						}).then((res) => {
@@ -291,7 +291,7 @@
 
 			// 重新解析订单状态
 			parseOrderStatus(state) {
-				const { stateTip, stateTipColor } = uni.$models.mall.parseOrderState(state);
+				const { stateTip, stateTipColor } = uni.$models.order.parseOrderState(state);
 
 				this.info.order_status = state;
 				this.info.stateTip = stateTip;

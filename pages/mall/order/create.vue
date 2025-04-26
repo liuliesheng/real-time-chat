@@ -42,9 +42,11 @@
 								<text class="text-price text-red">{{ item.goods_price }}</text>
 							</view>
 							<view style="display: inline-block;">
-								<uni-number-box :min="1" :max="100" size="sm" :value="item.goods_num"
-												@change="changeItemNum(item,$event)">
+								<uni-number-box :min="1" :max="item.stock>100?100:item.stock"
+												size="sm" :value="item.goods_num"
+												@change="changeItemNum(item,$event)" v-if="item.stock>0">
 								</uni-number-box>
+								<text class="text-red" v-else>商品库存不足</text>
 							</view>
 						</view>
 					</view>
@@ -295,7 +297,7 @@
 
 			// 去支付
 			goPay(order) {
-				uni.$models.mall.getOrderPaymentInfo({
+				uni.$models.order.getOrderPaymentInfo({
 					id: order.id,
 					type: this.payType
 				}, {

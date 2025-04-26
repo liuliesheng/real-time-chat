@@ -3,8 +3,9 @@
 		<view class="cu-dialog spec-dialog" @tap.stop.prevent="stopPrevent">
 
 			<view class="flex padding-lr padding-tb-sm">
-				<image class="spec-image margin-right radius" :src="chooseSku && chooseSku.cover?chooseSku.cover:info.cover"
-				       @tap="previewSkuImage(chooseSku && chooseSku.cover?chooseSku.cover:info.cover)"></image>
+				<image class="spec-image margin-right radius"
+					   :src="chooseSku && chooseSku.cover?chooseSku.cover:info.cover"
+					   @tap="previewSkuImage(chooseSku && chooseSku.cover?chooseSku.cover:info.cover)"></image>
 				<view class="flex-sub">
 					<view class="text-price text-red text-lg">{{chooseSku?chooseSku.price:info.price}}</view>
 					<view>库存：
@@ -22,9 +23,9 @@
 				</view>
 				<view class="flex-wrap spec-val-list margin-top-sm">
 					<view class="cu-tag padding-tb-xs padding-lr round light" style="height: auto;"
-					      v-for="(value,valueIndex) in spec.value" :key="value.id"
-					      :class="chooseSpec[index].id==value.id?'bg-red':''"
-					      @tap.stop="setChoiceSpecValue(index,value)">{{value.title}}</view>
+						  v-for="(value,valueIndex) in spec.value" :key="value.id"
+						  :class="chooseSpec[index].id==value.id?'bg-red':''"
+						  @tap.stop="setChoiceSpecValue(index,value)">{{value.title}}</view>
 				</view>
 			</view>
 
@@ -32,14 +33,15 @@
 				<view class="text-lg text-grey">选择数量</view>
 				<view class="flex-wrap margin-top-sm">
 					<uni-number-box :min="1" :max="100" :value="buyNumber"
-					                @change="buyNumber = $event">
+									@change="buyNumber = $event">
 					</uni-number-box>
 				</view>
 			</view>
 
 			<view class="padding flex flex-direction">
 				<button class="cu-btn bg-red lg" @tap="confirm" v-if="type=='cart'">加入购物车</button>
-				<button class="cu-btn bg-red lg" @tap="confirm" v-else-if="type=='buy'">立即购买</button>
+				<button class="cu-btn bg-red lg" @tap="confirm" v-else-if="type=='buy'"
+						:disabled="allowClick">立即购买</button>
 				<button class="cu-btn bg-red lg" @tap="confirm" v-else>完成</button>
 			</view>
 		</view>
@@ -73,6 +75,10 @@
 				}
 
 				return this.skuList[skuId];
+			},
+			allowClick() {
+				const chooseSku = this.chooseSku;
+				return (chooseSku && chooseSku.stock > 0);
 			}
 		},
 		created() {

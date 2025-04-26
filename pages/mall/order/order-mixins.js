@@ -8,7 +8,7 @@ export default {
 					return;
 				}
 
-				uni.$models.mall.deleteOrder(item.id, {
+				uni.$models.order.deleteOrder(item.id, {
 					loading: this,
 					hint: this,
 				}).then((res) => {
@@ -29,7 +29,7 @@ export default {
 					return;
 				}
 
-				uni.$models.mall.setOrderCancel(item.id, {
+				uni.$models.order.setOrderCancel(item.id, {
 					loading: this,
 					hint: this,
 				}).then((res) => {
@@ -51,7 +51,7 @@ export default {
 			itemList: ['余额支付', '微信支付'],
 			success: (res) => {
 				const type = payTypeMap[res.tapIndex];
-				uni.$models.mall.getOrderPaymentInfo({
+				uni.$models.order.getOrderPaymentInfo({
 					id: item.id,
 					type: type
 				}, {
@@ -85,7 +85,7 @@ export default {
 					return;
 				}
 
-				uni.$models.mall.setOrderReceipt(this.id, {
+				uni.$models.order.setOrderReceipt(this.id, {
 					loading: this,
 					hint: this,
 				}).then((res) => {

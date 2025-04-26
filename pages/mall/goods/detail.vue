@@ -26,7 +26,6 @@
 
 				<view class="flex justify-between margin-top">
 					<view class="">销量: {{ info.sale_count }}</view>
-					<!-- <view class="flex-sub">库存: {{ info.stock }}</view> -->
 					<view class="">浏览量: {{ info.view_count }}</view>
 				</view>
 			</view>

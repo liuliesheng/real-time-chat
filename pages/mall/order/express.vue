@@ -79,7 +79,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$models.mall.getExpressTracks(this.id).then(res => {
+				return uni.$models.order.getExpressTracks(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});

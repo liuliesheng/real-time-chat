@@ -67,7 +67,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$models.mall.getPreGoodsEvaluate(this.id).then(res => {
+				return uni.$models.order.getPreGoodsEvaluate(this.id).then(res => {
 					res.goods_list.forEach(it => {
 						it.score = 0;
 						it.content = '';
@@ -88,7 +88,7 @@
 					};
 				});
 
-				return uni.$models.mall.createGoodsEvaluate({
+				return uni.$models.order.createGoodsEvaluate({
 					order_id: this.id,
 					data: data
 				}, {
