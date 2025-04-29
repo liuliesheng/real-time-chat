@@ -78,7 +78,7 @@
 			},
 			allowClick() {
 				const chooseSku = this.chooseSku;
-				return (chooseSku && chooseSku.stock > 0);
+				return !(chooseSku && chooseSku.stock > 0);
 			}
 		},
 		created() {
