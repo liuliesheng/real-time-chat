@@ -107,4 +107,20 @@ export default {
 	applyCashout(data, options = {}) {
 		return uni.$http.post('user.cashout/apply', data, options);
 	},
+
+	// 用户收藏
+	favorite(topicType, topicId, options = {}) {
+		return uni.$http.get('user.favorite/favorite', {
+			topic_type: topicType,
+			topic_id: topicId,
+		}, options);
+	},
+
+	// 用户取消收藏
+	unfavorite(topicType, topicId, options = {}) {
+		return uni.$http.get('user.favorite/unfavorite', {
+			topic_type: topicType,
+			topic_id: topicId,
+		}, options);
+	},
 }

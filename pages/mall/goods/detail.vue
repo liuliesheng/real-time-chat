@@ -195,11 +195,11 @@
 					hint: this
 				};
 				if (!this.info.is_favorite) {
-					return uni.$models.favorite.favoriteGoods(this.id, options).then(res => {
+					return uni.$models.mall.favoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 1;
 					});
 				} else {
-					return uni.$models.favorite.unfavoriteGoods(this.id, options).then(res => {
+					return uni.$models.mall.unfavoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 0;
 					});
 				}

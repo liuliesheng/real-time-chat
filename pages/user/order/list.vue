@@ -23,7 +23,7 @@
 						  v-for="(item,index) in tabItem.data"
 						  :key="item.id">
 						<view class="cu-item shadow" @tap="linkTo"
-							  :data-url="'/pages/mall/order/detail?id='+item.id">
+							  :data-url="'./detail?id='+item.id">
 							<view class="padding flex flex-wrap">
 								<text class="flex-sub">{{item.create_time}}</text>
 								<text class="state" :style="{color: item.stateTipColor}">{{item.stateTip}}</text>

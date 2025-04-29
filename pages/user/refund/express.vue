@@ -59,7 +59,7 @@
 		methods: {
 			// 加载物流公司
 			loadExpressList() {
-				return uni.$http.get('plugin/express/index').then((res) => {
+				return uni.$models.getExpressList().then((res) => {
 					this.expressList = res;
 				});
 			},
@@ -90,7 +90,7 @@
 				}
 
 				data.id = this.id;
-				uni.$models.mall.submitRefundDelivery(data, {
+				uni.$models.order.submitRefundDelivery(data, {
 					loading: this,
 					hint: this
 				}).then((res) => {

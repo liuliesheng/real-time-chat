@@ -71,60 +71,7 @@
 				"navigationBarTitleText": "下单"
 			}
 		},
-		{
-			"path": "pages/mall/order/list",
-			"style": {
-				"navigationBarTitleText": "订单列表"
-			}
-		},
-		{
-			"path": "pages/mall/order/detail",
-			"style": {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "订单详情"
-			}
-		},
-		{
-			"path": "pages/mall/order/express",
-			"style": {
-				"navigationBarTitleText": "物流信息",
-				"enablePullDownRefresh": true
-			}
-		},
-		{
-			"path": "pages/mall/refund/apply",
-			"style": {
-				"navigationBarTitleText": "申请退款/退货"
-			}
-		},
-		{
-			"path": "pages/mall/refund/list",
-			"style": {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "退款/售后"
-			}
-		},
-		{
-			"path": "pages/mall/refund/detail",
-			"style": {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "退款详情"
-			}
-		},
-		{
-			"path": "pages/mall/refund/express",
-			"style": {
-				"navigationBarTitleText": "填写物流",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/mall/order/evaluate",
-			"style": {
-				"navigationBarTitleText": "我要评价",
-				"enablePullDownRefresh": false
-			}
-		},
+		
 		{
 			"path": "pages/mall/favorite/index",
 			"style": {
@@ -426,6 +373,60 @@
 			"style": {
 				"navigationBarTitleText": "提现银行卡",
 				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/user/order/list",
+			"style": {
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+		{
+			"path": "pages/user/order/detail",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/user/order/express",
+			"style": {
+				"navigationBarTitleText": "物流信息",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/user/refund/apply",
+			"style": {
+				"navigationBarTitleText": "申请退款/退货"
+			}
+		},
+		{
+			"path": "pages/user/refund/list",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "退款/售后"
+			}
+		},
+		{
+			"path": "pages/user/refund/detail",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTitleText": "退款详情"
+			}
+		},
+		{
+			"path": "pages/user/refund/express",
+			"style": {
+				"navigationBarTitleText": "填写物流",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/user/order/evaluate",
+			"style": {
+				"navigationBarTitleText": "我要评价",
+				"enablePullDownRefresh": false
 			}
 		},
 		// 鉴权相关

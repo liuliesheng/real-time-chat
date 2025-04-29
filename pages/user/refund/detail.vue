@@ -92,7 +92,7 @@
 			<button class="cu-btn round text-sm margin-left-sm"
 			        @tap.stop.prevent="onDeleteRefund">删除售后单</button>
 			<button class="cu-btn round text-sm margin-left-sm"
-			        @tap.stop.prevent="linkTo" :data-url="'/pages/mall/refund/express?id='+info.id"
+			        @tap.stop.prevent="linkTo" :data-url="'/pages/user/refund/express?id='+info.id"
 			        v-if="info.status==10">填写发货物流</button>
 		</view>
 	</view>
@@ -130,7 +130,7 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$models.mall.getRefundDetail(this.id).then(res => {
+				return uni.$models.order.getRefundDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
 				});

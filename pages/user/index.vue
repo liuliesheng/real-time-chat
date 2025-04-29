@@ -107,7 +107,7 @@
 
 <script>
 import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins";
-import OrderStatusNav from '@/pages/mall/components/order-status-nav.vue';
+import OrderStatusNav from './components/order-status-nav.vue';
 
 export default {
 		mixins: [MescrollMixin],

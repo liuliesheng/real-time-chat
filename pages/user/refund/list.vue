@@ -1,11 +1,8 @@
 <template>
-	<view class="page" v-if="loaded">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<!-- 订单列表 -->
 		<view class="cu-card dynamic no-card margin-top" v-for="(item,index) in data" :key="item.id">
-			<view class="cu-item shadow" @tap="linkTo" :data-url="'/pages/mall/refund/detail?id='+item.id">
+			<view class="cu-item shadow" @tap="linkTo" :data-url="'./detail?id='+item.id">
 				<view class="padding flex flex-wrap">
 					<text class="flex-sub">{{item.create_time}}</text>
 					<text class="type">
@@ -53,18 +50,17 @@
 
 				<view class="flex justify-end padding-lr padding-tb-sm">
 					<button class="cu-btn round text-sm margin-left-sm"
-					        @tap.stop.prevent="onDeleteRefund(index)">删除售后单</button>
+							@tap.stop.prevent="onDeleteRefund(index)">删除售后单</button>
 					<button class="cu-btn round text-sm margin-left-sm"
-					        @tap.stop.prevent="linkTo" :data-url="'/pages/mall/refund/express?id='+item.id"
-					        v-if="item.status==10">填写发货物流</button>
+							@tap.stop.prevent="linkTo" :data-url="'./express?id='+item.id"
+							v-if="item.status==10">填写发货物流</button>
 					<button class="cu-btn round bg-red text-sm margin-left-sm" @tap="linkTo"
-					        :data-url="'/pages/mall/refund/detail?id='+item.id">查看详情</button>
+							:data-url="'./detail?id='+item.id">查看详情</button>
 				</view>
 
 			</view>
 		</view>
-	</view>
-	<PageLoad v-else />
+	</custom-page>
 </template>
 
 <script>
@@ -84,8 +80,6 @@
 		},
 		onLoad() {
 			this.loadData();
-
-			console.log(this, refundMixin, refundListMixin)
 		},
 		onPullDownRefresh() {
 			this.loadData().finally(() => {
@@ -102,7 +96,7 @@
 		methods: {
 			// 加载数据
 			loadData: function(page = 1) {
-				return uni.$models.mall.getRefundList({
+				return uni.$models.order.getRefundList({
 					keywords: this.keywords,
 					page: page,
 				}).then(res => {

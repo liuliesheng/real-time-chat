@@ -1,13 +1,14 @@
 <template>
 	<view class="floating-btn-group">
 		<template v-for="(item,index) in list">
-			<button class="floating-btn-action cu-btn cuIcon bg-white shadow"
+			<button class="floating-btn-action cu-btn cuIcon"
 					:class="item.isCareful?'animated infinite bounceIn':''"
 					:open-type="item.type"
 					@tap="itemTapHandle(item)"
 					v-if="isShow(item.type)">
 				<image :src="item.icon" mode="aspectFill" v-if="item.icon"></image>
-				<text :class="cuIcon[item.type]" v-else></text>
+				<text :class="cuIcon[item.type]" v-else-if="item.type"></text>
+				<text class="text" v-else>{{item.text}}</text>
 			</button>
 		</template>
 	</view>
@@ -77,6 +78,8 @@
 		padding: 0;
 		font-size: 28px;
 		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.2);
+		color: white;
 	}
 
 	.floating-btn-group .floating-btn-action:not(:last-child) {
@@ -89,5 +92,10 @@
 		height: 90rpx;
 		left: 0;
 		top: 0;
+	}
+
+	.floating-btn-action text {
+		font-size: 12px;
+		line-height: 90rpx;
 	}
 </style>

@@ -10,6 +10,11 @@ export default {
 			id: id
 		}, options);
 	},
+	
+	// 获取商品评价列表
+	getGoodsEvaluateList(query, options = {}) {
+		return uni.$http.get('/app/order/goods_evaluate', query, options);
+	},
 
 	// 获取商品浏览记录
 	getGoodsBrowseList(query, options = {}) {
@@ -23,16 +28,12 @@ export default {
 
 	// 收藏商品
 	favoriteGoods(topicId, options = {}) {
-		return uni.$http.get('favorite/favorite', {
-			topic_id: topicId,
-		}, options);
+		return uni.$models.user.favorite('goods', topicId, options);
 	},
 
 	// 取消收藏
 	unfavoriteGoods(topicId, options = {}) {
-		return uni.$http.get('favorite/unfavorite', {
-			topic_id: topicId
-		}, options);
+		return uni.$models.user.unfavorite('goods', topicId, options);
 	},
 
 	// 获取分类列表

@@ -30,6 +30,26 @@
 
 			<custom-titlebar title="豪礼放送"></custom-titlebar>
 			<custom-pic-group class="margin-bottom"></custom-pic-group>
+			
+			<custom-poster></custom-poster>
+			
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			<custom-count-down></custom-count-down>
+			
+			<custom-pk></custom-pk>
+			
+			<custom-floating-button :list="[{text:'首页'}]"></custom-floating-button>
+			
+			<custom-number-keyboard></custom-number-keyboard>
+			
+			<custom-qrcode></custom-qrcode>
 
 			<!-- #ifdef MP-WEIXIN -->
 			<ad unit-id="adunit-1125620a898275d6"></ad>

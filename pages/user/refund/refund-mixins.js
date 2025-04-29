@@ -9,7 +9,7 @@ export default {
 						return;
 					}
 
-					uni.$models.mall.deleteRefund(item.id, {
+					uni.$models.order.deleteRefund(item.id, {
 						loading: this,
 						hint: this,
 					}).then((res) => {

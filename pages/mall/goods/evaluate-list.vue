@@ -1,6 +1,7 @@
 <template>
 	<custom-page class="page" :loaded="loaded" @refresh="loadData">
 		<GoodsEvaluateList :list="data" />
+		<custom-empty v-if="!data.length"></custom-empty>
 	</custom-page>
 </template>
 

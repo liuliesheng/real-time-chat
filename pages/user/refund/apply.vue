@@ -104,7 +104,7 @@
 		methods: {
 			// 加载预退款申请信息
 			loadData() {
-				return uni.$models.mall.getRefundApplyInfo({
+				return uni.$models.order.getRefundApplyInfo({
 					order_goods_id: this.orderGoodsId
 				}).then((res) => {
 					this.info = res;
@@ -126,7 +126,7 @@
 				data.type = this.typeList[this.typeIndex].value;
 				data.receipt_status = this.receiptStatusList[this.receiptStatusIndex].value;
 				data.apply_desc = this.info.apply_desc_list[this.applyDescIndex].value;
-				uni.$models.mall.applyRefund(data, {
+				uni.$models.order.applyRefund(data, {
 					loading: this,
 					hint: this
 				}).then((res) => {
