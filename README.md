@@ -551,18 +551,16 @@ console.log('是否为数组：', wx.Validate.is([], 'array'));
 wx.collectionUtil.shuffle(arr)
 
 // 从 list中产生一个随机样本。传递一个数字表示从list中返回n个随机元素。否则将返回一个单一的随机项。
-wx.collectionUtil.sample = function(arr, n, guard)
+wx.collectionUtil.sample(arr, n, guard)
 
 // 将多维数组拉平
 wx.collectionUtil.flatten(array, shallow)
 
 // 返回传入 arrays（数组）交集。结果中的每个值是存在于传入的每个arrays（数组）里。
-wx.collectionUtil.intersection(arr
-..)
+wx.collectionUtil.intersection(...arr)
 
 // 取两个数组的差集
-wx.collectionUtil.difference(arr
-...)
+wx.collectionUtil.difference(...arr)
 
 // 它类似于map，但是这用于对象。转换每个属性的值。
 wx.collectionUtil.mapObject(obj, iteratee)
@@ -739,3 +737,44 @@ components/custom-titlebar 【标题栏】
 components/custom-uploader 【上传器】
 
 components/custom-verify-code 【验证码】
+
+
+## 迭代计划
+
+### 电商模板
+- 商品列表组件
+- 商品详情页面优化
+- 立即下单页面优化
+- 订单列表优化
+- 订单详情优化
+- 退换货列表优化
+- 退换货详情优化
+
+### 自定义组件
+- 数字键盘
+- 倒计时
+- 二维码
+- 海报
+- PK
+- 悬浮按钮优化
+- 自定义页面解析器
+
+### 官网模板
+- 官网首页
+- 产品列表页
+- 产品详情页
+- 文章列表页
+- 文章详情页
+- 案例中心
+
+### 个人中心
+- 个人中心改版
+- 用户信息修改
+- 用户提现页面优化
+- 用户账户余额页面优化
+- 用户邀请人列表
+- 实名认证
+
+### 工具方法
+- 简化调用链
+- 语义化
