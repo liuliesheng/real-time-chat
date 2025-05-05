@@ -527,7 +527,43 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/index/video",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频播放",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/rank",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "排行榜",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/sign",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "手写签名",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/lottery-draw",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "抽奖",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5

@@ -13,6 +13,10 @@ textarea {
 	box-sizing: border-box;
 }
 
+image {
+	font-size: 0;
+}
+
 form {
 	display: block;
 }
@@ -142,6 +146,10 @@ navigator {
 	font-size: 12px;
 }
 
+.bold {
+	font-weight: 600;
+}
+
 .text-left {
 	text-align: left !important;
 }
@@ -234,8 +242,13 @@ navigator {
 	border-radius: 40upx !important;
 }
 
+/* 点击元素通用样式 */
+.tap {
+	opacity: 0.85;
+}
+
 /**
- * 图片懒样式
+ * 图片懒
  */
 .image-wrapper {
 	position: relative;
@@ -266,4 +279,45 @@ navigator {
 .image-wrapper.loaded image {
 	transition: .7s;
 	opacity: 1 !important;
+}
+
+image.img-full {
+	width: 100%;
+	height: auto;
+}
+
+/**
+ * 视频
+ */
+.video-wrapper {}
+
+/**
+ * 定位 
+ */
+.absolute-lt {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+}
+
+.absolute-rt {
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	top: 0;
+}
+
+.absolute-lb {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	bottom: 0;
+}
+
+.absolute-rb {
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	bottom: 0;
 }

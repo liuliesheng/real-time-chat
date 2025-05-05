@@ -1,47 +1,44 @@
 <template>
-	<popup ref="guipopupfornk"
-			   position="bottom" :canCloseByShade="canCloseByShade">
-		<view style="background-color:#F6F7F8;" @tap.stop.prevent="stopfun">
-			<text class="keyboard-res block" v-if="showInputRes"
-				  :style="{color:resultColor, fontSize:resultSize}">{{resVal}}</text>
-			<view class="keyboard flex justify-between">
-				<view class="keyboard-left flex flex-wrap justify-between">
-					<text v-for="(item, index) in [1,2,3,4,5,6,7,8,9]" :key="index"
-						  class="keyboard-keys block"
-						  :data-keynumber="item"
-						  :style="{
+	<view style="background-color:#F6F7F8;" @tap.stop.prevent="stopfun">
+		<text class="keyboard-res block" v-if="showInputRes"
+			  :style="{color:resultColor, fontSize:resultSize}">{{resVal}}</text>
+		<view class="keyboard flex justify-between">
+			<view class="keyboard-left flex flex-wrap justify-between">
+				<text v-for="(item, index) in [1,2,3,4,5,6,7,8,9]" :key="index"
+					  class="keyboard-keys block"
+					  :data-keynumber="item"
+					  :style="{
 						backgroundColor:tapIndex == item ? tapBgColor : '#FFFFFF', 
 						color : tapIndex == item ? '#FFFFFF' : '#2B2E3D'
 					}"
-						  @tap.stop="inputNow">{{item}}</text>
-					<text class="keyboard-keys block"
-						  :style="{
+					  @tap.stop="inputNow">{{item}}</text>
+				<text class="keyboard-keys block"
+					  :style="{
 						width: isPoint ? '259rpx':'538rpx',
 						backgroundColor:tapIndex == 0 ? tapBgColor : '#FFFFFF',
 						color : tapIndex == 0 ? '#FFFFFF' : '#2B2E3D'
 					}"
-						  data-keynumber="0" @tap.stop="inputNow">0</text>
-					<text v-if="isPoint" class="keyboard-keys"
-						  :style="{
+					  data-keynumber="0" @tap.stop="inputNow">0</text>
+				<text v-if="isPoint" class="keyboard-keys"
+					  :style="{
 						width:'259rpx',
 						backgroundColor:tapIndex == '.' ? tapBgColor : '#FFFFFF',
 						color : tapIndex == '.' ? '#FFFFFF' : '#2B2E3D'
 					}"
-						  data-keynumber="." @tap.stop="inputNow">.</text>
-				</view>
-				<view class="keyboard-right flex flex-direction align-center">
-					<text class="keyboard-keys cuIcon-backdelete block"
-						  :style="{
+					  data-keynumber="." @tap.stop="inputNow">.</text>
+			</view>
+			<view class="keyboard-right flex flex-direction align-center">
+				<text class="keyboard-keys cuIcon-backdelete block"
+					  :style="{
 						backgroundColor : tapIndex == -3 ? tapBgColor : '#FFFFFF',
 						color : tapIndex == -3 ? '#FFFFFF' : '#2B2E3D'
 					}"
-						  :data-keynumber="-3" @tap.stop="deleteNow"></text>
-					<text class="keyboard-keys keyboard-done block"
-						  :style="{backgroundColor:tapBgColor}" @tap.stop="done">{{doneBtnName}}</text>
-				</view>
+					  :data-keynumber="-3" @tap.stop="deleteNow"></text>
+				<text class="keyboard-keys keyboard-done block"
+					  :style="{backgroundColor:tapBgColor}" @tap.stop="done">{{doneBtnName}}</text>
 			</view>
 		</view>
-	</popup>
+	</view>
 </template>
 <script>
 	export default {

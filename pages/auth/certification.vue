@@ -1,13 +1,25 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<view class="padding light" :class="statusClass" v-if="form.status!==-1">
-			<text class="cuIcon-infofill margin-right-xs"></text>
-			<text v-if="form.status===0">审核中...</text>
-			<text v-else-if="form.status===1">审核成功！</text>
-			<text v-else-if="form.status===2">审核失败：{{form.audit_msg}}</text>
-		</view>
+		<custom-state-tips :state="form.status" :errorMsg="form.audit_msg"></custom-state-tips>
 
 		<form @submit="onSubmit">
+			<view class="margin-top padding-lr">
+				<text class="idcard-text text-gray">身份证照片 ( 个人信息面 )</text>
+			</view>
+			<view class="idcard-items img-in flex justify-center">
+				<view class="idcard-items-image" @tap="selectImg1">
+					<image :src="idCard1" mode="widthFix"></image>
+				</view>
+			</view>
+			<view class="margin-top padding-lr">
+				<text class="idcard-text text-gray">身份证照片 ( 国徽图案面 )</text>
+			</view>
+			<view class="idcard-items flex justify-center">
+				<view class="idcard-items-image" @tap="selectImg2">
+					<image :src="idCard2" mode="widthFix"></image>
+				</view>
+			</view>
+
 			<view class="cu-form-group margin-top">
 				<view class="title required">真实姓名</view>
 				<input v-model="form.realname" placeholder="请输入" />
@@ -34,23 +46,16 @@
 		data() {
 			return {
 				form: {},
-				loaded: false
+				loaded: false,
+
+				idCard1: 'https://img-cdn-tc.dcloud.net.cn/uploads/article/20210107/e53bf48607dcf795ab78e419dc5cf432.png',
+				idCard2: 'https://img-cdn-tc.dcloud.net.cn/uploads/article/20210107/dac9c5c703b2a0bcd254a919d0da5632.png'
 			}
 		},
 		computed: {
 			isDisabled() {
 				return !this.loaded || (this.form.status != 2 && this.form.status != -1);
 			},
-			statusClass() {
-				const status = this.form.status;
-				if (status === 1) {
-					return 'bg-cyan';
-				} else if (status === 2) {
-					return 'bg-red';
-				}
-
-				return 'bg-yellow';
-			}
 		},
 		onLoad() {
 			this.loadData();
@@ -72,6 +77,23 @@
 					};
 					this.loaded = true;
 				});
+			},
+
+			selectImg1: function() {
+				uni.chooseImage({
+					count: 1,
+					success: (res) => {
+						this.idCard1 = res.tempFilePaths[0];
+					}
+				})
+			},
+			selectImg2: function() {
+				uni.chooseImage({
+					count: 1,
+					success: (res) => {
+						this.idCard2 = res.tempFilePaths[0];
+					}
+				})
 			},
 
 			// 申请认证
@@ -100,5 +122,37 @@
 </script>
 
 <style>
+	.page {
+		background-color: white;
+	}
 
+	.idcard-main {
+		margin: 25rpx;
+	}
+
+	.idcard-desc {
+		background-color: #FFFFFF;
+		color: #666666;
+		line-height: 56rpx;
+		font-size: 26rpx;
+		padding: 20rpx;
+		border-radius: 10rpx;
+	}
+
+	.idcard-text {
+		line-height: 1.8em;
+		margin-top: 30rpx;
+		color: #666666;
+	}
+
+	.idcard-items {
+		background-color: #FFFFFF;
+		padding: 50rpx;
+		/* border-radius: 10rpx; */
+		margin-top: 15rpx;
+	}
+
+	.idcard-items-image {
+		width: 80%;
+	}
 </style>
