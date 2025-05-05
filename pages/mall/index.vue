@@ -23,33 +23,60 @@
 
 			<custom-nav :list="navList"></custom-nav>
 
-			<custom-coupon></custom-coupon>
+			<custom-titlebar title="优惠券"></custom-titlebar>
+			<template v-for="coupon in coupons">
+				<custom-coupon :coupon="coupon" class="margin"></custom-coupon>
+			</template>
 
 			<custom-titlebar title="回馈会员"></custom-titlebar>
 			<custom-pic-group class="margin-bottom"></custom-pic-group>
 
 			<custom-titlebar title="豪礼放送"></custom-titlebar>
 			<custom-pic-group class="margin-bottom"></custom-pic-group>
-			
+
+			<custom-titlebar title="商品海报"></custom-titlebar>
 			<custom-poster></custom-poster>
-			
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			<custom-count-down></custom-count-down>
-			
-			<custom-pk></custom-pk>
-			
-			<custom-floating-button :list="[{text:'首页'}]"></custom-floating-button>
-			
-			<custom-number-keyboard></custom-number-keyboard>
-			
+
+			<custom-titlebar title="二维码"></custom-titlebar>
 			<custom-qrcode></custom-qrcode>
+
+			<custom-titlebar title="倒计时"></custom-titlebar>
+			<view class="margin">
+				<text class="h6 color-gray bold">默认属性</text>
+			</view>
+			<view class="margin-top">
+				<custom-count-down :timer="time1"></custom-count-down>
+			</view>
+			<view class="margin">
+				<text class="h6 color-gray bold">边框形式</text>
+			</view>
+			<view class="margin-top">
+				<custom-count-down :timer="time2"
+								   fontColor="#008AFF" borderColor="#008AFF" fontSize="22rpx"
+								   spacing="10rpx" splitorColor="#008AFF"></custom-count-down>
+			</view>
+			<view class="margin">
+				<text class="h6 color-gray bold">背景形式</text>
+			</view>
+			<view class="margin-top">
+				<custom-count-down :timer="time2"
+								   fontColor="#FFFFFF" bgColor="#008AFF" borderColor="#008AFF" fontSize="22rpx"
+								   spacing="10rpx" splitorColor="#008AFF"></custom-count-down>
+			</view>
+			<view class="margin">
+				<text class="h6 color-gray bold">结束监听</text>
+			</view>
+			<view class="margin-top">
+				<custom-count-down :splitorText="[':',':',':','']" :timer="time3" @endDo="endDo"></custom-count-down>
+			</view>
+
+			<custom-titlebar title="PK"></custom-titlebar>
+			<custom-pk :title="title" :status="PKStatus" :progress="PKProgress" @choose="choose"></custom-pk>
+
+			<custom-floating-button :list="[{text:'首页'}]"></custom-floating-button>
+
+			<custom-titlebar title="数字键盘"></custom-titlebar>
+			<custom-number-keyboard></custom-number-keyboard>
 
 			<!-- #ifdef MP-WEIXIN -->
 			<ad unit-id="adunit-1125620a898275d6"></ad>
@@ -72,7 +99,7 @@
 	export default {
 		mixins: [MescrollMixin],
 		components: {
-			GoodsList
+			GoodsList,
 		},
 		data() {
 			return {
@@ -92,7 +119,52 @@
 				more: true,
 				goodsList: [],
 
-				loaded: false
+				loaded: false,
+
+				coupons: [{
+						color: '#9F6DFA',
+						ltBg: "#FFFFFF",
+						height: '180rpx',
+						unit: "￥",
+						number: 5,
+						txt: "满50元可用",
+						title: "全场通用券",
+						desc: "有效期至 2018-05-20",
+						btn: "领取",
+						drawed: "已抢2100张"
+					},
+					{
+						color: '#FF3456',
+						ltBg: "#FFFFFF",
+						height: '180rpx',
+						unit: "￥",
+						number: 10,
+						txt: "满50元可用",
+						title: "电器专场用券",
+						desc: "有效期至 2018-05-28",
+						btn: "已领取",
+						drawed: "已抢2800张"
+					},
+					{
+						color: '#FF8830',
+						ltBg: "#FFFFFF",
+						height: '180rpx',
+						unit: "￥",
+						number: 100,
+						txt: "满500元可用",
+						title: "服饰专场用券",
+						desc: "有效期至 2018-05-28",
+						btn: "领券"
+					}
+				],
+
+				time1: uni.$timeUtil.format.datetime(new Date().getTime() + 100000, true),
+				time2: uni.$timeUtil.format.datetime(new Date().getTime() + 100000, true),
+				time3: uni.$timeUtil.format.datetime(new Date().getTime() + 100000, true),
+
+				title: ['赞同', '反对'],
+				PKProgress: [70, 30, '7000 票', '3000 票'],
+				PKStatus: 'button'
 			};
 		},
 		onLoad() {

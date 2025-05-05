@@ -82,9 +82,28 @@ Object.defineProperty($, '$$define', {
 	}
 });
 
+// 使用回调函数返回属性值
+Object.defineProperty($, '$$defineOfFunc', {
+	enumerable: true,
+	get: function() {
+		return function(obj, key, value, isEnumerable = true) {
+			Object.defineProperty(obj, key, {
+				enumerable: isEnumerable,
+				get: value
+			});
+		};
+	}
+});
+
+
 // 增加wx对象添加新属性
 $.$$define($, '$define', function(key, value, isEnumerable = true) {
 	$.$$define($, '$' + key, value, isEnumerable);
+});
+
+// 增加wx对象使用回调函数返回属性值
+$.$define('defineOfFunc', function(key, value, isEnumerable = true) {
+	$.$$defineOfFunc($, '$' + key, value, isEnumerable);
 });
 
 // 定义平台

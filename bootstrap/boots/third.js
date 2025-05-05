@@ -22,12 +22,17 @@ $.$define('getQQMap', function() {
 });
 
 // 双精度小数点库
-Object.defineProperty($, '$BigNumber', {
-	enumerable: true,
-	get: function() {
-		return require('../libs/bignumber');
-	}
+$.$defineOfFunc('BigNumber', function() {
+	return require('../libs/bignumber');
 });
 
 // MD5
 $.$define('md5', md5.hexMD5);
+
+/**
+ * 获取二维码实例
+ * @return {QRCode}
+ */
+$.$defineOfFunc('QRCode', function() {
+	return require('../libs/qrcode');
+});
