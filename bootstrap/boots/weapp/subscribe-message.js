@@ -1,6 +1,6 @@
-// 尝试订阅消息
 import $ from "../../$";
 
+// 尝试订阅消息
 $.$define('tryRequestSubscribeMessage', function(options) {
 	return new Promise(function(resolve) {
 		$.getSetting({

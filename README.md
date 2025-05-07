@@ -15,7 +15,7 @@
 8. 日期时间的转换
 9. 数据验证（快速验证数据是否合法）
 
-#### 软件架构
+## 软件架构
 
 **遵循配置优先，从繁杂的业务逻辑中解脱您的双手，让更多细节变得清晰可控**，框架本身提供的API是通过服务注册模式完成的， 在任何地方均可使用uni.$[API名称]进行使用，如：uni.$getUserInfo()
 
@@ -423,6 +423,79 @@ uni.$upload({
 }).then(() => console.log, err => console.error)
 ```
 
+### API概览
+
+```javascript
+// Promise 扩展终态方法
+Promise.prototype.finally(callback);
+
+// 获取系统信息
+uni.$systemInfo;
+
+// 是否在开发者工具
+uni.$isDev;
+
+// 授权是否被拒绝
+uni.$isAuthDeny(err);
+
+// 当前页面是否正在显示
+uni.$isShowPage(pageObj);
+
+// 获取当前页面
+uni.$getCurrentPage();
+
+// 当前页面需要显示返回首页按钮
+uni.$isShowHomeButton();
+
+// 返回上一页面实例
+uni.$prePage(cb);
+
+// 数组转对象
+uni.$arr2obj(prefix, data, initIndex = 0);
+
+// 增加对微信原始API支持promise
+uni.$promise.xxx;
+
+// 延迟返回上一页
+uni.$back(delay = 1500, options = {});
+
+// 错误提示
+$.$hintError(msg);
+
+// 成功提示
+$.$hintSuccess(msg);
+
+// 获取用户信息
+uni.$getUserInfo(options = {});
+
+// 尝试订阅消息
+$.$tryRequestSubscribeMessage(options);
+
+// 自动尝试订阅模板消息
+$.$autoRequestSubscribeMessage();
+
+
+// 获取腾讯地图实例
+$.$getQQMap();
+
+// 双精度小数点库
+$.$BigNumber();
+
+// MD5
+$.$md5();
+
+// 获取二维码实例
+$.$QRCode();
+
+// 常用方法
+$.$random();
+$.$isEmpty(obj);
+$.$isArray(obj);
+$.$isObject(obj);
+$.$toObject(obj);
+$.$assign(obj, newObj);
+```
+
 ### 事件
 
 跨页面数据传递，将不用在通过getApp().globalData进行传递，使用getApp().globalData进行传递数据时，很容易出现混乱， 而且不利于维护，通过事件进行数据传递，可解锁更多的场景实现。
@@ -480,6 +553,50 @@ module.exports = {
 	}
 };
 ```
+
+### 缓存
+
+框架实现了一个简单的缓存处理器，它支持设置到期时间后自动清楚缓存数据，在一些页面需要数据的地方，特别有用
+
+```javascript
+// 获取缓存
+uni.$cache.get(key, defaultValue = null);
+
+// 设置缓存
+uni.$cache.set(key, value, ttl = 3600)
+
+// 清楚缓存
+uni.$cache.forget(key)
+```
+
+### 用户
+
+用户鉴权的机制，已有原来的getApp().globalData全局变量改为内部私有管控，全局变量随意性操作比较大，在某些情况下它将变得不可控，而使用内部私有管控，会起到一定的隔离性与简洁性
+
+```javascript
+// 获取当前登录sessionID
+uni.$getSessionId()
+
+// 设置当前登录sessionID
+uni.$setSessionId(sessionId)
+
+// 用户信息
+uni.$user.value();
+uni.$user.notify(data);
+uni.$user.subscribe(callback);
+uni.$user.unsubscribe(callback);
+
+// 主动调用登录服务器
+uni.$login(options); // 内部实现逻辑略显复杂，请自行观看
+
+// 当前是否已登录服务器
+uni.$isLogged();
+
+// 主动登出服务器
+uni.$logout()
+```
+
+> 用户信息是基于订阅者实现的，在某些场景下，你的多个页面可能需要实时更新同步到最新的用户信息，避免过多的网络请求造成服务器损耗
 
 ### 数据验证
 
@@ -542,6 +659,31 @@ console.log('是否是数字：', wx.Validate.is('48.56', 'number'));
 console.log('是否为整型：', wx.Validate.is('48.56', 'integer'));
 console.log('是否为布尔值：', wx.Validate.is('false', 'boolean'));
 console.log('是否为数组：', wx.Validate.is([], 'array'));
+```
+
+### 数据模型
+
+此出的模型并非真正意义上的模型，他并未实现ORM的特点，而是对服务器接口的一种封装。 它的存在意义是为了减少书写长长的接口地址以及对接口返回的结果做更多的处理而存在
+它在某种意义上也可以有效降低你在切换后端接口或者后端框架的情况下改动代码的最小化
+
+> 所有的模型都存储在 /common/models 目录下，由 index.js 统一对外导出，并会挂载到uni.$model 全局变量下，在使用过程中也非常便捷
+
+***代码示例***
+
+```javascript
+uni.$models.user.get();
+uni.$models.user.set();
+uni.$models.basic.config();
+
+// 更多模型方法请参考 /common/models 目录下的文件
+```
+
+### 服务
+
+此出的服务并未做过多的处理，基本上和数据模型处理方式是一样的，只不过挂载的全局变量名称是 uni.$service ，服务的意义在于对业务没有强依赖，或者你需要提供一些全局任何地方都能访问的API时，它是特别有意义的。
+
+```javascript
+uni.$service.xxx
 ```
 
 ### 工具方法
@@ -684,6 +826,24 @@ module.exports = {
 module.exports = {};
 ```
 
+### Vue 的扩展
+
+```javascript
+// 调用生命周期钩子函数
+Vue.prototype.$callHook(name)
+
+
+// 价格过滤器
+Vue.filter('price', function(price, fixed = 0){});
+
+
+// 日期
+Vue.filter('date', function(timeStamp, isSeconds = false){})
+
+// 友好的日期
+Vue.filter('firendlyDate', function(timeStamp) {})
+```
+
 ### 组件概览
 
 components/custom-auth-modal 【用户授权】
@@ -738,10 +898,10 @@ components/custom-uploader 【上传器】
 
 components/custom-verify-code 【验证码】
 
-
 ## 迭代计划
 
 ### 电商模板
+
 - 商品列表组件
 - 商品详情页面优化
 - 立即下单页面优化
@@ -751,8 +911,9 @@ components/custom-verify-code 【验证码】
 - 退换货详情优化
 
 ### 自定义组件
-- 数字键盘
-- 倒计时
+
+- ~~数字键盘~~
+- ~~倒计时~~
 - 二维码
 - 海报
 - PK
@@ -760,6 +921,7 @@ components/custom-verify-code 【验证码】
 - 自定义页面解析器
 
 ### 官网模板
+
 - 官网首页
 - 产品列表页
 - 产品详情页
@@ -768,13 +930,15 @@ components/custom-verify-code 【验证码】
 - 案例中心
 
 ### 个人中心
+
 - 个人中心改版
 - 用户信息修改
 - 用户提现页面优化
 - 用户账户余额页面优化
 - 用户邀请人列表
-- 实名认证
+- ~~实名认证~~
 
 ### 工具方法
+
 - 简化调用链
 - 语义化
