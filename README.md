@@ -137,7 +137,7 @@ import "./bootstrap/index";
 
 ```javascript
 // 应用基础配置
-// 获取配置 $.$config
+// 获取配置 uni.$config
 module.exports = {
 	// 应用ID
 	accessId: '',
@@ -245,7 +245,7 @@ module.exports = {
 	loginMaxCount: 1,
 	// 登录超时操作
 	onLoginTimout: function(config, response) {
-		$.showModal({
+		uni.showModal({
 			content: '登录超时，请稍后再试~',
 			showCancel: false
 		});
@@ -266,7 +266,7 @@ module.exports = {
 					return;
 				}
 
-				$.navigateTo({
+				uni.navigateTo({
 					url: '/pages/auth/unauthorized'
 				});
 			}
@@ -283,7 +283,7 @@ module.exports = {
 	statusErrors: {
 		'404': function(config, response) {
 			if (config.method.toUpperCase() === 'GET') {
-				$.navigateBack();
+				uni.navigateBack();
 			}
 		},
 		// '500': function(response) {
@@ -460,40 +460,40 @@ uni.$promise.xxx;
 uni.$back(delay = 1500, options = {});
 
 // 错误提示
-$.$hintError(msg);
+uni.$hintError(msg);
 
 // 成功提示
-$.$hintSuccess(msg);
+uni.$hintSuccess(msg);
 
 // 获取用户信息
 uni.$getUserInfo(options = {});
 
 // 尝试订阅消息
-$.$tryRequestSubscribeMessage(options);
+uni.$tryRequestSubscribeMessage(options);
 
 // 自动尝试订阅模板消息
-$.$autoRequestSubscribeMessage();
+uni.$autoRequestSubscribeMessage();
 
 
 // 获取腾讯地图实例
-$.$getQQMap();
+uni.$getQQMap();
 
 // 双精度小数点库
-$.$BigNumber();
+uni.$BigNumber();
 
 // MD5
-$.$md5();
+uni.$md5();
 
 // 获取二维码实例
-$.$QRCode();
+uni.$QRCode();
 
 // 常用方法
-$.$random();
-$.$isEmpty(obj);
-$.$isArray(obj);
-$.$isObject(obj);
-$.$toObject(obj);
-$.$assign(obj, newObj);
+uni.$random();
+uni.$isEmpty(obj);
+uni.$isArray(obj);
+uni.$isObject(obj);
+uni.$toObject(obj);
+uni.$assign(obj, newObj);
 ```
 
 ### 事件
@@ -502,39 +502,41 @@ $.$assign(obj, newObj);
 
 在框架中用户的鉴权机制即基于事件机制实现的。
 
-**基本使用**
+**代码示例**
 
 ```javascript
 // 监听一个事件
-wx.emitter.on('choose.address', function(address) {
+uni.$emitter.on('choose.address', function(address) {
 	console.log(address);
 });
 
 // 触发一个事件
-wx.emitter.emit('choose.address', {
+uni.$emitter.emit('choose.address', {
 	adddress: '郑州郑东新区...'
 });
 
 // 监听一个事件，只执行一次
-wx.emitter.once('choose.address', function(address) {
+uni.$emitter.once('choose.address', function(address) {
 	console.log(address);
 });
 
 // 监听一个事件，只执行一次
-wx.emitter.once('choose.address', function(address) {
+uni.$emitter.once('choose.address', function(address) {
 	console.log(address);
 });
 
 // 移除一个监听回调
-wx.emitter.on('choose.address', function addressFn(address) {
+uni.$emitter.on('choose.address', function addressFn(address) {
 	console.log(address);
-	wx.emitter.off('choose.address', addressFn);
+	uni.$emitter.off('choose.address', addressFn);
 });
 ```
 
 **全局事件监听**
 
-> common/mixins/page.js 扩展page实例方法
+> 全局事件监听存放在 common/event/ 目录下，由 index.js 统一导出
+
+**代码示例**
 
 ```javascript
 // 全局事件监听
@@ -542,12 +544,12 @@ module.exports = {
 	// 监听用户授权跳转
 	'sys.getUserInfo.to': function() {
 		console.log('sys.getUserInfo.to...');
-		const page = $.$getCurrentPage();
+		const page = uni.$getCurrentPage();
 		if (page.onLogin && page.onLogin(options) !== false) {
 			return;
 		}
 
-		$.navigateTo({
+		uni.navigateTo({
 			url: '/pages/auth/auth'
 		});
 	}
@@ -557,6 +559,8 @@ module.exports = {
 ### 缓存
 
 框架实现了一个简单的缓存处理器，它支持设置到期时间后自动清楚缓存数据，在一些页面需要数据的地方，特别有用
+
+**代码示例**
 
 ```javascript
 // 获取缓存
@@ -572,6 +576,8 @@ uni.$cache.forget(key)
 ### 用户
 
 用户鉴权的机制，已有原来的getApp().globalData全局变量改为内部私有管控，全局变量随意性操作比较大，在某些情况下它将变得不可控，而使用内部私有管控，会起到一定的隔离性与简洁性
+
+**代码示例**
 
 ```javascript
 // 获取当前登录sessionID
@@ -623,7 +629,7 @@ const fields = {
 };
 
 //实例化验证类
-const validate = new wx.Validate(rules, messages, fields);
+const validate = new uni.$Validate(rules, messages, fields);
 
 //要验证的数据
 const data = {
@@ -638,27 +644,28 @@ if (validate.check(data)) {
 } else {
 	console.error('validate fail:', validate.getError());
 }
+```
 
-
-// 静态调用
-console.log('必须存在：', wx.Validate.is(undefined, 'require'));
-console.log('只允许字母：', wx.Validate.is('abcd', 'alpha'));
-console.log('只允许字母和数字：', wx.Validate.is('abcd124', 'alphaNum'));
-console.log('只允许字母、数字和下划线 破折号：', wx.Validate.is('abcd124--', 'alphaDash'));
-console.log('只允许汉字：', wx.Validate.is('abcd124', 'chs'));
-console.log('只允许汉字、字母：', wx.Validate.is('abcd124', 'chsAlpha'));
-console.log('只允许汉字、字母和数字：', wx.Validate.is('abcd124', 'chsAlphaNum'));
-console.log('只允许汉字、字母、数字和下划线_及破折号-：', wx.Validate.is('abcd124', 'chsAlphaNum'));
-console.log('是否为邮箱地址：', wx.Validate.is('110@.com', 'email'));
-console.log('验证是否为11位手机号：', wx.Validate.is('13673679989', 'mobile'));
-console.log('验证是否为座机电话：', wx.Validate.is('0371-4569-225', 'tel'));
-console.log('是否为IP地址：', wx.Validate.is('127.0.0.1', 'ip'));
-console.log('是否为一个URL地址：', wx.Validate.is('127.0.0.1', 'url'));
-console.log('是否为float：', wx.Validate.is('127.0.0.1', 'float'));
-console.log('是否是数字：', wx.Validate.is('48.56', 'number'));
-console.log('是否为整型：', wx.Validate.is('48.56', 'integer'));
-console.log('是否为布尔值：', wx.Validate.is('false', 'boolean'));
-console.log('是否为数组：', wx.Validate.is([], 'array'));
+> 静态调用，一般用于对某一个字段做特殊验证
+```javascript
+console.log('必须存在：', uni.$Validate.is(undefined, 'require'));
+console.log('只允许字母：', uni.$Validate.is('abcd', 'alpha'));
+console.log('只允许字母和数字：', uni.$Validate.is('abcd124', 'alphaNum'));
+console.log('只允许字母、数字和下划线 破折号：', uni.$Validate.is('abcd124--', 'alphaDash'));
+console.log('只允许汉字：', uni.$Validate.is('abcd124', 'chs'));
+console.log('只允许汉字、字母：', uni.$Validate.is('abcd124', 'chsAlpha'));
+console.log('只允许汉字、字母和数字：', uni.$Validate.is('abcd124', 'chsAlphaNum'));
+console.log('只允许汉字、字母、数字和下划线_及破折号-：', uni.$Validate.is('abcd124', 'chsAlphaNum'));
+console.log('是否为邮箱地址：', uni.$Validate.is('110@.com', 'email'));
+console.log('验证是否为11位手机号：', uni.$Validate.is('13673679989', 'mobile'));
+console.log('验证是否为座机电话：', uni.$Validate.is('0371-4569-225', 'tel'));
+console.log('是否为IP地址：', uni.$Validate.is('127.0.0.1', 'ip'));
+console.log('是否为一个URL地址：', uni.$Validate.is('127.0.0.1', 'url'));
+console.log('是否为float：', uni.$Validate.is('127.0.0.1', 'float'));
+console.log('是否是数字：', uni.$Validate.is('48.56', 'number'));
+console.log('是否为整型：', uni.$Validate.is('48.56', 'integer'));
+console.log('是否为布尔值：', uni.$Validate.is('false', 'boolean'));
+console.log('是否为数组：', uni.$Validate.is([], 'array'));
 ```
 
 ### 数据模型
@@ -668,7 +675,7 @@ console.log('是否为数组：', wx.Validate.is([], 'array'));
 
 > 所有的模型都存储在 /common/models 目录下，由 index.js 统一对外导出，并会挂载到uni.$model 全局变量下，在使用过程中也非常便捷
 
-***代码示例***
+**代码示例**
 
 ```javascript
 uni.$models.user.get();
@@ -682,6 +689,7 @@ uni.$models.basic.config();
 
 此出的服务并未做过多的处理，基本上和数据模型处理方式是一样的，只不过挂载的全局变量名称是 uni.$service ，服务的意义在于对业务没有强依赖，或者你需要提供一些全局任何地方都能访问的API时，它是特别有意义的。
 
+**代码示例**
 ```javascript
 uni.$service.xxx
 ```
@@ -690,94 +698,94 @@ uni.$service.xxx
 
 ```javascript
 // 随机打乱数组
-wx.collectionUtil.shuffle(arr)
+uni.$collectionUtil.shuffle(arr)
 
 // 从 list中产生一个随机样本。传递一个数字表示从list中返回n个随机元素。否则将返回一个单一的随机项。
-wx.collectionUtil.sample(arr, n, guard)
+uni.$collectionUtil.sample(arr, n, guard)
 
 // 将多维数组拉平
-wx.collectionUtil.flatten(array, shallow)
+uni.$collectionUtil.flatten(array, shallow)
 
 // 返回传入 arrays（数组）交集。结果中的每个值是存在于传入的每个arrays（数组）里。
-wx.collectionUtil.intersection(...arr)
+uni.$collectionUtil.intersection(...arr)
 
 // 取两个数组的差集
-wx.collectionUtil.difference(...arr)
+uni.$collectionUtil.difference(...arr)
 
 // 它类似于map，但是这用于对象。转换每个属性的值。
-wx.collectionUtil.mapObject(obj, iteratee)
+uni.$collectionUtil.mapObject(obj, iteratee)
 
 // 尝试执行方法
-wx.functionUtil.safeCallback(func, param, thisArg)
+uni.$functionUtil.safeCallback(func, param, thisArg)
 
 // 创建并返回一个像节流阀一样的函数，当重复调用函数的时候，至少每隔 wait毫秒调用一次该函数。对于想控制一些触发频率较高的事件有帮助。
-wx.functionUtil.throttle(func, wait, options)
+uni.$functionUtil.throttle(func, wait, options)
 
 // 返回 function 函数的防反跳版本, 将延迟函数的执行(真正的执行)在函数最后一次调用时刻的 wait 毫秒之后.
-wx.functionUtil.debounce(func, wait, immediate)
+uni.$functionUtil.debounce(func, wait, immediate)
 
 // 创建一个函数,调用不超过count 次。 当count已经达到时，最后一个函数调用的结果将被记住并返回。
-wx.functionUtil.before(func, count)
+uni.$functionUtil.before(func, count)
 
 // 创建一个只能调用一次的函数。重复调用改进的方法也没有效果，只会返回第一次执行时的结果。
-wx.functionUtil.once(func)
+uni.$functionUtil.once(func)
 
 // 创建一个函数, 只有在运行了 count 次之后才有效果. 在处理同组异步请求返回结果时,
-wx.functionUtil.after(func, count)
+uni.$functionUtil.after(func, count)
 
 // 大于未来某个时刻可是执行
-wx.functionUtil.gtFuture(func, wait, context)
+uni.$functionUtil.gtFuture(func, wait, context)
 
 // 小于未来某个时刻可是执行
-wx.functionUtil.ltFuture(func, wait, context)
+uni.$functionUtil.ltFuture(func, wait, context)
 
 // 左填充
-wx.stringUtil.leftFill(str, num, fillStr)
+uni.$stringUtil.leftFill(str, num, fillStr)
 
 // 右填充
-wx.stringUtil.rightFill(str, num, fillStr)
+uni.$stringUtil.rightFill(str, num, fillStr)
 
 // 创建唯一id
-wx.stringUtil.uuid(prefix = '')
+uni.$stringUtil.uuid(prefix = '')
 
 // 创建类似订单
-wx.stringUtil.orderedUuid(prefix = '')
+uni.$stringUtil.orderedUuid(prefix = '')
 
 // 解析URL
-wx.stringUtil.parseUrl(url)
+uni.$stringUtil.parseUrl(url)
 
 // 解析Url Query字符串
-wx.stringUtil.parseUrlQuery(str)
+uni.$stringUtil.parseUrlQuery(str)
 
 // 组装url
-wx.stringUtil.buildUrl(obj)
+uni.$stringUtil.buildUrl(obj)
 
 // 保留小数点
-wx.numberUtil.toDecimal(number, dotNum = 2)
+uni.$numberUtil.toDecimal(number, dotNum = 2)
 
 // 转换为人性化数字
-wx.numberUtil.toSimplify(num, isLetter = false)
+uni.$numberUtil.toSimplify(num, isLetter = false)
 
 // 格式化日期
-wx.timeUtil.format(formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date())
+uni.$timeUtil.format(formatStr = 'yyyy-MM-dd hh:mm:ss', date = new Date())
 
 // 格式化成日期
-wx.timeUtil.format.date(date = new Date())
+uni.$timeUtil.format.date(date = new Date())
 
 // 格式化成时间
-wx.timeUtil.format.time(date = new Date(), isSeconds = false)
+uni.$timeUtil.format.time(date = new Date(), isSeconds = false)
 
 // 格式化成日期时间
-wx.timeUtil.format.datetime(date = new Date(), isSeconds = false)
+uni.$timeUtil.format.datetime(date = new Date(), isSeconds = false)
 
 // 获取今天的开始时间
-wx.timeUtil.todayStart(date = new Date())
+uni.$timeUtil.todayStart(date = new Date())
 
 // 获取今天的结束时间
-wx.timeUtil.todayEnd(date = new Date())
+uni.$timeUtil.todayEnd(date = new Date())
 
 // 获取今天开始和结束的时间
-wx.timeUtil.today(start = new Date(), end = new Date())
+uni.$timeUtil.today(start = new Date(), end = new Date())
 ```
 
 ### 中间件
@@ -786,8 +794,8 @@ wx.timeUtil.today(start = new Date(), end = new Date())
 
 ```javascript
 // 中间件配置
-// 创建一个中间件 $.$middleware();
-// 系统内置中间件列表 $.$middlewares
+// 创建一个中间件 uni.$middleware();
+// 系统内置中间件列表 uni.$middlewares
 import bindUser from './bind-user';
 import loadConfig from './load-config';
 
