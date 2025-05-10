@@ -42,21 +42,26 @@ export default {
 	getProductCategoryList(data, options = {}) {
 		return uni.$http.get('/app/website/product_category/index', data, options);
 	},
-	
+
 	// 获取案例列表
 	getCaseList(data, options = {}) {
 		return uni.$http.get('/app/website/case/index', data, options);
 	},
-	
+
 	// 获取案例详情
 	getCaseDetail(id, options = {}) {
 		return uni.$http.get('/app/website/case/detail', {
 			id: id
 		}, options);
 	},
-	
+
 	// 获取案例分类列表
 	getCaseCategoryList(data, options = {}) {
 		return uni.$http.get('/app/website/case_category/index', data, options);
 	},
+
+	// 创建留言
+	submitLeavingMsg(data, options = {}) {
+		return uni.$http.post('/app/website/index/submitleavingmsg', data, options);
+	}
 }

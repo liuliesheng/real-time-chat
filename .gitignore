@@ -156,3 +156,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 !/manifest.json
+
+package-lock.json
+node_modules

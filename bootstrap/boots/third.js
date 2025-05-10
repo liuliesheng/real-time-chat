@@ -36,3 +36,13 @@ $.$define('md5', md5.hexMD5);
 $.$defineOfFunc('QRCode', function() {
 	return require('../libs/qrcode');
 });
+
+/**
+ * 获取微信JSSDK实例
+ * @return {*}
+ */
+$.$defineOfFunc('jweixin', function() {
+	return require('../jweixin');
+});
+
+$.$jweixin;

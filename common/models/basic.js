@@ -6,7 +6,7 @@ export default {
 
 	// 获取关于我们
 	getAbout(data, options = {}) {
-		return uni.$http.get('/index/getabout', data, options);
+		return uni.$http.get('/index/about', data, options);
 	},
 
 	// 提交反馈
@@ -16,6 +16,6 @@ export default {
 
 	// 获取协议信息
 	getAgreement(data, options = {}) {
-		return uni.$http.get('/index/getagreement', data, options);
+		return uni.$http.get('/index/agreement', data, options);
 	},
 }

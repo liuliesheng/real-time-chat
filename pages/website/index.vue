@@ -121,7 +121,7 @@
 			// 提交留言
 			submitLeavingMsg({ values, forms }) {
 				this.isLeavingMsgLoading = true;
-				uni.$http.post('plugin/website/index/submitleavingmsg', {
+				uni.$models.website.submitLeavingMsg({
 					data: forms
 				}, {
 					loading: false,

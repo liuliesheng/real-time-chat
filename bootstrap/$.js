@@ -5,6 +5,7 @@ const platform = {
 	isTouTiaoWeapp: false,
 	isWechatWeapp: false,
 	isBrowser: false,
+	isWechatBrowser: false,
 	isApp: false,
 	isQuickapp: false,
 };
@@ -29,6 +30,8 @@ const $ = (() => {
 			//#ifdef H5
 			platform.isBrowser = true;
 			platform.name = 'browser';
+			// 是否是微信环境
+			platform.isWechatBrowser = navigator.userAgent.toLowerCase().indexOf("micromessenger") !== -1;
 			//#endif
 			//#ifdef MP
 			platform.isWeapp = true;
@@ -107,6 +110,6 @@ $.$define('defineOfFunc', function(key, value, isEnumerable = true) {
 });
 
 // 定义平台
-$.$define('platform', platform);
+$.$define('platform', Object.freeze(platform));
 
 export default $;
