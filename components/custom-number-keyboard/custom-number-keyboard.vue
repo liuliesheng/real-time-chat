@@ -7,35 +7,25 @@
 				<text v-for="(item, index) in [1,2,3,4,5,6,7,8,9]" :key="index"
 					  class="keyboard-keys block"
 					  :data-keynumber="item"
-					  :style="{
-						backgroundColor:tapIndex == item ? tapBgColor : '#FFFFFF', 
-						color : tapIndex == item ? '#FFFFFF' : '#2B2E3D'
-					}"
 					  @tap.stop="inputNow">{{item}}</text>
+
 				<text class="keyboard-keys block"
 					  :style="{
-						width: isPoint ? '259rpx':'538rpx',
-						backgroundColor:tapIndex == 0 ? tapBgColor : '#FFFFFF',
-						color : tapIndex == 0 ? '#FFFFFF' : '#2B2E3D'
+						width: isPoint ? '64%':'100%',
 					}"
 					  data-keynumber="0" @tap.stop="inputNow">0</text>
+
 				<text v-if="isPoint" class="keyboard-keys"
 					  :style="{
-						width:'259rpx',
-						backgroundColor:tapIndex == '.' ? tapBgColor : '#FFFFFF',
-						color : tapIndex == '.' ? '#FFFFFF' : '#2B2E3D'
+						width:'30%',
 					}"
 					  data-keynumber="." @tap.stop="inputNow">.</text>
 			</view>
 			<view class="keyboard-right flex flex-direction align-center">
 				<text class="keyboard-keys cuIcon-backdelete block"
-					  :style="{
-						backgroundColor : tapIndex == -3 ? tapBgColor : '#FFFFFF',
-						color : tapIndex == -3 ? '#FFFFFF' : '#2B2E3D'
-					}"
 					  :data-keynumber="-3" @tap.stop="deleteNow"></text>
 				<text class="keyboard-keys keyboard-done block"
-					  :style="{backgroundColor:tapBgColor}" @tap.stop="done">{{doneBtnName}}</text>
+					  @tap.stop="done">{{doneBtnName}}</text>
 			</view>
 		</view>
 	</view>
@@ -51,7 +41,7 @@
 			showInputRes: { type: Boolean, default: true },
 			resultColor: { type: String, default: '#2B2E3D' },
 			resultSize: { type: String, default: '32rpx' },
-			tapBgColor: { type: String, default: '#008AFF' },
+			// tapBgColor: { type: String, default: '#008AFF' },
 		},
 		methods: {
 			open: function() {
@@ -69,23 +59,18 @@
 				this.resVal += k + '';
 				this.tapIndex = k;
 				this.$emit('keyboardInput', k);
-				this.removeClass();
 			},
 			deleteNow: function(e) {
 				var k = e.currentTarget.dataset.keynumber;
 				this.tapIndex = k;
 				this.resVal = this.resVal.substring(0, this.resVal.length - 1);
 				this.$emit('keyboardDelete');
-				this.removeClass();
 			},
 			done: function() {
 				this.$emit('keyboardDone');
 			},
 			setVal: function(val) {
 				this.resVal = val;
-			},
-			removeClass: function() {
-				setTimeout(() => { this.tapIndex = -1; }, 100);
 			},
 		},
 		data() {
@@ -107,7 +92,6 @@
 <style>
 	.keyboard {
 		background-color: #F6F7F8;
-		width: 750rpx;
 		padding: 20rpx 0;
 	}
 
@@ -118,7 +102,8 @@
 	}
 
 	.keyboard-left {
-		width: 560rpx;
+		/* width: 560rpx; */
+		flex: 1;
 	}
 
 	.keyboard-right {
@@ -126,7 +111,8 @@
 	}
 
 	.keyboard-keys {
-		width: 166rpx;
+		/* width: 166rpx; */
+		width: 30%;
 		height: 100rpx;
 		margin: 10rpx;
 		background-color: #FFFFFF;
@@ -135,6 +121,18 @@
 		border-radius: 8rpx;
 		font-weight: 700;
 		font-size: 50rpx;
+		transition: all 0.2s;
+	}
+
+	.keyboard-keys:active {
+		opacity: .6;
+		/* background-color: rgba(255, 255, 255, 0.6); */
+		/* background-color: #3688FF; */
+		/* color: #FFFFFF; */
+	}
+
+	.keyboard-right .keyboard-keys {
+		width: 80%;
 	}
 
 	.keyboard-done {
@@ -143,6 +141,7 @@
 		font-size: 36rpx;
 		font-weight: 400;
 		color: #FFFFFF;
+		background-color: #008AFF;
 	}
 
 	.keyboard-res {
@@ -151,10 +150,5 @@
 		font-size: 32rpx;
 		font-weight: bold;
 		padding-top: 20rpx;
-	}
-
-	.keydown {
-		background-color: #3688FF;
-		color: #FFFFFF;
 	}
 </style>

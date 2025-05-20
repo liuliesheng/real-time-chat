@@ -29,70 +29,40 @@
 			</template>
 
 			<custom-titlebar title="回馈会员"></custom-titlebar>
-			<custom-pic-group class="margin-bottom"></custom-pic-group>
+			<view class="bg-white">
+				<custom-pic-group class="margin-bottom"></custom-pic-group>
+			</view>
 
 			<custom-titlebar title="豪礼放送"></custom-titlebar>
-			<custom-pic-group class="margin-bottom"></custom-pic-group>
-
-			<custom-titlebar title="商品海报"></custom-titlebar>
-			<custom-poster></custom-poster>
-
-			<custom-titlebar title="二维码"></custom-titlebar>
-			<custom-qrcode></custom-qrcode>
+			<view class="bg-white">
+				<custom-pic-group class="margin-bottom"></custom-pic-group>
+			</view>
 
 			<custom-titlebar title="倒计时"></custom-titlebar>
-			<view class="margin">
-				<text class="h6 color-gray bold">默认属性</text>
-			</view>
-			<view class="margin-top">
+			<view class="bg-white padding" style="padding-top: 0;">
+				<view class="h6 color-gray bold">默认属性</view>
 				<custom-count-down :timer="time1"></custom-count-down>
-			</view>
-			<view class="margin">
-				<text class="h6 color-gray bold">边框形式</text>
-			</view>
-			<view class="margin-top">
+				<view class="h6 color-gray bold margin-top">边框形式</view>
 				<custom-count-down :timer="time2"
 								   fontColor="#008AFF" borderColor="#008AFF" fontSize="22rpx"
 								   spacing="10rpx" splitorColor="#008AFF"></custom-count-down>
-			</view>
-			<view class="margin">
-				<text class="h6 color-gray bold">背景形式</text>
-			</view>
-			<view class="margin-top">
+				<view class="h6 color-gray bold margin-top">背景形式</view>
 				<custom-count-down :timer="time2"
 								   fontColor="#FFFFFF" bgColor="#008AFF" borderColor="#008AFF" fontSize="22rpx"
 								   spacing="10rpx" splitorColor="#008AFF"></custom-count-down>
+				<view class="h6 color-gray bold margin-top">结束监听</view>
+				<custom-count-down :splitorText="[':',':',':','']" :timer="time3" @endDo="endDo">
+				</custom-count-down>
 			</view>
-			<view class="margin">
-				<text class="h6 color-gray bold">结束监听</text>
-			</view>
-			<view class="margin-top">
-				<custom-count-down :splitorText="[':',':',':','']" :timer="time3" @endDo="endDo"></custom-count-down>
-			</view>
-
-			<custom-titlebar title="PK"></custom-titlebar>
-			<custom-pk :title="title" :status="PKStatus" :progress="PKProgress" @choose="choose"></custom-pk>
-
-			<custom-floating-button :list="[{text:'首页'}]"></custom-floating-button>
-
-			<custom-titlebar title="数字键盘"></custom-titlebar>
-			<custom-number-keyboard></custom-number-keyboard>
-
-			<custom-titlebar title="音乐播放器"></custom-titlebar>
-			<view style="background-color:#36395A;">
-				<custom-audio-player :list="audios" />
-			</view>
-
-			<custom-titlebar title="富文本编辑器"></custom-titlebar>
-			<custom-editor />
-			<editor :show-img-toolbar="true" />
 
 			<!-- #ifdef MP-WEIXIN -->
 			<ad unit-id="adunit-1125620a898275d6"></ad>
 			<!-- #endif -->
 
-			<custom-titlebar title="精品推荐"></custom-titlebar>
+			<custom-titlebar title="精品推荐" class="margin-top"></custom-titlebar>
 			<GoodsList :list="goodsList"></GoodsList>
+
+			<custom-floating-button :list="[{text:'首页'}]"></custom-floating-button>
 		</mescroll-body>
 	</custom-page>
 </template>
@@ -174,22 +144,6 @@
 				title: ['赞同', '反对'],
 				PKProgress: [70, 30, '7000 票', '3000 票'],
 				PKStatus: 'button',
-
-				audios: [{
-						title: "我们都一样",
-						singer: "张杰",
-						epname: "杰哥精选",
-						coverImgUrl: "https://7465-test01-632ffe-1258717418.tcb.qcloud.la/personal/player/images/jie02.jpg?sign=00e5e68d81145037000a162e2220736a&t=1556345760",
-						src: "https://7465-test01-632ffe-1258717418.tcb.qcloud.la/personal/player/song/%E6%88%91%E4%BB%AC%E9%83%BD%E4%B8%80%E6%A0%B7%20-%20%E5%BC%A0%E6%9D%B0.mp3?sign=008d62b6bea06a8a6814b5f284fac0ac&t=1556345730"
-					},
-					{
-						title: "明天过后",
-						singer: "张杰",
-						epname: "杰哥精选",
-						coverImgUrl: "https://7465-test01-632ffe-1258717418.tcb.qcloud.la/personal/player/images/jie01.jpg?sign=0d4ea8bb72553d22404e2fe8d3866d05&t=1556206405",
-						src: "https://7465-test01-632ffe-1258717418.tcb.qcloud.la/personal/player/song/%E6%98%8E%E5%A4%A9%E8%BF%87%E5%90%8E%20-%20%E5%BC%A0%E6%9D%B0.mp3?sign=ffdea83268ce7f0eb76e70f514a9fa44&t=1556119851"
-					}
-				]
 			};
 		},
 		onLoad() {

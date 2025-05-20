@@ -1,5 +1,5 @@
 <template>
-	<view class="search" :style="[{height:CustomBar + 'px'}]">
+	<view class="search-wrapper" :style="[{height:CustomBar + 'px'}]">
 		<view class="cu-bar search bg-white" :style="style">
 			<view class="action" @tap="BackPage" v-if="isBackButton">
 				<text class="cuIcon-back"></text>
@@ -103,6 +103,11 @@
 </script>
 
 <style scoped>
+	.search {
+		max-width: 1120upx;
+		min-height: auto;
+	}
+
 	.cu-btn {
 		font-size: 12px;
 	}
@@ -113,5 +118,12 @@
 		left: 0;
 		top: 0;
 		z-index: 1024;
+	}
+
+	@media screen and (min-width: 1120upx) {
+		.search {
+			left: 50%;
+			transform: translateX(-50%);
+		}
 	}
 </style>
