@@ -16,19 +16,36 @@ module.exports = {
 		isShowErrorTips: true,
 	},
 
+	// 登录授权
 	// 使用小程序原始登录器
 	// #ifdef MP
-	login: uni.$logins.weapp, // 使用小程序原始登录器
-	loginUrl: baseURL + '/weapp_login', // 登录地址
-	loginUserInfo: true, // 登录时是否获取用户信息
+	login: 'weapp', // 使用小程序原始登录器
 	// #endif
 
 	// 使用账户登录器
 	// #ifdef H5
-	login: uni.$logins.account, // 使用账户登录
+	login: uni.$platform.isWechatBrowser ? 'official' : 'account', // 使用公众号授权或账户登录
+	// #endif
+
+	// 小程序授权相关配置
+	// #ifdef MP-WEIXIN
+	weappLoginUrl: baseURL + '/weapp_login', // 微信小程序授权地址
+	// #endif
+	// #ifdef MP-ALIPAY
+	weappLoginUrl: baseURL + '/ali_mini_login', // 支付包小程序授权地址
+	// #endif
+	// #ifdef MP-MP-TOUTIAO
+	weappLoginUrl: baseURL + '/toutiao_login', // 字节跳动小程序授权地址
+	// #endif
+	loginUserInfo: true, // 登录时是否获取用户信息
+
+	// 普通账号授权相关配置
 	loginUrl: baseURL + '/login', // 登录地址
 	loginPage: '/pages/auth/login', // 自定义登录页面地址
-	// #endif
+
+	// 微信公众号授权地址
+	officialConfigUrl: 'wechat_official/config', // 公众号配置接口地址
+	officialAuthUrl: 'wechat_official/authorize', // 公众号授权接口地址
 
 	// 所有请求回调
 	onRequest: function(config) {},

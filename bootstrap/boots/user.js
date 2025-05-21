@@ -54,7 +54,7 @@ let lastTime = 0;
 let lastError = null;
 
 // 注入登录器
-$.$define('login', function(options) {
+$.$define('login', function(options = {}) {
 	// 如果请求时间小于登录时间周期，则直接复用最近一次登录结果
 	if (options.requestTime < lastTime) {
 		// 如果存在失败原因，则认为失败结果
@@ -67,7 +67,18 @@ $.$define('login', function(options) {
 
 	if (!loginPromise) {
 		$.showNavigationBarLoading();
-		loginPromise = $.$http.config.login(options).then((res) => {
+
+		const loginType = $.$http.config.login;
+		if (!loginType) {
+			return Promise.reject({
+				errMsg: 'common/config/http.js not configure `login` !'
+			});
+		}
+
+		const loginDriver = typeof loginType === 'function' ? loginType : $.$logins[loginType];
+		console.log(loginDriver, loginType)
+
+		loginPromise = loginDriver(options).then((res) => {
 			console.log("login success:", res);
 
 			$.hideLoading();

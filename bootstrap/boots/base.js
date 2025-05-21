@@ -1,10 +1,10 @@
 import $ from "../$";
 import cache from "../cache";
 import Validate from "../validate";
-import {emitter, EventEmitter} from "../events";
-import {default as observer, Observer} from "../observer";
+import { emitter, EventEmitter } from "../events";
+import { default as observer, Observer } from "../observer";
 import middleware from "../middleware";
-import {logins, Request, upload} from "../http";
+import { logins, Request, upload } from "../http";
 import * as util from "../util";
 
 // 初始化基础配置
@@ -18,7 +18,7 @@ import * as util from "../util";
 			config = config() || {};
 		}
 	} catch (e) {
-		console.warn("/common/config/app.js not found!");
+		console.warn("/common/config/app.js not found!", e);
 		config = {};
 	}
 

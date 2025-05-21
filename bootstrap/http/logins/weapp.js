@@ -1,9 +1,9 @@
 import $ from "../../$";
 
 export default function(options = {}) {
-	if (!$.$http.config.loginUrl) {
+	if (!$.$http.config.weappLoginUrl) {
 		return Promise.reject({
-			errMsg: 'common/config/http.js not configure `loginUrl` !'
+			errMsg: 'common/config/http.js not configure `weappLoginUrl` !'
 		});
 	}
 
@@ -30,7 +30,7 @@ export default function(options = {}) {
 
 		return new Promise((resolve, reject) => {
 			$.request({
-				url: $.$http.config.loginUrl,
+				url: $.$http.config.weappLoginUrl,
 				method: 'POST',
 				data: res,
 				dataType: 'json',
