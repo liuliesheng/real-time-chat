@@ -100,12 +100,22 @@ export default {
 
 	// 获取提现数据
 	getCashoutInfo(query, options = {}) {
-		return uni.$http.get('user.cashout/getApplyInfo', query, options);
+		return uni.$http.get('user.cashout/getapplyinfo', query, options);
 	},
 
 	// 申请提现
 	applyCashout(data, options = {}) {
 		return uni.$http.post('user.cashout/apply', data, options);
+	},
+	
+	// 获取申请合伙人信息
+	getApplyVipInfo(data, options = {}) {
+		return uni.$http.get('user.vip/getapplyinfo', data, options);
+	},
+	
+	// 申请合伙人
+	applyVip(data, options = {}) {
+		return uni.$http.post('user.vip/apply', data, options);
 	},
 
 	// 用户收藏
@@ -123,4 +133,19 @@ export default {
 			topic_id: topicId,
 		}, options);
 	},
+	
+	// 我的收藏列表
+	getFavoriteList(data, options = {}) {
+		return uni.$http.get('user.favorite/index', data, options);
+	},
+
+	// 我的推荐
+	getInvitedList(data, options) {
+		return uni.$http.get('user.team/invitedlist', data, options);
+	},
+
+	// 我推荐的人明细数据
+	getInvitedDetail(id, options) {
+		return uni.$http.get('user.team/invitedDetail', { id: id }, options);
+	}
 }

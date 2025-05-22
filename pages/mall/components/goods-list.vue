@@ -1,10 +1,10 @@
 <template>
 	<view class="cu-list goods-list" v-if="list.length">
 		<view class="cu-item padding"
-		      v-if="listType === 'row'"
-		      v-for="item in list"
-		      :key="item.id"
-		      @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
+			  v-if="listType === 'row'"
+			  v-for="item in list"
+			  :key="item.id"
+			  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
 			<view class="image-wrapper radius">
 				<image :src="item.cover" mode="aspectFill" lazy-load="true"></image>
 			</view>
@@ -44,10 +44,10 @@
 			listType: {
 				type: String,
 				default: 'row'
-			}
+			},
+			horizontal: { type: Boolean, default: false }
 		},
-		created() {
-		},
+		created() {},
 		watch: {
 			list(list) {
 				if (this.loadType === 'add') {

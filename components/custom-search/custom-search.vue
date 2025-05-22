@@ -10,6 +10,7 @@
 					   :maxlength="maxLength" confirm-type="search"
 					   v-model="search" :disabled="disabled"
 					   @search="toSearch" />
+				<text class="cuIcon-close clear" v-show="search" @tap="onClearTap"></text>
 			</view>
 			<!-- #ifndef MP-WEIXIN -->
 			<view class="action" v-if="showSearchBtn">
@@ -75,11 +76,7 @@
 				plus.key.hideSoftKeybord()
 				// #endif
 
-				const detail = {
-					value: this.search
-				};
-				this.$emit('input', this.search);
-				this.$emit('search', detail);
+				this.emitInput();
 			},
 
 			// 被点击
@@ -92,6 +89,18 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+			// 清理
+			onClearTap() {
+				this.search = '';
+			},
+			// 触发事件
+			emitInput() {
+				const detail = {
+					value: this.search
+				};
+				this.$emit('input', this.search);
+				this.$emit('search', detail);
 			}
 		},
 		watch: {
@@ -118,6 +127,16 @@
 		left: 0;
 		top: 0;
 		z-index: 1024;
+	}
+
+	.clear {
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.1);
+		border-radius: 20px;
+		height: 20px;
+		width: 20px;
+		text-align: center;
+		line-height: 20px;
 	}
 
 	@media screen and (min-width: 1120upx) {

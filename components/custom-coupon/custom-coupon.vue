@@ -5,32 +5,32 @@
 			<view class="coupons-left-number padding-lr-sm">
 				<view class="flex nowrap justify-center align-center">
 					<text class="text-gray h4">{{coupon.unit}}</text>
-					<text class="h3 bold"
-						  :style="{color:coupon.color}">{{coupon.number}}</text>
+					<text class="h3 bold" :style="{color:coupon.color}">{{coupon.number}}</text>
 				</view>
 				<text class="text-sm block text-center"
-					  :style="{color:coupon.color}">{{coupon.txt}}</text>
+					  :style="{color:coupon.color}">{{coupon.use_tips}}</text>
 			</view>
 			<view class="coupons-left-body">
 				<text class="block h5 primary-color">{{coupon.title}}</text>
 				<text class="block text-small text-gray">{{coupon.desc}}</text>
 			</view>
-			<text class="coupons-status"
-				  v-if="coupon.drawed"
+			<text class="coupons-status" v-if="coupon.drawed"
 				  :style="{backgroundColor:coupon.color}">{{coupon.drawed}}</text>
 		</view>
-		<text class="coupons-right text-white text-center block"
+		<view class="coupons-right text-white text-center block"
 			  :style="{
 			height:coupon.height, 
 			lineHeight:coupon.height, 
-			backgroundColor:coupon.color
-		}">{{coupon.btn}}</text>
+			backgroundColor:coupon.color,
+			opacity:coupon.disabled?0.8:1
+		}" @tap="onBtnTap">{{coupon.btn}}</view>
 		<view class="coupons-sawtooth"
 			  :style="{
 		height:coupon.height,
-		backgroundColor:coupon.color}">
-			<view class="coupons-sawtooth-circular"
-				  v-for="(item, index) in 10" :key="index"></view>
+		backgroundColor:coupon.color,
+		opacity:coupon.disabled?0.8:1
+		}">
+			<view class="coupons-sawtooth-circular" v-for="(item, index) in 10" :key="index"></view>
 		</view>
 	</view>
 </template>
@@ -44,6 +44,16 @@
 					return {}
 				}
 			}
+		},
+		methods: {
+			// 被点击
+			onBtnTap(e) {
+				if (this.coupon.disabled) {
+					return;
+				}
+
+				this.$emit('actiontap', e);
+			},
 		}
 	}
 </script>

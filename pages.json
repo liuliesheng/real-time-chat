@@ -71,14 +71,7 @@
 				"navigationBarTitleText": "下单"
 			}
 		},
-		
-		{
-			"path": "pages/mall/favorite/index",
-			"style": {
-				"navigationBarTitleText": "我的收藏",
-				"enablePullDownRefresh": true
-			}
-		},
+
 		// 门店
 		{
 			"path": "pages/store/index",
@@ -334,9 +327,23 @@
 			}
 		},
 		{
+			"path": "pages/user/favorite",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
 			"path": "pages/user/address/edit",
 			"style": {
 				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/user/vip/apply",
+			"style": {
+				"navigationBarTitleText": "申请会员",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -526,44 +533,64 @@
 				"enablePullDownRefresh": true
 			}
 
+		}, {
+			"path": "pages/index/video",
+			"style": {
+				"navigationBarTitleText": "视频播放",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/rank",
+			"style": {
+				"navigationBarTitleText": "排行榜",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/sign",
+			"style": {
+				"navigationBarTitleText": "手写签名",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/lottery-draw",
+			"style": {
+				"navigationBarTitleText": "抽奖",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/coupon",
+			"style": {
+				"navigationBarTitleText": "我的优惠券",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/index/coupon",
+			"style": {
+				"navigationBarTitleText": "优惠券列表",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/user/team/index",
+			"style": {
+				"navigationBarTitleText": "我的团队",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/user/team/detail",
+			"style": {
+				"navigationBarTitleText": "明细",
+				"enablePullDownRefresh": true
+			}
+
 		}
-	    ,{
-            "path" : "pages/index/video",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "视频播放",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/rank",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "排行榜",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/sign",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "手写签名",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/lottery-draw",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "抽奖",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5

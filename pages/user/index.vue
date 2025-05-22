@@ -58,6 +58,12 @@
 
 			<view class="cu-list menu sm-border card-menu radius-lg margin-top">
 				<view class="cu-item arrow">
+					<view class="content" @tap="linkTo" data-url="/pages/user/vip/apply" data-logged>
+						<text class="cuIcon-circlefill text-grey"></text>
+						<text>申请会员</text>
+					</view>
+				</view>
+				<view class="cu-item arrow">
 					<view class="content" @tap="linkTo" data-url="/pages/user/wallet/index" data-logged>
 						<text class="cuIcon-circlefill text-grey"></text>
 						<text>我的钱包</text>
@@ -70,7 +76,7 @@
 					</view>
 				</view>
 				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/mall/favorite/index" data-logged>
+					<view class="content" @tap="linkTo" data-url="/pages/user/favorite" data-logged>
 						<text class="cuIcon-favorfill text-grey"></text>
 						<text>我的收藏</text>
 					</view>

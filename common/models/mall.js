@@ -21,21 +21,6 @@ export default {
 		return uni.$http.get('/app/mall/goods/browseList', query, options);
 	},
 
-	// 获取商品收藏记录
-	getGoodsFavoriteList(query, options = {}) {
-		return uni.$http.get('/app/mall/goods/favoriteList', query, options);
-	},
-
-	// 收藏商品
-	favoriteGoods(topicId, options = {}) {
-		return uni.$models.user.favorite('goods', topicId, options);
-	},
-
-	// 取消收藏
-	unfavoriteGoods(topicId, options = {}) {
-		return uni.$models.user.unfavorite('goods', topicId, options);
-	},
-
 	// 获取分类列表
 	getCategoryList(query, options = {}) {
 		return uni.$http.get('/app/mall/category', query, options);

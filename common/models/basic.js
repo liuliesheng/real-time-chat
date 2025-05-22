@@ -1,5 +1,10 @@
 export default {
 	// 获取配置信息
+	getHome(data, options) {
+		return uni.$http.get('/index/index', data, options);
+	},
+	
+	// 获取配置信息
 	getConfig(data, options) {
 		return uni.$http.get('/index/config', data, options);
 	},

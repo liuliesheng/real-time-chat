@@ -152,7 +152,7 @@ function resolveBasicError(response) {
 		globalLogicErrors[logicCode](data, response);
 	}
 
-	console.warn('request logic tips:', response);
+	// console.warn('request logic tips:', response);
 
 	return Promise.reject(response);
 }

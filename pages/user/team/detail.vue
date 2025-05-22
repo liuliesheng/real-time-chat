@@ -1,0 +1,73 @@
+<template>
+	<custom-page class="page" :loaded="loaded">
+		<view class="cu-list menu-avatar" v-if="loaded">
+			<view class="cu-item">
+				<view class="cu-avatar round lg" :style="'background-image:url('+info.avatar+');'"></view>
+				<view class="content">
+					<view class="text-grey">{{info.nickname}}</view>
+					<view class="text-gray text-sm flex">
+						<view class="text-cut">{{info.remark}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="cu-list goods-list menu sm-border margin-top">
+			<view class="cu-item">
+				<view class="content">
+					<view class="">购买了【巴掌牛排】2份样品</view>
+					<view class="text-sm text-grey">2021-11-12 10：20</view>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view class="content">
+					<view class="">购买了【巴掌牛排】2份样品</view>
+					<view class="text-sm text-grey">2021-11-12 10：20</view>
+				</view>
+			</view>
+		</view>
+	</custom-page>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				id: 0,
+				info: null,
+				loaded: false,
+			}
+		},
+		onLoad(options) {
+			this.id = parseInt(options.id);
+			if (isNaN(this.id)) {
+				uni.$hintError('参数错误！');
+				return uni.$back();
+			}
+
+			this.loadData();
+		},
+
+		onPullDownRefresh() {
+			this.loadData().finally(() => {
+				uni.stopPullDownRefresh();
+			});
+		},
+		methods: {
+			// 加载数据
+			loadData() {
+				return uni.$models.user.getInvitedDetail(this.id).then(res => {
+					this.info = res;
+					this.loaded = true;
+				});
+			},
+		}
+	}
+</script>
+
+<style>
+	.goods-list .cu-item{
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+</style>

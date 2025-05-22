@@ -6,15 +6,16 @@
 				  :class="modalName=='move-box-'+ index?'move-cur':''"
 				  @touchstart="ListTouchStart" @touchmove="ListTouchMove" @touchend="ListTouchEnd"
 				  :data-target="'move-box-' + index"
-				  @tap="linkTo" :data-url="'../goods/detail?id='+item.topic_id">
+				  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.topic_id">
 				<view class="image-wrapper radius lg">
-					<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
+					<image :src="item.favoriteable.cover" mode="aspectFit" lazy-load="true"></image>
 				</view>
 				<view class="content flex-sub padding-lr-sm">
-					<view class="title ellipsis-2 text-black">{{ item.title }}</view>
+					<view class="title ellipsis-2 text-black">{{ item.favoriteable.title }}</view>
 					<view class="margin-top-xs">
-						<text class="text-price text-red text-xl">{{ item.price }}</text>
-						<text class="text-price m-price" style="vertical-align: middle;">{{ item.market_price }}</text>
+						<text class="text-price text-red text-xl">{{ item.favoriteable.price }}</text>
+						<text class="text-price m-price"
+							  style="vertical-align: middle;">{{ item.favoriteable.market_price }}</text>
 					</view>
 				</view>
 
@@ -32,6 +33,7 @@
 		data() {
 			return {
 				data: [],
+				type: 'goods',
 				page: 1,
 				more: true,
 				loaded: false,
@@ -59,8 +61,9 @@
 		methods: {
 			// 加载信息
 			loadData: function(page = 1) {
-				return uni.$models.mall.getGoodsFavoriteList({
+				return uni.$models.user.getFavoriteList({
 					page: page,
+					topic_type: this.type
 				}).then(res => {
 					res.data.forEach(it => it.checked = true);
 
@@ -74,7 +77,7 @@
 			// 取消收藏
 			unFavorite(index) {
 				const item = this.data[index];
-				uni.$models.favorite.unfavoriteGoods(item.topic_id, {
+				uni.$models.favorite.unfavorite(item.topic_id, {
 					loading: this,
 					hint: this
 				}).then(() => {
