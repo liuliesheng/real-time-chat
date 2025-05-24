@@ -1,5 +1,10 @@
 <template>
-	<view class="grid col-4 padding-tb">
+	<view class="grid padding-tb" :class="{
+		'col-2':col===2,
+		'col-3':col===3,
+		'col-4':col===4,
+		'col-5':col===5,
+	}">
 		<view class="item" v-for="(item,index) in list" :key="index"
 			  @tap="itemClickHandle(index)">
 			<view class="image">
@@ -17,6 +22,10 @@
 			list: {
 				type: Array,
 				default: () => []
+			},
+			col: {
+				type: Number,
+				default: 5
 			}
 		},
 		methods: {
@@ -83,13 +92,15 @@
 
 	.image {
 		position: relative;
-		/* padding-bottom: 80%; */
+		padding-bottom: 100%;
 		text-align: center;
 	}
 
 	.image>image {
-		width: 120rpx;
-		height: 120rpx;
-		/* position: absolute; */
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
 	}
 </style>

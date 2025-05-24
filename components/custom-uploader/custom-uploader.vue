@@ -1,7 +1,7 @@
 <template>
 	<view class="grid col-4 grid-square flex-sub">
 		<view class="bg-img" v-for="(item,index) in list" :key="index" @tap="onViewImage"
-		      :data-url="list[index].path||list[index].url">
+			  :data-url="list[index].path||list[index].url">
 			<image :src="list[index].path||list[index].url" mode="aspectFill"></image>
 			<view class="cu-tag bg-red" @tap.stop="onDelImg" :data-index="index">
 				<text class='cuIcon-close'></text>
@@ -21,19 +21,7 @@
 	export default {
 		data() {
 			return {
-				list: [{
-						path: "blob:http://localhost:8080/c64977bd-cbd1-4580-8b0d-94fbe33bb3cc",
-						state: 0,
-					},
-					{
-						url: "blob:http://localhost:8080/c95d8db0-8cb0-473f-a6c7-3ca66c2e5a4c",
-						state: 1,
-					},
-					{
-						path: "blob:http://localhost:8080/d7772fe4-fe84-40e1-9c1a-e7b686fc49cb",
-						state: 2,
-					}
-				]
+				list: []
 			};
 		},
 		methods: {
@@ -41,13 +29,15 @@
 				uni.chooseImage({
 					count: 9 - this.list.length,
 					success: (res) => {
-						this.list = this.list.concat(res.tempFilePaths.map(it => {
+						const uploadList = res.tempFiles.map(it => {
 							return {
-								path: it,
+								path: it.path,
+								file: it,
 								state: 0
 							};
-						}));
-						console.log(this.list)
+						});
+						this.list = this.list.concat(uploadList);
+						this.upload(uploadList);
 					}
 				});
 			},
@@ -73,6 +63,23 @@
 					}
 				})
 			},
+
+			// 开始上传
+			upload(list) {
+				uni.$upload({
+					files: list.map(it => it.file),
+					onUploadChange: function(info) {
+						const { state, index } = info;
+						const item = list[index];
+						item.state = state;
+						if (state === 1) {
+							item.url = info.url;
+						} else if (state === 2) {
+							item.errMsg = info.errMsg;
+						}
+					}
+				});
+			}
 		}
 	}
 </script>

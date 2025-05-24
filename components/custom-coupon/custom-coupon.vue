@@ -1,18 +1,18 @@
 <template>
 	<view class="coupons flex nowrap">
-		<view class="coupons-left flex-sub flex nowrap justify-between align-center"
+		<view class="coupons-left flex-sub flex nowrap align-center"
 			  :style="{backgroundColor:coupon.ltBg, height:coupon.height}">
 			<view class="coupons-left-number padding-lr-sm">
 				<view class="flex nowrap justify-center align-center">
 					<text class="text-gray h4">{{coupon.unit}}</text>
-					<text class="h3 bold" :style="{color:coupon.color}">{{coupon.number}}</text>
+					<text class="h4 bold" :style="{color:coupon.color}">{{coupon.number}}</text>
 				</view>
-				<text class="text-sm block text-center"
+				<text class="text-xs block text-center"
 					  :style="{color:coupon.color}">{{coupon.use_tips}}</text>
 			</view>
-			<view class="coupons-left-body">
+			<view class="coupons-left-body flex-sub">
 				<text class="block h5 primary-color">{{coupon.title}}</text>
-				<text class="block text-small text-gray">{{coupon.desc}}</text>
+				<text class="block text-sm text-gray">{{coupon.desc}}</text>
 			</view>
 			<text class="coupons-status" v-if="coupon.drawed"
 				  :style="{backgroundColor:coupon.color}">{{coupon.drawed}}</text>
@@ -66,7 +66,6 @@
 	.coupons-left {
 		width: 500rpx;
 		height: 150rpx;
-		padding-right: 10rpx;
 		border-radius: 8rpx;
 		position: relative;
 	}
@@ -78,6 +77,8 @@
 
 	.coupons-left-body {
 		width: 320rpx;
+		padding-left: 10rpx;
+		padding-right: 10rpx;
 	}
 
 	.coupons-status {
@@ -94,7 +95,7 @@
 	}
 
 	.coupons-right {
-		width: 150rpx;
+		width: 130rpx;
 		height: 150rpx;
 		font-size: 32rpx;
 	}

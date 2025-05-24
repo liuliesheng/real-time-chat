@@ -317,7 +317,7 @@
 				}).finally(() => {
 					setTimeout(() => {
 						uni.redirectTo({
-							url: './list'
+							url: './success?status=1'
 						});
 					}, 1500);
 				});

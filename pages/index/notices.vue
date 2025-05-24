@@ -1,16 +1,17 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<custom-search searchClass="bg-white" v-model="search" @search="loadData()" />
-		<view class="padding-lr padding-tb-sm bg-white solid-bottom text-grey fixed titlebar">我的团队（{{num}}）</view>
-		<view class="cu-list menu menu-avatar">
-			<view class="cu-item arrow" v-for="item in data" :key="item.id" @tap="linkTo"
-				  :data-url="'./detail?id='+item.id">
-				<view class="cu-avatar radius lg" :style="'background-image:url('+item.avatar+');'"></view>
-				<view class="content">
-					<view class="text-grey">{{item.nickname}}</view>
-					<view class="text-gray text-sm flex">
-						<view class="text-cut">{{item.remark}}</view>
+		<view class="cu-card dynamic">
+			<view class="cu-item shadow" v-for="item in data" :key="item.id">
+				<view class="cu-list menu">
+					<view class="cu-item">
+						<view class="content padding-tb-sm">
+							<view><text class="cuIcon-noticefill text-blue margin-right-xs"></text> {{item.title}}</view>
+							<view class="text-gray text-sm">发布于 {{item.create_time}}</view>
+						</view>
 					</view>
+				</view>
+				<view class="text-content solid-top" style="padding-top: 15px;">
+					{{item.content}}
 				</view>
 			</view>
 		</view>
@@ -21,9 +22,6 @@
 	export default {
 		data() {
 			return {
-				search: '',
-
-				num: 0,
 				data: [],
 				page: 1,
 				more: true,
@@ -49,9 +47,8 @@
 		methods: {
 			// 加载地址
 			loadData: function(page = 1) {
-				return uni.$models.user.getInvitedList({
+				return uni.$models.basic.getNoticeList({
 					page: page,
-					keywords: this.search,
 				}).then(res => {
 					this.data = page === 1 ? res.data : this.data.concat(res.data);
 					this.more = res.data.length >= res.per_page;
@@ -66,14 +63,5 @@
 </script>
 
 <style>
-	.titlebar {
-		position: fixed;
-		left: 0;
-		width: 100%;
-		z-index: 99;
-	}
 
-	.cu-list {
-		margin-top: 76rpx;
-	}
 </style>

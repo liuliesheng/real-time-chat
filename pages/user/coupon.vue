@@ -1,12 +1,16 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
 		<template v-for="coupon in data">
-			<custom-coupon :coupon="coupon" class="margin"></custom-coupon>
+			<custom-coupon :coupon="coupon" class="margin" @actiontap="navTo('/pages/index/index')"></custom-coupon>
 		</template>
 
-		<view class="foot padding">
-			<button class="cu-btn round block bg-gradual-red lg" @tap="linkTo"
-					data-url="/pages/index/coupon">更多优惠券</button>
+		<view class="foot padding bg-white">
+			<view class="text-center" @tap="linkTo"
+				  data-url="/pages/index/coupon">
+				<text class="cuIcon-cardboardfill text-red margin-right-xs"></text>
+				<text>更多优惠券</text>
+				<text class="cuIcon-right margin-left-xs"></text>
+			</view>
 		</view>
 	</custom-page>
 </template>
@@ -54,7 +58,6 @@
 							use_tips: item.coupon.use_tips,
 							desc: "有效期至 " + (item.expire_time || item.coupon.end_time),
 							btn: "使用",
-							drawed: "已抢" + item.coupon.give_num + "张"
 						};
 					});
 					this.data = page === 1 ? res.data : this.data.concat(res.data);

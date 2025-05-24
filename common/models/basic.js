@@ -3,7 +3,7 @@ export default {
 	getHome(data, options) {
 		return uni.$http.get('/index/index', data, options);
 	},
-	
+
 	// 获取配置信息
 	getConfig(data, options) {
 		return uni.$http.get('/index/config', data, options);
@@ -11,7 +11,7 @@ export default {
 
 	// 获取关于我们
 	getAbout(data, options = {}) {
-		return uni.$http.get('/index/about', data, options);
+		return uni.$http.get('/index/getabout', data, options);
 	},
 
 	// 提交反馈
@@ -21,6 +21,11 @@ export default {
 
 	// 获取协议信息
 	getAgreement(data, options = {}) {
-		return uni.$http.get('/index/agreement', data, options);
+		return uni.$http.get('/index/getagreement', data, options);
+	},
+
+	// 获取公告列表
+	getNoticeList(data, options = {}) {
+		return uni.$http.get('/index/getnoticelist', data, options);
 	},
 }

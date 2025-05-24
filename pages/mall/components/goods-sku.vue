@@ -1,6 +1,6 @@
 <template>
 	<view class="cu-modal bottom-modal" :class="isShow?'show':''" @tap="cancel">
-		<view class="cu-dialog spec-dialog" @tap.stop.prevent="stopPrevent">
+		<view class="cu-dialog spec-dialog" @tap.stop.prevent="stopPrevent" v-if="info">
 
 			<view class="flex padding-lr padding-tb-sm">
 				<image class="spec-image margin-right radius"
@@ -53,7 +53,7 @@
 		props: {
 			info: {
 				type: Object,
-				default: () => {}
+				default: null
 			},
 		},
 		data() {
@@ -82,7 +82,9 @@
 			}
 		},
 		created() {
-			this.calcSpec();
+			if (this.info) {
+				this.calcSpec();
+			}
 		},
 		methods: {
 			// 计算规格数据
@@ -90,6 +92,9 @@
 				if (this.info.spec_list && this.info.spec_list.length) {
 					this.chooseSpec = this.info.spec_list.map(it => it.value[0]);
 					this.specList = this.info.spec_list;
+				} else {
+					this.chooseSpec = [];
+					this.specList = [];
 				}
 
 				// 转换sku

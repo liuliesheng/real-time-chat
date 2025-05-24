@@ -33,7 +33,6 @@
 			}
 		},
 		onLoad(options) {
-			this.source = parseInt(options.source);
 			this.loadData();
 		},
 		onPullDownRefresh() {

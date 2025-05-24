@@ -64,16 +64,16 @@
 			</view>
 			<view class="cu-list menu sm-border">
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/forum/index">首页</navigator>
+					<navigator class="content" url="/pages/info/index">首页</navigator>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/forum/category">分类</navigator>
+					<navigator class="content" url="/pages/info/category">分类</navigator>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/forum/posts-list">文章列表</navigator>
+					<navigator class="content" url="/pages/info/posts-list">文章列表</navigator>
 				</view>
 				<view class="cu-item arrow">
-					<navigator class="content" url="/pages/forum/posts-create">发布文章</navigator>
+					<navigator class="content" url="/pages/info/posts-create">发布文章</navigator>
 				</view>
 			</view>
 

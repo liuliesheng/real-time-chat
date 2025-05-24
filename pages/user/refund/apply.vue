@@ -1,12 +1,9 @@
 <template>
-	<view class="page">
-		<XLoading />
-		<Hint />
-
+	<custom-page class="page" :loaded="loaded">
 		<view class="cu-form-group margin-top">
 			<view class="title required">申请类型</view>
 			<picker mode="selector" :range="typeList" range-key="text"
-			        @change="typeIndex = $event.detail.value">
+					@change="typeIndex = $event.detail.value">
 				<view class="picker">
 					{{typeList[typeIndex].text}}
 				</view>
@@ -15,7 +12,7 @@
 		<view class="cu-form-group">
 			<view class="title required">收货状态</view>
 			<picker mode="selector" :range="receiptStatusList" range-key="text"
-			        @change="receiptStatusIndex = $event.detail.value">
+					@change="receiptStatusIndex = $event.detail.value">
 				<view class="picker">
 					<text v-if="receiptStatusIndex!=-1">{{receiptStatusList[receiptStatusIndex].text}}</text>
 					<text v-else>请选择</text>
@@ -25,7 +22,7 @@
 		<view class="cu-form-group">
 			<view class="title required">申请原因</view>
 			<picker mode="selector" :range="info.apply_desc_list" range-key="text"
-			        @change="applyDescIndex = $event.detail.value" v-if="info">
+					@change="applyDescIndex = $event.detail.value" v-if="info">
 				<view class="picker">
 					<text v-if="applyDescIndex!=-1">{{info.apply_desc_list[applyDescIndex].text}}</text>
 					<text v-else>请选择</text>
@@ -37,7 +34,8 @@
 			<view class="flex-sub">
 				<view class="flex">
 					<text style="margin-top: 22rpx;vertical-align: middle;">￥</text>
-					<input type="number" style="color: #e54d42;font-size: 24px;" v-model="form.amount" :disabled="true" />
+					<input type="number" style="color: #e54d42;font-size: 24px;" v-model="form.amount"
+						   :disabled="true" />
 				</view>
 				<view class="text-grey text-xs">
 					若退款成功，将退还给你￥{{form.amount}}现金
@@ -61,7 +59,7 @@
 		<view class="padding">
 			<button class="cu-btn block bg-gradual-red lg" @click="confirm" :disabled="!info">提交申请</button>
 		</view>
-	</view>
+	</custom-page>
 </template>
 
 <script>

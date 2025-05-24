@@ -10,7 +10,14 @@ export default {
 			id: id
 		}, options);
 	},
-	
+
+	// 获取商品SKU数据
+	getGoodsSku(id, options = {}) {
+		return uni.$http.get('/app/mall/goods/skudata', {
+			id: id
+		}, options);
+	},
+
 	// 获取商品评价列表
 	getGoodsEvaluateList(query, options = {}) {
 		return uni.$http.get('/app/order/goods_evaluate', query, options);
@@ -70,4 +77,5 @@ export default {
 	createOrderFormCart(data, options = {}) {
 		return uni.$http.post('/app/mall/advance_order/fromshoppingcart', data, options);
 	},
+
 }

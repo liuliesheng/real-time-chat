@@ -30,7 +30,7 @@
 			</view>
 
 			<view class="padding">
-				<button class="cu-btn block bg-gradual-orange lg shadow radius" @click="confirm"
+				<button class="cu-btn block bg-gradual-red lg" @click="confirm"
 						:disabled="info.status===0 || info.status===1">提交申请</button>
 			</view>
 

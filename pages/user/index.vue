@@ -8,8 +8,9 @@
 					   @down="downCallback" @up="upCallback">
 
 			<view class="userinfo">
-				<image class="bg" src="/static/bg/user.jpg" mode="widthFix" :style="{top:-CustomBar+'px'}"></image>
-				<view class="userinfo-inner flex" @tap="linkTo" data-url="/pages/user/info" data-logged v-if="hasUserInfo">
+				<image class="bg" src="/static/bg/user.jpg" mode="aspectFill"></image>
+				<view class="userinfo-inner flex" @tap="linkTo" data-url="/pages/user/info" data-logged
+					  v-if="hasUserInfo">
 					<image :src="userInfo.avatar" background-size="cover"
 						   class="cu-avatar xl round userinfo-avatar"></image>
 					<view class="flex-sub padding-lr">
@@ -56,69 +57,23 @@
 
 			<OrderStatusNav />
 
-			<view class="cu-list menu sm-border card-menu radius-lg margin-top">
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/user/vip/apply" data-logged>
-						<text class="cuIcon-circlefill text-grey"></text>
-						<text>申请会员</text>
-					</view>
-				</view>
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/user/wallet/index" data-logged>
-						<text class="cuIcon-circlefill text-grey"></text>
-						<text>我的钱包</text>
-					</view>
-				</view>
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/user/address/list" data-logged>
-						<text class="cuIcon-locationfill text-grey"></text>
-						<text>收货地址</text>
-					</view>
-				</view>
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/user/favorite" data-logged>
-						<text class="cuIcon-favorfill text-grey"></text>
-						<text>我的收藏</text>
-					</view>
-				</view>
-				<!-- #ifndef MP -->
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/auth/rest.password" data-logged>
-						<text class="cuIcon-circlefill text-grey"></text>
-						<text>修改密码</text>
-					</view>
-				</view>
-				<!-- #endif -->
-				<!-- #ifdef MP -->
-				<view class="cu-item arrow">
-					<button open-type="feedback" class="content text-left">
-						<text class="cuIcon-commentfill text-grey"></text>
-						<text>意见反馈</text>
-					</button>
-				</view>
-				<!-- #endif -->
-				<!-- #ifndef MP -->
-				<view class="cu-item arrow">
-					<view class="content" @tap="linkTo" data-url="/pages/index/feedback">
-						<text class="cuIcon-circlefill text-grey"></text>
-						<text>意见反馈</text>
-					</view>
-				</view>
-				<!-- #endif -->
-			</view>
+			<MenuList />
+
 		</mescroll-body>
 
 	</custom-page>
 </template>
 
 <script>
-import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins";
-import OrderStatusNav from './components/order-status-nav.vue';
+	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins";
+	import OrderStatusNav from './components/order-status-nav.vue';
+	import MenuList from './components/menu-list.vue';
 
-export default {
+	export default {
 		mixins: [MescrollMixin],
 		components: {
-			OrderStatusNav
+			OrderStatusNav,
+			MenuList
 		},
 		data() {
 			return {
@@ -185,8 +140,6 @@ export default {
 					force: true
 				});
 			},
-
-
 		}
 	};
 </script>
@@ -203,7 +156,10 @@ export default {
 		padding-bottom: 3px;
 		overflow: hidden;
 		position: relative;
-		/* min-height: 330rpx; */
+		min-height: 330rpx;
+
+		margin-bottom: -90rpx;
+		z-index: -1;
 	}
 
 	.userinfo image.bg {

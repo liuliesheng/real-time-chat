@@ -16,7 +16,7 @@
 						</view>
 					</view>
 
-					<view class="cu-form-group margin-top">
+					<view class="cu-form-group margin-top align-stretch">
 						<view class="title">综合评分</view>
 						<view class="flex-sub">
 							<uni-rate v-model="goodsItem.score"></uni-rate>
@@ -27,7 +27,7 @@
 								  placeholder="多多描述商品和使用感受,更受欢迎哦"></textarea>
 					</view>
 					<view class="cu-form-group">
-						<custom-uploader />
+						<custom-uploader class="margin-top-sm" />
 					</view>
 
 				</view>

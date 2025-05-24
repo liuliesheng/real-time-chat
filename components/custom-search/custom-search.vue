@@ -1,6 +1,6 @@
 <template>
-	<view class="search-wrapper" :style="[{height:CustomBar + 'px'}]">
-		<view class="cu-bar search bg-white" :style="style">
+	<view class="search-wrapper" :style="wrapperStyle">
+		<view class="cu-bar search" :class="searchClass" :style="innerStyle">
 			<view class="action" @tap="BackPage" v-if="isBackButton">
 				<text class="cuIcon-back"></text>
 			</view>
@@ -12,11 +12,10 @@
 					   @search="toSearch" />
 				<text class="cuIcon-close clear" v-show="search" @tap="onClearTap"></text>
 			</view>
-			<!-- #ifndef MP-WEIXIN -->
-			<view class="action" v-if="showSearchBtn">
-				<button class="cu-btn round" @tap="toSearch">搜索</button>
+			<view class="action" v-if="showRightActions">
+				<button class="cu-btn round" @tap="toSearch" v-if="showSearchBtn">搜索</button>
+				<slot name="right"></slot>
 			</view>
-			<!-- #endif -->
 		</view>
 	</view>
 </template>
@@ -28,6 +27,10 @@
 			value: String,
 			adjustPosition: Boolean,
 			disabled: Boolean,
+			height: {
+				type: Number | Boolean,
+				default: true
+			},
 			placeholder: {
 				type: String,
 				default: '搜索...'
@@ -36,23 +39,28 @@
 				type: Number,
 				default: 255
 			},
+			showRightActions: {
+				type: Boolean,
+				default: true,
+			},
 			showSearchBtn: {
 				type: Boolean,
 				default: true
+			},
+			searchClass: {
+				type: String | Object,
+				default: ''
 			}
 		},
-		data() {
-			return {
-				search: '',
-				CustomBar: this.CustomBar,
-				isBackButton: false
-			};
-		},
-		created() {
-			this.isBackButton = !uni.$isShowHomeButton();
-		},
 		computed: {
-			style() {
+			wrapperStyle() {
+				return {
+					height: typeof this.height === 'boolean' ?
+						(this.height ? this.CustomBar + 'px' : 0) : this.height + 'px'
+				};
+			},
+
+			innerStyle() {
 				const StatusBar = this.StatusBar;
 				const CustomBar = this.CustomBar;
 
@@ -65,6 +73,16 @@
 
 				return style;
 			}
+		},
+		data() {
+			return {
+				search: '',
+				CustomBar: this.CustomBar,
+				isBackButton: false
+			};
+		},
+		created() {
+			this.isBackButton = !uni.$isShowHomeButton();
 		},
 		methods: {
 			// 去搜索
@@ -112,7 +130,13 @@
 </script>
 
 <style scoped>
+	.search-wrapper {
+		position: relative;
+		z-index: 1024;
+	}
+
 	.search {
+		transition: all 0.2s;
 		max-width: 1120upx;
 		min-height: auto;
 	}

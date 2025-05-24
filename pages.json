@@ -3,30 +3,41 @@
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		// 公共
 		{
-			"path": "pages/mall/index",
-			"style": {
-				"navigationStyle": "custom",
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/index/feedback",
-			"style": {
-				"navigationBarTitleText": "意见反馈"
-			}
-		},
-		{
-			"path": "pages/index/upload",
-			"style": {
-				"navigationBarTitleText": "文件上传"
-			}
-		},
-		// 商城页面
-		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
 				"enablePullDownRefresh": false
+			}
+		}
+	    ,{
+            "path" : "pages/index/notices",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "公告",
+                "enablePullDownRefresh": true
+            }
+            
+        },
+		{
+			"path": "pages/index/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/index/deploy",
+			"style": {
+				"navigationBarTitleText": "独立部署",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		// 商城页面
+		{
+			"path": "pages/mall/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -61,7 +72,6 @@
 			"path": "pages/mall/cart/index",
 			"style": {
 				"navigationStyle": "custom",
-				// "enablePullDownRefresh": true,
 				"navigationBarTitleText": "购物车"
 			}
 		},
@@ -237,6 +247,14 @@
 				"navigationBarTitleText": "名片详情",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/vcard/favorite",
+			"style": {
+				"navigationBarTitleText": "名片夹",
+				"enablePullDownRefresh": false
+			}
+
 		}, {
 			"path": "pages/vcard/square",
 			"style": {
@@ -383,6 +401,22 @@
 			}
 		},
 		{
+			"path": "pages/user/team/index",
+			"style": {
+				"navigationBarTitleText": "我的团队",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/user/team/detail",
+			"style": {
+				"navigationBarTitleText": "明细",
+				"enablePullDownRefresh": true
+			}
+		},
+
+		// 订单相关
+		{
 			"path": "pages/user/order/list",
 			"style": {
 				"navigationBarTitleText": "订单列表"
@@ -473,23 +507,9 @@
 				"navigationBarTitleText": "协议",
 				"enablePullDownRefresh": false
 			}
-		}, {
-			"path": "pages/index/deploy",
-			"style": {
-				"navigationBarTitleText": "独立部署",
-				"enablePullDownRefresh": false
-			}
-
 		}
 
 		, {
-			"path": "pages/vcard/favorite",
-			"style": {
-				"navigationBarTitleText": "名片夹",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
 			"path": "pages/info/index",
 			"style": {
 				"navigationBarTitleText": "信息",
@@ -523,35 +543,11 @@
 				"navigationBarTitleText": "我的收藏",
 				"enablePullDownRefresh": false
 			}
-
-		}
-
-		, {
+		}, {
 			"path": "pages/vcard/index",
 			"style": {
 				"navigationBarTitleText": "名片",
 				"enablePullDownRefresh": true
-			}
-
-		}, {
-			"path": "pages/index/video",
-			"style": {
-				"navigationBarTitleText": "视频播放",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/index/rank",
-			"style": {
-				"navigationBarTitleText": "排行榜",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/index/sign",
-			"style": {
-				"navigationBarTitleText": "手写签名",
-				"enablePullDownRefresh": false
 			}
 
 		}, {
@@ -575,22 +571,46 @@
 				"enablePullDownRefresh": true
 			}
 
-		}, {
-			"path": "pages/user/team/index",
+		},
+		// 示例
+		{
+			"path": "pages/examples/upload",
 			"style": {
-				"navigationBarTitleText": "我的团队",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "文件上传"
+			}
+		},
+		{
+			"path": "pages/examples/sign",
+			"style": {
+				"navigationBarTitleText": "手写签名",
+				"enablePullDownRefresh": false
 			}
 
 		}, {
-			"path": "pages/user/team/detail",
+			"path": "pages/examples/video",
 			"style": {
-				"navigationBarTitleText": "明细",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "视频播放",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/examples/rank",
+			"style": {
+				"navigationBarTitleText": "排行榜",
+				"enablePullDownRefresh": false
 			}
 
 		}
-	],
+        ,{
+            "path" : "pages/mall/order/success",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "下单成功",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5

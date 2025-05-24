@@ -1,7 +1,7 @@
 <template>
 	<view class="flex nowrap align-center">
 		<slot name="icon">
-			<text class="block cuIcon-notificationfill text-orange margin-right-sm"></text>
+			<view class="block cuIcon-notificationfill text-orange margin-right-sm" @tap="iconTap"></view>
 		</slot>
 		<view class="flex-sub">
 			<swiper :style="styles"
@@ -24,7 +24,7 @@
 			current: { type: Number, default: 0 },
 			vertical: { type: Boolean, default: false },
 			interval: { type: Number, default: 5000 },
-			styles: { type: String, default: 'overflow:hidden; height:60rpx; line-height:60rpx; font-size:28rpx;' }
+			styles: { type: String, default: 'overflow:hidden; height:76rpx; line-height:76rpx; font-size:28rpx;' }
 		},
 		data() {
 			return {}
@@ -32,6 +32,9 @@
 		methods: {
 			change: function(index) {
 				this.$emit('change', index.detail.current);
+			},
+			iconTap: function(e) {
+				this.$emit('icontap', e);
 			}
 		}
 	}

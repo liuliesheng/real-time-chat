@@ -13,16 +13,14 @@
 			</block>
 		</cu-custom>
 
-		<block v-if="loaded">
-			<slot name="default" v-if="loaded"></slot>
-		</block>
+		<slot name="default" v-if="loaded"></slot>
 		<custom-page-load @refresh="$emit('refresh',$event)" v-else />
 
 		<custom-technical-support v-if="showTechnicalSupport" :class="!loaded?'fixed-bottom':''" />
 
 		<custom-auth-modal />
 		<custom-loading />
-		<custom-hint />
+		<custom-hint :offsetTop="showNavbar?CustomBar:0" />
 	</view>
 </template>
 
@@ -41,7 +39,9 @@
 			}
 		},
 		data() {
-			return {};
+			return {
+				CustomBar: this.CustomBar,
+			};
 		}
 	}
 </script>

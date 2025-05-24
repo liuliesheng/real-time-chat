@@ -1,11 +1,10 @@
-import { request } from '../request';
 import extMaps from './ext.maps.js';
 const qiniuUploader = require("../../libs/qiniuUploader");
 
 export default function(options) {
 	return init(options).then((uploadOptions) => {
 		return new Promise((resolve, reject) => {
-			qiniuUploader.upload(options.file, (res) => {
+			qiniuUploader.upload(options.filepath, (res) => {
 				resolve(
 					options.onUploadedSuccess ?
 					options.onUploadedSuccess(res) : res.data,
@@ -29,28 +28,30 @@ function init(options) {
 		});
 	}
 
-	let file = options.file;
 	let fileType = 'file';
-	if (typeof file === 'string') {
-		const dotIndex = file.lastIndexOf('.');
-		const ext = dotIndex > 0 ? file.substring(dotIndex + 1, file.length).toLowerCase() : '';
+	const file = options.file;
+	const filename = typeof file === 'string' ? file : file.name || file.path;
+	const filepath = options.filepath = typeof file === 'string' ? file : file.path;
 
-		if (extMaps[ext]) {
-			file = {
-				path: file,
-				type: extMaps[ext].contentType
-			};
-			fileType = extMaps[ext].type;
-		} else {
-			file = {
-				path: file,
-				type: 'application/octet-stream'
-			};
-		}
+	const dotIndex = filename.lastIndexOf('.');
+	const ext = dotIndex > 0 ? filename.substring(dotIndex + 1, filename.length).toLowerCase() : '';
+
+	let uploadFile = null;
+	if (extMaps[ext]) {
+		uploadFile = {
+			path: filepath,
+			type: extMaps[ext].contentType
+		};
+		fileType = extMaps[ext].type;
+	} else {
+		uploadFile = {
+			path: filepath,
+			type: 'application/octet-stream'
+		};
 	}
 
-	return request.post(options.tokenInfoUrl, {
-		file: file,
+	return uni.$http.post(options.tokenInfoUrl, {
+		file: uploadFile,
 		type: fileType,
 	}, {
 		successTips: false,
