@@ -3,7 +3,6 @@ import cache from "../cache";
 import Validate from "../validate";
 import { emitter, EventEmitter } from "../events";
 import { default as observer, Observer } from "../observer";
-import middleware from "../middleware";
 import { logins, Request, upload } from "../http";
 import * as util from "../util";
 
@@ -51,9 +50,6 @@ $.$define('EventEmitter', EventEmitter);
 // 观察者
 $.$define('observer', observer);
 $.$define('Observer', Observer);
-
-// 中间件
-$.$define('middleware', middleware);
 
 // 请求类
 $.$define('http', new Request());

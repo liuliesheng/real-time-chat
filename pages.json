@@ -610,6 +610,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/mall/goods/poster",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品海报",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {

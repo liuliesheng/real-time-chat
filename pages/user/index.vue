@@ -55,7 +55,7 @@
 				</view>
 			</view>
 
-			<OrderStatusNav />
+			<OrderStatusNav :info="config.order_status_count" />
 
 			<MenuList />
 

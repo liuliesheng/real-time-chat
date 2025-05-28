@@ -17,15 +17,18 @@
 			</view>
 			<view class="content">
 				<view class="goods-title">{{ item.title }}</view>
-				<view class="text-gray text-sm flex flex-wrap margin-top-xs">
-					<text class="sales">月销 {{ item.sale_count || 0 }}</text>
+				<view class="tags margin-top-xs">
+					<view class="cu-tag light bg-red sm">特价</view>
+					<view class="cu-tag light bg-red sm">24h发货</view>
+					<view class="cu-tag light bg-red sm" v-if="item.is_free_freight">包邮</view>
 				</view>
 				<view class="flex flex-wrap margin-top-xs">
 					<text class="text-price text-red">{{ item.price }}</text>
-					<text v-if="item.market_price > item.price" class="m-price">￥{{ item.market_price }}</text>
+					<text class="text-xs text-red">/件</text>
+					<text v-if="item.market_price > item.price" class="m-price margin-left-xs">￥{{ item.market_price }}</text>
 				</view>
-				<view class="tags margin-top-xs">
-					<view class="cu-tag line-red text-xs" v-if="item.is_free_freight">免邮费</view>
+				<view class="text-gray text-sm flex flex-wrap margin-top-xs">
+					<text class="sales">{{ item.sale_count || 0 }}人已购买</text>
 				</view>
 			</view>
 		</view>
@@ -105,12 +108,12 @@
 	}
 
 	.text-price {
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: bold;
 	}
 
 	.m-price {
-		font-size: 13px;
+		font-size: 20rpx;
 		text-decoration: line-through;
 		margin-left: 10rpx;
 		color: #999;
@@ -120,6 +123,7 @@
 		.cu-tag {
 			padding: 2rpx 4rpx;
 			height: auto;
+			border-radius: 4rpx;
 		}
 	}
 

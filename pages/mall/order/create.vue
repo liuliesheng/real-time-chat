@@ -65,7 +65,7 @@
 				</view>
 				<view class="cu-item arrow">
 					<view class="content">优惠券</view>
-					<view class="action">
+					<view class="action" @tap="choiceCoupon">
 						<text class="text-red"
 							  v-if="info.user_coupon_list.length">{{info.user_coupon_list.length}}张可用</text>
 						<text class="text-gray" v-else>无可用</text>
@@ -248,6 +248,17 @@
 				this.$set(item, 'total_price', totalPrice);
 			},
 
+			// 使用优惠券
+			choiceCoupon() {
+				uni.$emitter.once('coupon.choice', (res) => {
+					console.log(res);
+				});
+
+				uni.navigateTo({
+					url: '/pages/user/coupon?source=1'
+				});
+			},
+
 			// 立即下单
 			goOrder() {
 				if (this.isGoOrder) {
@@ -297,6 +308,13 @@
 
 			// 去支付
 			goPay(order) {
+				const jump = function() {
+					setTimeout(() => {
+						uni.redirectTo({
+							url: './success?status=1'
+						});
+					}, 1500);
+				};
 				uni.$models.order.getOrderPaymentInfo({
 					id: order.id,
 					type: this.payType
@@ -306,20 +324,18 @@
 				}).then((res) => {
 					if (res.state === 1) { // 余额支付
 						this.hintSuccess('已支付！');
+						jump();
 					} else { // 微信支付
 						uni.requestPayment({
 							...res,
 							success: () => {
 								this.hintSuccess('已支付！');
+							},
+							complete: () => {
+								jump();
 							}
 						});
 					}
-				}).finally(() => {
-					setTimeout(() => {
-						uni.redirectTo({
-							url: './success?status=1'
-						});
-					}, 1500);
 				});
 			}
 		}

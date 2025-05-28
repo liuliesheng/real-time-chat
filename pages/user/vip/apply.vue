@@ -1,7 +1,7 @@
 <template>
-	<custom-page class="page" :loaded="loaded">
+	<custom-page class="page" :loaded="loaded" :showTechnicalSupport="false">
 
-		<template v-if="loaded">
+		<view class="form-wrapper" v-if="loaded">
 			<view class="status-desc" v-if="info.status!==-1">
 				<view class="icon">
 					<text class="text-blue cuIcon-timefill" v-if="info.status===0"></text>
@@ -12,29 +12,28 @@
 				<view v-else-if="info.status===1" class="text-green text-lg">已通过</view>
 				<view v-else-if="info.status===2" class="text-red">
 					<view class="text-lg">已拒绝</view>
-					<view class="margin-top-xs text-yellow" style="word-break: break-all;">{{info.refuse_msg}}</view>
+					<view class="margin-top-xs text-yellow text-sm" style="word-break: break-all;">{{info.refuse_msg}}
+					</view>
 				</view>
 				<view class="text-red text-lg" v-else>{{info.status_text||"审核失败！"}}</view>
 			</view>
 
-			<view class="cu-bar bg-white margin-top solid-bottom">
-				<view class="action text-bold">基本信息填写</view>
+			<view class="padding solid-bottom text-center text-bold">填写信息</view>
+			<view class="cu-form-group">
+				<view class="title required">姓名</view>
+				<input type="text" v-model="info.realname" placeholder="请输入姓名" />
 			</view>
 			<view class="cu-form-group">
-				<view class="title required">申请人</view>
-				<input type="text" v-model="info.realname" placeholder="请输入申请人姓名" />
-			</view>
-			<view class="cu-form-group">
-				<view class="title required">联系电话</view>
-				<input type="number" v-model="info.mobile" placeholder="请输入申请人手机号码" />
+				<view class="title required">手机号</view>
+				<input type="number" v-model="info.mobile" placeholder="请输入手机号码" />
 			</view>
 
 			<view class="padding">
-				<button class="cu-btn block bg-gradual-red lg" @click="confirm"
+				<button class="cu-btn block bg-orange lg round" @click="confirm"
 						:disabled="info.status===0 || info.status===1">提交申请</button>
 			</view>
 
-		</template>
+		</view>
 	</custom-page>
 </template>
 
@@ -63,6 +62,7 @@
 			loadData() {
 				return uni.$models.user.getApplyVipInfo().then((res) => {
 					if (res) {
+						res.status = -1;
 						this.info = res;
 					}
 					this.loaded = true;
@@ -82,8 +82,25 @@
 </script>
 
 <style>
+	.page {
+		background-image: url(https://org.modao.cc/uploads5/images/7596/75960826/v2_r2i54i.png);
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		background-color: #ff5318;
+	}
+
+	.form-wrapper {
+		position: fixed;
+		left: 15px;
+		right: 15px;
+		bottom: 30px;
+		border-radius: 20rpx;
+		background-color: white;
+		overflow: hidden;
+	}
+
 	.status-desc {
-		margin-top: 15%;
 		padding: 30rpx;
 		text-align: center;
 	}

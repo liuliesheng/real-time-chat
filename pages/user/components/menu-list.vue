@@ -3,7 +3,7 @@
 		<view class="cu-item arrow">
 			<view class="content" @tap="linkTo" data-url="/pages/user/team/index" data-logged>
 				<text class="cuIcon-group_fill text-grey"></text>
-				<text>分享团队</text>
+				<text>分销团队</text>
 			</view>
 		</view>
 		<view class="cu-item arrow">

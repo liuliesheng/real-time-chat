@@ -1,33 +1,6 @@
 import $ from "../../$";
 import defaultMixins from '../default.mixins';
 
-// 重置App函数
-if (typeof App !== "undefined") {
-	const originalApp = App;
-	App = function(appInstance) {
-		const registerAppMiddleware = function(callbackName, middlewareName) {
-			if (!$.$middlewares[middlewareName]) {
-				return;
-			}
-
-			const oldFunc = appInstance[callbackName] || function() {};
-			appInstance[callbackName] = function(options) {
-				console.groupCollapsed(middlewareName, options);
-				$.$middlewares[middlewareName](oldFunc, options, appInstance);
-				console.groupEnd();
-			};
-		};
-
-		registerAppMiddleware('onLaunch', 'appLaunch');
-		registerAppMiddleware('onShow', 'appShow');
-		registerAppMiddleware('onHide', 'appHide');
-		registerAppMiddleware('onError', 'appError');
-		registerAppMiddleware('onPageNotFound', 'appPageNotFound');
-
-		originalApp(appInstance);
-	};
-}
-
 // 重置Page函数
 if (typeof Page !== "undefined" && typeof uni === 'undefined') {
 	const originalPage = Page;

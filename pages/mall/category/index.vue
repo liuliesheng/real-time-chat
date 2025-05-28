@@ -23,40 +23,28 @@
 							  :up="{auto:false,empty:false}"
 							  @init="mescrollInit" @down="downCallback" @up="upCallback">
 					<!--商品列表-->
-					<view class="cu-list goods-list" v-if="data.length">
-						<template v-for="(item,index) in data">
-							<ad unit-id="adunit-02012c56bdf50736" ad-type="grid" v-if="index==2"></ad>
+					<TheGoodsList :list="data" @sampletap="sampleTap" @shoppingcart="shoppingCart" />
 
-							<view class="cu-item flex padding-sm" :id="'main-'+item.id" :key="item.id"
-								  @tap="linkTo" :data-url="'/pages/mall/goods/detail?id='+item.id">
-								<view class="image-wrapper radius lg">
-									<image :src="item.cover" mode="aspectFit" lazy-load="true"></image>
-								</view>
-								<view class="content flex-sub">
-									<view class="title ellipsis-2 text-black">{{ item.title }}</view>
-									<view class="text-gray text-sm margin-top-xs">
-										<text class="sales">月销 {{ item.sale_count || 0 }}</text>
-									</view>
-									<view class="flex flex-wrap margin-top-xs">
-										<text class="text-price text-red text-xl text-bold">{{ item.price }}</text>
-										<text v-if="item.market_price > item.price"
-											  class="m-price">￥{{ item.market_price }}</text>
-									</view>
-								</view>
-							</view>
-						</template>
-					</view>
-					<Empty type="goods" v-else></Empty>
 				</mescroll-uni>
 			</view>
 		</template>
+
+		<!-- 商品规格 -->
+		<GoodsSku ref="sku" :info="showGoodsSkuData" />
+		<!-- /商品规格 -->
 	</custom-page>
 </template>
 
 <script>
 	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
+	import TheGoodsList from "./the-goods-list.vue";
+	import GoodsSku from '../components/goods-sku.vue';
 	export default {
 		mixins: [MescrollMixin],
+		components: {
+			TheGoodsList,
+			GoodsSku
+		},
 		data() {
 			return {
 				categories: [],
@@ -64,6 +52,7 @@
 				page: 1,
 				more: true,
 				loaded: false,
+				showGoodsSkuData: null,
 
 				tabCur: 0,
 				mainCur: 0,
@@ -132,6 +121,8 @@
 					this.loaded = true;
 				});
 			},
+
+			// 上拉数据
 			upCallback(mescroll) {
 				if (this.loaded) {
 					return;
@@ -143,6 +134,8 @@
 					mescroll.endErr();
 				});
 			},
+
+			// 加载商品数据
 			loadGoodsData(page = 1) {
 				if (!this.categories.length) {
 					return Promise.resolve();
@@ -160,6 +153,56 @@
 					return res;
 				});
 			},
+
+			// 试样点击
+			sampleTap(info) {
+				this.toChooseSpec(info, 'simple').then((res) => {
+					if (res.cancel) {
+						return;
+					}
+
+					uni.$logged({
+						loginUserInfo: true
+					}).then(() => {
+						uni.navigateTo({
+							url: `../order/create?goods_id=${info.id}&goods_sku_id=${res.sku.id}&count=${res.count}`
+						});
+					});
+				});
+			},
+
+			// 开始加入购物车
+			shoppingCart(info) {
+				this.toChooseSpec(info, 'cart').then((res) => {
+					if (res.cancel) {
+						return;
+					}
+
+					return uni.$models.mall.addShoppingCart({
+						goods_id: info.id,
+						goods_sku_id: res.sku.id,
+						count: res.count
+					}, {
+						loading: this,
+						hint: this
+					}).then((count) => {
+						
+						
+					});
+				});
+			},
+
+			// 开始选择规格
+			toChooseSpec(info, type) {
+				return uni.$models.mall.getGoodsSku(info.id).then((res) => {
+					this.showGoodsSkuData = Object.assign({}, info, res);
+					return this.$refs.sku.open(type).then((res) => {
+						return res;
+					});
+				});
+			},
+
+			// 分类选择
 			TabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
 				// this.mainCur = e.currentTarget.dataset.id;
@@ -253,29 +296,5 @@
 	.VerticalMain {
 		background-color: #fff;
 		flex: 1;
-	}
-
-	.goods-list .cu-item {
-		/* background-color: white; */
-	}
-
-	.goods-list .cu-item .title {
-		color: #333333;
-		font-size: 14px;
-		line-height: 1.2;
-		height: 33.6px;
-	}
-
-	.goods-list .cu-item .image-wrapper {
-		width: 120rpx;
-		height: 120rpx;
-		margin-right: 20rpx;
-	}
-
-	.m-price {
-		font-size: 26rpx;
-		text-decoration: line-through;
-		margin-left: 10rpx;
-		color: #999;
 	}
 </style>

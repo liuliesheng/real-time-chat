@@ -29,57 +29,57 @@ export class EventEmitter {
 	/**
 	 * 添加监听器
 	 * @param {string} name
-	 * @param {<Function,object>} callback
+	 * @param {<Function,object>} handle
 	 * @return {Function}
 	 */
-	on(name, callback, isInsert = false) {
+	on(name, handle, isInsert = false) {
 		checkType(name, 'string', 'name');
 
 		if (!this._listeners.hasOwnProperty(name)) {
 			this._listeners[name] = [];
 		}
 
-		const callbackStorage = this._listeners[name];
-		if (typeof callback !== 'object') {
-			callback = {
-				callback: callback
+		const handleStorage = this._listeners[name];
+		if (typeof handle !== 'object') {
+			handle = {
+				handle: handle
 			};
 		}
 
-		checkType(callback.callback, 'function', 'callback');
+		checkType(handle.handle, 'function', 'handle');
 		if (isInsert) {
-			callbackStorage.unshift(callback);
+			handleStorage.unshift(handle);
 		} else {
-			callbackStorage.push(callback);
+			handleStorage.push(handle);
 		}
 
-		return callback.callback;
+		return handle.handle;
 	}
 
 	/**
 	 * 只触发一次事件
 	 * @param {string} name
-	 * @param {*} callback
+	 * @param {*} handle
 	 * @returns {*[]}
 	 */
-	once(name, callback, isInsert = false) {
-		if (typeof callback === 'function') {
-			callback = {
-				callback: callback
+	once(name, handle, isInsert = false) {
+		if (typeof handle === 'function') {
+			handle = {
+				handle: handle
 			};
 		}
 
-		callback.once = true;
+		handle.once = true;
 
-		return this.on(name, callback, isInsert);
+		return this.on(name, handle, isInsert);
 	}
 
 	/**
 	 * 移除监听器
 	 * @param {string,null} name
-	 * @param {...<Function,object>} callbacks
+	 * @param {...<Function,object>} handles
 	 */
-	off(name, ...callbacks) {
+	off(name, ...handles) {
 		if (!name) {
 			return;
 		}
@@ -88,13 +88,13 @@ export class EventEmitter {
 			return;
 		}
 
-		const callbackStorage = this._listeners[name];
-		if (callbacks.length) {
-			for (let i in callbacks) {
-				const callback = callbacks[i];
-				for (let i = 0; i < callbackStorage.length; i++) {
-					if (callback === callbackStorage[i].callback) {
-						callbackStorage.splice(i, 1);
+		const handleStorage = this._listeners[name];
+		if (handles.length) {
+			for (let i in handles) {
+				const handle = handles[i];
+				for (let i = 0; i < handleStorage.length; i++) {
+					if (handle === handleStorage[i].handle) {
+						handleStorage.splice(i, 1);
 						i--;
 					}
 				}
@@ -135,26 +135,26 @@ export class EventEmitter {
 			return this;
 		}
 
-		const callbackStorage = this._listeners[name];
-		for (let i = 0; i < callbackStorage.length; i++) {
-			const callback = callbackStorage[i];
+		const handleStorage = this._listeners[name];
+		for (let i = 0; i < handleStorage.length; i++) {
+			const handle = handleStorage[i];
 
 			//只执行一次回调器
-			if (callback.once) {
-				callbackStorage.splice(i, 1);
+			if (handle.once) {
+				handleStorage.splice(i, 1);
 				i--;
 			}
 
 			let result = undefined;
 
-			if (callback.isBind) {
-				if (callback.isReplaceBindArgs !== false) {
-					result = callback.callback(param);
+			if (handle.isBind) {
+				if (handle.isReplaceBindArgs !== false) {
+					result = handle.handle(param);
 				} else {
-					result = callback.callback();
+					result = handle.handle();
 				}
 			} else {
-				result = callback.callback.call(callback.thisArg, param);
+				result = handle.handle.call(handle.thisArg, param);
 			}
 
 			if (result === false) {

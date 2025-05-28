@@ -6,6 +6,7 @@
 		},
 		onLaunch: function(options) {
 			console.log('App Launch', options);
+			uni.$emitter.emit('appLaunch', options);
 
 			Vue.prototype.MenuButtonRect = {
 				width: 0,
@@ -15,11 +16,11 @@
 				left: 0,
 				bottom: 0,
 			};
-			
+
 			// #ifdef MP-WEIXIN
 			Vue.prototype.MenuButtonRect = uni.getMenuButtonBoundingClientRect();
 			// #endif
-			
+
 			uni.getSystemInfo({
 				success: function(e) {
 					// #ifndef MP
@@ -55,9 +56,19 @@
 		},
 		onShow: function(options) {
 			console.log('App Show', options);
+			uni.$emitter.emit('appShow', options);
 		},
 		onHide: function(options) {
 			console.log('App Hide', options);
+			uni.$emitter.emit('appHide', options);
+		},
+		onError: function(error) {
+			console.error('App Hide', error);
+			uni.$emitter.emit('appError', error);
+		},
+		onPageNotFound: function(options) {
+			console.log('App PageNotFound', options);
+			uni.$emitter.emit('appPageNotFound', options);
 		},
 
 		methods: {}

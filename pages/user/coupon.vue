@@ -1,7 +1,7 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
 		<template v-for="coupon in data">
-			<custom-coupon :coupon="coupon" class="margin" @actiontap="navTo('/pages/index/index')"></custom-coupon>
+			<custom-coupon :coupon="coupon" class="margin" @actiontap="actionTap(coupon)"></custom-coupon>
 		</template>
 
 		<view class="foot padding bg-white">
@@ -23,12 +23,18 @@
 				page: 1,
 				more: true,
 				keywords: '',
-				loaded: false
+				loaded: false,
+
+				source: 0,
+				choice: null,
 			}
 		},
 		onLoad(options) {
 			this.source = parseInt(options.source);
 			this.loadData();
+		},
+		onUnload() {
+			uni.$emitter.emit('coupon.choice', this.choice);
 		},
 		onPullDownRefresh() {
 			this.loadData().finally(() => {
@@ -49,7 +55,7 @@
 					page: page,
 				}).then(res => {
 					res.data = res.data.map(item => {
-						return {
+						return Object.assign(item, {
 							color: '#FF3456',
 							ltBg: "#FFFFFF",
 							height: '180rpx',
@@ -58,7 +64,7 @@
 							use_tips: item.coupon.use_tips,
 							desc: "有效期至 " + (item.expire_time || item.coupon.end_time),
 							btn: "使用",
-						};
+						});
 					});
 					this.data = page === 1 ? res.data : this.data.concat(res.data);
 					this.more = res.data.length >= res.per_page;
@@ -68,6 +74,18 @@
 					uni.navigateBack();
 				});
 			},
+
+			// 去使用
+			actionTap(item) {
+				if (this.source) {
+					this.choice = item;
+					uni.navigateBack();
+				} else {
+					uni.reLaunch({
+						url: '/pages/index/index'
+					})
+				}
+			}
 		}
 	}
 </script>

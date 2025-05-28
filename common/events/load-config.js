@@ -1,4 +1,4 @@
-export default function(next, options) {
+export default function(options) {
 	uni.$models.basic.getConfig().then((config) => {
 		const globalData = getApp().globalData;
 		Object.assign(globalData, config);
@@ -20,5 +20,4 @@ export default function(next, options) {
 
 		uni.$emitter.emit('refresh-global-config', config);
 	});
-	next();
 }

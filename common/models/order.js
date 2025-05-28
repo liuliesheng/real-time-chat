@@ -32,7 +32,9 @@ export default {
 
 	// 获取订单支付信息
 	getOrderPaymentInfo(query, options = {}) {
-		return uni.$http.get('/app/order/index/paid', query, options);
+		return uni.$http.post('/app/order/order_paid/index', query, Object.assign({
+			successTips: false
+		}, options));
 	},
 
 	// 删除订单

@@ -6,7 +6,7 @@
 					<image src="../../static/icon/wechat.png" mode="aspectFill" class="icon"></image>
 					<button class="flex-sub text text-cut share-btn" open-type="share">发送给朋友</button>
 				</view>
-				<view class="flex-sub flex list-item">
+				<view class="flex-sub flex list-item" @tap="linkTo" data-url="/pages/mall/goods/poster">
 					<image src="../../static/icon/wechat.png" mode="aspectFill" class="icon"></image>
 					<view class="flex-sub text text-cut">分享海报</view>
 				</view>

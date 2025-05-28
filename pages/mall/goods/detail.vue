@@ -17,6 +17,7 @@
 			<!-- 商品基本信息 -->
 			<view class="padding bg-white">
 				<view class="text-xl text-black">{{ info.title }}</view>
+				<view class="text-xl text-black" @tap="showShareTap">分享</view>
 				<view class="margin-top">
 					<text class="text-price text-red text-xl">{{ info.price }}</text>
 					<text class="text-price text-gray margin-left-sm"
@@ -88,6 +89,10 @@
 			<view class="padding rich-text bg-white">
 				<MPHtml :content="info.content" />
 			</view>
+			<!-- /商品详情 -->
+
+			<!-- 商品详情 -->
+			<custom-share-popup ref="sharePopup"></custom-share-popup>
 			<!-- /商品详情 -->
 
 			<!-- #ifdef MP-WEIXIN -->
@@ -195,11 +200,11 @@
 					hint: this
 				};
 				if (!this.info.is_favorite) {
-					return uni.$models.mall.favoriteGoods(this.id, options).then(res => {
+					return uni.$models.user.favoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 1;
 					});
 				} else {
-					return uni.$models.mall.unfavoriteGoods(this.id, options).then(res => {
+					return uni.$models.user.unfavoriteGoods(this.id, options).then(res => {
 						this.info.is_favorite = 0;
 					});
 				}
@@ -214,6 +219,11 @@
 
 					return res;
 				});
+			},
+
+			// 显示分享
+			showShareTap() {
+				this.$refs.sharePopup.open();
 			},
 
 			// 开始加入购物车
