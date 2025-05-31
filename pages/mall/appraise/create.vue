@@ -16,10 +16,22 @@
 						</view>
 					</view>
 
-					<view class="cu-form-group margin-top align-stretch">
+					<view class="cu-form-group margin-top">
 						<view class="title">综合评分</view>
 						<view class="flex-sub">
-							<uni-rate v-model="goodsItem.score"></uni-rate>
+							<uni-rate v-model="goodsItem.whole_credit"></uni-rate>
+						</view>
+					</view>
+					<view class="cu-form-group">
+						<view class="title">服务评分</view>
+						<view class="flex-sub">
+							<uni-rate v-model="goodsItem.service_credit"></uni-rate>
+						</view>
+					</view>
+					<view class="cu-form-group align-center">
+						<view class="title">物流评分</view>
+						<view class="flex-sub">
+							<uni-rate v-model="goodsItem.delivery_credit"></uni-rate>
 						</view>
 					</view>
 					<view class="cu-form-group">
@@ -47,10 +59,6 @@
 			return {
 				id: 0,
 				info: null,
-				form: {
-					rate: 0,
-					content: ''
-				},
 				loaded: false,
 			}
 		},
@@ -67,9 +75,12 @@
 		methods: {
 			// 加载数据
 			loadData() {
-				return uni.$models.order.getPreGoodsEvaluate(this.id).then(res => {
+				return uni.$models.mall.getPreGoodsAppraise(this.id).then(res => {
 					res.goods_list.forEach(it => {
-						it.score = 0;
+						it.order_goods_id = it.id;
+						it.whole_credit = 0;
+						it.service_credit = 0;
+						it.delivery_credit = 0;
 						it.content = '';
 						it.images = [];
 					});
@@ -79,16 +90,8 @@
 			},
 			// 提交数据
 			onSubmit() {
-				const data = this.info.goods_list.map(it => {
-					return {
-						order_goods_id: it.id,
-						score: it.score,
-						content: it.content,
-						images: it.images,
-					};
-				});
-
-				return uni.$models.order.createGoodsEvaluate({
+				const data = this.info.goods_list;
+				return uni.$models.mall.createGoodsAppraise({
 					order_id: this.id,
 					data: data
 				}, {
@@ -112,5 +115,9 @@
 	.goods-list .cu-item .image-wrapper {
 		width: 120rpx;
 		height: 120rpx;
+	}
+
+	.cu-form-group .title {
+		line-height: 76rpx;
 	}
 </style>

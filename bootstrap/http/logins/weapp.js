@@ -27,6 +27,7 @@ export default function(options = {}) {
 		// 组装数据
 		const globalData = getApp().globalData;
 		res.share_uid = globalData.shareUid || 0;
+		res.fenxiao_uid = globalData.fenxiaoUid || 0;
 
 		return new Promise((resolve, reject) => {
 			$.request({

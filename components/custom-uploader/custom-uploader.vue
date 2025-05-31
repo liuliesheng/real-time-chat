@@ -84,7 +84,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.bg-img {
 		position: relative;
 	}

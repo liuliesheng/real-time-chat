@@ -40,7 +40,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.share-wrapper {}
 
 	.share-dialog {

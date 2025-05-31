@@ -63,7 +63,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.floating-btn-group {
 		position: fixed;
 		bottom: 120rpx;

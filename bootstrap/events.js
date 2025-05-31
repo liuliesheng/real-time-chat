@@ -42,8 +42,11 @@ export class EventEmitter {
 		const handleStorage = this._listeners[name];
 		if (typeof handle !== 'object') {
 			handle = {
+				thisArg: handle,
 				handle: handle
 			};
+		} else {
+			handle.thisArg = handle.thisArg || handle;
 		}
 
 		checkType(handle.handle, 'function', 'handle');
@@ -65,8 +68,11 @@ export class EventEmitter {
 	once(name, handle, isInsert = false) {
 		if (typeof handle === 'function') {
 			handle = {
+				thisArg: handle,
 				handle: handle
 			};
+		} else {
+			handle.thisArg = handle.thisArg || handle;
 		}
 
 		handle.once = true;

@@ -19,8 +19,20 @@ export default {
 	},
 
 	// 获取商品评价列表
-	getGoodsEvaluateList(query, options = {}) {
-		return uni.$http.get('/app/order/goods_evaluate', query, options);
+	getGoodsAppraiseList(query, options = {}) {
+		return uni.$http.get('/app/mall/goods_appraise', query, options);
+	},
+	
+	// 获取商品预评价信息
+	getPreGoodsAppraise(id, options = {}) {
+		return uni.$http.get('/app/mall/goods_appraise/create', {
+			order_id: id
+		}, options);
+	},
+	
+	// 创建商品评价
+	createGoodsAppraise(data, options = {}) {
+		return uni.$http.post('/app/mall/goods_appraise/create', data, options);
 	},
 
 	// 获取商品浏览记录

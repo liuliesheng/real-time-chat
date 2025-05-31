@@ -41,7 +41,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.map-wrapper {
 		background-color: white;
 		overflow: hidden;

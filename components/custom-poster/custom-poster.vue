@@ -165,7 +165,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.canvas-in {
 		width: 750rpx;
 		overflow: hidden;

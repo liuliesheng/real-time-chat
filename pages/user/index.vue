@@ -163,6 +163,7 @@
 	}
 
 	.userinfo image.bg {
+		background-color: #ff3c1b;
 		position: absolute;
 		width: 100%;
 		height: 330rpx;

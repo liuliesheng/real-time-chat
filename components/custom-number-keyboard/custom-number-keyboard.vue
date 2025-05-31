@@ -89,7 +89,7 @@
 		}
 	}
 </script>
-<style>
+<style scoped>
 	.keyboard {
 		background-color: #F6F7F8;
 		padding: 20rpx 0;

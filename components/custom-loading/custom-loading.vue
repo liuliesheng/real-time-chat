@@ -41,7 +41,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.loading {
 		position: fixed;
 		left: 0;

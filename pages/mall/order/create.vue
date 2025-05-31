@@ -142,7 +142,10 @@
 				payType: '10',
 
 				// 是否下单中
-				isGoOrder: false
+				isGoOrder: false,
+
+				// 是否是样品
+				sample: 0
 			};
 		},
 		computed: {
@@ -201,6 +204,8 @@
 				uni.$hintError('参数错误！');
 				return uni.$back();
 			}
+
+			this.sample = parseInt(options.sample) || 0;
 
 			this.loadData();
 		},
@@ -286,6 +291,7 @@
 						goods_id: this.goodsId,
 						goods_sku_id: this.goodsSkuId,
 						goods_num: this.info.goods_list[0].goods_num,
+						sample: this.sample
 					}, order), {
 						successTips: false
 					}).then((info) => {

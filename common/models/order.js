@@ -58,18 +58,6 @@ export default {
 		}, options);
 	},
 
-	// 获取商品预评价信息
-	getPreGoodsEvaluate(id, options = {}) {
-		return uni.$http.get('/app/order/goods_evaluate/create', {
-			order_id: id
-		}, options);
-	},
-
-	// 创建商品评价
-	createGoodsEvaluate(data, options = {}) {
-		return uni.$http.post('/app/order/goods_evaluate/create', data, options);
-	},
-
 	// 获取订单物流信息
 	getExpressTracks(orderId, options = {}) {
 		return uni.$http.get('/app/order/express/tracks', {

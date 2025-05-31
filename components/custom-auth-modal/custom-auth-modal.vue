@@ -69,7 +69,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.auth-avatar-warpper {
 		margin: 30upx auto;
 		width: 180upx;

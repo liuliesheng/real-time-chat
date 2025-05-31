@@ -24,6 +24,6 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.card {}
 </style>

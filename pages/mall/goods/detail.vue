@@ -5,8 +5,11 @@
 			<view class="" style="overflow: hidden;">
 				<swiper class="screen-swiper round-dot" style="min-height: 356rpx;"
 						:indicator-dots="true" :circular="true"
-						:autoplay="true" interval="5000" duration="500"
+						:autoplay="false" interval="5000" duration="500"
 						@tap="previewImage" :data-urls="swiperList">
+					<swiper-item v-if="info.video">
+						<video :src="info.video" :controls="false"></video>
+					</swiper-item>
 					<swiper-item v-for="(item,index) in swiperList" :key="index" :data-current="index">
 						<image :src="item" mode="aspectFill"></image>
 					</swiper-item>
@@ -15,118 +18,159 @@
 			<!-- /商品轮播图 -->
 
 			<!-- 商品基本信息 -->
-			<view class="padding bg-white">
+			<view class="margin padding radius bg-white" style="overflow: hidden;">
+				<view class="favorite text-sm" @tap="toggleFavorite">
+					<template v-if="info.is_favorite">
+						<view class="cuIcon-favorfill text-orange text-xxl"></view>
+						<text>想买</text>
+					</template>
+					<template v-else>
+						<view class="cuIcon-favor text-xxl"></view>
+						<text>想买</text>
+					</template>
+				</view>
 				<view class="text-xl text-black">{{ info.title }}</view>
-				<view class="text-xl text-black" @tap="showShareTap">分享</view>
+
+
+				<view class="margin-top">
+					<view class="cu-tag light bg-red sm">特价</view>
+					<view class="cu-tag light bg-red sm">24h发货</view>
+					<view class="cu-tag light bg-red sm" v-if="info.is_free_freight">包邮</view>
+				</view>
+				<view class="text-gray margin-top">
+					<view class="">规格：</view>
+					<view class="">场景：</view>
+				</view>
+
 				<view class="margin-top">
 					<text class="text-price text-red text-xl">{{ info.price }}</text>
 					<text class="text-price text-gray margin-left-sm"
 						  style="text-decoration: line-through;">{{ info.market_price }}
 					</text>
 				</view>
-
-				<view class="flex justify-between margin-top">
-					<view class="">销量: {{ info.sale_count }}</view>
-					<view class="">浏览量: {{ info.view_count }}</view>
-				</view>
 			</view>
 			<!-- /商品基本信息 -->
 
 			<!-- 商品优惠信息 -->
-			<view class="bg-white cu-list menu">
-				<view class="cu-item arrow" @tap="toChooseSpec">
-					<view class="cu-item-title">购买类型</view>
-					<view class="flex-sub">
-						<text v-if="chooseSpec.length">{{chooseSpecText}}</text>
-						<text v-else>选择规格</text>
+			<view class="margin radius bg-white goods-discount" style="overflow: hidden;">
+				<view class="cu-bar">
+					<view class="action text-bold">商品优惠</view>
+				</view>
+				<view class="item">
+					<view class="cu-item-title">
+						<view class="cu-tag light bg-red sm">样品</view>
 					</view>
+					<text>样品每人限购3份，超出则该商品全部按原价</text>
 				</view>
-				<view class="cu-item arrow">
-					<view class="cu-item-title">优惠券</view>
-					<view class="flex-sub text-red">
-						<text v-if="info.coupon && info.coupon.length">选择优惠券</text>
-						<text v-else>无</text>
+				<view class="item">
+					<view class="cu-item-title">
+						<view class="cu-tag light bg-red sm">券</view>
 					</view>
+					<text>可使用优惠券</text>
 				</view>
-				<!--<view class="cu-item">
-				<view class="cu-item-title">促销活动</view>
-				<view class="flex-sub">
-					<view>新人首单送20元无门槛代金券</view>
-					<view>订单满50减10</view>
-					<view>订单满100减30</view>
-					<view>单笔购买满两件免邮费</view>
+				<view class="item">
+					<view class="cu-item-title">
+						<view class="cu-tag light bg-red sm">赠送</view>
+					</view>
+					<text>购买正品赠送【麻辣火锅】</text>
 				</view>
-			</view> -->
-				<view class="cu-item" v-if="info.services&&info.services.length">
-					<view class="cu-item-title">服务</view>
-					<view class="flex-sub">{{servicesText}}</view>
+				<view class="item">
+					<view class="cu-item-title">
+						<view class="cu-tag light bg-red sm">赠送</view>
+					</view>
+					<text>该商品享受7折优惠</text>
+				</view>
+				<view class="item text-sm text-grey solid-top">
+					<text class="cuIcon-info margin-right-xs"></text>
+					<text>样品不支持7天无理由退换货</text>
 				</view>
 			</view>
 			<!-- /商品优惠信息 -->
 
-			<!-- 商品规格 -->
-			<GoodsSku ref="sku" :info="info" />
-			<!-- /商品规格 -->
-
-			<!-- 商品评价 -->
-			<view class="cu-bar bg-white margin-top solid-bottom"
-				  @tap="linkTo" :data-url="'./evaluate-list?goods_id='+info.id">
-				<view class="action">
-					评价（{{info.evaluate_list_count}}）
+			<!-- 发圈素材 -->
+			<view class="margin radius bg-white" style="overflow: hidden;">
+				<view class="cu-bar">
+					<view class="action text-bold">发圈素材</view>
+					<view class="action">
+						<button class="cu-btn round line-grey sm">下载素材</button>
+					</view>
 				</view>
-				<view class="action">
-					<text class="cuIcon-right"></text>
+				<view class="padding-lr">
+					<view class="grid col-4 grid-square">
+						<view class="bg-img" v-for="(item,index) in avatar" :key="index"
+							  :style="[{ backgroundImage:'url(' + avatar[index] + ')' }]"></view>
+					</view>
 				</view>
 			</view>
-			<GoodsEvaluateList :list="info.evaluate_list" />
-			<!-- 商品评价 -->
+			<!-- /发圈素材 -->
 
+			<!-- 发圈文案 -->
+			<view class="margin radius bg-white" style="overflow: hidden;">
+				<view class="cu-bar">
+					<view class="action text-bold">发圈文案</view>
+					<view class="action">
+						<button class="cu-btn round line-grey sm">复制文案</button>
+					</view>
+				</view>
+				<view class="padding">
+					发圈文案发圈文案发圈文案发圈文案发圈文案
+				</view>
+			</view>
+			<!-- /发圈文案 -->
 
 			<!-- 商品详情 -->
-			<view class="cu-bar bg-white margin-top solid-bottom">
-				<view class="action">图文详情</view>
-			</view>
-			<view class="padding rich-text bg-white">
-				<MPHtml :content="info.content" />
+			<view class="margin radius bg-white" style="overflow: hidden;">
+				<view class="cu-bar">
+					<view class="action text-bold">商品详情</view>
+				</view>
+				<view class="padding rich-text bg-white" style="padding-top: 0;">
+					<MPHtml :content="info.content" />
+				</view>
 			</view>
 			<!-- /商品详情 -->
+
+			<custom-titlebar :transparent="true" title="最近浏览" class="margin-top"></custom-titlebar>
+			<GoodsList :list="goodsList" :row="true" :radius="true"></GoodsList>
+
+			<!-- 食品顾问 -->
+			<view class="margin flex">
+				<image src="../../../static/bg/wallet.png" mode="widthFix" style="width: 100%;"></image>
+			</view>
+			<!-- /食品顾问 -->
+
+			<!-- 食品顾问 -->
+			<view class="fixed-share-btn" @tap="showShareTap">
+				<image src="../../../static/icon/wechat.png" mode="aspectFill"></image>
+			</view>
+			<!-- /分销按钮 -->
 
 			<!-- 商品详情 -->
 			<custom-share-popup ref="sharePopup"></custom-share-popup>
 			<!-- /商品详情 -->
 
-			<!-- #ifdef MP-WEIXIN -->
-			<ad unit-id="adunit-dca118409648c077" ad-type="video"></ad>
-			<!-- #endif -->
+			<!-- 商品规格 -->
+			<GoodsSku ref="sku" :info="info" />
+			<!-- /商品规格 -->
 
 			<!-- 底部操作栏 -->
 			<view class="cu-bar bg-white tabbar shop foot">
 				<!-- #ifdef MP -->
-				<button class="action" open-type="contact">
+				<!-- 			<button class="action" open-type="contact">
 					<view class="cuIcon-service text-green"></view>
 					<text>客服</text>
-				</button>
+				</button> -->
 				<!-- #endif -->
-				<view class="action" @tap="toggleFavorite">
-					<template v-if="info.is_favorite">
-						<view class="cuIcon-favorfill text-orange"></view>
-						<text>已收藏</text>
-					</template>
-					<template v-else>
-						<view class="cuIcon-favor"></view>
-						<text>收藏</text>
-					</template>
-				</view>
 				<view class="action" @tap="linkTo" data-url="../cart/index">
 					<view class="cuIcon-cart">
 						<view class="cu-tag badge" v-if="info.cart_count">{{info.cart_count}}</view>
 					</view>
 					购物车
 				</view>
-				<view class="btn-group flex">
-					<view class="cu-btn bg-gradual-orange round flex-sub" @tap="toShoppingCart">加入购物车</view>
-					<view class="cu-btn bg-gradual-red round flex-sub margin-left-sm"
-						  @tap="toBuy">立即订购</view>
+				<view class="cu-btn bg-green round" @tap="toBuy(1)">试样品</view>
+				<view class="btn-group flex flex-sub">
+					<view class="cu-btn bg-orange round flex-sub btn-shoppcart" @tap="toShoppingCart">加入购物车</view>
+					<view class="cu-btn bg-red round flex-sub btn-buy"
+						  @tap="toBuy()">立即订购</view>
 				</view>
 			</view>
 			<!-- /底部操作栏 -->
@@ -137,6 +181,7 @@
 <script>
 	import MPHtml from '@/components/mp-html/mp-html';
 	import uniNumberBox from "@/components/uni-number-box/uni-number-box.vue";
+	import GoodsList from '../components/goods-list';
 	import GoodsSku from '../components/goods-sku.vue';
 	import GoodsEvaluateList from '../components/goods-evaluate-list.vue';
 
@@ -145,6 +190,7 @@
 			MPHtml,
 			uniNumberBox,
 			GoodsSku,
+			GoodsList,
 			GoodsEvaluateList
 		},
 		data() {
@@ -152,6 +198,14 @@
 				info: null,
 				loaded: false,
 				chooseSpec: [],
+
+				goodsList: [],
+
+				avatar: ['https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
+					'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',
+					'https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg',
+					'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+				],
 			};
 		},
 		computed: {
@@ -176,12 +230,15 @@
 			}
 
 			this.loadData();
+			this.loadGoodsData();
 		},
 
 		onPullDownRefresh() {
 			this.loadData().finally(() => {
 				uni.stopPullDownRefresh();
 			});
+
+			this.loadGoodsData();
 		},
 
 		methods: {
@@ -193,6 +250,15 @@
 				});
 			},
 
+			// 加载商品数据
+			loadGoodsData() {
+				return uni.$models.mall.getGoodsList({
+					limit: 10,
+				}).then(res => {
+					this.goodsList = res.data;
+				});
+			},
+
 			// 商品收藏
 			toggleFavorite() {
 				const options = {
@@ -200,11 +266,11 @@
 					hint: this
 				};
 				if (!this.info.is_favorite) {
-					return uni.$models.user.favoriteGoods(this.id, options).then(res => {
+					return uni.$models.user.favorite('goods', this.id, options).then(res => {
 						this.info.is_favorite = 1;
 					});
 				} else {
-					return uni.$models.user.unfavoriteGoods(this.id, options).then(res => {
+					return uni.$models.user.unfavorite('goods', this.id, options).then(res => {
 						this.info.is_favorite = 0;
 					});
 				}
@@ -247,7 +313,7 @@
 			},
 
 			// 开始立即购买
-			toBuy() {
+			toBuy(sample = 0) {
 				this.toChooseSpec('buy').then((res) => {
 					if (res.cancel) {
 						return;
@@ -257,7 +323,7 @@
 						loginUserInfo: true
 					}).then(() => {
 						uni.navigateTo({
-							url: `../order/create?goods_id=${this.info.id}&goods_sku_id=${res.sku.id}&count=${res.count}`
+							url: `../order/create?goods_id=${this.info.id}&goods_sku_id=${res.sku.id}&count=${res.count}&sample=${sample}`
 						});
 					});
 				});
@@ -271,8 +337,27 @@
 		padding-bottom: 130rpx;
 	}
 
+	.screen-swiper video {
+		pointer-events: all;
+	}
+
+	.favorite {
+		float: right;
+		text-align: center;
+	}
+
 	.cu-item-title {
 		width: 140rpx;
+	}
+
+	.goods-discount .item {
+		padding: 20rpx 30rpx;
+		word-break: break-all;
+	}
+
+	.goods-discount .cu-item-title {
+		width: 76rpx;
+		display: inline-block;
 	}
 
 	.cu-bar.tabbar.shop .action {
@@ -284,7 +369,31 @@
 		width: 54rpx;
 	}
 
-	.cu-bar.tabbar .btn-group {
+	.cu-bar.tabbar.shop .btn-group {
 		justify-content: space-between;
+	}
+
+	.btn-shoppcart {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.btn-buy {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	.fixed-share-btn {
+		position: fixed;
+		right: 30rpx;
+		bottom: 160rpx;
+		width: 96rpx;
+		height: 96rpx;
+	}
+
+	.fixed-share-btn image {
+		position: absolute;
+		height: 100%;
+		width: 100%;
 	}
 </style>

@@ -1,6 +1,4 @@
 export default {
-	name: 'bind-user',
-	isBinded: false,
 	handle: function(options) {
 		this.initFenxiaoUid(options);
 
@@ -13,7 +11,7 @@ export default {
 	},
 
 	// 初始化分销UID
-	initFenxiaoUid: function() {
+	initFenxiaoUid: function(options) {
 		const globalData = getApp().globalData;
 
 		let fenxiaoUid = parseInt(uni.getStorageSync('fenxiao_uid'));

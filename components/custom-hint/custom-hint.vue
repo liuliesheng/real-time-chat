@@ -79,7 +79,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.hint {
 		position: fixed;
 		top: 0;

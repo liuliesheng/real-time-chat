@@ -57,7 +57,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.img {
 		max-width: 400rpx;
 		display: block;

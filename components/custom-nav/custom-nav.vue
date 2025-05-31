@@ -52,7 +52,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.grid.col-2>view:nth-child(2n),
 	.grid.col-3>view:nth-child(3n),
 	.grid.col-4>view:nth-child(4n),

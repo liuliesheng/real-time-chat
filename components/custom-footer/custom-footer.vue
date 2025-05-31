@@ -27,7 +27,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.footer {
 		padding: 60rpx 30rpx;
 	}
