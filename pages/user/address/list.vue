@@ -26,10 +26,10 @@
 				</view>
 			</view>
 		</view>
-		<Empty v-else />
+		<custom-empty type="address" v-else />
 
 		<view class="foot padding">
-			<button class="cu-btn round block bg-gradual-red lg" @tap="linkTo"
+			<button class="cu-btn round block bg-red lg" @tap="linkTo"
 					data-url="/pages/user/address/edit">新建收货地址</button>
 		</view>
 	</custom-page>

@@ -33,7 +33,7 @@
 		</view>
 
 		<view class="padding">
-			<button class="cu-btn block bg-gradual-red lg" @click="confirm">提交</button>
+			<button class="cu-btn round block bg-red lg" @click="confirm">提交</button>
 		</view>
 
 	</custom-page>
@@ -86,7 +86,7 @@
 			switchDefault(e) {
 				this.info.is_default = e.detail ? 1 : 0;
 			},
-			
+
 			// 设置值
 			setField(name, value) {
 				this.info[name] = value;

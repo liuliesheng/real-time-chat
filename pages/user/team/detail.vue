@@ -14,28 +14,21 @@
 
 		<view class="margin">
 			<view class="padding-lr padding-tb-sm solid-bottom text-grey fixed titlebar">购买的样品</view>
-			<view class="cu-list menu-avatar goods-list sm-border radius">
-				<view class="cu-item">
-					<view class="cu-avatar radius lg" style="'background-image:url('+item.cover+');'"></view>
+			<view class="cu-list menu-avatar goods-list sm-border radius" v-if="data.length">
+				<view class="cu-item" v-for="(item,index) in data" :key="item.key">
+					<view class="cu-avatar radius lg" :style="'background-image:url('+item.goods_cover+');'"></view>
 					<view class="content">
-						<view class="margin-bottom-xs">购买了【巴掌牛排】</view>
-						<view class="flex text-sm text-grey">
-							<view class="flex-sub">2份样品</view>
-							<view class="flex-sub text-right">2021-11-12 10：20</view>
+						<view class="margin-bottom-xs">
+							<view class="text-cut">购买了【{{item.goods_title}}】</view>
 						</view>
-					</view>
-				</view>
-				<view class="cu-item">
-					<view class="cu-avatar radius lg" style="'background-image:url('+item.cover+');'"></view>
-					<view class="content">
-						<view class="margin-bottom-xs">购买了【巴掌牛排】</view>
 						<view class="flex text-sm text-grey">
-							<view class="flex-sub">2份样品</view>
-							<view class="flex-sub text-right">2021-11-12 10：20</view>
+							<view class="flex-sub">{{item.goods_num}}份样品</view>
+							<view class="flex-sub text-right">{{item.create_time}}</view>
 						</view>
 					</view>
 				</view>
 			</view>
+			<custom-empty v-else></custom-empty>
 		</view>
 	</custom-page>
 </template>

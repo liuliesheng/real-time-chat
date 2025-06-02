@@ -1,5 +1,5 @@
 <template>
-	<view class="grid padding-tb" :class="{
+	<view class="grid padding-top" :class="{
 		'col-2':col===2,
 		'col-3':col===3,
 		'col-4':col===4,

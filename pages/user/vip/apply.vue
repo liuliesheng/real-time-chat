@@ -62,7 +62,6 @@
 			loadData() {
 				return uni.$models.user.getApplyVipInfo().then((res) => {
 					if (res) {
-						res.status = -1;
 						this.info = res;
 					}
 					this.loaded = true;
@@ -83,7 +82,7 @@
 
 <style>
 	.page {
-		background-image: url(https://org.modao.cc/uploads5/images/7596/75960826/v2_r2i54i.png);
+		/* background-image: url(../../../static/bg/apply_vip.png); */
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;

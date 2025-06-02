@@ -4,6 +4,7 @@
 
 			<view class="flex padding-lr padding-tb-sm">
 				<image class="spec-image margin-right radius"
+					   mode="aspectFill"
 					   :src="chooseSku && chooseSku.cover?chooseSku.cover:info.cover"
 					   @tap="previewSkuImage(chooseSku && chooseSku.cover?chooseSku.cover:info.cover)"></image>
 				<view class="flex-sub">

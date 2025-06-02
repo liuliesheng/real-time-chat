@@ -44,5 +44,3 @@ $.$defineOfFunc('QRCode', function() {
 $.$defineOfFunc('jweixin', function() {
 	return require('../jweixin');
 });
-
-$.$jweixin;

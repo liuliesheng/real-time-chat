@@ -1,6 +1,6 @@
 const jweixin = require('./libs/jweixin-module');
 
-const a = new Proxy({
+export default new Proxy({
 	init: function() {
 		return new Promise(function(resolve) {
 			jweixin.config({});

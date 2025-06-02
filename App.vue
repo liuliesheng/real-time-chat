@@ -2,11 +2,15 @@
 	import Vue from 'vue';
 	export default {
 		globalData: {
-			userInfo: null,
+			shareUid: 0,
+			distributorIdK: 0,
 		},
 		onLaunch: function(options) {
 			console.log('App Launch', options);
-			uni.$emitter.emit('appLaunch', options);
+			uni.$emitter.emit('appLaunch', {
+				app: this,
+				options: options
+			});
 
 			Vue.prototype.MenuButtonRect = {
 				width: 0,
@@ -56,19 +60,24 @@
 		},
 		onShow: function(options) {
 			console.log('App Show', options);
-			uni.$emitter.emit('appShow', options);
+			uni.$emitter.emit('appShow', {
+				app: this,
+				options: options
+			});
 		},
 		onHide: function(options) {
 			console.log('App Hide', options);
-			uni.$emitter.emit('appHide', options);
-		},
-		onError: function(error) {
-			console.error('App Hide', error);
-			uni.$emitter.emit('appError', error);
+			uni.$emitter.emit('appHide', {
+				app: this,
+				options: options
+			});
 		},
 		onPageNotFound: function(options) {
 			console.log('App PageNotFound', options);
-			uni.$emitter.emit('appPageNotFound', options);
+			uni.$emitter.emit('appPageNotFound', {
+				app: this,
+				options: options
+			});
 		},
 
 		methods: {}

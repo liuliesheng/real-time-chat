@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<Empty v-else></Empty>
+		<custom-empty type="favorite" v-else></custom-empty>
 	</custom-page>
 </template>
 

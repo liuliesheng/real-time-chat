@@ -6,18 +6,17 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
-		}
-	    ,{
-            "path" : "pages/index/notices",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "公告",
-                "enablePullDownRefresh": true
-            }
-            
-        },
+		}, {
+			"path": "pages/index/notices",
+			"style": {
+				"navigationBarTitleText": "公告",
+				"enablePullDownRefresh": true
+			}
+
+		},
 		{
 			"path": "pages/index/feedback",
 			"style": {
@@ -37,7 +36,8 @@
 			"path": "pages/mall/index",
 			"style": {
 				"navigationStyle": "custom",
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -600,26 +600,22 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/mall/order/success",
+			"style": {
+				"navigationBarTitleText": "下单成功",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mall/goods/poster",
+			"style": {
+				"navigationBarTitleText": "商品海报",
+				"enablePullDownRefresh": false
+			}
+
 		}
-        ,{
-            "path" : "pages/mall/order/success",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "下单成功",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/mall/goods/poster",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "商品海报",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"entryPagePath": "pages/mall/index",
 	"globalStyle": {
 		// #ifdef H5

@@ -1,8 +1,10 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<template v-for="(coupon,index) in data">
-			<custom-coupon :coupon="coupon" class="margin" @actiontap="onGiveTap(index)"></custom-coupon>
-		</template>
+		<image src="" mode="widthFix" class="img-full"></image>
+		<view class="coupon-list">
+			<custom-coupon v-for="(coupon,index) in data" :coupon="coupon" class="margin" @actiontap="onGiveTap(index)">
+			</custom-coupon>
+		</view>
 	</custom-page>
 </template>
 
@@ -76,4 +78,14 @@
 </script>
 
 <style>
+	.page {
+		background-color: #f5f4f4;
+		/* background-color: #000; */
+	}
+
+	.coupon-list {
+		position: relative;
+		margin-top: -40%;
+		z-index: 10;
+	}
 </style>

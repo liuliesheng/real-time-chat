@@ -18,18 +18,23 @@ export default {
 		}, options);
 	},
 
+	// 获取海报信息
+	getGoodsPoster(data, options) {
+		return uni.$http.get('/app/mall/goods/poster', data, options);
+	},
+
 	// 获取商品评价列表
 	getGoodsAppraiseList(query, options = {}) {
 		return uni.$http.get('/app/mall/goods_appraise', query, options);
 	},
-	
+
 	// 获取商品预评价信息
 	getPreGoodsAppraise(id, options = {}) {
 		return uni.$http.get('/app/mall/goods_appraise/create', {
 			order_id: id
 		}, options);
 	},
-	
+
 	// 创建商品评价
 	createGoodsAppraise(data, options = {}) {
 		return uni.$http.post('/app/mall/goods_appraise/create', data, options);

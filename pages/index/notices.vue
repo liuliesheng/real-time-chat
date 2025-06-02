@@ -1,6 +1,6 @@
 <template>
 	<custom-page class="page" :loaded="loaded">
-		<view class="cu-card dynamic">
+		<view class="cu-card dynamic" v-if="data.length">
 			<view class="cu-item shadow" v-for="item in data" :key="item.id">
 				<view class="cu-list menu">
 					<view class="cu-item">
@@ -10,11 +10,13 @@
 						</view>
 					</view>
 				</view>
-				<view class="text-content solid-top" style="padding-top: 15px;">
-					{{item.content}}
+				<view class="text-content solid-top">
+					<view class="padding-tb-sm">{{item.content}}</view>
+					<view class="text-gray text-sm">发布于 {{item.create_time}}</view>
 				</view>
 			</view>
 		</view>
+		<custom-empty type="notice" v-else></custom-empty>
 	</custom-page>
 </template>
 

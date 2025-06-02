@@ -1,5 +1,5 @@
 <template>
-	<custom-page class="page" :loaded="loaded" @refresh="loadData">
+	<custom-page class="page" :loaded="loaded || loadError" @refresh="loadData">
 		<template v-if="loaded">
 			<!-- 商品轮播图 -->
 			<view class="" style="overflow: hidden;">
@@ -175,6 +175,7 @@
 			</view>
 			<!-- /底部操作栏 -->
 		</template>
+		<custom-empty type="loaderr" v-else-if="loadError"></custom-empty>
 	</custom-page>
 </template>
 
@@ -197,15 +198,11 @@
 			return {
 				info: null,
 				loaded: false,
+				loadError: false,
+
 				chooseSpec: [],
 
 				goodsList: [],
-
-				avatar: ['https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg',
-					'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-				],
 			};
 		},
 		computed: {
@@ -247,6 +244,10 @@
 				return uni.$models.mall.getGoodsDetail(this.id).then(res => {
 					this.info = res;
 					this.loaded = true;
+				}, () => {
+					if (!this.loaded) {
+						this.loadError = true;
+					}
 				});
 			},
 

@@ -30,7 +30,7 @@
 					  v-for="(item,index) in info.goods_list" :key="item.id"
 					  @tap="linkTo" :data-url="'../goods/detail?id='+item.goods_id">
 					<view class="image-wrapper radius lg">
-						<image :src="item.goods_cover" mode="aspectFit" lazy-load="true"></image>
+						<image :src="item.goods_cover" mode="aspectFill" lazy-load="true"></image>
 					</view>
 					<view class="content flex-sub padding-lr-sm">
 						<view class="title ellipsis-2 text-black">{{ item.goods_title }}</view>

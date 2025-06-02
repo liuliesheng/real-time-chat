@@ -1,6 +1,6 @@
-export default function(options) {
+export default function({app, options}) {
 	uni.$models.basic.getConfig().then((config) => {
-		const globalData = getApp().globalData;
+		const globalData = app.globalData;
 		Object.assign(globalData, config);
 
 		if (!globalData.support) {
@@ -9,7 +9,7 @@ export default function(options) {
 					title: config['web.support_title'],
 					icon: config['web.support_icon']
 				};
-			} 
+			}
 			// else if (config['web.site_title']) {
 			// 	globalData.support = {
 			// 		title: config['web.site_title'],

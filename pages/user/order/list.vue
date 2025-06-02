@@ -33,7 +33,7 @@
 								<view class="cu-item flex padding-sm"
 									  v-for="(goodsItem,goodsIndex) in item.goods_list" :key="goodsItem.id">
 									<view class="image-wrapper radius lg" :class="{loaded: goodsItem.loaded}">
-										<image :src="goodsItem.goods_cover" mode="aspectFit" lazy-load="true"
+										<image :src="goodsItem.goods_cover" mode="aspectFill" lazy-load="true"
 											   @load="imageOnLoad(goodsItem)"></image>
 									</view>
 									<view class="content flex-sub padding-lr-sm">
